@@ -27,6 +27,8 @@ class RecipesFragment : Fragment() {
         val binding = FragmentRecipesBinding.inflate(inflater, container, false)
 
 
+
+
         return binding.root
     }
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/recipesFragment">
+
+    <fragment
+        android:id="@+id/recipesFragment"
+        android:name="com.zongmin.cook.recipes.RecipesFragment"
+        android:label="RecipesFragment" />
+    <fragment
+        android:id="@+id/managmentFragment"
+        android:name="com.zongmin.cook.management.ManagmentFragment"
+        android:label="ManagmentFragment" />
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.zongmin.cook.plan.PlanFragment"
+        android:label="PlanFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.zongmin.cook.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/socialFragment"
+        android:name="com.zongmin.cook.social.SocialFragment"
+        android:label="SocialFragment" />
+
+
+
+
+    <action android:id="@+id/navigate_to_recipes_fragment" app:destination="@+id/recipesFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_managment_fragment" app:destination="@+id/managmentFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_profile_fragment" app:destination="@+id/profileFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_social_fragment" app:destination="@+id/socialFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+
+
+
+
+
+
+
+
+
+</navigation>
