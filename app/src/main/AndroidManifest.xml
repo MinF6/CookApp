@@ -3,6 +3,7 @@
     package="com.zongmin.cook">
 
     <application
+        android:name=".CookApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
