@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".edit.EditRecipesFragment">
+
+
+            <ImageView
+                android:id="@+id/image_edit_main"
+                imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_edit_change_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="變更照片"
+                app:layout_constraintBottom_toBottomOf="@+id/image_edit_main"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <TextView
+                android:id="@+id/text_edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="料理名稱："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_edit_main" />
+
+            <EditText
+                android:id="@+id/edittext_edit_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:hint="輸入料理名稱"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_edit_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_edit_name" />
+
+            <TextView
+                android:id="@+id/text_edit_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="選擇類別："
+                app:layout_constraintStart_toStartOf="@+id/edittext_edit_name"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_edit_name" />
+
+            <Spinner
+                android:id="@+id/spinner_edit_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinnerValue"
+                app:layout_constraintStart_toStartOf="@+id/text_edit_category"
+                app:layout_constraintTop_toBottomOf="@+id/text_edit_category" />
+
+            <TextView
+                android:id="@+id/text_ingredient_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="食材："
+                app:layout_constraintStart_toStartOf="@+id/spinner_edit_category"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_edit_category" />
+
+            <EditText
+                android:id="@+id/edittext_serving"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="5"
+                android:numeric="integer"
+                app:layout_constraintBottom_toBottomOf="@+id/text_serving"
+                app:layout_constraintEnd_toStartOf="@+id/text_serving"
+                app:layout_constraintTop_toTopOf="@+id/text_serving" />
+
+            <TextView
+                android:id="@+id/text_serving"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人份"
+                app:layout_constraintBottom_toBottomOf="@+id/text_ingredient_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_ingredient_title" />
+
+            <EditText
+                android:id="@+id/edittext_ingredient_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/edittext_quantity"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_ingredient_title" />
+
+            <EditText
+                android:id="@+id/edittext_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/edittext_unit"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edittext_ingredient_name"
+                app:layout_constraintTop_toTopOf="@+id/edittext_ingredient_name" />
+
+            <EditText
+                android:id="@+id/edittext_unit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edittext_quantity"
+                app:layout_constraintTop_toTopOf="@+id/edittext_quantity" />
+
+            <Button
+                android:id="@+id/button_new_ingredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新增食材"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_quantity" />
+
+            <TextView
+                android:id="@+id/text_edit_step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="步驟："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_new_ingredient" />
+
+            <EditText
+                android:id="@+id/edittext_edit_step"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="輸入步驟"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_edit_step"
+                app:layout_constraintTop_toBottomOf="@+id/text_edit_step" />
+
+            <Button
+                android:id="@+id/button_new_step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新增步驟"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_edit_step" />
+
+            <TextView
+                android:id="@+id/text_edit_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Tag："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_new_step" />
+
+            <Button
+                android:id="@+id/button_new_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新增Tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_edit_tag" />
+
+            <TextView
+                android:id="@+id/text_edit_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="備註："
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_new_tag" />
+
+            <EditText
+                android:id="@+id/edittext_edit_remark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="輸入備註"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_edit_remark"
+                app:layout_constraintTop_toBottomOf="@+id/text_edit_remark" />
+
+            <Button
+                android:id="@+id/button_edit_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="儲存"
+                app:layout_constraintEnd_toStartOf="@+id/button_edit_cancel"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_edit_remark" />
+
+            <Button
+                android:id="@+id/button_edit_cancel"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/button_edit_save"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_edit_remark" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

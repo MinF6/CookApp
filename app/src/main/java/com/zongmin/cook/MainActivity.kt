@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_plan -> {
 
-                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToProfileFragment())
+                    findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToPlanFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_management -> {

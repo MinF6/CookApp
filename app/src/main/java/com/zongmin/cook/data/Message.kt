@@ -1,11 +1,18 @@
 package com.zongmin.cook.data
 
-import com.squareup.moshi.Json
-import java.sql.Timestamp
+import android.os.Parcelable
 
+import com.squareup.moshi.Json
+import kotlinx.parcelize.Parcelize
+import java.sql.Timestamp
+import java.util.*
+
+@Parcelize
 data class Message(
     val id: String = " ",
     @Json(name = "user_id") val userId: String = " ",
     val content: String = " ",
     val time: Timestamp? = null
-)
+//    val time: Date? = null
+//    val time: Long = 0L
+) : Parcelable

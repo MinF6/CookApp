@@ -30,44 +30,8 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-//        binding.viewModel = viewModel
 
-//        binding.recyclerCatalogItem.adapter = PagingAdapter(
-//            PagingAdapter.OnClickListener {
-//                viewModel.navigateToDetail(it)
-//            }
-//        )
-
-//        viewModel.navigateToDetail.observe(
-//            viewLifecycleOwner,
-//            Observer {
-//                it?.let {
-//                    findNavController().navigate(NavigationDirections.navigateToDetailFragment(it))
-//                    viewModel.onDetailNavigated()
-//                }
-//            }
-//        )
-
-//        viewModel.pagingDataProducts.observe(
-//            viewLifecycleOwner,
-//            Observer {
-//                (binding.recyclerCatalogItem.adapter as PagingAdapter).submitList(it)
-//            }
-//        )
-
-//        binding.layoutSwipeRefreshCatalogItem.setOnRefreshListener {
-//            viewModel.refresh()
-//        }
-
-//        viewModel.status.observe(
-//            viewLifecycleOwner,
-//            Observer {
-//                it?.let {
-//                    if (it != LoadApiStatus.LOADING)
-//                        binding.layoutSwipeRefreshCatalogItem.isRefreshing = false
-//                }
-//            }
-//        )
+        viewModel.getRecipesResult()
 
         return binding.root
     }

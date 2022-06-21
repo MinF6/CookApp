@@ -1,15 +1,16 @@
-package com.zongmin.cook.management
+package com.zongmin.cook.edit
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zongmin.cook.databinding.FragmentManagementBinding
+import com.zongmin.cook.R
+import com.zongmin.cook.databinding.FragmentDetailRecipesBinding
+import com.zongmin.cook.databinding.FragmentEditRecipesBinding
 
 
-
-class ManagmentFragment : Fragment() {
+class EditRecipesFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,15 +23,20 @@ class ManagmentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentManagementBinding.inflate(inflater, container, false)
-
+        val binding = FragmentEditRecipesBinding.inflate(inflater, container, false)
 
 
 
 
 
         return binding.root
+
+
+
+        // Inflate the layout for this fragment
+//        return inflater.inflate(R.layout.fragment_edit_recipes, container, false)
     }
+
 
 
 

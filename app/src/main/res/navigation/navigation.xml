@@ -25,7 +25,15 @@
         android:name="com.zongmin.cook.social.SocialFragment"
         android:label="SocialFragment" />
 
+    <fragment
+        android:id="@+id/detailRecipesFragment"
+        android:name="com.zongmin.cook.detail.DetailRecipesFragment"
+        android:label="DetailRecipesFragment" />
 
+    <fragment
+        android:id="@+id/editRecipesFragment"
+        android:name="com.zongmin.cook.edit.EditRecipesFragment"
+        android:label="EditRecipesFragment" />
 
 
     <action android:id="@+id/navigate_to_recipes_fragment" app:destination="@+id/recipesFragment"
@@ -33,6 +41,10 @@
         app:popUpToInclusive="true" />
 
     <action android:id="@+id/navigate_to_managment_fragment" app:destination="@+id/managmentFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_plan_fragment" app:destination="@+id/planFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
@@ -44,12 +56,13 @@
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
+    <action android:id="@+id/navigate_to_detail_recipes_fragment" app:destination="@+id/detailRecipesFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
 
-
-
-
-
-
+    <action android:id="@+id/navigate_to_edit_recipes_fragment" app:destination="@+id/editRecipesFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
 
 
 

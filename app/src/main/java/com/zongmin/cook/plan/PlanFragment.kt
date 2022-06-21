@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zongmin.cook.R
-import com.zongmin.cook.databinding.FragmentManagmentBinding
 import com.zongmin.cook.databinding.FragmentPlanBinding
 
 

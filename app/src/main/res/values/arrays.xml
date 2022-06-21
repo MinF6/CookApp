@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerValue">
+        <item>主食</item>
+        <item>蔬菜類</item>
+        <item>水果類</item>
+        <item>蛋豆魚肉類</item>
+        <item>五穀根莖類</item>
+    </string-array>
+</resources>

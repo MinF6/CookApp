@@ -2,8 +2,10 @@ package com.zongmin.cook.data.source
 
 import androidx.lifecycle.LiveData
 import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.source.remote.CookRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import com.zongmin.cook.data.Result
 
 class DefaultCookRepository(
     private val cookRemoteDataSource: CookDataSource,
@@ -62,6 +64,7 @@ class DefaultCookRepository(
 //        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
 //    }
     override suspend fun getRecipes(): Result<List<Recipes>> {
-        TODO("Not yet implemented")
+
+        return cookRemoteDataSource.getRecipes()
     }
 }

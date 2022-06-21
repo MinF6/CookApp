@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.R
 import com.zongmin.cook.databinding.FragmentRecipesBinding
 
@@ -60,6 +62,12 @@ class RecipesFragment : Fragment() {
                 it.adapter = RecipesAdapter(childFragmentManager)
                 it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabsRecipes))
             }
+
+            buttonNavNew.setOnClickListener {
+//                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
+            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
+            }
+
             return@onCreateView root
         }
 
