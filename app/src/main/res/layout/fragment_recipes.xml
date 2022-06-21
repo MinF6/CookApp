@@ -12,26 +12,45 @@ xmlns:tools="http://schemas.android.com/tools">
 
 
 
+<!--    <androidx.viewpager.widget.ViewPager-->
+<!--        android:id="@+id/viewpager_recipes"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:id="@+id/tabs_recipes"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            app:tabIndicatorColor="#3f3a3a"-->
+<!--            app:tabSelectedTextColor="#3f3a3a"-->
+<!--            app:tabTextColor="#888888">-->
+
+<!--        </com.google.android.material.tabs.TabLayout>-->
+
+<!--    </androidx.viewpager.widget.ViewPager>-->
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_recipes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/viewPager"
+        android:layout_width="wrap_content"
+        android:layout_height="430dp"
+        android:layout_marginTop="153dp"
+        android:layout_marginBottom="148dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingStart="60dp"
+        android:paddingLeft="60dp"
+        android:paddingEnd="60dp"
+        android:paddingRight="60dp"
+        android:paddingBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_recipes"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:tabIndicatorColor="#3f3a3a"
-            app:tabSelectedTextColor="#3f3a3a"
-            app:tabTextColor="#888888">
-
-        </com.google.android.material.tabs.TabLayout>
-
-    </androidx.viewpager.widget.ViewPager>
 
     <Button
         android:id="@+id/button_nav_new"

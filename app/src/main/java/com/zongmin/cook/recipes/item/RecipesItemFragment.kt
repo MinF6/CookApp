@@ -18,7 +18,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
     /**
      * Lazily initialize our [CatalogItemViewModel].
      */
-    private val viewModel by viewModels<RecipesItemViewModel> { getVmFactory(recipesType) }
+//    private val viewModel by viewModels<RecipesItemViewModel> { getVmFactory(recipesType) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,10 +28,10 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 
         val binding = FragmentRecipesItemBinding.inflate(inflater, container, false)
 
-        binding.lifecycleOwner = viewLifecycleOwner
+//        binding.lifecycleOwner = viewLifecycleOwner
 
 
-        viewModel.getRecipesResult()
+//        viewModel.getRecipesResult()
 
         return binding.root
     }

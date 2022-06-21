@@ -23,7 +23,12 @@ import com.zongmin.cook.recipes.RecipesTypeFilter
 //    return ProductViewModelFactory(repository, product)
 //}
 
-fun Fragment.getVmFactory(recipesType: RecipesTypeFilter): RecipesItemViewModelFactory {
+
+//fun Fragment.getVmFactory(recipesType: RecipesTypeFilter): RecipesItemViewModelFactory {
+//    val repository = (requireContext().applicationContext as CookApplication).cookRepository
+//    return RecipesItemViewModelFactory(repository, recipesType)
+//}
+fun Fragment.getVmFactory(): RecipesItemViewModelFactory {
     val repository = (requireContext().applicationContext as CookApplication).cookRepository
-    return RecipesItemViewModelFactory(repository, recipesType)
+    return RecipesItemViewModelFactory(repository)
 }

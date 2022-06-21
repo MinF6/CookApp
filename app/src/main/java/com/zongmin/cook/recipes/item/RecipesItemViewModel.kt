@@ -16,7 +16,7 @@ import com.zongmin.cook.data.Result
 
 class RecipesItemViewModel(
     private val cookRepository: CookRepository,
-    recipesType: RecipesTypeFilter // Handle the type for each catalog item
+//    recipesType: RecipesTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
     var _articles = MutableLiveData<List<Recipes>>()
