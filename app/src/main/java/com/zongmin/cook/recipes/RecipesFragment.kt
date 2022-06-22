@@ -1,6 +1,7 @@
 package com.zongmin.cook.recipes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,8 +58,10 @@ class RecipesFragment : Fragment() {
 
         FragmentRecipesBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = viewLifecycleOwner
+
             viewpagerRecipes.let {
                 tabsRecipes.setupWithViewPager(it)
+                tabsRecipes.tabMode = TabLayout.MODE_SCROLLABLE;
                 it.adapter = RecipesAdapter(childFragmentManager)
                 it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabsRecipes))
             }
@@ -66,6 +69,11 @@ class RecipesFragment : Fragment() {
             buttonNavNew.setOnClickListener {
 //                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
             findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
+            }
+
+            buttonRecipesDialog.setOnClickListener {
+                findNavController().navigate(NavigationDirections.navigateToDialogPlan())
+//            Log.d("hank1","111111111111111111111")
             }
 
             return@onCreateView root

@@ -19,12 +19,12 @@ object CookRemoteDataSource: CookDataSource {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("hank1","check4")
+//                    Log.d("hank1","check4")
                     val list = mutableListOf<Recipes>()
                     for (document in task.result!!) {
 
-                        Log.d("hank1","check3")
-                        Log.d("hank1",document.id + " => " + document.data)
+//                        Log.d("hank1","check3")
+//                        Log.d("hank1",document.id + " => " + document.data)
 
                         val article = document.toObject(Recipes::class.java)
 
@@ -40,6 +40,8 @@ object CookRemoteDataSource: CookDataSource {
                 }
             }
     }
+
+
 
 
 

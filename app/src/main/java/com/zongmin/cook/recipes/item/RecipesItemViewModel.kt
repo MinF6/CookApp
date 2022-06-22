@@ -3,7 +3,6 @@ package com.zongmin.cook.recipes.item
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.source.CookRepository
@@ -19,10 +18,10 @@ class RecipesItemViewModel(
     recipesType: RecipesTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
-    var _articles = MutableLiveData<List<Recipes>>()
+    var _recipes = MutableLiveData<List<Recipes>>()
 
-    val articles: LiveData<List<Recipes>>
-        get() = _articles
+    val recipes: LiveData<List<Recipes>>
+        get() = _recipes
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -31,18 +30,18 @@ class RecipesItemViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-//        getRecipesResult()
+        getRecipesResult()
     }
 
 
     fun getRecipesResult() {
-        Log.d("hank1","check1")
+//        Log.d("hank1","check1")
 
         coroutineScope.launch {
 
             val result = cookRepository.getRecipes()
-            Log.d("hank1","check2")
-            _articles.value = when (result) {
+//            Log.d("hank1","check2")
+            _recipes.value = when (result) {
                 is Result.Success -> {
                     result.data
                 }
@@ -58,9 +57,8 @@ class RecipesItemViewModel(
                     null
                 }
             }
-            Log.d("hank1","show result => ${result}")
-            Log.d("hank1","show _articles => $articles")
-            Log.d("hank1","show articles => ${articles.value}")
+//            Log.d("hank1","show result => ${result}")
+//            Log.d("hank1","show recipes => ${recipes.value}")
 
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/recipesFragment">
 
@@ -33,7 +34,14 @@
     <fragment
         android:id="@+id/editRecipesFragment"
         android:name="com.zongmin.cook.edit.EditRecipesFragment"
-        android:label="EditRecipesFragment" />
+        android:label="EditRecipesFragment"
+        tools:layout="@layout/fragment_edit_recipes"/>
+
+    <dialog
+        android:id="@+id/dialogPlan"
+        android:name="com.zongmin.cook.dialog.DialogPlan"
+        android:label="DialogPlan"
+        tools:layout="@layout/fragment_dialog_plan"/>
 
 
     <action android:id="@+id/navigate_to_recipes_fragment" app:destination="@+id/recipesFragment"
@@ -61,6 +69,10 @@
         app:popUpToInclusive="true" />
 
     <action android:id="@+id/navigate_to_edit_recipes_fragment" app:destination="@+id/editRecipesFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_dialog_plan" app:destination="@+id/dialogPlan"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 
