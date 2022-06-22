@@ -10,9 +10,9 @@ import java.util.*
 @Parcelize
 data class Message(
     val id: String = " ",
-    @Json(name = "user_id") val userId: String = " ",
+    val userId: String = " ",
     val content: String = " ",
-    val time: Timestamp? = null
-//    val time: Date? = null
+//    val time: Timestamp? = null
+    val time: Date? = null
 //    val time: Long = 0L
 ) : Parcelable

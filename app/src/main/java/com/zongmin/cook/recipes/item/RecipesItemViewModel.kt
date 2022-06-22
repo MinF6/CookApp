@@ -23,6 +23,11 @@ class RecipesItemViewModel(
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
 
+    private val _navigateToDetail = MutableLiveData<Recipes?>()
+
+    val navigateToDetail: LiveData<Recipes?>
+        get() = _navigateToDetail
+
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
@@ -31,6 +36,8 @@ class RecipesItemViewModel(
 
     init {
         getRecipesResult()
+
+
     }
 
 
@@ -40,6 +47,7 @@ class RecipesItemViewModel(
         coroutineScope.launch {
 
             val result = cookRepository.getRecipes()
+            val result2 = 1
 //            Log.d("hank1","check2")
             _recipes.value = when (result) {
                 is Result.Success -> {
@@ -65,5 +73,14 @@ class RecipesItemViewModel(
         }
     }
 
+
+
+    fun navigateToDetail(recipes: Recipes) {
+        _navigateToDetail.value = recipes
+    }
+
+    fun onDetailNavigated() {
+        _navigateToDetail.value = null
+    }
 
 }

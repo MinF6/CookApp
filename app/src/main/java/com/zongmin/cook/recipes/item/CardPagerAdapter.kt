@@ -14,6 +14,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.zongmin.cook.R
 import com.zongmin.cook.bindImage
 import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.databinding.ItemRecipesViewPagerBinding
 import com.zongmin.cook.recipes.item.CardItem
 import com.zongmin.cook.recipes.item.RecipesItemViewModel
 import java.io.InputStream
@@ -46,23 +47,16 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view: View = LayoutInflater.from(container.context)
-            .inflate(R.layout.item_recipes_view_pager, container, false)
-        container.addView(view)
+//        val view: View = LayoutInflater.from(container.context)
+//            .inflate(R.layout.item_recipes_view_pager, container, false)
+//        container.addView(view)
 //        val layoutInflater = LayoutInflater.from(container.context)
-//        val binding = ItemRecipesViewPagerBinding.inflate(layoutInflater, container, false)
-//        val binding = ItemRecipesViewPagerBinding.inflate(LayoutInflater.from(container.context), container, false)
-        bind(mData[position], view)
+        val binding = ItemRecipesViewPagerBinding.inflate(LayoutInflater.from(container.context), container, true)
+        bind(mData[position], binding,position)
 //        bind(mData[position], view,binding)
-        val cardView = view.findViewById(R.id.cardView) as CardView
-        if (baseElevation == 0f) {
-            baseElevation = cardView.cardElevation
-        }
-//        cardView.maxCardElevation = baseElevation * CardAdapter.MAX_ELEVATION_FACTOR
-        cardView.maxCardElevation = baseElevation * 8
-        mViews[position] = cardView
 
-        return view
+
+        return binding.root
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
@@ -72,10 +66,13 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
     }
 
     //    private fun bind(item: CardItem, view: View, binding: ItemRecipesViewPagerBinding) {
-    private fun bind(item: CardItem, view: View) {
-        val category = view.findViewById(R.id.text_recipes_item_category) as TextView
-        val title = view.findViewById(R.id.text_recipes_item_title) as TextView
-        val image = view.findViewById(R.id.image_recipes_item) as ImageView
+    private fun bind(item: CardItem, binding: ItemRecipesViewPagerBinding, position: Int) {
+//        val category = view.findViewById(R.id.text_recipes_item_category) as TextView
+//        val title = view.findViewById(R.id.text_recipes_item_title) as TextView
+//        val image = view.findViewById(R.id.image_recipes_item) as ImageView
+        val category = binding.textRecipesItemCategory
+        val title = binding.textRecipesItemTitle
+        val image = binding.imageRecipesItem
 
 //        titleTextView.setText(viewModel.recipes.value?.get(0)?.name ?: "")
 //        binding.titleTextView.setText("123456")
@@ -87,7 +84,25 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
         category.setText(item.category)
         title.setText(item.title)
 
-        val btn = view.findViewById(R.id.button_view_pager_add) as Button
+        val cardView = binding.cardView
+        if (baseElevation == 0f) {
+            baseElevation = cardView.cardElevation
+        }
+//        cardView.maxCardElevation = baseElevation * CardAdapter.MAX_ELEVATION_FACTOR
+        cardView.maxCardElevation = baseElevation * 8
+        mViews[position] = cardView
+
+//        binding.root.setOnClickListener { onClickListener.onClick(item) }
+        binding.root.setOnClickListener {
+            Log.d("hank1","點擊到這個item，這是 ->${item.title}")
+        }
+
+//        cardView.setOnClickListener {
+//            Log.d("hank1","點擊到這個item，這是 ->${item.title}")
+//
+//        }
+
+        val btn = binding.buttonViewPagerAdd
         btn.setOnClickListener {
             Log.d("hank1","點擊到按鈕了，這是 ->${item.title}")
         }
@@ -99,15 +114,15 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
 
     }
 
-    private fun LoadImageFromWebOperations(url: String): Drawable {
-        return try {
-            val `is`: InputStream = URL(url).getContent() as InputStream
-            Drawable.createFromStream(`is`, "src name")
-        } catch (e: Exception) {
-            val `is`: InputStream = URL(url).getContent() as InputStream
-            Drawable.createFromStream(`is`, "src name")
-        }
-    }
+//    private fun LoadImageFromWebOperations(url: String): Drawable {
+//        return try {
+//            val `is`: InputStream = URL(url).getContent() as InputStream
+//            Drawable.createFromStream(`is`, "src name")
+//        } catch (e: Exception) {
+//            val `is`: InputStream = URL(url).getContent() as InputStream
+//            Drawable.createFromStream(`is`, "src name")
+//        }
+//    }
 
 //    fun submitList(color: List<String>) {
 //        this.color = color

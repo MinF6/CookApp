@@ -7,13 +7,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Step(
     val sequence: String = " ",
-    val images: List<String>,
+    val images: List<String> = listOf(" "),
     val depiction: String = " ",
-    @Json(name = "tool_type") val toolType: ToolType
+    val toolType: ToolType = ToolType(" ", " ")
 ) : Parcelable
 
 @Parcelize
 data class ToolType(
     val temperature: String = " ",
-    val timer: Int = 0
+    val timer: String = " "
 ) : Parcelable
