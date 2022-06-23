@@ -8,28 +8,41 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.zongmin.cook.recipes.RecipesFragment"
-        android:label="RecipesFragment" />
+        android:label="RecipesFragment"
+        tools:layout="@layout/fragment_recipes"/>
     <fragment
         android:id="@+id/managmentFragment"
         android:name="com.zongmin.cook.management.ManagmentFragment"
-        android:label="ManagmentFragment" />
+        android:label="ManagmentFragment"
+        tools:layout="@layout/fragment_management"/>
     <fragment
         android:id="@+id/planFragment"
         android:name="com.zongmin.cook.plan.PlanFragment"
-        android:label="PlanFragment" />
+        android:label="PlanFragment"
+        tools:layout="@layout/fragment_plan"/>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.zongmin.cook.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+
     <fragment
         android:id="@+id/socialFragment"
         android:name="com.zongmin.cook.social.SocialFragment"
-        android:label="SocialFragment" />
+        android:label="SocialFragment"
+        tools:layout="@layout/fragment_social"/>
 
     <fragment
         android:id="@+id/detailRecipesFragment"
         android:name="com.zongmin.cook.detail.DetailRecipesFragment"
-        android:label="DetailRecipesFragment" />
+        android:label="DetailRecipesFragment"
+        tools:layout="@layout/fragment_detail_recipes">
+
+        <argument android:name="recipes"
+            app:argType="com.zongmin.cook.data.Recipes"
+            app:nullable="false"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/editRecipesFragment"

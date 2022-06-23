@@ -1,32 +1,21 @@
-package com.zongmin.cook.recipes.item
+package com.zongmin.cook.plan
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.source.CookRepository
-import com.zongmin.cook.recipes.RecipesTypeFilter
+import com.zongmin.cook.util.ServiceLocator.cookRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.zongmin.cook.data.Result
 
-class RecipesItemViewModel(
-    private val cookRepository: CookRepository,
-    recipesType: RecipesTypeFilter // Handle the type for each catalog item
-) : ViewModel() {
-
-    var _recipes = MutableLiveData<List<Recipes>>()
-
-    val recipes: LiveData<List<Recipes>>
-        get() = _recipes
-
-    private val _navigateToDetail = MutableLiveData<Recipes>()
-
-    val navigateToDetail: LiveData<Recipes>
-        get() = _navigateToDetail
+class PlanViewModel(
+    private val cookRepository: CookRepository) : ViewModel() {
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -34,22 +23,27 @@ class RecipesItemViewModel(
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+
+    var _plan = MutableLiveData<List<Plan>>()
+
+    val plan: LiveData<List<Plan>>
+        get() = _plan
+
+
+
+
     init {
-        getRecipesResult()
-
-
+        getPlanResult()
+        Log.d("hank1","進到PlanViewModel")
     }
 
-
-    fun getRecipesResult() {
-//        Log.d("hank1","check1")
+    fun getPlanResult(){
 
         coroutineScope.launch {
 
-            val result = cookRepository.getRecipes()
-            val result2 = 1
-//            Log.d("hank1","check2")
-            _recipes.value = when (result) {
+            val result = cookRepository.getPlan()
+            Log.d("hank1","show result => ${result}")
+            _plan.value = when (result) {
                 is Result.Success -> {
                     result.data
                 }
@@ -66,21 +60,16 @@ class RecipesItemViewModel(
                 }
             }
 //            Log.d("hank1","show result => ${result}")
-//            Log.d("hank1","show recipes => ${recipes.value}")
+            Log.d("hank1","show recipes => ${plan.value}")
 
 
 
         }
-    }
 
 
 
-    fun navigateToDetail(recipes: Recipes) {
-        _navigateToDetail.value = recipes
-    }
 
-    fun onDetailNavigated() {
-        _navigateToDetail.value = null
+
     }
 
 }

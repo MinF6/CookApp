@@ -19,14 +19,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/text_dialog_plan_title"
+            <Button
+                android:id="@+id/button_dialog_yesterday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="這裡是dialog"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="&lt;"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_management_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="2022/6/20"
+                app:layout_constraintBottom_toBottomOf="@+id/button_dialog_yesterday"
+                app:layout_constraintStart_toEndOf="@+id/button_dialog_yesterday"
+                app:layout_constraintTop_toTopOf="@+id/button_dialog_yesterday" />
+
+            <Button
+                android:id="@+id/button_dialog_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="&gt;"
+                app:layout_constraintBottom_toBottomOf="@+id/text_management_date"
+                app:layout_constraintStart_toEndOf="@+id/text_management_date"
+                app:layout_constraintTop_toTopOf="@+id/text_management_date" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_dialog_yesterday" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

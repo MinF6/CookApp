@@ -16,7 +16,7 @@ data class Recipes(
     val cookingTime: String = " ",
     var ingredient: List<Ingredient> = listOf(Ingredient(" "," "," ")),
     var step: List<Step> = listOf(Step(" ", listOf(" ")," ",ToolType(" ", " "))),
-    var tag: List<String> = listOf(" "),
+    var tags: List<String> = listOf(" "),
     var author: String = " ",
     var like: List<String> = listOf(" "),
     var remark: String =" ",

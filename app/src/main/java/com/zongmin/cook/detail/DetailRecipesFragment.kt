@@ -1,6 +1,7 @@
 package com.zongmin.cook.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,10 +28,14 @@ class DetailRecipesFragment : Fragment() {
     ): View? {
         val binding = FragmentDetailRecipesBinding.inflate(inflater, container, false)
 
+        Log.d("hank1","我收到了資料 -> ${DetailRecipesFragmentArgs.fromBundle(requireArguments()).recipes}")
+
 
         binding.buttonDetailToEdit.setOnClickListener {
+            //到時候要帶值給編輯
             findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
         }
+
 
 
 

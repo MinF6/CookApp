@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
+import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
 import com.zongmin.cook.recipes.RecipesTypeFilter
@@ -41,11 +43,17 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 
         })
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "我想看recipes ->${it}")
+//            Log.d("hank1", "我想看recipes ->${it}")
             for (i in it) {
-                Log.d("hank1", "我想看迴圈 ->${i}")
-                mCardAdapter!!.addCardItem(CardItem(i.category, i.name,i.mainImage))
+//                Log.d("hank1", "我想看迴圈 ->${i}")
+                mCardAdapter!!.addCardItem(i)
             }
+
+            viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
+//                Log.d("hank1","想傳的內容是 -> $it")
+                findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
+            })
+
 
 //            mCardAdapter!!.addCardItem(CardItem(1, 1))
 //            mCardAdapter!!.addCardItem(CardItem(2, 2))
