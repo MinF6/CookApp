@@ -8,7 +8,15 @@ import java.util.*
 @Parcelize
 data class Plan(
     val id: String = " ",
-    val name: String = " ",
     val threeMeals: String = " ",
-    val time: Date? = null
+    val planContent: PlanContent = PlanContent(" "," "," ",null)
 ) : Parcelable
+
+
+@Parcelize
+data class PlanContent(
+    val image: String = " ",
+    val name: String = " ",
+    val category: String = " ",
+    val time: Date? = null
+): Parcelable

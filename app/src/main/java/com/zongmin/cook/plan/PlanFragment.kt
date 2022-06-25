@@ -9,6 +9,7 @@ import android.widget.CalendarView.OnDateChangeListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.zongmin.cook.databinding.FragmentPlanBinding
 import com.zongmin.cook.ext.getVmFactory
 import com.zongmin.cook.recipes.item.RecipesItemViewModel
@@ -37,7 +38,30 @@ class PlanFragment : Fragment() {
 
         binding.calendarView.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
 
-            Log.d("hank1","我選了日期 ->${year}年${month+1} 月$dayOfMonth 日 ")
+            Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
+
+
+        })
+        val adapter = PlanAdapter()
+
+        binding.recyclerviewPlan.adapter = adapter
+
+
+        val dataList = mutableListOf<PlanItem>()
+        viewModel.plan.observe(viewLifecycleOwner, Observer {
+
+            Log.d("hank1", "資料有進來了")
+            for (plan in it) {
+                val item1 = PlanItem.Title(plan.threeMeals)
+                dataList.add(item1)
+//                for (planContent in plan.planContent) {
+//                        val item2 = PlanItem.FullPlan(planContent)
+                val item2 = PlanItem.FullPlan(plan.planContent)
+                dataList.add(item2)
+
+//                }
+            }
+            adapter.submitList(dataList)
 
 
         })

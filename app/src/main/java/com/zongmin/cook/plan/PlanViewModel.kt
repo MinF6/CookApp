@@ -33,7 +33,7 @@ class PlanViewModel(
 
 
     init {
-        getPlanResult()
+//        getPlanResult()
         Log.d("hank1","進到PlanViewModel")
     }
 
@@ -42,7 +42,7 @@ class PlanViewModel(
         coroutineScope.launch {
 
             val result = cookRepository.getPlan()
-            Log.d("hank1","show result => ${result}")
+//            Log.d("hank1","show result => ${result}")
             _plan.value = when (result) {
                 is Result.Success -> {
                     result.data
