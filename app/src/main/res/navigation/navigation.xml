@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_recipes"/>
     <fragment
         android:id="@+id/managmentFragment"
-        android:name="com.zongmin.cook.management.ManagmentFragment"
+        android:name="com.zongmin.cook.management.ManagementFragment"
         android:label="ManagmentFragment"
         tools:layout="@layout/fragment_management"/>
     <fragment

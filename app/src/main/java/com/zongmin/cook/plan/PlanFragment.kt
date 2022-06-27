@@ -54,12 +54,10 @@ class PlanFragment : Fragment() {
             for (plan in it) {
                 val item1 = PlanItem.Title(plan.threeMeals)
                 dataList.add(item1)
-//                for (planContent in plan.planContent) {
-//                        val item2 = PlanItem.FullPlan(planContent)
+
                 val item2 = PlanItem.FullPlan(plan.planContent)
                 dataList.add(item2)
 
-//                }
             }
             adapter.submitList(dataList)
 

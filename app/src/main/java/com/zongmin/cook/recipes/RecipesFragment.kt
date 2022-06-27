@@ -12,6 +12,8 @@ import com.google.android.material.tabs.TabLayout
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.R
 import com.zongmin.cook.databinding.FragmentRecipesBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class RecipesFragment : Fragment() {
@@ -65,6 +67,8 @@ class RecipesFragment : Fragment() {
                 it.adapter = RecipesAdapter(childFragmentManager)
                 it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabsRecipes))
             }
+
+            buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
 
             buttonNavNew.setOnClickListener {
 //                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())

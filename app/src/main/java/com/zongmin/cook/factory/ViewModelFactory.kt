@@ -3,7 +3,11 @@ package com.zongmin.cook.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zongmin.cook.data.source.CookRepository
+import com.zongmin.cook.dialog.DialogPlanViewModel
+import com.zongmin.cook.management.ManagementViewModel
 import com.zongmin.cook.plan.PlanViewModel
+import com.zongmin.cook.profile.ProfileViewModel
+import com.zongmin.cook.social.SocialViewModel
 
 /**
  * Created by Wayne Chen in Jul. 2019.
@@ -21,20 +25,31 @@ class ViewModelFactory constructor(
                 isAssignableFrom(PlanViewModel::class.java) ->
                     PlanViewModel(cookRepository)
 
-//                isAssignableFrom(HomeViewModel::class.java) ->
-//                    HomeViewModel(stylishRepository)
+                isAssignableFrom(DialogPlanViewModel::class.java) ->
+                    DialogPlanViewModel(cookRepository)
 //
-//                isAssignableFrom(CartViewModel::class.java) ->
-//                    CartViewModel(stylishRepository)
+                isAssignableFrom(ManagementViewModel::class.java) ->
+                    ManagementViewModel(cookRepository)
 //
-//                isAssignableFrom(PaymentViewModel::class.java) ->
-//                    PaymentViewModel(stylishRepository)
+                isAssignableFrom(ManagementViewModel::class.java) ->
+                    ManagementViewModel(cookRepository)
 //
-//                isAssignableFrom(LoginViewModel::class.java) ->
-//                    LoginViewModel(stylishRepository)
+                isAssignableFrom(SocialViewModel::class.java) ->
+                    SocialViewModel(cookRepository)
 //
-//                isAssignableFrom(CheckoutSuccessViewModel::class.java) ->
-//                    CheckoutSuccessViewModel(stylishRepository)
+                //到時候得拿掉換成吃type版本，同食譜的item
+                isAssignableFrom(ProfileViewModel::class.java) ->
+                    ProfileViewModel(cookRepository)
+//
+//                isAssignableFrom(SocialViewModel::class.java) ->
+//                    SocialViewModel(cookRepository)
+//
+//                isAssignableFrom(SocialViewModel::class.java) ->
+//                    SocialViewModel(cookRepository)
+//
+//                isAssignableFrom(SocialViewModel::class.java) ->
+//                    SocialViewModel(cookRepository)
+
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

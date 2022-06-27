@@ -1,9 +1,10 @@
-package com.zongmin.cook.dialog
+package com.zongmin.cook.management
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zongmin.cook.data.Management
 import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.source.CookRepository
@@ -14,33 +15,27 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DialogPlanViewModel(
+class ManagementViewModel(
     private val cookRepository: CookRepository
 ) : ViewModel() {
+    var _management = MutableLiveData<List<Management>>()
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
+    val management: LiveData<List<Management>>
+        get() = _management
+
+
     private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    var _plan = MutableLiveData<List<Plan>>()
+    fun getManagementResult() {
+//        Log.d("hank1","check1")
 
-    val plan: LiveData<List<Plan>>
-        get() = _plan
-
-
-    init {
-//        getPlanResult()
-        Log.d("hank1", "進到DialogPlanViewModel")
-    }
-
-    fun getPlanResult() {
         coroutineScope.launch {
-            val result = cookRepository.getPlan()
-//            Log.d("hank1","show result => ${result}")
-            _plan.value = when (result) {
+            val result = cookRepository.getManagement()
+
+//            Log.d("hank1","check2")
+            _management.value = when (result) {
                 is Result.Success -> {
                     result.data
                 }
@@ -56,9 +51,16 @@ class DialogPlanViewModel(
                     null
                 }
             }
-            Log.d("hank1", "show recipes => ${plan.value}")
+//            Log.d("hank1","show result => ${result}")
+//            Log.d("hank1","show recipes => ${recipes.value}")
+
+
+
         }
     }
+
+
+
 
     var showTime = System.currentTimeMillis()
     val dayTime = 24 * 60 * 60 * 1000L
@@ -79,5 +81,20 @@ class DialogPlanViewModel(
         showTime += dayTime
         return SimpleDateFormat("yyyy/MM/dd").format(Date(showTime))
     }
+
+    fun getThreeDay(): String {
+        showTime = System.currentTimeMillis()
+        return SimpleDateFormat("yyyy/MM/dd").format(Date(showTime)) + " ~ " + SimpleDateFormat("yyyy/MM/dd").format(
+            Date(showTime + (dayTime * 3))
+        )
+    }
+
+    fun getWeek(): String {
+        showTime = System.currentTimeMillis()
+        return SimpleDateFormat("yyyy/MM/dd").format(Date(showTime)) + " ~ " + SimpleDateFormat("yyyy/MM/dd").format(
+            Date(showTime + (dayTime * 7))
+        )
+    }
+
 
 }

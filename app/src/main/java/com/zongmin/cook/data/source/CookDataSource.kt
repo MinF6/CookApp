@@ -1,10 +1,7 @@
 package com.zongmin.cook.data.source
 
 import androidx.lifecycle.MutableLiveData
-import com.zongmin.cook.data.Ingredient
-import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.Recipes
-import com.zongmin.cook.data.Result
+import com.zongmin.cook.data.*
 
 interface CookDataSource {
 
@@ -15,5 +12,9 @@ interface CookDataSource {
 
     suspend fun getPlan():Result<List<Plan>>
 
+
+    suspend fun getManagement(): Result<List<Management>>
+
+    suspend fun getUser(): Result<User>
 
 }

@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".management.ManagmentFragment">
+        tools:context=".management.ManagementFragment">
 
         <Button
             android:id="@+id/button_management_yesterday"
@@ -29,6 +29,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/button_management_yesterday"
             app:layout_constraintStart_toEndOf="@+id/button_management_yesterday"
             app:layout_constraintTop_toTopOf="@+id/button_management_yesterday" />
+<!--        -->
 
         <Button
             android:id="@+id/button_management_tomorrow"
@@ -79,12 +80,17 @@
             app:layout_constraintTop_toBottomOf="@+id/button_management_tomorrow" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_management"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_management_today" />
+            app:layout_constraintTop_toBottomOf="@+id/button_management_today"
+            tools:listitem="@layout/item_management"/>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

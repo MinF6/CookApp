@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNav()
 
+        this.setTitle("煮食")
+
 //        val db = FirebaseFirestore.getInstance()
 //        val name = Test()
 //        binding.buttonTest.setOnClickListener {

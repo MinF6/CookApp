@@ -3,27 +3,28 @@
 
     <item
         android:id="@+id/navigation_recipes"
-        android:icon="@drawable/ic_baseline_menu_book_24"
-        android:title="" />
+        android:icon="@drawable/recipes"
+        android:title="食譜" />
+<!--    android:icon="@drawable/ic_baseline_menu_book_24"-->
 
     <item
         android:id="@+id/navigation_management"
-        android:icon="@drawable/ic_baseline_add_shopping_cart_24"
-        android:title="" />
+        android:icon="@drawable/management"
+        android:title="採購" />
 
     <item
         android:id="@+id/navigation_plan"
-        android:icon="@drawable/ic_baseline_edit_calendar_24"
-        android:title="" />
+        android:icon="@drawable/plan"
+        android:title="計畫" />
 
     <item
         android:id="@+id/navigation_social"
-        android:icon="@drawable/ic_baseline_people_outline_24"
-        android:title="" />
+        android:icon="@drawable/social"
+        android:title="社交" />
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="" />
+        android:icon="@drawable/profile"
+        android:title="個人" />
 
 </menu>

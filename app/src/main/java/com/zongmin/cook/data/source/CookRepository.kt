@@ -1,9 +1,7 @@
 package com.zongmin.cook.data.source
 
 
-import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.Recipes
-import com.zongmin.cook.data.Result
+import com.zongmin.cook.data.*
 
 interface CookRepository {
 
@@ -14,5 +12,10 @@ interface CookRepository {
 
 
     suspend fun getPlan(): Result<List<Plan>>
+
+
+    suspend fun getManagement(): Result<List<Management>>
+
+    suspend fun getUser(): Result<User>
 
 }

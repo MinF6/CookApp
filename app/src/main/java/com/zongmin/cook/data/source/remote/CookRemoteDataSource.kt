@@ -111,6 +111,58 @@ object CookRemoteDataSource : CookDataSource {
     }
 
 
+    //食材管理
+    override suspend fun getManagement(): Result<List<Management>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection("Management")
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Management>()
+                        for (document in task.result!!) {
+//                        Log.d("hank1", document.id + " => " + document.data)
+                            val management = document.toObject(Management::class.java)
+                            list.add(management)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                    }
+                }
+        }
+
+    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection("User")
+            .whereEqualTo("id","W5bXC4hAbvs5zOYY7i5R")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+//                    val list = mutableListOf<User>()
+//                    var list: User
+                    for (document in task.result!!) {
+//                        Log.d("hank1", document.id + " => " + document.data)
+                        val user = document.toObject(User::class.java)
+                        Log.d("hank1", document.id + " => " + document.data)
+                        Log.d("hank1", "看一下user拿到啥 => $user ")
+
+                        continuation.resume(Result.Success(user))
+                    }
+//                    continuation.resume(Result.Success(list))
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                }
+            }
+    }
+
+
     //備份單拿Recipes----------------------------------------------
 
 //    override suspend fun getRecipes(): Result<List<Recipes>> = suspendCoroutine { continuation ->

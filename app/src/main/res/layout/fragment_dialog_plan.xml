@@ -23,19 +23,22 @@
                 android:id="@+id/button_dialog_yesterday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
                 android:text="&lt;"
+                app:layout_constraintEnd_toStartOf="@+id/text_dialog_date"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_management_date"
+                android:id="@+id/text_dialog_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="2022/6/20"
                 app:layout_constraintBottom_toBottomOf="@+id/button_dialog_yesterday"
+                app:layout_constraintEnd_toStartOf="@+id/button_dialog_tomorrow"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_dialog_yesterday"
                 app:layout_constraintTop_toTopOf="@+id/button_dialog_yesterday" />
 
@@ -43,16 +46,19 @@
                 android:id="@+id/button_dialog_tomorrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="4dp"
                 android:text="&gt;"
-                app:layout_constraintBottom_toBottomOf="@+id/text_management_date"
-                app:layout_constraintStart_toEndOf="@+id/text_management_date"
-                app:layout_constraintTop_toTopOf="@+id/text_management_date" />
+                app:layout_constraintBottom_toBottomOf="@+id/text_dialog_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/text_dialog_date"
+                app:layout_constraintTop_toTopOf="@+id/text_dialog_date" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

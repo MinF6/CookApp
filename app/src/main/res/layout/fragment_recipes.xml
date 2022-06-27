@@ -50,7 +50,7 @@ xmlns:tools="http://schemas.android.com/tools">
 
     <RadioGroup
         android:id="@+id/radioGroup_recipes"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,30 +58,26 @@ xmlns:tools="http://schemas.android.com/tools">
 
         <RadioButton
             android:id="@+id/radioButton"
-            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="早餐"
-            />
+            android:checked="true"
+            android:text="早餐" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="午餐"
-           />
+            android:text="午餐" />
+
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="晚餐"
-           />
+            android:text="晚餐" />
     </RadioGroup>
 
 
-
-
-<!--    <TextView-->
+    <!--    <TextView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="食譜區也就是Home"-->
