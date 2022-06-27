@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="user"
+            type="com.zongmin.cook.data.User" />
 
     </data>
 
@@ -19,6 +22,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="16dp"
+            imageUrl="@{user.headShot}"
             android:src="@drawable/ic_baseline_catching_pokemon_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -106,32 +110,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="介紹內容"
+            android:text="我發布的食譜"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_profile_fans" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager_profile"
+<!--        <androidx.viewpager.widget.ViewPager-->
+<!--            android:id="@+id/viewpager_profile"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce">-->
+
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:id="@+id/tabs_profile"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="48dp"-->
+<!--                app:tabIndicatorColor="#3f3a3a"-->
+<!--                app:tabSelectedTextColor="#3f3a3a"-->
+<!--                app:tabTextColor="#888888">-->
+
+<!--            </com.google.android.material.tabs.TabLayout>-->
+
+<!--        </androidx.viewpager.widget.ViewPager>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_profile"
+            android:background="#eeeeee"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce">
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce"
+            tools:listitem="@layout/item_profile_creation"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs_profile"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:tabIndicatorColor="#3f3a3a"
-                app:tabSelectedTextColor="#3f3a3a"
-                app:tabTextColor="#888888">
-
-            </com.google.android.material.tabs.TabLayout>
-
-        </androidx.viewpager.widget.ViewPager>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

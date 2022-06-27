@@ -147,8 +147,8 @@ object CookRemoteDataSource : CookDataSource {
                     for (document in task.result!!) {
 //                        Log.d("hank1", document.id + " => " + document.data)
                         val user = document.toObject(User::class.java)
-                        Log.d("hank1", document.id + " => " + document.data)
-                        Log.d("hank1", "看一下user拿到啥 => $user ")
+//                        Log.d("hank1", document.id + " => " + document.data)
+//                        Log.d("hank1", "看一下user拿到啥 => $user ")
 
                         continuation.resume(Result.Success(user))
                     }

@@ -32,14 +32,22 @@ class ProfileFragment : Fragment() {
 
         viewModel.getUserResult()
 
+        val adapter = ProfileAdapter()
+
+        binding.recyclerviewProfile.adapter = adapter
+
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1","show user -> $it")
-
-
+//            Log.d("hank1","show user -> $it")
+            binding.user = it
+            binding.textProfileName.text = it.name
+            binding.textProfileFans.text = it.fans.size.toString()
+            binding.textProfileFollows.text = it.follows.size.toString()
         })
 
-
-
+        viewModel.recipes.observe(viewLifecycleOwner, Observer {
+            Log.d("hank1","show 拿到的食譜，List<Recipes> -> $it")
+            adapter.submitList(it)
+        })
 
 
 
