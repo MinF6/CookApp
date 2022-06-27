@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="recipes"
+            type="com.zongmin.cook.data.Recipes" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_social_user"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="16dp"
+            imageUrl="@{`https://img-global.cpcdn.com/users/bf4baf131b3d9154/108x108cq50/avatar.jpg`}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_baseline_catching_pokemon_24" />
+
+        <TextView
+            android:id="@+id/text_social_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="作者名稱"
+            app:layout_constraintStart_toEndOf="@+id/image_social_user"
+            app:layout_constraintTop_toTopOf="@+id/image_social_user" />
+
+        <View
+            android:id="@+id/view_social_setting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_baseline_more_vert_24"
+            app:layout_constraintBottom_toBottomOf="@+id/image_social_user"
+            app:layout_constraintEnd_toEndOf="@+id/image_social_food" />
+
+
+        <ImageView
+            android:id="@+id/image_social_food"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            imageUrl="@{recipes.mainImage}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/image_social_user"
+            app:layout_constraintTop_toBottomOf="@+id/image_social_user" />
+
+        <TextView
+            android:id="@+id/text_social_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="料理名稱"
+            app:layout_constraintEnd_toStartOf="@+id/view"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/image_social_food"
+            app:layout_constraintTop_toBottomOf="@+id/image_social_food" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_baseline_bookmark_24"
+            app:layout_constraintBottom_toBottomOf="@+id/text_social_name"
+            app:layout_constraintEnd_toEndOf="@+id/image_social_food"
+            app:layout_constraintTop_toTopOf="@+id/text_social_name" />
+
+        <View
+            android:id="@+id/view_social_like"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_baseline_sentiment_very_satisfied_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_social_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_social_name" />
+
+
+        <TextView
+            android:id="@+id/text_social_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="1"
+            app:layout_constraintBottom_toBottomOf="@+id/view_social_like"
+            app:layout_constraintStart_toEndOf="@+id/view_social_like"
+            app:layout_constraintTop_toTopOf="@+id/view_social_like" />
+
+        <View
+            android:id="@+id/view_social_add_like"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/ic_baseline_add_reaction_24"
+            app:layout_constraintStart_toEndOf="@+id/text_social_like"
+            app:layout_constraintTop_toTopOf="@+id/view_social_like" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
