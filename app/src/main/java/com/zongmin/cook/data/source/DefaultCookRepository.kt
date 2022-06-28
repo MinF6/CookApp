@@ -11,6 +11,21 @@ class DefaultCookRepository(
         return cookRemoteDataSource.getRecipes()
     }
 
+    override suspend fun getCategoryRecipes(type: String): Result<List<Recipes>> {
+
+        return cookRemoteDataSource.getCategoryRecipes(type)
+    }
+
+    override suspend fun getCompoundRecipes(type: String, key: String): Result<List<Recipes>> {
+
+        return cookRemoteDataSource.getCompoundRecipes(type, key)
+    }
+
+    override suspend fun getKeywordRecipes(key: String): Result<List<Recipes>> {
+
+        return cookRemoteDataSource.getKeywordRecipes(key)
+    }
+
     override suspend fun getPlan(): Result<List<Plan>> {
 
         return cookRemoteDataSource.getPlan()

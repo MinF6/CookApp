@@ -2,13 +2,12 @@ package com.zongmin.cook.recipes
 
 enum class RecipesTypeFilter(val value: String) {
     ALL("全部"),
-    MEN("主食"),
-    ACCESSORIES("肉類"),
-    NEW1("海鮮"),
-    NEW2("蔬菜"),
-    NEW3("湯品"),
-    NEW4("甜點"),
-    NEW5("其他"),
-    NEW6("金針菇"),
+    STAPLE("主食"),
+    MEAT("肉類"),
+    SEAFOOD("海鮮"),
+    VEGETABLE("蔬菜"),
+    SOUP("湯品"),
+    DESSERT("甜點"),
+    OTHER("其他"),
 
 }

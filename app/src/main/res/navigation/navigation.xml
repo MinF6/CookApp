@@ -40,7 +40,7 @@
 
         <argument android:name="recipes"
             app:argType="com.zongmin.cook.data.Recipes"
-            app:nullable="false"/>
+            app:nullable="true"/>
 
     </fragment>
 

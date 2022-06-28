@@ -35,20 +35,37 @@ class RecipesItemViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getRecipesResult()
-
+        getRecipesResult(recipesType.value, null)
+//        Log.d("hank1", "看一下拿到的recipesType -> ${recipesType}")
+//        Log.d("hank1", "看一下拿到的recipesType.value -> ${recipesType.value}")
+//        Log.d("hank1", "看一下拿到的recipesType.ordinal -> ${recipesType.ordinal}")
+//        Log.d("hank1", "看一下拿到的recipesType.name -> ${recipesType.name}")
+//        Log.d("hank1", "---------------------------------------------------------")
 
     }
 
 
-    fun getRecipesResult() {
-//        Log.d("hank1","check1")
-
+    fun getRecipesResult(type: String, key: String?) {
+        Log.d("hank1", "現在的type到底是啥 -> $type")
+        Log.d("hank1", "現在的key到底是啥 -> $key")
         coroutineScope.launch {
+            var result: Result<List<Recipes>>? = null
+//            if(key == null){
+//                if (type == "全部") {
+//                    result = cookRepository.getRecipes()
+//                } else {
+//                    result = cookRepository.getCategoryRecipes(type)
+//                }
+//            }else{
+//                if (type == "全部") {
+//                    result = cookRepository.getKeywordRecipes(key)
+//                } else {
+//                    result = cookRepository.getCompoundRecipes(type,key)
+//                }
+//
+//            }
+            result = cookRepository.getRecipes()
 
-            val result = cookRepository.getRecipes()
-            val result2 = 1
-//            Log.d("hank1","check2")
             _recipes.value = when (result) {
                 is Result.Success -> {
                     result.data
@@ -69,10 +86,8 @@ class RecipesItemViewModel(
 //            Log.d("hank1","show recipes => ${recipes.value}")
 
 
-
         }
     }
-
 
 
     fun navigateToDetail(recipes: Recipes) {

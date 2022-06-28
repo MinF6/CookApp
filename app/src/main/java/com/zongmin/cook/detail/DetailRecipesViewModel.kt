@@ -28,7 +28,7 @@ class DetailRecipesViewModel: ViewModel() {
 
     }
 
-    fun getSetp(recipes: Recipes){
+    fun getStep(recipes: Recipes){
         _stepData.value = recipes.step
 
     }

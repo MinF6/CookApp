@@ -11,14 +11,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         app:cardUseCompatPadding="true">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -26,7 +26,7 @@
                 <ImageView
                     android:id="@+id/image_recipes_item"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="250dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="標題"
+
+
                     app:layout_constraintStart_toStartOf="@+id/text_recipes_item_category"
                     app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_category" />
 
@@ -58,12 +60,12 @@
                     android:id="@+id/button_view_pager_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="排定"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_title" />
+                     />
+<!--                app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_title"-->
 
 <!--                <RadioGroup-->
 <!--                    android:id="@+id/radioGroup_recipes"-->

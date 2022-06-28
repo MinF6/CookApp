@@ -5,12 +5,18 @@ import com.zongmin.cook.data.*
 
 interface CookDataSource {
 
-    suspend fun getRecipes():Result<List<Recipes>>
+    suspend fun getRecipes(): Result<List<Recipes>>
+
+    suspend fun getCategoryRecipes(type: String): Result<List<Recipes>>
+
+    suspend fun getCompoundRecipes(type: String, key: String): Result<List<Recipes>>
+
+    suspend fun getKeywordRecipes(key: String): Result<List<Recipes>>
 
 //    suspend fun getIngredient():Result<List<Ingredient>>
 
 
-    suspend fun getPlan():Result<List<Plan>>
+    suspend fun getPlan(): Result<List<Plan>>
 
 
     suspend fun getManagement(): Result<List<Management>>

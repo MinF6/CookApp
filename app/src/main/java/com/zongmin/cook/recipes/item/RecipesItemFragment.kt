@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.recipes.RecipesFragment
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import com.zongmin.viewpagercards.CardPagerAdapter
 import com.zongmin.viewpagercards.ShadowTransformer
@@ -35,13 +36,22 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
     ): View? {
 
         val binding = FragmentRecipesItemBinding.inflate(inflater, container, false)
+//        viewModel. getRecipesResult()
+//        Log.d("hank1", "看一下拿到的recipesType -> ${recipesType}")
+//        Log.d("hank1", "看一下拿到的recipesType.value -> ${recipesType.value}")
+//        Log.d("hank1", "看一下拿到的recipesType.declaringClass -> ${recipesType.declaringClass}")
+//        Log.d("hank1", "看一下拿到的recipesType.ordinal -> ${recipesType.ordinal}")
+//        Log.d("hank1", "看一下拿到的recipesType.name -> ${recipesType.name}")
+
 
         binding.lifecycleOwner = viewLifecycleOwner
+
 
         mViewPager = binding.viewPager
         mCardAdapter = CardPagerAdapter(viewModel, CardPagerAdapter.OnClickListener {
 
         })
+
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
 //            Log.d("hank1", "我想看recipes ->${it}")
             for (i in it) {
@@ -49,10 +59,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
                 mCardAdapter!!.addCardItem(i)
             }
 
-            viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
-//                Log.d("hank1","想傳的內容是 -> $it")
-                findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
-            })
+
 
 
 //            mCardAdapter!!.addCardItem(CardItem(1, 1))
@@ -65,6 +72,12 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
             mViewPager!!.setPageTransformer(false, mCardShadowTransformer)
             mViewPager!!.offscreenPageLimit = 3
 
+        })
+
+        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
+//                Log.d("hank1","想傳的內容是 -> $it")
+            findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
+            viewModel.onDetailNavigated()
         })
 
 

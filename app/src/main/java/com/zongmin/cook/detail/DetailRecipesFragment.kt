@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.zongmin.cook.NavigationDirections
-import com.zongmin.cook.R
 import com.zongmin.cook.databinding.FragmentDetailRecipesBinding
-import com.zongmin.cook.databinding.FragmentPlanBinding
 
 
 class DetailRecipesFragment : Fragment() {
@@ -36,14 +34,18 @@ class DetailRecipesFragment : Fragment() {
 
         val data = DetailRecipesFragmentArgs.fromBundle(requireArguments()).recipes
         binding.recipes = data
-        binding.textDetailTitle.text = data.name
+        if (data != null) {
+            binding.textDetailTitle.text = data.name
+        }
 
         //食材adapter
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter
 
         val viewModel = DetailRecipesViewModel()
-        viewModel.getIngredient(data)
+        if (data != null) {
+            viewModel.getIngredient(data)
+        }
 
         viewModel.ingredient.observe(viewLifecycleOwner, Observer {
 
@@ -55,7 +57,9 @@ class DetailRecipesFragment : Fragment() {
         val stepAdapter = DetailStepAdapter()
         binding.recyclerviewStep.adapter = stepAdapter
 
-        viewModel.getSetp(data)
+        if (data != null) {
+            viewModel.getStep(data)
+        }
 
         viewModel.stepData.observe(viewLifecycleOwner, Observer {
             Log.d("hank1","看一下拿到的步驟 -> ${it}")
