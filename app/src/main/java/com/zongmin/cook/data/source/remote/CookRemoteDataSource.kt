@@ -99,8 +99,9 @@ object CookRemoteDataSource : CookDataSource {
                     if (task.isSuccessful) {
                         var count = task.result.size()
                         val list = mutableListOf<Recipes>()
+                        Log.d("hank1", "CCCCCCCC，看一下有無task.result.size -> ${task.result.size()}")
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
+                        Log.d("hank1",document.id + " => " + document.data)
                             val recipes = document.toObject(Recipes::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(" Recipes")
@@ -174,68 +175,79 @@ object CookRemoteDataSource : CookDataSource {
                 .whereEqualTo("name", key)
                 .get()
                 .addOnCompleteListener { task ->
+                    Log.d("hank1", "BBBBBBBB")
                     if (task.isSuccessful) {
+                        Log.d("hank1", "CCCCCCCC，看一下有無task.result.size -> ${task.result.size()}")
                         var count = task.result.size()
                         val list = mutableListOf<Recipes>()
+
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
+                            Log.d("hank1", document.id + " => " + document.data)
+                            Log.d("hank1", "DDD")
+
                             val recipes = document.toObject(Recipes::class.java)
-                            FirebaseFirestore.getInstance()
-                                .collection(" Recipes")
-                                .document(document.id)
-                                .collection("ingredient")
-                                .get()
-                                .addOnCompleteListener { task2 ->
-                                    if (task2.isSuccessful) {
-                                        val list2 = mutableListOf<Ingredient>()
-                                        for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
-                                            list2.add(document2.toObject(Ingredient::class.java))
-                                        }
-                                        recipes.ingredient = list2
-                                    }
-
-                                }
-                            FirebaseFirestore.getInstance()
-                                .collection(" Recipes")
-                                .document(document.id)
-                                .collection("message")
-                                .get()
-                                .addOnCompleteListener { task3 ->
-                                    if (task3.isSuccessful) {
-                                        val list2 = mutableListOf<Message>()
-                                        for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
-                                            list2.add(document2.toObject(Message::class.java))
-                                        }
-                                        recipes.message = list2
-                                    }
-
-                                }
-                            FirebaseFirestore.getInstance()
-                                .collection(" Recipes")
-                                .document(document.id)
-                                .collection("step")
-                                .get()
-                                .addOnCompleteListener { task3 ->
-                                    if (task3.isSuccessful) {
-                                        val list2 = mutableListOf<Step>()
-                                        for (document2 in task3.result) {
-                                            list2.add(document2.toObject(Step::class.java))
-                                        }
-                                        recipes.step = list2
-                                        list.add(recipes)
-                                        count--
-                                        if (count == 0) {
-                                            continuation.resume(Result.Success(list))
-                                        }
-                                    }
-                                }
+//                            FirebaseFirestore.getInstance()
+//                                .collection(" Recipes")
+//                                .document(document.id)
+//                                .collection("ingredient")
+//                                .get()
+//                                .addOnCompleteListener { task2 ->
+//                                    if (task2.isSuccessful) {
+//                                        val list2 = mutableListOf<Ingredient>()
+//                                        for (document2 in task2.result) {
+////                                        Log.d("hank1", document2.id + " => " + document.data)
+////                                        val ingredient = document.toObject(Ingredient::class.java)
+//                                            list2.add(document2.toObject(Ingredient::class.java))
+//                                        }
+//                                        recipes.ingredient = list2
+//                                    }
+//
+//                                }
+//                            FirebaseFirestore.getInstance()
+//                                .collection(" Recipes")
+//                                .document(document.id)
+//                                .collection("message")
+//                                .get()
+//                                .addOnCompleteListener { task3 ->
+//                                    if (task3.isSuccessful) {
+//                                        val list2 = mutableListOf<Message>()
+//                                        for (document2 in task3.result) {
+////                                        Log.d("hank1", document2.id + " => " + document.data)
+////                                        val ingredient = document.toObject(Ingredient::class.java)
+//                                            list2.add(document2.toObject(Message::class.java))
+//                                        }
+//                                        recipes.message = list2
+//                                    }
+//
+//                                }
+//                            FirebaseFirestore.getInstance()
+//                                .collection(" Recipes")
+//                                .document(document.id)
+//                                .collection("step")
+//                                .get()
+//                                .addOnCompleteListener { task3 ->
+//                                    if (task3.isSuccessful) {
+//                                        val list2 = mutableListOf<Step>()
+//                                        for (document2 in task3.result) {
+//                                            list2.add(document2.toObject(Step::class.java))
+//                                        }
+//                                        recipes.step = list2
+//                                        list.add(recipes)
+//                                        count--
+//                                        if (count == 0) {
+//                                            continuation.resume(Result.Success(list))
+//                                        }
+//                                    }
+//                                }
+                            list.add(recipes)
+                            count--
+                            if (count == 0) {
+                                continuation.resume(Result.Success(list))
+                            }
                         }
                     } else {
                         task.exception?.let {
+                            Log.d("hank1", "GGGGGG")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }

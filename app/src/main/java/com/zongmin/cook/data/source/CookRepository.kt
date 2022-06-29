@@ -7,7 +7,6 @@ interface CookRepository {
 
     suspend fun getRecipes(): Result<List<Recipes>>
 
-
     suspend fun getCategoryRecipes(type: String): Result<List<Recipes>>
 
     suspend fun getCompoundRecipes(type: String, key: String): Result<List<Recipes>>

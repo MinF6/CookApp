@@ -1,9 +1,11 @@
 package com.zongmin.cook.recipes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
@@ -15,77 +17,48 @@ import java.util.*
 
 class RecipesFragment : Fragment() {
 
-    //    private var mViewPager: ViewPager? = null
-//
-//    private var mCardAdapter: CardPagerAdapter? = null
-//    private var mCardShadowTransformer: ShadowTransformer? = null
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-//        val binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        val binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
 
-
-//        mViewPager = binding.viewpagerRecipes
-//
-//        mCardAdapter = CardPagerAdapter()
-//        mCardAdapter.addCardItem(CardItem(1,1))
-//        mCardAdapter.addCardItem(CardItem(2, 2))
-//        mCardAdapter.addCardItem(CardItem(3, 3))
-//        mCardAdapter.addCardItem(CardItem(4, 4))
-//
-//        mCardShadowTransformer = ShadowTransformer(mViewPager, mCardAdapter)
-//        mCardShadowTransformer.enableScaling(true)
-//
-//        mViewPager.setAdapter(mCardAdapter)
-//        mViewPager.setPageTransformer(false, mCardShadowTransformer)
-//        mViewPager.setOffscreenPageLimit(3)
-
-
-//        return binding.root
-
-        FragmentRecipesBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-
-            viewpagerRecipes.let {
-                tabsRecipes.setupWithViewPager(it)
-                tabsRecipes.tabMode = TabLayout.MODE_SCROLLABLE;
+        binding.viewpagerRecipes.let {
+            binding.tabsRecipes.setupWithViewPager(it)
+            binding.tabsRecipes.tabMode = TabLayout.MODE_SCROLLABLE;
 //                val adapter = RecipesAdapter(childFragmentManager)
-                it.adapter = RecipesAdapter(childFragmentManager)
+            it.adapter = RecipesAdapter(childFragmentManager)
 //                it.adapter = adapter
-                it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabsRecipes))
-            }
-
-            buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
-
-            //新增食譜
-            buttonNavNew.setOnClickListener {
-//                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
-                findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
-            }
-
-            buttonReicpesSearch.setOnClickListener {
-//                RecipesItemFragment
-            }
-
-
-            buttonRecipesDialog.setOnClickListener {
-                findNavController().navigate(NavigationDirections.navigateToDialogPlan())
-
-            }
-
-            return@onCreateView root
+            it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabsRecipes))
         }
+
+        binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
+
+        binding.buttonNavNew.setOnClickListener {
+//                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
+            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
+        }
+
+        //傳值
+//        binding.buttonReicpesSearch.setOnClickListener {
+//
+//            val result = binding.edittextRecipesSearch.text.toString()
+//
+//            childFragmentManager.setFragmentResult("RecipesCard", bundleOf("bundleKey" to result))
+//            Log.d("hank1", "按了搜尋按鈕，傳送了 -> ${bundleOf("bundleKey" to result).getString("bundleKey")}")
+//
+//        }
+
+        binding.buttonRecipesDialog.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToDialogPlan())
+
+        }
+
+
+        return binding.root
 
     }
 
