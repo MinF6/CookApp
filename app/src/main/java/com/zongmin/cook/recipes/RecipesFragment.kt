@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentRecipesBinding
+import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.recipes.item.RecipesItemViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class RecipesFragment : Fragment() {
 
+    private val viewModel by viewModels<ReccipesViewModel> { getVmFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +29,8 @@ class RecipesFragment : Fragment() {
 
         val binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+
+
 
         binding.viewpagerRecipes.let {
             binding.tabsRecipes.setupWithViewPager(it)
@@ -42,20 +48,34 @@ class RecipesFragment : Fragment() {
             findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
         }
 
+
         //傳值
-//        binding.buttonReicpesSearch.setOnClickListener {
-//
-//            val result = binding.edittextRecipesSearch.text.toString()
-//
+        binding.buttonReicpesSearch.setOnClickListener {
+
+            val result = binding.edittextRecipesSearch.text.toString()
+
 //            childFragmentManager.setFragmentResult("RecipesCard", bundleOf("bundleKey" to result))
+
+            viewModel.searchText.value = result
 //            Log.d("hank1", "按了搜尋按鈕，傳送了 -> ${bundleOf("bundleKey" to result).getString("bundleKey")}")
-//
-//        }
+
+        }
+
+        binding.buttonRecipesClear.setOnClickListener {
+            binding.edittextRecipesSearch.setText("")
+            val result = binding.edittextRecipesSearch.text.toString()
+//            childFragmentManager.setFragmentResult("RecipesCard", bundleOf("bundleKey" to result))
+            viewModel.searchText.value = result
+        }
 
         binding.buttonRecipesDialog.setOnClickListener {
             findNavController().navigate(NavigationDirections.navigateToDialogPlan())
 
         }
+
+//        viewModel.searchText.observe(viewLifecycleOwner) {
+//            Log.d("hank2", "viewModel.searchText.observe, it->${it}")
+//        }
 
 
         return binding.root

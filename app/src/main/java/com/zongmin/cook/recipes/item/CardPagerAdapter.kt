@@ -16,14 +16,17 @@ import com.zongmin.cook.recipes.item.RecipesItemViewModel
 class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener: OnClickListener) :
     PagerAdapter() {
     private val mViews: MutableList<CardView?>
-//    private val mData: MutableList<CardItem>
-    private val mData: MutableList<Recipes>
+    private var mData: MutableList<Recipes>
     var baseElevation = 0f
         private set
 
     fun addCardItem(item: Recipes) {
-        mViews.add(null)
-        mData.add(item)
+        item.let {
+//            Log.d("hank1","進入addCardItem時機")
+            mViews.add(null)
+            mData.add(item)
+        }
+
     }
 
     fun getCardViewAt(position: Int): CardView? {
@@ -51,6 +54,13 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
 
         return binding.root
     }
+
+    fun submitList(data: List<Recipes>) {
+        Log.d("hank1","進入submitList")
+        this.mData = data as MutableList<Recipes>
+        notifyDataSetChanged()
+    }
+
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         container.removeView(`object` as View)
@@ -102,7 +112,7 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
 //            Log.d("hank1","點擊到這個item，這是 ->${item.name}")
         }
 
-
+//        mData = ArrayList()
     }
 
 
@@ -114,6 +124,11 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
 
     class OnClickListener(val clickListener: (recipes: Recipes) -> Unit) {
         fun onClick(recipes: Recipes) = clickListener(recipes)
+    }
+
+    fun remakeData(){
+        mData = ArrayList()
+//        Log.d("hank1","清空data -> $mData")
     }
 
 

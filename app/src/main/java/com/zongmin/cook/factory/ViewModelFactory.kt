@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.dialog.DialogPlanViewModel
+import com.zongmin.cook.edit.EditRecipesViewModel
 import com.zongmin.cook.management.ManagementViewModel
 import com.zongmin.cook.plan.PlanViewModel
 import com.zongmin.cook.profile.ProfileViewModel
+import com.zongmin.cook.recipes.ReccipesViewModel
 import com.zongmin.cook.social.SocialViewModel
 
 /**
@@ -40,9 +42,12 @@ class ViewModelFactory constructor(
                 //到時候得拿掉換成吃type版本，同食譜的item
                 isAssignableFrom(ProfileViewModel::class.java) ->
                     ProfileViewModel(cookRepository)
-//
-//                isAssignableFrom(SocialViewModel::class.java) ->
-//                    SocialViewModel(cookRepository)
+
+                isAssignableFrom(ReccipesViewModel::class.java) ->
+                    ProfileViewModel(cookRepository)
+
+                isAssignableFrom(EditRecipesViewModel::class.java) ->
+                    EditRecipesViewModel(cookRepository)
 //
 //                isAssignableFrom(SocialViewModel::class.java) ->
 //                    SocialViewModel(cookRepository)

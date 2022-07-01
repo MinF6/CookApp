@@ -29,10 +29,10 @@ class RecipesItemViewModel(
         get() = _navigateToDetail
 
 
-    private val _passValue = MutableLiveData<String>()
-
-    val passValue: LiveData<String>
-        get() = _passValue
+//    private val _passKey = MutableLiveData<String>()
+//
+//    val passKey: LiveData<String>
+//        get() = _passKey
 
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
@@ -41,10 +41,10 @@ class RecipesItemViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 //        val type = recipesType.value
-//    private var key: String = "Null"
+    private var key: String = ""
 
     init {
-        getRecipesResult(recipesType.value, null)
+        getRecipesResult(recipesType.value)
 //        getRecipesResult()
 //        getRecipesResult( null)
 //        Log.d("hank1", "看一下拿到的recipesType -> ${recipesType}")
@@ -56,58 +56,37 @@ class RecipesItemViewModel(
     }
 
 
-        fun getRecipesResult(type: String, key: String?) {
+    fun getRecipesResult(type: String ) {
 //    fun getRecipesResult() {
-        Log.d("hank1", "現在的type到底是啥 -> $type")
-        Log.d("hank1", "現在的key到底是啥 -> $key")
+//        Log.d("hank1", "現在的type到底是啥 -> $type")
+//        Log.d("hank1", "現在的key到底是啥 -> $key")
         coroutineScope.launch {
             var result: Result<List<Recipes>>? = null
-            Log.d("hank1", "現在的type是 -> $type 現在的key是 -> $key")
-            if (key == null) {
+//            Log.d("hank1", "現在的type是 -> $type 現在的key是 -> $key")
+            if (key == "") {
                 if (type == "全部") {
-                    Log.d("hank1", "進了1")
+//                    Log.d("hank1", "進了1")
                     result = cookRepository.getRecipes()
-                    Log.d("hank1", "進了1的result為 -> $result")
+//                    Log.d("hank1", "進了1的result為 -> $result")
                 } else {
-                    Log.d("hank1", "進了2")
+//                    Log.d("hank1", "進了2")
                     result = cookRepository.getCategoryRecipes(type)
-                    Log.d("hank1", "進了2的result為 -> $result")
+//                    result = cookRepository.getCategoryRecipes("蔬菜")
+//                    Log.d("hank1", "進了2的result為 -> $result")
                 }
-//            } else {
-//                if (type == "全部") {
+            } else {
+                if (type == "全部") {
 //                    Log.d("hank1", "進了3")
-//                    result = key?.let { cookRepository.getKeywordRecipes(it) }
-//                    Log.d("hank1", "進了3的result為 -> $result")
-//                } else {
-//                    Log.d("hank1", "進了4")
-//                    result = key?.let { cookRepository.getCompoundRecipes(type, it) }
-//                    Log.d("hank1", "進了4的result為 -> $result")
-//                }
-//
-//            }
-        } else if(key == "") {
-                if (type == "全部") {
-                    Log.d("hank1", "進了1")
-                    result = cookRepository.getRecipes()
-                    Log.d("hank1", "進了1的result為 -> $result")
-                } else {
-                    Log.d("hank1", "進了2")
-                    result = cookRepository.getCategoryRecipes(type)
-                    Log.d("hank1", "進了2的result為 -> $result")
-                }
-            }else {
-                if (type == "全部") {
-                    Log.d("hank1", "進了3")
                     result = key?.let { cookRepository.getKeywordRecipes(it) }
-                    Log.d("hank1", "進了3的result為 -> $result")
+//                    Log.d("hank1", "進了3的result為 -> $result")
                 } else {
-                    Log.d("hank1", "進了4")
+//                    Log.d("hank1", "進了4")
                     result = key?.let { cookRepository.getCompoundRecipes(type, it) }
-                    Log.d("hank1", "進了4的result為 -> $result")
+//                    result = key?.let { cookRepository.getCompoundRecipes("蔬菜", it) }
+//                    Log.d("hank1", "進了4的result為 -> $result")
                 }
 
             }
-
 
             _recipes.value = when (result) {
                 is Result.Success -> {
@@ -125,6 +104,7 @@ class RecipesItemViewModel(
                     null
                 }
             }
+//            _recipes.value = _recipes.value
 //            Log.d("hank1","show result => ${_result}")
 //            Log.d("hank1", "show recipes => ${_recipes.value}")
 
@@ -133,13 +113,13 @@ class RecipesItemViewModel(
     }
 
 
-//    fun setRecipesKey(key: String) {
-//        this.key = key
-//        getRecipesResult()
-//
-//        Log.d("hank1", "執行")
-//
-//    }
+    fun setRecipesKey(type: String,key: String) {
+        this.key = key
+        getRecipesResult(type)
+
+        Log.d("hank1", "執行")
+
+    }
 
 
     fun navigateToDetail(recipes: Recipes) {

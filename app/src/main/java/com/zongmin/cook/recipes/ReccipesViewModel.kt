@@ -7,11 +7,6 @@ import androidx.lifecycle.ViewModel
 
 class ReccipesViewModel : ViewModel() {
 
-
-    var passValue = MutableLiveData<String>("123")
-//    var passValue = " "
-
-
-
+    val searchText = MutableLiveData<String>()
 
 }

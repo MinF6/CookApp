@@ -41,6 +41,15 @@ class DefaultCookRepository(
         return cookRemoteDataSource.getUser()
     }
 
+    override suspend fun createRecipes(
+        recipes: Recipes,
+        ingredient: List<Ingredient>,
+        step: List<Step>
+    ): Result<Boolean> {
+
+        return cookRemoteDataSource.createRecipes(recipes, ingredient, step)
+    }
+
 //    override suspend fun getIngredient(): Result<List<Ingredient>> {
 //        return cookRemoteDataSource.getIngredient()
 //    }
