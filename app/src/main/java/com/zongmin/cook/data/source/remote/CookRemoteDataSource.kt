@@ -13,6 +13,8 @@ import kotlin.coroutines.suspendCoroutine
 object CookRemoteDataSource : CookDataSource {
 
     const val RECIPES = " Recipes"
+    const val INGREDIENT = "ingredient"
+    const val STEP = "step"
 
     override suspend fun getRecipes(): Result<List<Recipes>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
@@ -28,7 +30,7 @@ object CookRemoteDataSource : CookDataSource {
                         FirebaseFirestore.getInstance()
                             .collection(RECIPES)
                             .document(document.id)
-                            .collection("ingredient")
+                            .collection(INGREDIENT)
                             .get()
                             .addOnCompleteListener { task2 ->
                                 if (task2.isSuccessful) {
@@ -62,7 +64,8 @@ object CookRemoteDataSource : CookDataSource {
                         FirebaseFirestore.getInstance()
                             .collection(RECIPES)
                             .document(document.id)
-                            .collection("step")
+//                            .collection("step")
+                            .collection(STEP)
                             .get()
                             .addOnCompleteListener { task3 ->
                                 if (task3.isSuccessful) {
@@ -107,7 +110,7 @@ object CookRemoteDataSource : CookDataSource {
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-                                .collection("ingredient")
+                                .collection(INGREDIENT)
                                 .get()
                                 .addOnCompleteListener { task2 ->
                                     if (task2.isSuccessful) {
@@ -141,7 +144,7 @@ object CookRemoteDataSource : CookDataSource {
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-                                .collection("step")
+                                .collection(STEP)
                                 .get()
                                 .addOnCompleteListener { task3 ->
                                     if (task3.isSuccessful) {
@@ -188,7 +191,7 @@ object CookRemoteDataSource : CookDataSource {
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-                                .collection("ingredient")
+                                .collection(INGREDIENT)
                                 .get()
                                 .addOnCompleteListener { task2 ->
                                     if (task2.isSuccessful) {
@@ -222,7 +225,7 @@ object CookRemoteDataSource : CookDataSource {
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-                                .collection("step")
+                                .collection(STEP)
                                 .get()
                                 .addOnCompleteListener { task3 ->
                                     if (task3.isSuccessful) {
@@ -271,7 +274,7 @@ object CookRemoteDataSource : CookDataSource {
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-                                .collection("ingredient")
+                                .collection(INGREDIENT)
                                 .get()
                                 .addOnCompleteListener { task2 ->
                                     if (task2.isSuccessful) {
@@ -305,7 +308,7 @@ object CookRemoteDataSource : CookDataSource {
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-                                .collection("step")
+                                .collection(STEP)
                                 .get()
                                 .addOnCompleteListener { task3 ->
                                     if (task3.isSuccessful) {
@@ -408,7 +411,7 @@ object CookRemoteDataSource : CookDataSource {
     }
 
     override suspend fun createRecipes(
-        recipes: Recipes,
+        summary: Summary,
         ingredient: List<Ingredient>,
         step: List<Step>
     ): Result<Boolean> =
@@ -416,10 +419,10 @@ object CookRemoteDataSource : CookDataSource {
             val recipe = FirebaseFirestore.getInstance().collection(RECIPES)
             val document = recipe.document()
 
-            recipes.id = document.id
+            summary.id = document.id
 //        article.createdTime = Calendar.getInstance().timeInMillis
             document
-                .set(recipes)
+                .set(summary)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d("hank1", "新增成功區，我新增了 -> $recipe")
@@ -439,7 +442,7 @@ object CookRemoteDataSource : CookDataSource {
             for (i in ingredient) {
                 val ingredientDocument = recipeIngredient.document()
                 i.id = ingredientDocument.id
-                document.collection("Ingredient").document(ingredientDocument.id).set(i)
+                document.collection(INGREDIENT).document(ingredientDocument.id).set(i)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Log.d("hank1", "新增成功區，我新增了ingredient -> $i")
@@ -459,7 +462,7 @@ object CookRemoteDataSource : CookDataSource {
             for (i in step) {
                 val stepDocument = recipeStep.document()
                 i.id = stepDocument.id
-                document.collection("Step").document(stepDocument.id).set(i)
+                document.collection(STEP).document(stepDocument.id).set(i)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Log.d("hank1", "新增成功區，我新增了step -> $i")

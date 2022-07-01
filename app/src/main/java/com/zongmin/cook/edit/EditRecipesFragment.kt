@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.zongmin.cook.data.Ingredient
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.Step
+import com.zongmin.cook.data.Summary
 import com.zongmin.cook.databinding.FragmentEditRecipesBinding
 import com.zongmin.cook.ext.getVmFactory
 
@@ -34,7 +35,7 @@ class EditRecipesFragment : Fragment() {
 
 
         binding.buttonEditSave.setOnClickListener {
-            val newRecipes = Recipes()
+            val newRecipes = Summary()
             val newIngredient = Ingredient()
             val newStep = Step()
             newRecipes.name = binding.edittextEditName.text.toString()

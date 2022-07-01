@@ -23,6 +23,6 @@ interface CookDataSource {
 
     suspend fun getUser(): Result<User>
 
-    suspend fun createRecipes(recipes: Recipes,ingredient: List<Ingredient>,step: List<Step>): Result<Boolean>
+    suspend fun createRecipes(summary: Summary,ingredient: List<Ingredient>,step: List<Step>): Result<Boolean>
 
 }
