@@ -20,20 +20,43 @@
             android:layout_height="match_parent"
             tools:context=".edit.EditRecipesFragment">
 
+            <ImageView
+                android:id="@+id/image_edit_test"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_edit_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上傳照片"
+                app:layout_constraintBottom_toBottomOf="@+id/image_edit_test"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/button_edit_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="從相機打開"
+                app:layout_constraintStart_toEndOf="@+id/button_edit_upload"
+                app:layout_constraintTop_toTopOf="@+id/button_edit_upload" />
 
             <ImageView
                 android:id="@+id/image_edit_main"
                 imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="300dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button_edit_change_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:text="變更照片"
                 app:layout_constraintBottom_toBottomOf="@+id/image_edit_main"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -102,6 +125,7 @@
                 android:id="@+id/text_serving"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:text="人份"
                 app:layout_constraintBottom_toBottomOf="@+id/text_ingredient_title"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -186,6 +210,7 @@
                 android:id="@+id/text_edit_cook_time_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:text="分鐘"
                 app:layout_constraintBottom_toBottomOf="@+id/text_edit_step"
                 app:layout_constraintEnd_toEndOf="parent"
