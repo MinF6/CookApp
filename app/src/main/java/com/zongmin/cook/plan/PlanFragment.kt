@@ -64,6 +64,10 @@ class PlanFragment : Fragment() {
 
         })
 
+
+
+
+
         return binding.root
     }
 

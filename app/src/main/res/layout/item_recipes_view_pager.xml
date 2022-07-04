@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        >
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,10 +24,22 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+<!--                <com.google.android.material.imageview.ShapeableImageView-->
+<!--                    android:id="@+id/image_recipes_item"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:shapeAppearanceOverlay="@style/imageViewCorner"-->
+
+<!--                    />-->
+
                 <ImageView
                     android:id="@+id/image_recipes_item"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="200dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +49,14 @@
 <!--                app:imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"-->
 
                 <TextView
-                    android:id="@+id/text_recipes_item_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:id="@+id/text_recipes_item_category"
                     android:text="類別"
                     app:layout_constraintStart_toStartOf="@+id/image_recipes_item"
-                    app:layout_constraintTop_toBottomOf="@+id/image_recipes_item" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_recipes_item"
+                     />
 
                 <TextView
                     android:id="@+id/text_recipes_item_title"
@@ -50,7 +64,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="標題"
-
+                    android:textStyle="bold"
+                    android:textSize="20dp"
 
                     app:layout_constraintStart_toStartOf="@+id/text_recipes_item_category"
                     app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_category" />
@@ -60,7 +75,7 @@
                     android:id="@+id/button_view_pager_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="排定"
+                    android:text="安排烹飪"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

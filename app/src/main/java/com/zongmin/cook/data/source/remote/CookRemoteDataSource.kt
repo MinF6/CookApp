@@ -4,6 +4,7 @@ import android.icu.util.Calendar
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.zongmin.cook.CookApplication
 import com.zongmin.cook.data.*
 import com.zongmin.cook.data.source.CookDataSource
@@ -66,6 +67,7 @@ object CookRemoteDataSource : CookDataSource {
                             .document(document.id)
 //                            .collection("step")
                             .collection(STEP)
+                            .orderBy("sequence", Query.Direction.ASCENDING)
                             .get()
                             .addOnCompleteListener { task3 ->
                                 if (task3.isSuccessful) {
@@ -145,6 +147,7 @@ object CookRemoteDataSource : CookDataSource {
                                 .collection(RECIPES)
                                 .document(document.id)
                                 .collection(STEP)
+                                .orderBy("sequence", Query.Direction.ASCENDING)
                                 .get()
                                 .addOnCompleteListener { task3 ->
                                     if (task3.isSuccessful) {
@@ -226,6 +229,7 @@ object CookRemoteDataSource : CookDataSource {
                                 .collection(RECIPES)
                                 .document(document.id)
                                 .collection(STEP)
+                                .orderBy("sequence", Query.Direction.ASCENDING)
                                 .get()
                                 .addOnCompleteListener { task3 ->
                                     if (task3.isSuccessful) {
@@ -309,6 +313,7 @@ object CookRemoteDataSource : CookDataSource {
                                 .collection(RECIPES)
                                 .document(document.id)
                                 .collection(STEP)
+                                .orderBy("sequence", Query.Direction.ASCENDING)
                                 .get()
                                 .addOnCompleteListener { task3 ->
                                     if (task3.isSuccessful) {
@@ -466,7 +471,7 @@ object CookRemoteDataSource : CookDataSource {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Log.d("hank1", "新增成功區，我新增了step -> $i")
-                            continuation.resume(Result.Success(true))
+//                            continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
                                 Log.d("hank1", "新增失敗")

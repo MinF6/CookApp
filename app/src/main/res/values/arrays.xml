@@ -2,9 +2,11 @@
 <resources>
     <string-array name="spinnerValue">
         <item>主食</item>
-        <item>蔬菜類</item>
-        <item>水果類</item>
-        <item>蛋豆魚肉類</item>
-        <item>五穀根莖類</item>
+        <item>肉類</item>
+        <item>海鮮</item>
+        <item>蔬菜</item>
+        <item>湯品</item>
+        <item>甜點</item>
+        <item>其他</item>
     </string-array>
 </resources>

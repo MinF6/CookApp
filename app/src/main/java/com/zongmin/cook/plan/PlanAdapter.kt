@@ -31,6 +31,9 @@ class PlanAdapter : ListAdapter<PlanItem , RecyclerView.ViewHolder>(DiffCallback
             binding.textPlanName.text = planContent.name
             binding.textPlanCategory.text = planContent.category
 
+            binding.buttonPlanCancel.setOnClickListener {
+                Log.d("hank1","看看這個item -> $planContent")
+            }
             binding.executePendingBindings()
         }
     }
