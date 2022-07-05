@@ -21,9 +21,11 @@
             tools:context=".edit.EditRecipesFragment">
 
             <ImageView
+
                 android:id="@+id/image_edit_test"
                 android:layout_width="200dp"
                 android:layout_height="300dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +51,7 @@
                 imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"
                 android:layout_width="200dp"
                 android:layout_height="300dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

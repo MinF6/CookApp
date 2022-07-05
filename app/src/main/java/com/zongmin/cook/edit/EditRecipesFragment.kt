@@ -1,25 +1,28 @@
 package com.zongmin.cook.edit
 
-import android.content.ContentResolver
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.R
 import com.zongmin.cook.data.*
@@ -27,6 +30,7 @@ import com.zongmin.cook.databinding.FragmentEditRecipesBinding
 import com.zongmin.cook.databinding.ItemEditIngredientBinding
 import com.zongmin.cook.databinding.ItemEditStepBinding
 import com.zongmin.cook.ext.getVmFactory
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 
@@ -38,10 +42,12 @@ class EditRecipesFragment : Fragment() {
     var intent: Intent? = null
     var uri: Uri? = null
     var PICK_CONTACT_REQUEST = 1
-    var data_list: String? = null
+    var REQUEST_CODE = 42
     var img1: ImageView? = null
     var img2: ImageView? = null
 
+    val FILE_NAME = "photo.jpg"
+    var photoFile: File? = null
 
     private val viewModel by viewModels<EditRecipesViewModel> { getVmFactory() }
 
@@ -53,24 +59,51 @@ class EditRecipesFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data);
+        //來自檔案
         if (requestCode == PICK_CONTACT_REQUEST) {
             uri = data?.data
             img1?.setImageURI(uri)
-
-//            val contentResolver: ContenResolver = getContentResolver()
-//            val contentResolver: ContentResolver? = null
-//
-//            val mimeTypeMap = MimeTypeMap.getSingleton()
-//            if (contentResolver != null) {
-//                data_list = mimeTypeMap.getExtensionFromMimeType(uri?.let { contentResolver.getType(it) })
-//            }
-
+            Log.d("hank1","看一下上傳拿到的uri是啥 -> $uri")
 
         }
+
+        //來自相機
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+//            val takeImage = data?.extras?.get("data") as Bitmap
+
+            val takeImage = BitmapFactory.decodeFile(photoFile?.absolutePath)
+
+
+            Log.d("hank1","看一下拍照拿的的takeImage是啥 -> $takeImage")
+            img1?.setImageBitmap(takeImage)
+
+            uri = context?.let { getImageUri(it,takeImage) }
+//            img1?.setImageURI(takeImage)
+        }
+
 
 
         super.onActivityResult(requestCode, resultCode, data);
 
+
+    }
+
+    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            inContext.getContentResolver(),
+            inImage,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
+    }
+
+    private fun getPhotoFile(fileName: String): File {
+        val storageDirectory = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+        return File.createTempFile(fileName, ".jpg", storageDirectory)
 
     }
 
@@ -89,24 +122,47 @@ class EditRecipesFragment : Fragment() {
         stepList = binding.editStepList
         val depiction = binding3.itemEdittextStepDepiction
 
+//打開攝影機----------------------------------------------------------------------
+
+        binding.buttonEditCamera.setOnClickListener {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            photoFile = getPhotoFile(FILE_NAME)
+
+//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
+
+
+            val fileProvider = context?.let { it1 -> FileProvider.getUriForFile(it1,"com.zongmin.cook.fileprovider",
+                photoFile!!
+            ) }
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
+
+
+//            if(takePictureIntent.resolveActivity(MainActivity().packageManager)!= null){
+//
+//            }
+
+            startActivityForResult(takePictureIntent,REQUEST_CODE)
+
+
+
+
+
+        }
+
+
+
+
+//打開攝影機結束----------------------------------------------------------------------
+
+
 //圖片上傳-------------------------------------------------------------------------------------
         img1 = binding.imageEditTest
         img2 = binding.imageEditMain
 
-//        var storageRef = FirebaseFirestore.
-//        var storageRef = FirebaseStorage.getInstance().getReference()
         var storageReference = FirebaseStorage.getInstance().getReference()
 
-//// Create a reference to "mountains.jpg"
-//        val mountainsRef = storageRef.child("mountains.jpg")
-//
-//// Create a reference to 'images/mountains.jpg'
-//        val mountainImagesRef = storageRef.child("images/mountains.jpg")
-//
-//
-//// While the file names are the same, the references point to different files
-//        mountainsRef.name == mountainImagesRef.name // true
 
+        //換置圖片
         binding.buttonEditUpload.setOnClickListener {
             intent = Intent()
             intent!!.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -117,18 +173,15 @@ class EditRecipesFragment : Fragment() {
         }
 
 
-
-
+        var apple = 0L
         binding.buttonEditChangeImage.setOnClickListener {
 
             //上傳圖片   應該要改去viewModel用coroutineScope.launch
-//            val picStorage = storageReference.child("m4.$data_list")
             val time = System.currentTimeMillis()
             val picStorage = storageReference.child("image$time")
-            Log.d("hank1", "點擊更換圖片1")
+            Log.d("hank1", "點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
 
             uri?.let { it1 ->
-                Log.d("hank1", "查看uri是啥 -> $uri")
                 picStorage.putFile(it1).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d("hank1", "上傳成功")
@@ -139,9 +192,16 @@ class EditRecipesFragment : Fragment() {
                                 .into(img2!!)
 
                             Log.d("hank1", "成功更換圖片")
+                            if(apple == 0L){
+                                apple = time
+                                Log.d("hank1", "沒有過去的圖片")
+                            }else{
+                                storageReference.child("image$apple").delete()
+                                apple = time
+                                Log.d("hank1", "刪除上次張上傳的圖片")
+                            }
                         }.addOnFailureListener {
                             // Handle any errors
-
                         }
                     } else {
                         Log.d("hank1", "上傳失敗")
@@ -149,48 +209,7 @@ class EditRecipesFragment : Fragment() {
                 }
             }
 
-            //變更圖片
-//            var file: File
-//            try {
-//                file = File.createTempFile("images","png")
-//                picStorage.getFile(file).addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-////                        img2!!.setImageURI(Uri.fromFile(file))
-//                        binding.imageEditMain.setImageURI(Uri.fromFile(file))
-//                        Log.d("hank1", "下載成功，想看file -> ${file}")
-//                        Log.d("hank1", "下載成功，想看Uri.fromFile(file) -> ${Uri.fromFile(file)}")
-////                        storageReference
-//                    } else {
-//                        Log.d("hank1", "下載失敗")
-//                    }
-//                }
-//
-//            } catch (e: Exception) {
-//                    e.printStackTrace()
-//
-//                        Log.d("hank1", "出意外")
-//            }
-
-//            val storageReference = Firebase.storage.reference
-//            Log.d("hank1","看一下是不是url(Firebase.storage.reference) ->$storageReference ")
-//            Glide.with(this /* context */)
-//                .load(storageReference)
-//                .into(img2!!)
-
-//            picStorage.downloadUrl.addOnSuccessListener {
-//                Log.d("hank1", "看一下uri ->$it ")
-//                Glide.with(this /* context */)
-//                    .load(it)
-//                    .into(img2!!)
-//
-//            }.addOnFailureListener {
-//                // Handle any errors
-//
-//            }
-
-
         }
-
 
 //---------------------------------------------------------------------------------------------
 
@@ -291,6 +310,8 @@ class EditRecipesFragment : Fragment() {
         return binding.root
 
     }
+
+
 
     private fun addView() {
         val aa: View = layoutInflater.inflate(R.layout.item_edit_ingredient, null, false)
