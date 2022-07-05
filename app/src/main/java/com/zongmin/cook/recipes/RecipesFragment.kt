@@ -5,83 +5,80 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.zongmin.cook.NavigationDirections
-import com.zongmin.cook.R
 import com.zongmin.cook.databinding.FragmentRecipesBinding
+import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.recipes.item.RecipesItemViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class RecipesFragment : Fragment() {
 
-//    private var mViewPager: ViewPager? = null
-//
-//    private var mCardAdapter: CardPagerAdapter? = null
-//    private var mCardShadowTransformer: ShadowTransformer? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
+    private val viewModel by viewModels<ReccipesViewModel> { getVmFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-//        val binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        val binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
 
+        binding.viewpagerRecipes.let {
+            binding.tabsRecipes.setupWithViewPager(it)
+            binding.tabsRecipes.tabMode = TabLayout.MODE_SCROLLABLE;
+//                val adapter = RecipesAdapter(childFragmentManager)
+            it.adapter = RecipesAdapter(childFragmentManager)
+//                it.adapter = adapter
+            it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabsRecipes))
+        }
 
-//        mViewPager = binding.viewpagerRecipes
-//
-//        mCardAdapter = CardPagerAdapter()
-//        mCardAdapter.addCardItem(CardItem(1,1))
-//        mCardAdapter.addCardItem(CardItem(2, 2))
-//        mCardAdapter.addCardItem(CardItem(3, 3))
-//        mCardAdapter.addCardItem(CardItem(4, 4))
-//
-//        mCardShadowTransformer = ShadowTransformer(mViewPager, mCardAdapter)
-//        mCardShadowTransformer.enableScaling(true)
-//
-//        mViewPager.setAdapter(mCardAdapter)
-//        mViewPager.setPageTransformer(false, mCardShadowTransformer)
-//        mViewPager.setOffscreenPageLimit(3)
+        binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
 
-
-
-//        return binding.root
-
-        FragmentRecipesBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = viewLifecycleOwner
-
-            viewpagerRecipes.let {
-                tabsRecipes.setupWithViewPager(it)
-                tabsRecipes.tabMode = TabLayout.MODE_SCROLLABLE;
-                it.adapter = RecipesAdapter(childFragmentManager)
-                it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabsRecipes))
-            }
-
-            buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
-
-            buttonNavNew.setOnClickListener {
+        binding.buttonNavNew.setOnClickListener {
 //                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
             findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
-            }
-
-            buttonRecipesDialog.setOnClickListener {
-                findNavController().navigate(NavigationDirections.navigateToDialogPlan())
-//            Log.d("hank1","111111111111111111111")
-            }
-
-            return@onCreateView root
         }
+
+
+        //傳值
+        binding.buttonReicpesSearch.setOnClickListener {
+
+            val result = binding.edittextRecipesSearch.text.toString()
+
+//            childFragmentManager.setFragmentResult("RecipesCard", bundleOf("bundleKey" to result))
+
+            viewModel.searchText.value = result
+//            Log.d("hank1", "按了搜尋按鈕，傳送了 -> ${bundleOf("bundleKey" to result).getString("bundleKey")}")
+
+        }
+
+        binding.buttonRecipesClear.setOnClickListener {
+            binding.edittextRecipesSearch.setText("")
+            val result = binding.edittextRecipesSearch.text.toString()
+//            childFragmentManager.setFragmentResult("RecipesCard", bundleOf("bundleKey" to result))
+            viewModel.searchText.value = result
+        }
+
+        binding.buttonRecipesDialog.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToDialogPlan())
+
+        }
+
+//        viewModel.searchText.observe(viewLifecycleOwner) {
+//            Log.d("hank2", "viewModel.searchText.observe, it->${it}")
+//        }
+
+
+        return binding.root
 
     }
 

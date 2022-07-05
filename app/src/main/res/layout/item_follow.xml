@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/image_follow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_follow_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="用戶名稱"
+            app:layout_constraintStart_toEndOf="@+id/image_follow"
+            app:layout_constraintTop_toTopOf="@+id/image_follow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="食譜數量"
+            app:layout_constraintStart_toStartOf="@+id/text_follow_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_follow_name" />
+
+        <Button
+            android:id="@+id/button_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="追蹤"
+            app:layout_constraintTop_toTopOf="@+id/image_follow"
+            app:layout_constraintBottom_toBottomOf="@+id/image_follow"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#aaaaaa"
+            app:layout_constraintTop_toBottomOf="@+id/image_follow"
+            android:layout_margin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
