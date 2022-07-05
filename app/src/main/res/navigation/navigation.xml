@@ -56,6 +56,11 @@
         android:label="DialogPlan"
         tools:layout="@layout/fragment_dialog_plan"/>
 
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.zongmin.cook.login.LoginFragment"
+        android:label="LoginFragment" />
+
 
     <action android:id="@+id/navigate_to_recipes_fragment" app:destination="@+id/recipesFragment"
         app:popUpTo="@id/navigation"
@@ -86,6 +91,10 @@
         app:popUpToInclusive="true" />
 
     <action android:id="@+id/navigate_to_dialog_plan" app:destination="@+id/dialogPlan"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true" />
+
+    <action android:id="@+id/navigate_to_login" app:destination="@+id/loginFragment"
         app:popUpTo="@id/navigation"
         app:popUpToInclusive="true" />
 

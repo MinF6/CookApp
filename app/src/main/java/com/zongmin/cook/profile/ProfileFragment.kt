@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentProfileBinding
 
 import com.zongmin.cook.ext.getVmFactory
@@ -50,6 +52,9 @@ class ProfileFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        binding.buttonProfileLogin.setOnClickListener {
+            findNavController().navigate(NavigationDirections.navigateToLogin())
+        }
 
 
 //            binding.viewpagerProfile.let {
