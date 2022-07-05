@@ -52,9 +52,8 @@ class EditRecipesFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data); comment this unless you
+//        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_CONTACT_REQUEST) {
-//            uri = data?.getData()
             uri = data?.data
             img1?.setImageURI(uri)
 
@@ -124,8 +123,10 @@ class EditRecipesFragment : Fragment() {
 
             //上傳圖片   應該要改去viewModel用coroutineScope.launch
 //            val picStorage = storageReference.child("m4.$data_list")
-            val time =System.currentTimeMillis()
+            val time = System.currentTimeMillis()
             val picStorage = storageReference.child("image$time")
+            Log.d("hank1", "點擊更換圖片1")
+
             uri?.let { it1 ->
                 Log.d("hank1", "查看uri是啥 -> $uri")
                 picStorage.putFile(it1).addOnCompleteListener { task ->
@@ -137,6 +138,7 @@ class EditRecipesFragment : Fragment() {
                                 .load(it)
                                 .into(img2!!)
 
+                            Log.d("hank1", "成功更換圖片")
                         }.addOnFailureListener {
                             // Handle any errors
 

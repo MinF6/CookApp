@@ -25,31 +25,17 @@ class EditRecipesViewModel(
         get() = _recipes
 
 
-//    fun updateClientUrl(s: Editable) {
-//        _clientUrl.value = s.toString();
-//    }
-
-
     fun create(summary: Summary, ingredient: List<Ingredient>,step: List<Step>) {
-
         coroutineScope.launch {
-
-//            _status.value = LoadApiStatus.LOADING
-//            val result = cookRepository.createRecipes(recipes)
-
             when (val result = cookRepository.createRecipes(summary, ingredient, step)) {
                 is Result.Success -> {
                     Log.d("hank1", "成功更新，看看result -> $result")
                 }
                 is Result.Fail -> {
-
                 }
                 is Result.Error -> {
-
-
                 }
                 else -> {
-
 
                 }
             }
