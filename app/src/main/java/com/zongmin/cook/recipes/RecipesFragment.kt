@@ -45,7 +45,7 @@ class RecipesFragment : Fragment() {
 
         binding.buttonNavNew.setOnClickListener {
 //                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
-            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
+            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(null))
         }
 
 

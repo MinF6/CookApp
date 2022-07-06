@@ -55,6 +55,11 @@ class DefaultCookRepository(
         return cookRemoteDataSource.userSignIn(user)
     }
 
+    override suspend fun deleteRecipes(id: String): Result<Boolean> {
+
+        return cookRemoteDataSource.deleteRecipes(id)
+    }
+
 //    override suspend fun getIngredient(): Result<List<Ingredient>> {
 //        return cookRemoteDataSource.getIngredient()
 //    }

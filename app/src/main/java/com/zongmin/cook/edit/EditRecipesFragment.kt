@@ -22,15 +22,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.storage.FirebaseStorage
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.R
+import com.zongmin.cook.bindImage
 import com.zongmin.cook.data.*
 import com.zongmin.cook.databinding.FragmentEditRecipesBinding
 import com.zongmin.cook.databinding.ItemEditIngredientBinding
 import com.zongmin.cook.databinding.ItemEditStepBinding
 import com.zongmin.cook.ext.getVmFactory
-import java.io.ByteArrayOutputStream
 import java.io.File
 
 
@@ -42,6 +43,8 @@ class EditRecipesFragment : Fragment() {
     var uri: Uri? = null
     var PICK_CONTACT_REQUEST = 1
     var REQUEST_CODE = 42
+    var ITEM_STEP_IMAGE = 3
+
     var img1: ImageView? = null
     var img2: ImageView? = null
     val FILE_NAME = "photo.jpg"
@@ -59,9 +62,16 @@ class EditRecipesFragment : Fragment() {
         if (requestCode == PICK_CONTACT_REQUEST) {
             uri = data?.data
             img1?.setImageURI(uri)
+            viewModel.mainUri.value = true
             Log.d("hank1", "看一下上傳拿到的uri是啥 -> $uri")
-
         }
+        //來自itemImage
+        if (requestCode == ITEM_STEP_IMAGE) {
+            uri = data?.data
+            viewModel.itemUri.value = uri
+            Log.d("hank1", "看一下上傳拿到的uri是啥 -> $uri")
+        }
+
         //來自相機
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
@@ -69,24 +79,11 @@ class EditRecipesFragment : Fragment() {
 //            Log.d("hank1", "看一下拍照拿的的takeImage是啥 -> $takeImage")
             img1?.setImageBitmap(takeImage)
 //            uri = context?.let { getImageUri(it, takeImage) }
+            viewModel.mainUri.value = true
         }
-
         super.onActivityResult(requestCode, resultCode, data);
-
     }
 
-//    //Bitmap to Uri 為了傳firebase  0705 22:00實體手機會有問題所以棄置
-//    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
-//        val bytes = ByteArrayOutputStream()
-//        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-//        val path = MediaStore.Images.Media.insertImage(
-//            inContext.contentResolver,
-//            inImage,
-//            "Title",
-//            null
-//        )
-//        return Uri.parse(path)
-//    }
 
     //    取得暫存圖片檔案
     private fun getPhotoFile(fileName: String): File {
@@ -110,6 +107,108 @@ class EditRecipesFragment : Fragment() {
         ingredientList = binding.editIngredientList
         stepList = binding.editStepList
         val depiction = binding3.itemEdittextStepDepiction
+        val itemImage = binding3.itemStepImage
+
+
+
+        Log.d(
+            "hank1",
+            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipes}"
+        )
+        val recipesData = EditRecipesFragmentArgs.fromBundle(requireArguments()).recipes
+        if (recipesData != null) {
+            binding.buttonEditDelete.visibility = View.VISIBLE
+            viewModel.getRecipesData(recipesData)
+            binding.recipes = recipesData
+            viewModel.selectSpinnerValue(binding.spinnerEditCategory, recipesData.category)
+
+            //食材所需欄位
+            for (i in 0 until (recipesData.ingredient.size - 1)) {
+                addView()
+//                Log.d("hank1","這欄的size是 ${recipesData.ingredient.size}")
+            }
+            //放入食材
+            if (recipesData.ingredient.isNotEmpty()) {
+                for (i in 0 until ingredientList!!.childCount) {
+                    if (ingredientList!!.getChildAt(i) is LinearLayoutCompat) {
+                        val ll = ingredientList!!.getChildAt(i) as LinearLayoutCompat
+                        for (j in 0 until ll.childCount) {
+                            if (ll.getChildAt(j) is EditText) {
+                                val et = ll.getChildAt(j) as EditText
+                                if (et.id == ingredientName.id) {
+                                    et.setText(recipesData.ingredient[i].ingredientName)
+                                }
+                                if (et.id == quantity.id) {
+                                    et.setText(recipesData.ingredient[i].quantity)
+                                }
+                                if (et.id == unit.id) {
+                                    et.setText(recipesData.ingredient[i].unit)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //步驟所需欄位
+            for (i in 0 until (recipesData.step.size - 1)) {
+                addStepView()
+                Log.d("hank1", "新增1個步驟欄位}")
+            }
+
+
+            //放入步驟
+            if (recipesData.step.isNotEmpty()) {
+                for (i in 0 until stepList!!.childCount) {
+                    if (stepList!!.getChildAt(i) is LinearLayoutCompat) {
+                        val ll = stepList!!.getChildAt(i) as LinearLayoutCompat
+                        for (j in 0 until ll.childCount) {
+                            if (ll.getChildAt(j) is LinearLayoutCompat) {
+                                val gg = ll.getChildAt(j) as LinearLayoutCompat
+                                for (k in 0 until gg.childCount) {
+                                    if (gg.getChildAt(k) is EditText) {
+                                        val et = gg.getChildAt(k) as EditText
+                                        if (et.id == depiction.id) {
+                                            et.setText(recipesData.step[i].depiction)
+                                        }
+                                    } else if (gg.getChildAt(k) is ShapeableImageView) {
+                                        val eImg = gg.getChildAt(k) as ShapeableImageView
+                                        if (eImg.id == itemImage.id) {
+//                                        eImg.setImageURI(Uri.parse(recipesData.step[i].images))
+                                            bindImage(eImg, recipesData.step[i].images)
+                                        }
+                                    }
+
+
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        binding.buttonEditDelete.setOnClickListener {
+            if (recipesData != null) {
+                viewModel.deleteRecipes(recipesData.id)
+                findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+            }
+        }
+
+
+//        val et = ll.getChildAt(j) as EditText
+//        if (et.id == depiction.id) {
+//            Log.d("hank1", "第$i 組的depiction放了 => ${recipesData.step[i].depiction}")
+//            et.setText(recipesData.step[i].depiction)
+//                                Log.d("hank1", "檢查目前的sequence結果 => ${sequence}")
+//                                Log.d("hank1", "檢查目前的listnewStep結果 => ${listnewStep}")
+//        }
+//                            val eImg = ll.getChildAt(j) as ShapeableImageView
+//                            if(eImg.id == itemImage.id){
+//                                eImg.setImageURI(Uri.parse(recipesData.step[i].images))
+//                            }
 
 
 //打開攝影機----------------------------------------------------------------------
@@ -150,12 +249,49 @@ class EditRecipesFragment : Fragment() {
         }
 
 
-        var unusedFileName = 0L
-        var mainImage = ""
         //變更照片按鈕
         binding.buttonEditChangeImage.setOnClickListener {
 
             //上傳圖片   應該要改去viewModel用coroutineScope.launch
+//            val time = System.currentTimeMillis()
+//            val picStorage = storageReference.child("image$time")
+////            Log.d("hank1", "點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
+//
+//            uri?.let { it1 ->
+//                picStorage.putFile(it1).addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                        Log.d("hank1", "上傳成功")
+//                        picStorage.downloadUrl.addOnSuccessListener {
+//                            Log.d("hank1", "看一下uri ->$it ")
+//                            mainImage = it.toString()
+//                            Glide.with(this /* context */)
+//                                .load(it)
+//                                .into(img2!!)
+//
+//                            Log.d("hank1", "成功更換圖片")
+//                            if (unusedFileName == 0L) {
+//                                unusedFileName = time
+//                                Log.d("hank1", "沒有過去的圖片")
+//                            } else {
+//                                storageReference.child("image$unusedFileName").delete()
+//                                unusedFileName = time
+//                                Log.d("hank1", "刪除上次張上傳的圖片")
+//                            }
+//                        }.addOnFailureListener {
+//                            // Handle any errors
+//                        }
+//                    } else {
+//                        Log.d("hank1", "上傳失敗")
+//                    }
+//                }
+//            }
+
+        }
+
+        var unusedFileName = 0L
+        var mainImage = ""
+        viewModel.mainUri.observe(viewLifecycleOwner) {
+            Log.d("hank1", "觸發observe")
             val time = System.currentTimeMillis()
             val picStorage = storageReference.child("image$time")
 //            Log.d("hank1", "點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
@@ -189,6 +325,7 @@ class EditRecipesFragment : Fragment() {
                 }
             }
 
+//            viewModel.mainUri.value = null
         }
 
 //---------------------------------------------------------------------------------------------
@@ -202,7 +339,7 @@ class EditRecipesFragment : Fragment() {
             addView()
         }
 
-
+        //儲存食譜-----------------------------------------------------------
         binding.buttonEditSave.setOnClickListener {
             val newRecipes = Summary()
             val listNewIngredient = mutableListOf<Ingredient>()
@@ -217,19 +354,19 @@ class EditRecipesFragment : Fragment() {
                         if (ll.getChildAt(j) is EditText) {
                             val et = ll.getChildAt(j) as EditText
                             if (et.id == depiction!!.id) {
-//                                Log.d("hank1", "這組depiction放了 => ${et.text}")
+                                Log.d("hank1", "這組depiction放了 => ${et.text}")
                                 listnewStep.add(
                                     Step(
                                         "",
                                         sequence.toString(),
-                                        listOf("https://tokyo-kitchen.icook.network/uploads/recipe/cover/407229/1e9aa981b9a4a97f.jpg"),
+                                        "https://tokyo-kitchen.icook.network/uploads/recipe/cover/407229/1e9aa981b9a4a97f.jpg",
                                         et.text.toString(),
                                         ToolType()
                                     )
                                 )
                                 sequence++
 //                                Log.d("hank1", "檢查目前的sequence結果 => ${sequence}")
-//                                Log.d("hank1", "檢查目前的listnewStep結果 => ${listnewStep}")
+                                Log.d("hank1", "檢查目前的listnewStep結果 => ${listnewStep}")
                             }
                         }
                     }
@@ -299,6 +436,7 @@ class EditRecipesFragment : Fragment() {
             removeView(aa)
         }
         ingredientList?.addView(aa)
+        Log.d("hank1", "進來新增囉")
 
     }
 
@@ -308,12 +446,27 @@ class EditRecipesFragment : Fragment() {
     }
 
     private fun addStepView() {
+
         val bb: View = layoutInflater.inflate(R.layout.item_edit_step, null, false)
         val cross: ImageView = bb.findViewById<View>(R.id.item_step_cross) as ImageView
+        val stepImage = bb.findViewById<ShapeableImageView>(R.id.item_step_image)
         cross.visibility = View.VISIBLE
 
         cross.setOnClickListener {
             removeStepView(bb)
+        }
+        stepImage.setOnClickListener {
+            Log.d("hank1", "我點到了")
+//            stepImage.setImageURI(uri)
+            val intent = Intent()
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(intent, ITEM_STEP_IMAGE)
+            viewModel.itemUri.observe(viewLifecycleOwner) {
+                stepImage.setImageURI(it)
+            }
+
         }
         stepList?.addView(bb)
 

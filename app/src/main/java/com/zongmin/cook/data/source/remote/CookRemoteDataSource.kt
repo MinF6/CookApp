@@ -507,6 +507,25 @@ object CookRemoteDataSource : CookDataSource {
             }
     }
 
+    override suspend fun deleteRecipes(id: String): Result<Boolean> = suspendCoroutine { continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(RECIPES)
+            .document(id)
+            .delete()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("hank1","成功刪除")
+                    continuation.resume(Result.Success(true))
+                } else {
+                    task.exception?.let {
+                        Log.d("hank1","[${this::class.simpleName}] Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                }
+            }
+    }
 
 
     //備份單拿Recipes----------------------------------------------

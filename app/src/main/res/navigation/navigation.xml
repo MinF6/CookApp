@@ -48,7 +48,13 @@
         android:id="@+id/editRecipesFragment"
         android:name="com.zongmin.cook.edit.EditRecipesFragment"
         android:label="EditRecipesFragment"
-        tools:layout="@layout/fragment_edit_recipes"/>
+        tools:layout="@layout/fragment_edit_recipes">
+
+        <argument android:name="recipes"
+            app:argType="com.zongmin.cook.data.Recipes"
+            app:nullable="true"/>
+
+    </fragment>
 
     <dialog
         android:id="@+id/dialogPlan"
@@ -59,7 +65,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zongmin.cook.login.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
 
 
     <action android:id="@+id/navigate_to_recipes_fragment" app:destination="@+id/recipesFragment"

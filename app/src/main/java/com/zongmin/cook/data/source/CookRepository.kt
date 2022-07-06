@@ -28,4 +28,6 @@ interface CookRepository {
 
     suspend fun userSignIn(user: User): Result<Boolean>
 
+    suspend fun deleteRecipes(id: String): Result<Boolean>
+
 }

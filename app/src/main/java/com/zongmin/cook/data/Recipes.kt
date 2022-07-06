@@ -15,7 +15,7 @@ data class Recipes(
     var serving: Int = 0,
     var cookingTime: String = " ",
     var ingredient: List<Ingredient> = listOf(Ingredient(" "," "," "," ")),
-    var step: List<Step> = listOf(Step(" "," ", listOf(" ")," ",ToolType(" ", " "))),
+    var step: List<Step> = listOf(Step(" "," "," "," ",ToolType(" ", " "))),
     var tags: List<String> = listOf(" "),
     var author: String = " ",
     var like: List<String> = listOf(" "),

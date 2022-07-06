@@ -19,7 +19,7 @@ class DetailStepAdapter: ListAdapter<Step, RecyclerView.ViewHolder>(DiffCallback
             binding.textStepDepiction.text = step.depiction
 
             //這裡是listString，之後要多改個recycle
-            bindImage(binding.imageStep, step.images[0])
+            bindImage(binding.imageStep, step.images)
 
 
             binding.executePendingBindings()

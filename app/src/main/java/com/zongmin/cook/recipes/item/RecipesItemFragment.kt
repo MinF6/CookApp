@@ -77,7 +77,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         })
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "想傳的內容是 -> $it")
+//            Log.d("hank1", "想傳的內容是 -> $it")
             it?.let {
                 findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
                 viewModel.onDetailNavigated()
