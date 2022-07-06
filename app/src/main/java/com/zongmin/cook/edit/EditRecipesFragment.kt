@@ -39,13 +39,11 @@ class EditRecipesFragment : Fragment() {
     var ingredientList: LinearLayout? = null
     var stepList: LinearLayout? = null
 
-    var intent: Intent? = null
     var uri: Uri? = null
     var PICK_CONTACT_REQUEST = 1
     var REQUEST_CODE = 42
     var img1: ImageView? = null
     var img2: ImageView? = null
-
     val FILE_NAME = "photo.jpg"
     var photoFile: File? = null
 
@@ -53,53 +51,44 @@ class EditRecipesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data);
+
         //來自檔案
         if (requestCode == PICK_CONTACT_REQUEST) {
             uri = data?.data
             img1?.setImageURI(uri)
-            Log.d("hank1","看一下上傳拿到的uri是啥 -> $uri")
+            Log.d("hank1", "看一下上傳拿到的uri是啥 -> $uri")
 
         }
-
         //來自相機
-        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-//            val takeImage = data?.extras?.get("data") as Bitmap
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 
             val takeImage = BitmapFactory.decodeFile(photoFile?.absolutePath)
-
-
-            Log.d("hank1","看一下拍照拿的的takeImage是啥 -> $takeImage")
+//            Log.d("hank1", "看一下拍照拿的的takeImage是啥 -> $takeImage")
             img1?.setImageBitmap(takeImage)
-
-            uri = context?.let { getImageUri(it,takeImage) }
-//            img1?.setImageURI(takeImage)
+//            uri = context?.let { getImageUri(it, takeImage) }
         }
-
-
 
         super.onActivityResult(requestCode, resultCode, data);
 
-
     }
 
-    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
-        val bytes = ByteArrayOutputStream()
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path = MediaStore.Images.Media.insertImage(
-            inContext.getContentResolver(),
-            inImage,
-            "Title",
-            null
-        )
-        return Uri.parse(path)
-    }
+//    //Bitmap to Uri 為了傳firebase  0705 22:00實體手機會有問題所以棄置
+//    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+//        val bytes = ByteArrayOutputStream()
+//        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+//        val path = MediaStore.Images.Media.insertImage(
+//            inContext.contentResolver,
+//            inImage,
+//            "Title",
+//            null
+//        )
+//        return Uri.parse(path)
+//    }
 
+    //    取得暫存圖片檔案
     private fun getPhotoFile(fileName: String): File {
         val storageDirectory = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
@@ -122,38 +111,27 @@ class EditRecipesFragment : Fragment() {
         stepList = binding.editStepList
         val depiction = binding3.itemEdittextStepDepiction
 
-//打開攝影機----------------------------------------------------------------------
 
+//打開攝影機----------------------------------------------------------------------
+        //打開相機按鈕
         binding.buttonEditCamera.setOnClickListener {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             photoFile = getPhotoFile(FILE_NAME)
 
-//            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
+            val fileProvider = context?.let { it1 ->
+                FileProvider.getUriForFile(
+                    it1, "com.zongmin.cook.fileprovider",
+                    photoFile!!
+                )
+            }
+//            Log.d("hank1","尋找有沒有存在的uri，看fileProvider -> $fileProvider")
+            uri = fileProvider
 
-
-            val fileProvider = context?.let { it1 -> FileProvider.getUriForFile(it1,"com.zongmin.cook.fileprovider",
-                photoFile!!
-            ) }
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
-
-
 //            if(takePictureIntent.resolveActivity(MainActivity().packageManager)!= null){
-//
 //            }
-
-            startActivityForResult(takePictureIntent,REQUEST_CODE)
-
-
-
-
-
+            startActivityForResult(takePictureIntent, REQUEST_CODE)
         }
-
-
-
-
-//打開攝影機結束----------------------------------------------------------------------
-
 
 //圖片上傳-------------------------------------------------------------------------------------
         img1 = binding.imageEditTest
@@ -162,24 +140,25 @@ class EditRecipesFragment : Fragment() {
         var storageReference = FirebaseStorage.getInstance().getReference()
 
 
-        //換置圖片
+        //上傳照片按鈕
         binding.buttonEditUpload.setOnClickListener {
-            intent = Intent()
-            intent!!.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            intent!!.setType("image/*")
-            intent!!.setAction(Intent.ACTION_GET_CONTENT)
+            val intent = Intent()
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, PICK_CONTACT_REQUEST)
-
         }
 
 
-        var apple = 0L
+        var unusedFileName = 0L
+        var mainImage = ""
+        //變更照片按鈕
         binding.buttonEditChangeImage.setOnClickListener {
 
             //上傳圖片   應該要改去viewModel用coroutineScope.launch
             val time = System.currentTimeMillis()
             val picStorage = storageReference.child("image$time")
-            Log.d("hank1", "點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
+//            Log.d("hank1", "點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
 
             uri?.let { it1 ->
                 picStorage.putFile(it1).addOnCompleteListener { task ->
@@ -187,17 +166,18 @@ class EditRecipesFragment : Fragment() {
                         Log.d("hank1", "上傳成功")
                         picStorage.downloadUrl.addOnSuccessListener {
                             Log.d("hank1", "看一下uri ->$it ")
+                            mainImage = it.toString()
                             Glide.with(this /* context */)
                                 .load(it)
                                 .into(img2!!)
 
                             Log.d("hank1", "成功更換圖片")
-                            if(apple == 0L){
-                                apple = time
+                            if (unusedFileName == 0L) {
+                                unusedFileName = time
                                 Log.d("hank1", "沒有過去的圖片")
-                            }else{
-                                storageReference.child("image$apple").delete()
-                                apple = time
+                            } else {
+                                storageReference.child("image$unusedFileName").delete()
+                                unusedFileName = time
                                 Log.d("hank1", "刪除上次張上傳的圖片")
                             }
                         }.addOnFailureListener {
@@ -266,15 +246,15 @@ class EditRecipesFragment : Fragment() {
                     for (j in 0 until ll.childCount) {
                         if (ll.getChildAt(j) is EditText) {
                             val et = ll.getChildAt(j) as EditText
-                            if (et.id == ingredientName!!.id) {
+                            if (et.id == ingredientName.id) {
 //                                Log.d("hank1", "這組ingredientName放了 => ${et.text}")
                                 itemName = et.text.toString()
                             }
-                            if (et.id == quantity!!.id) {
+                            if (et.id == quantity.id) {
 //                                Log.d("hank1", "這組quantity放了 => ${et.text}")
                                 itemQuantity = et.text.toString()
                             }
-                            if (et.id == unit!!.id) {
+                            if (et.id == unit.id) {
 //                                Log.d("hank1", "這組unit放了 => ${et.text}")
                                 itemUnit = et.text.toString()
                                 listNewIngredient.add(
@@ -290,8 +270,7 @@ class EditRecipesFragment : Fragment() {
             newRecipes.name = binding.edittextEditName.text.toString()
             newRecipes.category = binding.spinnerEditCategory.selectedItem.toString()
             newRecipes.serving = binding.edittextServing.text.toString().toInt()
-            newRecipes.mainImage =
-                "https://tokyo-kitchen.icook.network/uploads/recipe/cover/406300/ec1128b22f4092d6.jpg"
+            newRecipes.mainImage = mainImage
             newRecipes.cookingTime = binding.edittextEditCookTime.text.toString()
             newRecipes.author = "W5bXC4hAbvs5zOYY7i5R"
             newRecipes.remark = binding.edittextEditRemark.text.toString()
@@ -310,7 +289,6 @@ class EditRecipesFragment : Fragment() {
         return binding.root
 
     }
-
 
 
     private fun addView() {

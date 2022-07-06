@@ -14,103 +14,107 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         app:cardUseCompatPadding="true"
+
         >
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!--                <com.google.android.material.imageview.ShapeableImageView-->
+            <!--                    android:id="@+id/image_recipes_item"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="200dp"-->
+            <!--                    android:scaleType="centerCrop"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:shapeAppearanceOverlay="@style/imageViewCorner"-->
+
+            <!--                    />-->
+
+            <ImageView
+                android:id="@+id/image_recipes_item"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/text_recipes_item_category"
+                app:layout_constraintEnd_toEndOf="parent"
 
-<!--                <com.google.android.material.imageview.ShapeableImageView-->
-<!--                    android:id="@+id/image_recipes_item"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="200dp"-->
-<!--                    android:scaleType="centerCrop"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:shapeAppearanceOverlay="@style/imageViewCorner"-->
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed" />
+            <!--                app:imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"-->
 
-<!--                    />-->
+            <TextView
+                android:id="@+id/text_recipes_item_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="類別"
+                app:layout_constraintBottom_toTopOf="@+id/text_recipes_item_title"
+                app:layout_constraintStart_toStartOf="@+id/image_recipes_item"
+                app:layout_constraintTop_toBottomOf="@+id/image_recipes_item" />
 
-                <ImageView
-                    android:id="@+id/image_recipes_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+            <TextView
+                android:id="@+id/text_recipes_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="標題"
+                android:textSize="20dp"
+                android:textStyle="bold"
 
-                    />
-<!--                app:imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"-->
+                app:layout_constraintBottom_toTopOf="@+id/button_view_pager_add"
+                app:layout_constraintStart_toStartOf="@+id/text_recipes_item_category"
+                app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_category" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/text_recipes_item_category"
-                    android:text="類別"
-                    app:layout_constraintStart_toStartOf="@+id/image_recipes_item"
-                    app:layout_constraintTop_toBottomOf="@+id/image_recipes_item"
-                     />
+            <Button
 
-                <TextView
-                    android:id="@+id/text_recipes_item_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="標題"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
+                android:id="@+id/button_view_pager_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="安排烹飪"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <!--                app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_title"-->
 
-                    app:layout_constraintStart_toStartOf="@+id/text_recipes_item_category"
-                    app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_category" />
+            <!--                <RadioGroup-->
+            <!--                    android:id="@+id/radioGroup_recipes"-->
+            <!--                    android:layout_width="61dp"-->
+            <!--                    android:layout_height="132dp"-->
 
-                <Button
+            <!--                    app:layout_constraintBottom_toTopOf="@+id/button_view_pager_add"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@+id/image_recipes_item">-->
 
-                    android:id="@+id/button_view_pager_add"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="安排烹飪"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                     />
-<!--                app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_title"-->
+            <!--                    <RadioButton-->
+            <!--                        android:id="@+id/radioButton"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:checked="true"-->
+            <!--                        android:text="早餐" />-->
 
-<!--                <RadioGroup-->
-<!--                    android:id="@+id/radioGroup_recipes"-->
-<!--                    android:layout_width="61dp"-->
-<!--                    android:layout_height="132dp"-->
+            <!--                    <RadioButton-->
+            <!--                        android:id="@+id/radioButton2"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="午餐" />-->
 
-<!--                    app:layout_constraintBottom_toTopOf="@+id/button_view_pager_add"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/image_recipes_item">-->
-
-<!--                    <RadioButton-->
-<!--                        android:id="@+id/radioButton"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:checked="true"-->
-<!--                        android:text="早餐" />-->
-
-<!--                    <RadioButton-->
-<!--                        android:id="@+id/radioButton2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="午餐" />-->
-
-<!--                    <RadioButton-->
-<!--                        android:id="@+id/radioButton3"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="晚餐" />-->
-<!--                </RadioGroup>-->
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--                    <RadioButton-->
+            <!--                        android:id="@+id/radioButton3"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="晚餐" />-->
+            <!--                </RadioGroup>-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
