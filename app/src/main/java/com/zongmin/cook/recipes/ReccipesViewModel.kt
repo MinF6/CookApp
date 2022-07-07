@@ -9,4 +9,6 @@ class ReccipesViewModel : ViewModel() {
 
     val searchText = MutableLiveData<String>()
 
+    val threeMeals = MutableLiveData("早餐")
+
 }

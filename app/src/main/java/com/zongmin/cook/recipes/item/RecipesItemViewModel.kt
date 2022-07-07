@@ -65,22 +65,18 @@ class RecipesItemViewModel(
 //            Log.d("hank1", "現在的type是 -> $type 現在的key是 -> $key")
             if (key == "") {
                 if (type == "全部") {
-//                    Log.d("hank1", "進了1")
                     result = cookRepository.getRecipes()
 //                    Log.d("hank1", "進了1的result為 -> $result")
                 } else {
-//                    Log.d("hank1", "進了2")
                     result = cookRepository.getCategoryRecipes(type)
 //                    result = cookRepository.getCategoryRecipes("蔬菜")
 //                    Log.d("hank1", "進了2的result為 -> $result")
                 }
             } else {
                 if (type == "全部") {
-//                    Log.d("hank1", "進了3")
                     result = key?.let { cookRepository.getKeywordRecipes(it) }
 //                    Log.d("hank1", "進了3的result為 -> $result")
                 } else {
-//                    Log.d("hank1", "進了4")
                     result = key?.let { cookRepository.getCompoundRecipes(type, it) }
 //                    result = key?.let { cookRepository.getCompoundRecipes("蔬菜", it) }
 //                    Log.d("hank1", "進了4的result為 -> $result")

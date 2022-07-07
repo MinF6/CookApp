@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,6 +31,11 @@ class RecipesFragment : Fragment() {
         val binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.radioGroupRecipes.setOnCheckedChangeListener { _, i ->
+            val checkedMeals = binding.radioGroupRecipes.findViewById<RadioButton>(i).text.toString()
+            Log.d("hank1","radio改變，目前選的是 -> ${checkedMeals}")
+            viewModel.threeMeals.value = checkedMeals
+        }
 
 
         binding.viewpagerRecipes.let {

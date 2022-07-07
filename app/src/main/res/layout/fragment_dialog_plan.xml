@@ -62,7 +62,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_dialog_yesterday" />
+                app:layout_constraintTop_toBottomOf="@+id/button_dialog_yesterday"
+                tools:listitem="@layout/item_dialog"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

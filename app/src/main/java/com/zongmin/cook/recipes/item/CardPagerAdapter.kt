@@ -10,10 +10,11 @@ import androidx.viewpager.widget.PagerAdapter
 import com.zongmin.cook.bindImage
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.ItemRecipesViewPagerBinding
+import com.zongmin.cook.recipes.ReccipesViewModel
 import com.zongmin.cook.recipes.item.RecipesItemViewModel
 
 
-class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener: OnClickListener) :
+class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel: ReccipesViewModel, val onClickListener: OnClickListener) :
     PagerAdapter() {
     private val mViews: MutableList<CardView?>
     private var mData: MutableList<Recipes>
@@ -99,17 +100,18 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val onClickListener:
         binding.root.setOnClickListener {
 //            Log.d("hank1","點擊到這個item，這是 ->${item}")
             viewModel.navigateToDetail(item)
-
         }
-
 //        cardView.setOnClickListener {
 //            Log.d("hank1","點擊到這個item，這是 ->${item.title}")
 //
 //        }
 
+
         val btn = binding.buttonViewPagerAdd
         btn.setOnClickListener {
-//            Log.d("hank1","點擊到這個item，這是 ->${item.name}")
+            Log.d("hank1","點擊到這個item，這是 ->${item.name}")
+            Log.d("hank1","點擊到這個item，這是 ->${item.id}")
+            Log.d("hank1","點擊到這個item，他隸屬於 ->${recipesViewModel.threeMeals.value}")
         }
 
 //        mData = ArrayList()

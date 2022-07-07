@@ -22,6 +22,8 @@ class DialogPlanAdapter : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffC
 
 
 
+
+
             binding.executePendingBindings()
         }
     }
@@ -30,9 +32,13 @@ class DialogPlanAdapter : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffC
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(planContent: PlanContent) {
-            Log.d("hank1","有沒有進來Item裡面 => ${planContent}")
+//            Log.d("hank1","有沒有進來Item裡面 => ${planContent}")
             binding.textDialogTitle.text = planContent.name
             binding.textDialogCategory.text = planContent.category
+
+            binding.buttonDialogCancel.setOnClickListener {
+                Log.d("hank1","點擊了${planContent}的取消紐")
+            }
 
 
             binding.executePendingBindings()

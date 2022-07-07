@@ -41,8 +41,9 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         val binding = FragmentRecipesItemBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val recipesViewModel = ViewModelProvider(requireParentFragment()).get(ReccipesViewModel::class.java)
         mViewPager = binding.viewPager
-        mCardAdapter = CardPagerAdapter(viewModel, CardPagerAdapter.OnClickListener {
+        mCardAdapter = CardPagerAdapter(viewModel,recipesViewModel, CardPagerAdapter.OnClickListener {
 
         })
 
