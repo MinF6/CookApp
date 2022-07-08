@@ -9,7 +9,7 @@ import com.zongmin.cook.login.LoginViewModel
 import com.zongmin.cook.management.ManagementViewModel
 import com.zongmin.cook.plan.PlanViewModel
 import com.zongmin.cook.profile.ProfileViewModel
-import com.zongmin.cook.recipes.ReccipesViewModel
+import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.social.SocialViewModel
 
 /**
@@ -44,8 +44,9 @@ class ViewModelFactory constructor(
                 isAssignableFrom(ProfileViewModel::class.java) ->
                     ProfileViewModel(cookRepository)
 
-                isAssignableFrom(ReccipesViewModel::class.java) ->
-                    ProfileViewModel(cookRepository)
+                isAssignableFrom(RecipesViewModel::class.java) ->
+//                    RecipesViewModel(cookRepository)
+                    RecipesViewModel()
 
                 isAssignableFrom(EditRecipesViewModel::class.java) ->
                     EditRecipesViewModel(cookRepository)

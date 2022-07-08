@@ -1,5 +1,6 @@
 package com.zongmin.cook.plan
 
+import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.PlanContent
 
 sealed class PlanItem {
@@ -8,7 +9,7 @@ sealed class PlanItem {
         val id: Long = -1
     }
 
-    data class FullPlan(val planContent: PlanContent) : PlanItem () {
+    data class FullPlan(val plan: Plan) : PlanItem () {
         val id: Long = -1
 
     }

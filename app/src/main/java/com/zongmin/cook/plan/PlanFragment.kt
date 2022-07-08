@@ -55,7 +55,7 @@ class PlanFragment : Fragment() {
                 val item1 = PlanItem.Title(plan.threeMeals)
                 dataList.add(item1)
 
-                val item2 = PlanItem.FullPlan(plan.planContent)
+                val item2 = PlanItem.FullPlan(plan)
                 dataList.add(item2)
 
             }

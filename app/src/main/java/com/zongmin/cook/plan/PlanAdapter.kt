@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.PlanContent
 import com.zongmin.cook.databinding.ItemPlanBinding
 import com.zongmin.cook.databinding.ItemPlanThreeMealsBinding
@@ -26,13 +27,13 @@ class PlanAdapter : ListAdapter<PlanItem , RecyclerView.ViewHolder>(DiffCallback
     class PlanContentViewHolder(private var binding: ItemPlanBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(planContent: PlanContent) {
-            binding.planContent = planContent
-            binding.textPlanName.text = planContent.name
-            binding.textPlanCategory.text = planContent.category
+        fun bind(plan: Plan) {
+            binding.planContent = plan.planContent
+            binding.textPlanName.text = plan.planContent.name
+            binding.textPlanCategory.text = plan.planContent.category
 
             binding.buttonPlanCancel.setOnClickListener {
-                Log.d("hank1","看看這個item -> $planContent")
+                Log.d("hank1","看看這個item -> ${plan}")
             }
             binding.executePendingBindings()
         }
@@ -64,7 +65,7 @@ class PlanAdapter : ListAdapter<PlanItem , RecyclerView.ViewHolder>(DiffCallback
                 holder.bind((getItem(position) as PlanItem.Title).title)
             }
             is PlanContentViewHolder -> {
-                holder.bind((getItem(position) as PlanItem.FullPlan).planContent)
+                holder.bind((getItem(position) as PlanItem.FullPlan).plan)
             }
         }
     }

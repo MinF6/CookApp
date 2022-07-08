@@ -33,15 +33,15 @@
             android:id="@+id/button_dialog_cancel"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:background="@drawable/ic_baseline_close_24"
             app:layout_constraintBottom_toBottomOf="@+id/text_dialog_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_dialog_category" />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_width="150dp"
+            android:layout_height="1dp"
             android:background="#aaaaaa"
             android:layout_margin="16dp"
 

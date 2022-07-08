@@ -6,22 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.zongmin.cook.NavigationDirections
+import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.FragmentRecipesBinding
+import com.zongmin.cook.dialog.DialogPlanViewModel
 import com.zongmin.cook.ext.getVmFactory
-import com.zongmin.cook.recipes.item.RecipesItemViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class RecipesFragment : Fragment() {
 
-    private val viewModel by viewModels<ReccipesViewModel> { getVmFactory() }
+    private val viewModel by viewModels<RecipesViewModel> { getVmFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +48,30 @@ class RecipesFragment : Fragment() {
             it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabsRecipes))
         }
 
-        binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
+//        binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
+//        binding.buttonRecipesDialog.text = viewModel.date.value
+
+
+
+        viewModel.date.observe(viewLifecycleOwner){
+//            Log.d("hank1","Recipes的data 被改變了 -> $it")
+            binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date(it))
+
+
+        }
+
+//        val recipesViewModel1 = ViewModelProvider(requireParentFragment()).get(DialogPlanViewModel::class.java)
+//        recipesViewModel1.date.observe(viewLifecycleOwner){
+//            Log.d("hank1","有監控到嗎? $it")
+//        }
+
+
+
 
         binding.buttonNavNew.setOnClickListener {
 //                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
             findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(null))
+//            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(nullRecipes))
         }
 
 

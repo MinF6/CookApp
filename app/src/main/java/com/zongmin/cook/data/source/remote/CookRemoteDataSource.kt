@@ -13,9 +13,10 @@ import kotlin.coroutines.suspendCoroutine
 
 object CookRemoteDataSource : CookDataSource {
 
-    const val RECIPES = " Recipes"
-    const val INGREDIENT = "ingredient"
-    const val STEP = "step"
+    private const val RECIPES = " Recipes"
+    private const val INGREDIENT = "ingredient"
+    private const val STEP = "step"
+    const val PLAN = "Plan"
 
     override suspend fun getRecipes(): Result<List<Recipes>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
@@ -343,7 +344,7 @@ object CookRemoteDataSource : CookDataSource {
 
     override suspend fun getPlan(): Result<List<Plan>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
-            .collection("Plan")
+            .collection(PLAN)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -511,6 +512,50 @@ object CookRemoteDataSource : CookDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(RECIPES)
+            .document(id)
+            .delete()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("hank1","成功刪除")
+                    continuation.resume(Result.Success(true))
+                } else {
+                    task.exception?.let {
+                        Log.d("hank1","[${this::class.simpleName}] Error getting documents. ${it.message}")
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                }
+            }
+    }
+
+    override suspend fun createPlan(plan: Plan): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val recipe = FirebaseFirestore.getInstance().collection(PLAN)
+            val document = recipe.document()
+
+            plan.id = document.id
+//        article.createdTime = Calendar.getInstance().timeInMillis
+            document
+                .set(plan)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("hank1", "新增成功區，我新增了 -> $recipe")
+//                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            Log.d("hank1", "新增失敗")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+//                    continuation.resume(kotlin.Result.Fail(PublisherApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
+
+    override suspend fun deletePlan(id: String): Result<Boolean> = suspendCoroutine { continuation ->
+
+        FirebaseFirestore.getInstance()
+            .collection(PLAN)
             .document(id)
             .delete()
             .addOnCompleteListener { task ->
