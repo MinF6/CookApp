@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class Step(
     var id: String = " ",
     var sequence: String = " ",
-    var images: List<String> = listOf(" "),
+    var images: String = " ",
     var depiction: String = " ",
     val toolType: ToolType = ToolType(" ", " ")
 ) : Parcelable

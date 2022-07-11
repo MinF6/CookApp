@@ -1,5 +1,6 @@
 package com.zongmin.cook.detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,11 +26,13 @@ class DetailRecipesViewModel: ViewModel() {
 
     fun getIngredient(recipes: Recipes){
         _ingredient.value = recipes.ingredient
+        Log.d("hank1","這欄的size是 ${recipes.ingredient.size}")
 
     }
 
     fun getStep(recipes: Recipes){
         _stepData.value = recipes.step
+        Log.d("hank1","這欄的size是 ${recipes.step.size}")
 
     }
 

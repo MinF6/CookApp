@@ -17,8 +17,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .load(imgUri)
             .apply(
                 RequestOptions()
-                .placeholder(R.drawable.ic_baseline_add_shopping_cart_24)
-                .error(R.drawable.ic_baseline_edit_calendar_24)
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.loading)
             )
             .into(imgView)
     }

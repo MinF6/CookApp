@@ -52,9 +52,9 @@ class ProfileFragment : Fragment() {
             adapter.submitList(it)
         })
 
-        binding.buttonProfileLogin.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToLogin())
-        }
+//        binding.buttonProfileLogin.setOnClickListener {
+//            findNavController().navigate(NavigationDirections.navigateToLogin())
+//        }
 
 
 //            binding.viewpagerProfile.let {

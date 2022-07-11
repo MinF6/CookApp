@@ -27,4 +27,10 @@ interface CookDataSource {
 
     suspend fun userSignIn(user: User): Result<Boolean>
 
+    suspend fun deleteRecipes(id: String): Result<Boolean>
+
+    suspend fun createPlan(plan: Plan): Result<Boolean>
+
+    suspend fun deletePlan(id: String): Result<Boolean>
+
 }

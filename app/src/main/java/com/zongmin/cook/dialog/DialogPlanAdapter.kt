@@ -3,22 +3,26 @@ package com.zongmin.cook.dialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.PlanContent
 import com.zongmin.cook.databinding.ItemDialogBinding
 import com.zongmin.cook.databinding.ItemDialogThreeMealsBinding
 
-class DialogPlanAdapter : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffCallback) {
+class DialogPlanAdapter(val viewModel: DialogPlanViewModel) : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffCallback) {
 
 
     class DialogTitleViewHolder(private var binding: ItemDialogThreeMealsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: String) {
-            Log.d("hank1","有沒有進來Item裡面")
+//            Log.d("hank1","有沒有進來Item裡面")
             binding.textDialogThree.text = title
+
+
 
 
 
@@ -29,10 +33,17 @@ class DialogPlanAdapter : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffC
     class DialogPlanContentViewHolder(private var binding: ItemDialogBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(planContent: PlanContent) {
-            Log.d("hank1","有沒有進來Item裡面 => ${planContent}")
-            binding.textDialogTitle.text = planContent.name
-            binding.textDialogCategory.text = planContent.category
+        fun bind(plan: Plan,viewModel: DialogPlanViewModel) {
+//            Log.d("hank1","有沒有進來Item裡面 => ${planContent}")
+            binding.textDialogTitle.text = plan.planContent.name
+            binding.textDialogCategory.text = plan.planContent.category
+
+            binding.buttonDialogCancel.setOnClickListener {
+                Log.d("hank1","點擊了${plan}的取消紐")
+                Log.d("hank1","點擊了${plan.id}的取消紐")
+                viewModel.deletePlan(plan.id)
+
+            }
 
 
             binding.executePendingBindings()
@@ -65,7 +76,7 @@ class DialogPlanAdapter : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffC
                 holder.bind((getItem(position) as DialogItem.Title).title)
             }
             is DialogPlanContentViewHolder -> {
-                holder.bind((getItem(position) as DialogItem.FullPlan).planContent)
+                holder.bind((getItem(position) as DialogItem.FullPlan).plan,viewModel)
             }
         }
     }

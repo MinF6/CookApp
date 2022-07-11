@@ -15,7 +15,7 @@ android {
         applicationId "com.zongmin.cook"
         minSdk 21
         targetSdk 32
-        versionCode 1
+        versionCode 3
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -95,9 +95,7 @@ dependencies {
 
     //google login
     implementation "com.google.android.gms:play-services-auth:20.2.0"
-
     implementation 'io.fabric.sdk.android:fabric:1.4.8'
-
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.6'
 
 

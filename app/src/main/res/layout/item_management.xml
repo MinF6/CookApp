@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/ic_baseline_catching_pokemon_24"
+            android:src="@drawable/ic_baseline_local_dining_24"
             app:layout_constraintStart_toStartOf="@+id/text_management_name"
             app:layout_constraintTop_toBottomOf="@+id/text_management_name" />
 

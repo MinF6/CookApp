@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
-import com.zongmin.cook.recipes.ReccipesViewModel
+import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import com.zongmin.viewpagercards.CardPagerAdapter
 import com.zongmin.viewpagercards.ShadowTransformer
@@ -41,8 +40,9 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         val binding = FragmentRecipesItemBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val recipesViewModel = ViewModelProvider(requireParentFragment()).get(RecipesViewModel::class.java)
         mViewPager = binding.viewPager
-        mCardAdapter = CardPagerAdapter(viewModel, CardPagerAdapter.OnClickListener {
+        mCardAdapter = CardPagerAdapter(viewModel,recipesViewModel, CardPagerAdapter.OnClickListener {
 
         })
 
@@ -77,7 +77,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         })
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "想傳的內容是 -> $it")
+//            Log.d("hank1", "想傳的內容是 -> $it")
             it?.let {
                 findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
                 viewModel.onDetailNavigated()
@@ -98,7 +98,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 ////            viewModel._recipes.value = viewModel._recipes.value
 //        }
 
-        val parentViewModel = ViewModelProvider(requireParentFragment()).get(ReccipesViewModel::class.java)
+        val parentViewModel = ViewModelProvider(requireParentFragment()).get(RecipesViewModel::class.java)
 //        Log.d("hank2", "requireParentFragment(), ${requireParentFragment()}")
 //        Log.d("hank2", "parentViewModel, ${parentViewModel}")
 

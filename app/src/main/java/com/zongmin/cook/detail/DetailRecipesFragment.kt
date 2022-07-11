@@ -62,7 +62,7 @@ class DetailRecipesFragment : Fragment() {
         }
 
         viewModel.stepData.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1","看一下拿到的步驟 -> ${it}")
+//            Log.d("hank1","看一下拿到的步驟 -> ${it}")
             stepAdapter.submitList(it)
         })
 
@@ -73,7 +73,7 @@ class DetailRecipesFragment : Fragment() {
 
         binding.buttonDetailToEdit.setOnClickListener {
             //到時候要帶值給編輯
-            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
+            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(data))
         }
 
 
