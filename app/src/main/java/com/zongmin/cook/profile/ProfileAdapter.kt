@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.zongmin.cook.data.Ingredient
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.ItemProfileCreationBinding
 
@@ -15,6 +16,12 @@ class ProfileAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallbac
         fun bind(recipes: Recipes) {
             binding.result = recipes
             binding.textProfileRecipes.text = recipes.name
+//            val ingredientlist = mutableListOf<String>()
+            var ingredientlist = ""
+            for(i in recipes.ingredient){
+                ingredientlist += "${i.ingredientName}\n"
+            }
+            binding.textProfileIngredient.text = ingredientlist
 
 
 

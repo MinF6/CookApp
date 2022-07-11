@@ -77,6 +77,8 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel
         val category = binding.textRecipesItemCategory
         val title = binding.textRecipesItemTitle
         val image = binding.imageRecipesItem
+        binding.textRecipesTime.text = "${item.cookingTime}分鐘"
+        binding.textRecipesServing.text = "${item.serving.toString()}人份"
 
 //        titleTextView.setText(viewModel.recipes.value?.get(0)?.name ?: "")
 //        binding.titleTextView.setText("123456")

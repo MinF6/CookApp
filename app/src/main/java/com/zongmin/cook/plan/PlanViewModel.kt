@@ -32,9 +32,11 @@ class PlanViewModel(
 
 
 
+
+
     init {
 //        getPlanResult()
-        Log.d("hank1","進到PlanViewModel")
+//        Log.d("hank1","進到PlanViewModel")
     }
 
     fun getPlanResult(){
@@ -55,21 +57,32 @@ class PlanViewModel(
                     null
                 }
                 else -> {
-
                     null
                 }
             }
 //            Log.d("hank1","show result => ${result}")
             Log.d("hank1","show recipes => ${plan.value}")
-
-
-
         }
-
-
-
-
-
     }
+
+    fun deletePlan(id: String) {
+        coroutineScope.launch {
+            when (val result = cookRepository.deletePlan(id)) {
+                is Result.Success -> {
+                    Log.d("hank1", "成功刪除，看看result -> $result")
+                    getPlanResult()
+                }
+                is Result.Fail -> {
+                }
+                is Result.Error -> {
+                }
+                else -> {
+
+                }
+            }
+        }
+    }
+
+
 
 }

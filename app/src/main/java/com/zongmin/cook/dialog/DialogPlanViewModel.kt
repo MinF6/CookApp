@@ -39,7 +39,7 @@ class DialogPlanViewModel(
 
 
     init {
-//        getPlanResult()
+        getPlanResult()
 //        Log.d("hank1", "進到DialogPlanViewModel")
         getToday()
     }
@@ -87,7 +87,7 @@ class DialogPlanViewModel(
         }
     }
 
-    var showTime = System.currentTimeMillis()
+    //    var showTime = System.currentTimeMillis()
     val dayTime = 24 * 60 * 60 * 1000L
 //    val recipesViewModel = ViewModelProvider(requireParentFragment()).get(RecipesViewModel::class.java)
 
@@ -95,7 +95,27 @@ class DialogPlanViewModel(
     fun getToday() {
 //        showTime = System.currentTimeMillis()
 //        return SimpleDateFormat("yyyy/MM/dd").format(Date(showTime))
-        _date.value = System.currentTimeMillis()
+        val newTime = System.currentTimeMillis()
+        //轉好的月份對GregorianCalendar多一個月，因為從日曆拿的月份是從0開始
+        val storedDate = GregorianCalendar(
+            SimpleDateFormat("yyyy").format(Date(newTime)).toInt(),
+            SimpleDateFormat("MM").format(Date(newTime)).toInt() - 1,
+            SimpleDateFormat("dd").format(Date(newTime)).toInt()
+        )
+        _date.value = storedDate.timeInMillis
+
+//        Log.d("hank1","取得這天的毫秒 ->${storedDate.timeInMillis}")
+//        Log.d("hank1","取得這天的毫秒 ->${System.currentTimeMillis()}")
+        val testDay = storedDate.timeInMillis - 86400000L
+        Log.d("hank1", "取得這天開始的毫秒 ->${storedDate.timeInMillis}")
+        Log.d("hank1", "扣一天的毫秒 ->${testDay}")
+        Log.d(
+            "hank1",
+            "觀察一下當天毫秒的範圍 ->${SimpleDateFormat("yyyy/MM/dd").format(Date(storedDate.timeInMillis + 86399999L))}"
+        )
+
+//        storedDate.timeInMillis - 86400000L
+//        getPlanResult()
     }
 
     //    fun getYesterday(): String? {

@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="步驟O"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/image_step"
             app:layout_constraintTop_toTopOf="@+id/image_step" />
 

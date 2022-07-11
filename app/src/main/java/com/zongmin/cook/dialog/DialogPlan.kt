@@ -57,15 +57,16 @@ class DialogPlan : AppCompatDialogFragment() {
 
 
         viewModel.date.observe(viewLifecycleOwner) {
-            Log.d("hank1", "檢查it -> $it")
+            Log.d("hank1", "檢查改變後的日期毫秒 -> $it")
             recipesViewModel.date.value = it
             binding.textDialogDate.text = SimpleDateFormat("yyyy/MM/dd").format(Date(it))
+
         }
 
 
 
 
-        viewModel.getPlanResult()
+//        viewModel.getPlanResult()
 
         val adapter = DialogPlanAdapter(viewModel)
 
@@ -87,13 +88,6 @@ class DialogPlan : AppCompatDialogFragment() {
 //            }
 
             for (plan in it) {
-//                when(plan.threeMeals == "早餐"){
-//                    breakfast.add(plan)
-//                }else if(plan.threeMeals == "午餐"){
-//
-//                }else{
-//
-//                }
                 when (plan.threeMeals) {
                     "早餐" -> {
                         breakfast.add(plan)
@@ -134,7 +128,7 @@ class DialogPlan : AppCompatDialogFragment() {
 //            dataList.add(item2)
 
 
-            Log.d("hank1", "安排完的結果 => $dataList")
+//            Log.d("hank1", "安排完的結果 => $dataList")
             adapter.submitList(dataList)
 
         })

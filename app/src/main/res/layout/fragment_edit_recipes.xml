@@ -52,22 +52,22 @@
             <ImageView
                 android:id="@+id/image_edit_main"
                 imageUrl="@{recipes.mainImage}"
-                android:background="@drawable/ic_baseline_catching_pokemon_24"
-                android:layout_width="200dp"
+                android:background="@drawable/editimg"
+                android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 <!--            imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"-->
 
-            <Button
-                android:id="@+id/button_edit_change_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="變更照片"
-                app:layout_constraintBottom_toBottomOf="@+id/image_edit_main"
-                app:layout_constraintEnd_toEndOf="parent" />
+<!--            <Button-->
+<!--                android:id="@+id/button_edit_change_image"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:text="變更照片"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/image_edit_main"-->
+<!--                app:layout_constraintEnd_toEndOf="parent" />-->
 
             <Button
                 android:id="@+id/button_edit_delete"

@@ -45,7 +45,7 @@
                 android:layout_marginStart="16dp"
                 android:scaleType="centerCrop"
                 app:shapeAppearanceOverlay="@style/imageViewCorner"
-                android:src="@drawable/ic_baseline_catching_pokemon_24"/>
+                android:src="@drawable/stepimg"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

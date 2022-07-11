@@ -75,6 +75,47 @@
                 app:layout_constraintStart_toStartOf="@+id/text_recipes_item_category"
                 app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_category" />
 
+            <View
+                android:id="@+id/view_recipes_time"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ic_baseline_access_time_24"
+                app:layout_constraintStart_toStartOf="@+id/text_recipes_item_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_recipes_item_title" />
+
+            <TextView
+                android:id="@+id/text_recipes_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="10分鐘"
+                app:layout_constraintBottom_toBottomOf="@+id/view_recipes_time"
+                app:layout_constraintStart_toEndOf="@+id/view_recipes_time"
+                app:layout_constraintTop_toTopOf="@+id/view_recipes_time" />
+
+            <View
+                android:id="@+id/view_recipes_serving"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/ic_baseline_people_outline_24"
+                app:layout_constraintBottom_toBottomOf="@+id/view_recipes_time"
+                app:layout_constraintStart_toEndOf="@+id/text_recipes_time"
+                app:layout_constraintTop_toTopOf="@+id/view_recipes_time" />
+
+            <TextView
+                android:id="@+id/text_recipes_serving"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="1人份"
+                app:layout_constraintBottom_toBottomOf="@+id/view_recipes_serving"
+                app:layout_constraintStart_toEndOf="@+id/view_recipes_serving"
+                app:layout_constraintTop_toTopOf="@+id/view_recipes_serving" />
+
+
+
             <Button
 
                 android:id="@+id/button_view_pager_add"

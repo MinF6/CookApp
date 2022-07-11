@@ -14,6 +14,7 @@
             android:layout_width="300dp"
             android:layout_height="400dp"
             android:background="@drawable/bg_corner"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,11 +22,12 @@
 
             <Button
                 android:id="@+id/button_dialog_yesterday"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-
+                android:background="@android:color/transparent"
                 android:text="&lt;"
+                android:textColor="#ffffff"
                 app:layout_constraintEnd_toStartOf="@+id/text_dialog_date"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +38,8 @@
                 android:id="@+id/text_dialog_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
                 android:text="2022/6/20"
                 app:layout_constraintBottom_toBottomOf="@+id/button_dialog_yesterday"
                 app:layout_constraintEnd_toStartOf="@+id/button_dialog_tomorrow"
@@ -45,9 +49,10 @@
 
             <Button
                 android:id="@+id/button_dialog_tomorrow"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
                 android:text="&gt;"
                 app:layout_constraintBottom_toBottomOf="@+id/text_dialog_date"
                 app:layout_constraintEnd_toEndOf="parent"

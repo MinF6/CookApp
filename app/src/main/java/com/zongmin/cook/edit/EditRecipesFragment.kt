@@ -61,7 +61,7 @@ class EditRecipesFragment : Fragment() {
         //來自檔案
         if (requestCode == PICK_CONTACT_REQUEST) {
             uri = data?.data
-            img1?.setImageURI(uri)
+//            img1?.setImageURI(uri)
             viewModel.mainUri.value = true
             Log.d("hank1", "看一下上傳拿到的uri是啥 -> $uri")
         }
@@ -250,7 +250,7 @@ class EditRecipesFragment : Fragment() {
 
 
         //變更照片按鈕
-        binding.buttonEditChangeImage.setOnClickListener {
+//        binding.buttonEditChangeImage.setOnClickListener {
 
             //上傳圖片   應該要改去viewModel用coroutineScope.launch
 //            val time = System.currentTimeMillis()
@@ -286,7 +286,7 @@ class EditRecipesFragment : Fragment() {
 //                }
 //            }
 
-        }
+//        }
 
         var unusedFileName = 0L
         var mainImage = ""

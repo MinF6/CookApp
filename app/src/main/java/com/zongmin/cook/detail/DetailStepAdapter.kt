@@ -15,7 +15,7 @@ class DetailStepAdapter: ListAdapter<Step, RecyclerView.ViewHolder>(DiffCallback
         RecyclerView.ViewHolder(binding.root) {
         fun bind(step: Step) {
 
-            binding.textStepSequence.text = step.sequence
+            binding.textStepSequence.text = "步驟${step.sequence}"
             binding.textStepDepiction.text = step.depiction
 
             //這裡是listString，之後要多改個recycle

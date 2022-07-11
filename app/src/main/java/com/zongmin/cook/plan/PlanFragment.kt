@@ -5,14 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView.OnDateChangeListener
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.zongmin.cook.data.Plan
 import com.zongmin.cook.databinding.FragmentPlanBinding
 import com.zongmin.cook.ext.getVmFactory
-import com.zongmin.cook.recipes.item.RecipesItemViewModel
+import java.util.*
 
 
 class PlanFragment : Fragment() {
@@ -36,29 +35,70 @@ class PlanFragment : Fragment() {
 
         viewModel.getPlanResult()
 
-        binding.calendarView.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
+//        binding.calendarView.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
+//
+//            Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
+//            Log.d()
+//
+//
+//        })
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
 
             Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
+//            Log.d()
+            val storedDate = GregorianCalendar(year, month, dayOfMonth)
+            Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
 
 
-        })
-        val adapter = PlanAdapter()
+        }
+        val adapter = PlanAdapter(viewModel)
 
         binding.recyclerviewPlan.adapter = adapter
 
 
-        val dataList = mutableListOf<PlanItem>()
+//        val dataList = mutableListOf<PlanItem>()
         viewModel.plan.observe(viewLifecycleOwner, Observer {
+            val dataList = mutableListOf<PlanItem>()
+            val breakfast = mutableListOf<Plan>()
+            val lunch = mutableListOf<Plan>()
+            val dinner = mutableListOf<Plan>()
 
-            Log.d("hank1", "資料有進來了")
             for (plan in it) {
-                val item1 = PlanItem.Title(plan.threeMeals)
-                dataList.add(item1)
+                when (plan.threeMeals) {
+                    "早餐" -> {
+                        breakfast.add(plan)
+                    }
+                    "午餐" -> {
+                        lunch.add(plan)
+                    }
+                    "晚餐" -> {
+                        dinner.add(plan)
+                    }
+                }
 
-                val item2 = PlanItem.FullPlan(plan)
-                dataList.add(item2)
 
             }
+            if (breakfast.size > 0) {
+                dataList.add(PlanItem.Title("早餐"))
+                for (i in breakfast) {
+                    dataList.add(PlanItem.FullPlan(i))
+                }
+
+            }
+            if (lunch.size > 0) {
+                dataList.add(PlanItem.Title("午餐"))
+                for (i in lunch) {
+                    dataList.add(PlanItem.FullPlan(i))
+                }
+            }
+            if (dinner.size > 0) {
+                dataList.add(PlanItem.Title("晚餐"))
+                for (i in dinner) {
+                    dataList.add(PlanItem.FullPlan(i))
+                }
+            }
+
+
             adapter.submitList(dataList)
 
 

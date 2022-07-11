@@ -13,8 +13,9 @@
             android:id="@+id/text_dialog_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="食物類別"
+            android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,14 +26,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="食物名稱"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="@+id/text_dialog_category"
             app:layout_constraintStart_toStartOf="@+id/text_dialog_category"
             app:layout_constraintTop_toBottomOf="@+id/text_dialog_category" />
 
         <View
             android:id="@+id/button_dialog_cancel"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_margin="8dp"
             android:background="@drawable/ic_baseline_close_24"
             app:layout_constraintBottom_toBottomOf="@+id/text_dialog_title"
@@ -42,9 +46,8 @@
         <View
             android:layout_width="150dp"
             android:layout_height="1dp"
-            android:background="#aaaaaa"
-            android:layout_margin="16dp"
-
+            android:background="#eeeeee"
+            android:layout_margin="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_dialog_title" />
