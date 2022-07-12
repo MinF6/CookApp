@@ -411,9 +411,11 @@ class EditRecipesFragment : Fragment() {
             newRecipes.cookingTime = binding.edittextEditCookTime.text.toString()
             newRecipes.author = "W5bXC4hAbvs5zOYY7i5R"
             newRecipes.remark = binding.edittextEditRemark.text.toString()
-            viewModel.create(newRecipes, listNewIngredient, listnewStep)
 
-            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+
+//            viewModel.create(newRecipes, listNewIngredient, listnewStep)
+
+//            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
         }
 
         //取消
