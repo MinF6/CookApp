@@ -32,6 +32,7 @@ import com.zongmin.cook.databinding.FragmentEditRecipesBinding
 import com.zongmin.cook.databinding.ItemEditIngredientBinding
 import com.zongmin.cook.databinding.ItemEditStepBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 import java.io.File
 
 
@@ -109,7 +110,9 @@ class EditRecipesFragment : Fragment() {
         val depiction = binding3.itemEdittextStepDepiction
         val itemImage = binding3.itemStepImage
 
-
+        binding.imageEditBack.setOnClickListener {
+            this.findNavController().navigateUp()
+        }
 
         Log.d(
             "hank1",
@@ -409,7 +412,7 @@ class EditRecipesFragment : Fragment() {
             newRecipes.serving = binding.edittextServing.text.toString().toInt()
             newRecipes.mainImage = mainImage
             newRecipes.cookingTime = binding.edittextEditCookTime.text.toString()
-            newRecipes.author = "W5bXC4hAbvs5zOYY7i5R"
+            newRecipes.author = UserManager.user.id
             newRecipes.remark = binding.edittextEditRemark.text.toString()
 
 

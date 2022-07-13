@@ -63,7 +63,7 @@ class RecipesItemViewModel(
     }
 
 
-    fun getRecipesResult(type: String) {
+    private fun getRecipesResult(type: String) {
 //    fun getRecipesResult() {
 //        Log.d("hank1", "現在的type到底是啥 -> $type")
 //        Log.d("hank1", "現在的key到底是啥 -> $key")

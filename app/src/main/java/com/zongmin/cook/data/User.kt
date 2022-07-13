@@ -13,6 +13,7 @@ data class User(
     val fans: List<String> = listOf(" "),
     val follows: List<String> = listOf(" "),
     var headShot: String = " ",
-    val introduce: String = " "
+    val introduce: String = " ",
+    val collect: List<String> = listOf(" ")
 
 ) : Parcelable

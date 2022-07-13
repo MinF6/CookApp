@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.zongmin.cook.data.Plan
 import com.zongmin.cook.databinding.FragmentPlanBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 import java.util.*
 
 

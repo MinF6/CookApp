@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zongmin.cook.data.Ingredient
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.ItemProfileCreationBinding
+import com.zongmin.cook.social.SocialAdapter
 
-class ProfileAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
+class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
 
     class UserViewHolder(private var binding: ItemProfileCreationBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -47,6 +48,9 @@ class ProfileAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallbac
         when (holder) {
             is UserViewHolder -> {
                 val selectedItem = getItem(position) as Recipes
+                holder.itemView.setOnClickListener {
+                    onClickListener.onClick(getItem(position))
+                }
                 holder.bind(selectedItem)
             }
         }
@@ -65,5 +69,8 @@ class ProfileAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallbac
 
     }
 
+    class OnClickListener(val clickListener: (recipes: Recipes) -> Unit) {
+        fun onClick(recipes: Recipes) = clickListener(recipes)
+    }
 
 }

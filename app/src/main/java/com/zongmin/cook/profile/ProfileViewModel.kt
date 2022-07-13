@@ -30,6 +30,11 @@ class ProfileViewModel(
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
 
+    private val _navigateToDetail = MutableLiveData<Recipes>()
+
+    val navigateToDetail: LiveData<Recipes>
+        get() = _navigateToDetail
+
 
     fun getUserResult() {
         coroutineScope.launch {
@@ -78,7 +83,13 @@ class ProfileViewModel(
     }
 
 
+    fun navigateToDetail(recipes: Recipes) {
+        _navigateToDetail.value = recipes
+    }
 
+    fun onDetailNavigated() {
+        _navigateToDetail.value = null
+    }
 
 
 

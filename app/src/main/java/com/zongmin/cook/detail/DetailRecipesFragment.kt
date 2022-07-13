@@ -35,15 +35,18 @@ class DetailRecipesFragment : Fragment() {
         val data = DetailRecipesFragmentArgs.fromBundle(requireArguments()).recipes
         binding.recipes = data
 
-            binding.textDetailTitle.text = data.name
+        binding.textDetailTitle.text = data.name
 
+        binding.imageDetailBack.setOnClickListener {
+//            this.findNavController().navigateUp()
+        }
 
         //食材adapter
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter
 
         val viewModel = DetailRecipesViewModel()
-            viewModel.getIngredient(data)
+        viewModel.getIngredient(data)
 
         viewModel.ingredient.observe(viewLifecycleOwner, Observer {
             ingredientAdapter.submitList(it)

@@ -25,6 +25,11 @@ class SocialViewModel(
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
 
+    private val _navigateToDetail = MutableLiveData<Recipes>()
+
+    val navigateToDetail: LiveData<Recipes>
+        get() = _navigateToDetail
+
 
     fun getRecipesResult() {
         coroutineScope.launch {
@@ -49,7 +54,13 @@ class SocialViewModel(
         }
     }
 
+    fun navigateToDetail(recipes: Recipes) {
+        _navigateToDetail.value = recipes
+    }
 
+    fun onDetailNavigated() {
+        _navigateToDetail.value = null
+    }
 
 
 

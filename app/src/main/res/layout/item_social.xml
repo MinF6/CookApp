@@ -19,13 +19,15 @@
             android:id="@+id/image_social_user"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/imageViewRound"
             imageUrl="@{`https://img-global.cpcdn.com/users/bf4baf131b3d9154/108x108cq50/avatar.jpg`}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_baseline_catching_pokemon_24"/>
+            tools:src="@drawable/ic_baseline_person_24"/>
+<!--        android:layout_margin="16dp"-->
 
 <!--        <ImageView-->
 <!--            android:id="@+id/image_social_user"-->

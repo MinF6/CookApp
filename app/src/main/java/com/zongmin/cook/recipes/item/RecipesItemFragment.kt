@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import com.zongmin.viewpagercards.CardPagerAdapter
@@ -46,6 +47,10 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 
         })
 
+
+//        Log.d("hank1","我想看登入的人的id -> ${UserManager.user.id}")
+//        Log.d("hank1","我想看登入的人的email -> ${UserManager.user.email}")
+
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
 //            Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
             mCardAdapter!!.remakeData()
@@ -75,6 +80,8 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 //            mViewPager!!.offscreenPageLimit = 3
 
         })
+
+
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
 //            Log.d("hank1", "想傳的內容是 -> $it")

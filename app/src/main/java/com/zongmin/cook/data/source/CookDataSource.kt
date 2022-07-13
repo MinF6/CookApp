@@ -13,6 +13,9 @@ interface CookDataSource {
 
     suspend fun getKeywordRecipes(key: String): Result<List<Recipes>>
 
+    //改版取得
+//    suspend fun getCollectRecipes(userId: String): Result<Recipes>
+
 //    suspend fun getIngredient():Result<List<Ingredient>>
 
 

@@ -2,24 +2,25 @@ package com.zongmin.cook.login
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.zongmin.cook.NavigationDirections
-import com.zongmin.cook.R
 import com.zongmin.cook.databinding.FragmentLoginBinding
-import com.zongmin.cook.edit.EditRecipesViewModel
 import com.zongmin.cook.ext.getVmFactory
 
 
-class LoginFragment : Fragment() {
+open class LoginFragment : Fragment() {
 
     private val viewModel by viewModels< LoginViewModel> { getVmFactory() }
 
@@ -57,10 +58,29 @@ class LoginFragment : Fragment() {
 
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        binding.buttonLogin.setOnClickListener {
-            signInGoogle()
+//        binding.buttonLogin.setOnClickListener {
+//            signInGoogle()
+//
+////            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+//        }
+        viewModel.loginSuccess.observe(viewLifecycleOwner){
+            if(it){
+                Toast.makeText(context, "登入成功", Toast.LENGTH_LONG).show()
+            }else{
+                Toast.makeText(context, "登入失敗", Toast.LENGTH_LONG).show()
+            }
 
-//            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+        }
+
+//        binding.signInButton.getChildAt(0)
+        setGooglePlusButtonText(binding.signInButton,"用 Google 登入")
+        binding.signInButton.setOnClickListener {
+            signInGoogle()
+        }
+
+        viewModel.navigateToRecipes.observe(viewLifecycleOwner){
+            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+
         }
 
 
@@ -71,6 +91,17 @@ class LoginFragment : Fragment() {
     private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
+    }
+
+    private fun setGooglePlusButtonText(signInButton: SignInButton, buttonText: String?) {
+        // Find the TextView that is inside of the SignInButton and set its text
+        for (i in 0 until signInButton.childCount) {
+            val v = signInButton.getChildAt(i)
+            if (v is TextView) {
+                v.text = buttonText
+                return
+            }
+        }
     }
 
 
