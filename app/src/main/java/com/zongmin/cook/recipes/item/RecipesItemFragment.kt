@@ -109,7 +109,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 //            viewModel.getRecipesResult(recipesType.value)
             mCardAdapter!!.remakeData()
             viewModel.setRecipesKey(recipesType.value,it)
-            viewModel._recipes.value = viewModel._recipes.value
+//            viewModel._recipes.value = viewModel._recipes.value
         }
 
 

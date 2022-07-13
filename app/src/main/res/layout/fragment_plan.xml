@@ -18,10 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!--        <DatePicker-->
-<!--            android:id="@+id/date_Picker"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"/>-->
+
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calendarView"
             tools:listitem="@layout/item_plan"/>
-
+<!--        -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

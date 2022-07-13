@@ -34,21 +34,18 @@ class DetailRecipesFragment : Fragment() {
 
         val data = DetailRecipesFragmentArgs.fromBundle(requireArguments()).recipes
         binding.recipes = data
-        if (data != null) {
+
             binding.textDetailTitle.text = data.name
-        }
+
 
         //食材adapter
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter
 
         val viewModel = DetailRecipesViewModel()
-        if (data != null) {
             viewModel.getIngredient(data)
-        }
 
         viewModel.ingredient.observe(viewLifecycleOwner, Observer {
-
             ingredientAdapter.submitList(it)
         })
 
@@ -56,7 +53,6 @@ class DetailRecipesFragment : Fragment() {
         //步驟adapter
         val stepAdapter = DetailStepAdapter()
         binding.recyclerviewStep.adapter = stepAdapter
-
         if (data != null) {
             viewModel.getStep(data)
         }
@@ -69,20 +65,14 @@ class DetailRecipesFragment : Fragment() {
 
 
 
-
-
         binding.buttonDetailToEdit.setOnClickListener {
             //到時候要帶值給編輯
             findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(data))
         }
 
 
-
-
         return binding.root
 
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_detail_recipes, container, false)
     }
 
 

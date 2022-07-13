@@ -6,9 +6,9 @@
 
     <data>
 
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.zongmin.cook.edit.EditRecipesViewModel" />-->
+        <!--        <variable-->
+        <!--            name="viewModel"-->
+        <!--            type="com.zongmin.cook.edit.EditRecipesViewModel" />-->
         <variable
             name="recipes"
             type="com.zongmin.cook.data.Recipes" />
@@ -52,33 +52,32 @@
             <ImageView
                 android:id="@+id/image_edit_main"
                 imageUrl="@{recipes.mainImage}"
-                android:background="@drawable/editimg"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:background="@drawable/editimg"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-<!--            imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"-->
+            <!--            imageUrl="@{`https://tokyo-kitchen.icook.network/uploads/recipe/cover/414397/a21961e2296a9aab.jpg`}"-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_edit_change_image"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="16dp"-->
-<!--                android:text="變更照片"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/image_edit_main"-->
-<!--                app:layout_constraintEnd_toEndOf="parent" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/button_edit_change_image"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:text="變更照片"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/image_edit_main"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent" />-->
 
             <Button
                 android:id="@+id/button_edit_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="刪除"
                 android:layout_marginEnd="16dp"
+                android:text="刪除"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_edit_main"
-                android:visibility="gone"/>
-
+                app:layout_constraintTop_toBottomOf="@+id/image_edit_main" />
 
 
             <TextView
@@ -137,13 +136,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="輸入食材份量"
-                android:text="@{Integer.toString(recipes.serving)}"
                 android:inputType="number"
                 android:maxLength="5"
+                android:text="@{recipes.serving == 0 ? null : Integer.toString(recipes.serving) }"
                 app:layout_constraintBottom_toBottomOf="@+id/text_serving"
                 app:layout_constraintEnd_toStartOf="@+id/text_serving"
                 app:layout_constraintTop_toTopOf="@+id/text_serving" />
-
+            <!--            android:text="@{Integer.toString(recipes.serving)}"-->
             <TextView
                 android:id="@+id/text_serving"
                 android:layout_width="wrap_content"
@@ -210,14 +209,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_ingredient_list" />
 
-<!--            <Button-->
-<!--                android:id="@+id/button_test2"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="檢測食材輸入"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/button_new_ingredient"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/edit_ingredient_list" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/button_test2"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="檢測食材輸入"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/button_new_ingredient"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/edit_ingredient_list" />-->
 
             <TextView
                 android:id="@+id/text_edit_step"
@@ -245,22 +244,22 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="輸入烹飪時間(分鐘)"
-                android:text="@{recipes.cookingTime}"
                 android:inputType="number"
+                android:text="@{recipes.cookingTime}"
                 app:layout_constraintBottom_toBottomOf="@+id/text_edit_cook_time_title"
                 app:layout_constraintEnd_toStartOf="@+id/text_edit_cook_time_title"
                 app:layout_constraintTop_toTopOf="@+id/text_edit_cook_time_title" />
 
 
-<!--            <EditText-->
-<!--                android:id="@+id/edittext_edit_step"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:hint="輸入步驟"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/text_edit_step"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/text_edit_step" />-->
+            <!--            <EditText-->
+            <!--                android:id="@+id/edittext_edit_step"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="16dp"-->
+            <!--                android:hint="輸入步驟"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/text_edit_step"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/text_edit_step" />-->
             <LinearLayout
                 android:id="@+id/edit_step_list"
                 android:layout_width="match_parent"

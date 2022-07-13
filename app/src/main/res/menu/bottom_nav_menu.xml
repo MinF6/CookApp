@@ -20,7 +20,7 @@
     <item
         android:id="@+id/navigation_social"
         android:icon="@drawable/social"
-        android:title="社交" />
+        android:title="分享" />
 
     <item
         android:id="@+id/navigation_profile"

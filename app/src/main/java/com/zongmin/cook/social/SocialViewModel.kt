@@ -20,7 +20,7 @@ class SocialViewModel(
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    var _recipes = MutableLiveData<List<Recipes>>()
+    private var _recipes = MutableLiveData<List<Recipes>>()
 
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
