@@ -106,6 +106,7 @@ class LoginViewModel(
 //                        "~~~~~~開始~~~~~~firebaseTokenResult?.token.toString() = ${firebaseTokenResult?.token.toString()}"
 //                    )
                     UserManager.user = user
+                    Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
 //                    Log.d("hank1","檢查user有無值 -> $user")
                     _navigateToRecipes.value = true
 //                    val firebaseDate = firebaseTokenResult?.expirationTimestamp?.let { Date(it) }
@@ -133,10 +134,11 @@ class LoginViewModel(
 //                    Log.d("hank1", "UserManager.user.value = ${UserManager.user.value}")
 //                    liveUser.value = user
 //                    Log.d("hank1", "Login user = $user")
-
+                    userSignIn(user)
                     if (task.result.additionalUserInfo?.isNewUser == true) {
                         UserManager.user = user
-//                        Log.d("hank1","檢查user有無值 -> $user")
+
+                        Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
                         _navigateToRecipes.value = true
 //                        Log.d("hank1", "task.result.additionalUserInfo?.isNewUser == true")
 //

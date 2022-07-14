@@ -10,7 +10,7 @@ data class Step(
     var sequence: String = " ",
     var images: String = " ",
     var depiction: String = " ",
-    val toolType: ToolType = ToolType(" ", " ")
+    val toolType: ToolType = ToolType()
 ) : Parcelable
 
 @Parcelize

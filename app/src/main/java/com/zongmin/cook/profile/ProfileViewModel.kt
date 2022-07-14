@@ -39,7 +39,7 @@ class ProfileViewModel(
 
     fun getUserResult() {
         coroutineScope.launch {
-            val result = cookRepository.getUser()
+            val result = cookRepository.getUser(UserManager.user.id)
 //            val result2 = cookRepository.getRecipes()
             val result2 = cookRepository.getCollectRecipes(UserManager.user.id)
 
@@ -77,8 +77,8 @@ class ProfileViewModel(
                 }
             }
 
-            Log.d("hank1","check2，檢查Query結果，result => $result")
-            Log.d("hank1","check2，檢查Query結果，result => $result2")
+//            Log.d("hank1","check2，檢查Query結果，result => $result")
+//            Log.d("hank1","check2，檢查Query結果，result => $result2")
 //            Log.d("hank1","show recipes => ${recipes.value}")
 
         }

@@ -41,9 +41,9 @@ class DefaultCookRepository(
         return cookRemoteDataSource.getManagement()
     }
 
-    override suspend fun getUser(): Result<User> {
+    override suspend fun getUser(id: String): Result<User> {
 
-        return cookRemoteDataSource.getUser()
+        return cookRemoteDataSource.getUser(id)
     }
 
     override suspend fun createRecipes(

@@ -22,7 +22,7 @@ interface CookRepository {
 
     suspend fun getManagement(): Result<List<Management>>
 
-    suspend fun getUser(): Result<User>
+    suspend fun getUser(id: String): Result<User>
 
     suspend fun createRecipes(summary: Summary,ingredient: List<Ingredient>,step: List<Step>): Result<Boolean>
 

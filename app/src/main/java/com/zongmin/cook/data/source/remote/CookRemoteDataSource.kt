@@ -468,10 +468,10 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
-    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
+    override suspend fun getUser(id: String): Result<User> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection("User")
-            .whereEqualTo("id", "W5bXC4hAbvs5zOYY7i5R")
+            .whereEqualTo("id", id)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -506,7 +506,7 @@ object CookRemoteDataSource : CookDataSource {
             if (summary.id == " ") {
                 summary.id = document.id
                 Log.d("hank1", "需要給ID")
-            }else{
+            } else {
                 Log.d("hank1", "不需要給ID")
             }
 
