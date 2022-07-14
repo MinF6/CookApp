@@ -3,12 +3,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="com.zongmin.cook.util.CurrentFragmentType" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.zongmin.cook.MainViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:backgroundTint="#ff9933"
+            android:elevation="5dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.DETAIL || viewModel.currentFragmentType == CurrentFragmentType.EDIT || viewModel.currentFragmentType == CurrentFragmentType.LOGIN ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_activity_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search"
+            android:elevation="5dp"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.RECIPES ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/text_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:letterSpacing="0.3"
+            android:text="@{viewModel.currentFragmentType.value}"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.DETAIL || viewModel.currentFragmentType == CurrentFragmentType.EDIT ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <!--        android:text="食譜"-->
+
+        <ImageView
+            android:id="@+id/image_activity_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/create_recipes"
+            android:elevation="5dp"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.RECIPES ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+
+        <!--        -->
 
         <fragment
             android:id="@+id/myNavHostFragment"
@@ -19,7 +87,7 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:navGraph="@navigation/navigation" />
 
 
@@ -48,8 +116,9 @@
             android:layout_height="66dp"
             android:background="@color/white"
             android:elevation="4dp"
-            app:labelVisibilityMode="labeled"
             app:itemIconSize="36dp"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.LOGIN ? View.GONE : View.VISIBLE}"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

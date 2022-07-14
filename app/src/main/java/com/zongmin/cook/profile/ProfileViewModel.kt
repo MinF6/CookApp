@@ -8,6 +8,7 @@ import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
+import com.zongmin.cook.login.UserManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -30,11 +31,17 @@ class ProfileViewModel(
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
 
+    private val _navigateToDetail = MutableLiveData<Recipes>()
+
+    val navigateToDetail: LiveData<Recipes>
+        get() = _navigateToDetail
+
 
     fun getUserResult() {
         coroutineScope.launch {
             val result = cookRepository.getUser()
-            val result2 = cookRepository.getRecipes()
+//            val result2 = cookRepository.getRecipes()
+            val result2 = cookRepository.getCollectRecipes(UserManager.user.id)
 
             _user.value = when (result) {
                 is Result.Success -> {
@@ -78,7 +85,13 @@ class ProfileViewModel(
     }
 
 
+    fun navigateToDetail(recipes: Recipes) {
+        _navigateToDetail.value = recipes
+    }
 
+    fun onDetailNavigated() {
+        _navigateToDetail.value = null
+    }
 
 
 

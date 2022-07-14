@@ -4,21 +4,32 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/bg_conner_search.xml" value="0.238" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/bg_corner.xml" value="0.271" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/bg_corner_white.xml" value="0.363" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.325" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_add_reaction_24.xml" value="0.325" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_add_shopping_cart_24.xml" value="0.325" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.325" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_catching_pokemon_24.xml" value="0.325" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.363" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.325" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_edit_calendar_24.xml" value="0.232" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_local_dining_24.xml" value="0.325" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_menu_book_24.xml" value="0.325" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.325" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_people_outline_24.xml" value="0.2915" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2915" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/drawable/ic_baseline_sentiment_very_satisfied_24.xml" value="0.325" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_detail_recipes.xml" value="0.13814432989690723" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_detail_recipes.xml" value="0.3168384879725086" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_dialog_plan.xml" value="0.28072916666666664" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_edit_recipes.xml" value="0.2508108108108108" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_follow.xml" value="0.41304347826086957" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_login.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_management.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_managment.xml" value="0.31302083333333336" />
-        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_plan.xml" value="0.4071557971014493" />
+        <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_plan.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_profile.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_recipes.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/F6/Desktop/Cook/app/src/main/res/layout/fragment_recipes_item.xml" value="0.3333333333333333" />

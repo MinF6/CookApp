@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.zongmin.cook.data.Plan
 import com.zongmin.cook.databinding.FragmentPlanBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 import java.util.*
 
 
@@ -21,7 +22,6 @@ class PlanFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -42,15 +42,15 @@ class PlanFragment : Fragment() {
 //
 //
 //        })
-        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-
-            Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
-//            Log.d()
-            val storedDate = GregorianCalendar(year, month, dayOfMonth)
-            Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
-
-
-        }
+//        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+//
+//            Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
+////            Log.d()
+//            val storedDate = GregorianCalendar(year, month, dayOfMonth)
+//            Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
+//
+//
+//        }
         val adapter = PlanAdapter(viewModel)
 
         binding.recyclerviewPlan.adapter = adapter

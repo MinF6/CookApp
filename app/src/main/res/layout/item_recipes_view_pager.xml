@@ -114,8 +114,6 @@
                 app:layout_constraintStart_toEndOf="@+id/view_recipes_serving"
                 app:layout_constraintTop_toTopOf="@+id/view_recipes_serving" />
 
-
-
             <Button
 
                 android:id="@+id/button_view_pager_add"

@@ -41,6 +41,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                    />
+                <ImageView
+                    android:id="@+id/image_detail_back"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="40dp"
+                    android:elevation="5dp"
+                    android:src="@drawable/back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 <!--                app:shapeAppearanceOverlay="@style/imageViewCorner"-->
 
 
@@ -133,6 +144,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_step_title"
                     tools:listitem="@layout/item_step" />
+
+                <Switch
+                    android:id="@+id/switch_detail_public"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公開食譜"
+                    android:theme="@style/publicSwitch"
+                    app:layout_constraintEnd_toEndOf="@+id/button_detail_to_edit"
+                    app:layout_constraintTop_toBottomOf="@+id/button_detail_to_edit" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>

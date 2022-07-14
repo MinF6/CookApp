@@ -35,7 +35,9 @@ class ProfileFragment : Fragment() {
 
         viewModel.getUserResult()
 
-        val adapter = ProfileAdapter()
+        val adapter = ProfileAdapter(ProfileAdapter.OnClickListener{
+            viewModel.navigateToDetail(it)
+        })
 
         binding.recyclerviewProfile.adapter = adapter
 
@@ -52,31 +54,9 @@ class ProfileFragment : Fragment() {
             adapter.submitList(it)
         })
 
-//        binding.buttonProfileLogin.setOnClickListener {
-//            findNavController().navigate(NavigationDirections.navigateToLogin())
-//        }
-
-
-//            binding.viewpagerProfile.let {
-//                binding.tabsProfile.setupWithViewPager(it)
-//                binding.tabsProfile.tabMode = TabLayout.MODE_SCROLLABLE;
-//                it.adapter = RecipesAdapter(childFragmentManager)
-//                it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabsRecipes))
-//            }
-//
-//            buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date())
-//
-//            buttonNavNew.setOnClickListener {
-////                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
-//                findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment())
-//            }
-//
-//            buttonRecipesDialog.setOnClickListener {
-//                findNavController().navigate(NavigationDirections.navigateToDialogPlan())
-////            Log.d("hank1","111111111111111111111")
-//            }
-//
-//            return@onCreateView root
+        viewModel.navigateToDetail.observe(viewLifecycleOwner){
+            findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
+        }
 
 
 

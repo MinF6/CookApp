@@ -1,5 +1,6 @@
 package com.zongmin.cook.social
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +10,7 @@ import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.ItemSocialBinding
 
 
-class SocialAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
+class SocialAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
 
 
     class SocialViewHolder(private var binding: ItemSocialBinding) :
@@ -18,6 +19,9 @@ class SocialAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback
             binding.recipes = recipes
             binding.textSocialName.text = recipes.name
             binding.textSocialUser.text = "Hank"
+            binding.viewSocialCollect.setOnClickListener {
+                Log.d("hank1","想收藏的這個是 -> $recipes")
+            }
 
 
             binding.executePendingBindings()
@@ -42,6 +46,9 @@ class SocialAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback
             is SocialViewHolder -> {
                 val selectedItem = getItem(position) as Recipes
                 holder.bind(selectedItem)
+                holder.itemView.setOnClickListener {
+                    onClickListener.onClick(getItem(position))
+                }
             }
         }
     }
@@ -57,6 +64,10 @@ class SocialAdapter : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback
         }
 
 
+    }
+
+    class OnClickListener(val clickListener: (recipes: Recipes) -> Unit) {
+        fun onClick(recipes: Recipes) = clickListener(recipes)
     }
 
 
