@@ -8,6 +8,7 @@ import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
+import com.zongmin.cook.login.UserManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -39,7 +40,8 @@ class ProfileViewModel(
     fun getUserResult() {
         coroutineScope.launch {
             val result = cookRepository.getUser()
-            val result2 = cookRepository.getRecipes()
+//            val result2 = cookRepository.getRecipes()
+            val result2 = cookRepository.getCollectRecipes(UserManager.user.id)
 
             _user.value = when (result) {
                 is Result.Success -> {

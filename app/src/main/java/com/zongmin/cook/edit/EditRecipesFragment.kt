@@ -351,32 +351,48 @@ class EditRecipesFragment : Fragment() {
             //取得步驟內容
             var sequence = 1
             for (i in 0 until stepList!!.childCount) {
+                Log.d("hank1", "check1")
                 if (stepList!!.getChildAt(i) is LinearLayoutCompat) {
+                    Log.d("hank1", "check2")
                     val ll = stepList!!.getChildAt(i) as LinearLayoutCompat
+                    var depictionText = ""
+                    var depictionUri = ""
                     for (j in 0 until ll.childCount) {
-                        if (ll.getChildAt(j) is EditText) {
-                            val et = ll.getChildAt(j) as EditText
-                            if (et.id == depiction!!.id) {
-                                Log.d("hank1", "這組depiction放了 => ${et.text}")
-                                listnewStep.add(
-                                    Step(
-                                        "",
-                                        sequence.toString(),
-                                        "https://tokyo-kitchen.icook.network/uploads/recipe/cover/407229/1e9aa981b9a4a97f.jpg",
-                                        et.text.toString(),
-                                        ToolType()
-                                    )
-                                )
-                                sequence++
-//                                Log.d("hank1", "檢查目前的sequence結果 => ${sequence}")
-                                Log.d("hank1", "檢查目前的listnewStep結果 => ${listnewStep}")
-                            }
+                        Log.d("hank1", "check3")
+                        if (ll.getChildAt(j) is LinearLayoutCompat) {
+                            Log.d("hank1", "check4")
+                            val gg = ll.getChildAt(j) as LinearLayoutCompat
+                            //這邊要施工，加K
+
+                            for (k in 0 until gg.childCount) {
+                                    if (gg.getChildAt(k) is EditText) {
+                                        val et = gg.getChildAt(k) as EditText
+                                        if (et.id == depiction.id) {
+                                            depictionText = et.text.toString()
+                                            Log.d("hank1","檢查edittext的輸入值 -> $depictionText")
+                                        }
+                                    } else if (gg.getChildAt(k) is ShapeableImageView) {
+                                        val eImg = gg.getChildAt(k) as ShapeableImageView
+                                        if (eImg.id == itemImage.id) {
+                                            Log.d("hank1","要放入的depictionText是 -> $depictionText")
+                                        depictionUri = "https://tokyo-kitchen.icook.network/uploads/recipe/cover/360711/84b41b35a1124c7c.jpg"
+                                            listnewStep.add(Step("",sequence.toString(),depictionUri,depictionText,
+                                                ToolType()
+                                            ))
+                                        }
+                                    }
+                                }
+//                                sequence++
+                            //K範圍結束
                         }
                     }
+                    sequence++
                 }
             }
+//比對用---------------------------------------------------------------------------------------------
 
-            //取得食材內容
+
+//取得食材內容-----------------------------------------------------------------------------------------
             for (i in 0 until ingredientList!!.childCount) {
                 if (ingredientList!!.getChildAt(i) is LinearLayoutCompat) {
                     val ll = ingredientList!!.getChildAt(i) as LinearLayoutCompat
@@ -393,11 +409,14 @@ class EditRecipesFragment : Fragment() {
                             if (et.id == quantity.id) {
 //                                Log.d("hank1", "這組quantity放了 => ${et.text}")
                                 itemQuantity = et.text.toString()
+
                             }
                             if (et.id == unit.id) {
+//                                Log.d("hank1", "check6")
 //                                Log.d("hank1", "這組unit放了 => ${et.text}")
                                 itemUnit = et.text.toString()
                                 listNewIngredient.add(
+
                                     Ingredient("", itemName, itemQuantity, itemUnit)
                                 )
 //                                Log.d("hank1", "檢查目前的listNewIngredient結果 => ${listNewIngredient}")
@@ -412,13 +431,34 @@ class EditRecipesFragment : Fragment() {
             newRecipes.serving = binding.edittextServing.text.toString().toInt()
             newRecipes.mainImage = mainImage
             newRecipes.cookingTime = binding.edittextEditCookTime.text.toString()
-            newRecipes.author = UserManager.user.id
+            if (recipesData != null) {
+                newRecipes.author = recipesData.author
+                newRecipes.id = recipesData.id
+            }else{
+                newRecipes.author = UserManager.user.id
+            }
+
             newRecipes.remark = binding.edittextEditRemark.text.toString()
 
+                Log.d("hank1","檢視一下要新增的id是 -> ${newRecipes.id}")
+            if(newRecipes.id == null){
+                Log.d("hank1","他是null")
+            }
+            if(newRecipes.id == ""){
+                Log.d("hank1","他是沒有空值的字串")
+            }
+            if(newRecipes.id == " "){
+                Log.d("hank1","他是有空值的字串")
+            }
 
-//            viewModel.create(newRecipes, listNewIngredient, listnewStep)
 
-//            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+                Log.d("hank1","我傳的newRecipes是 -> $newRecipes")
+                Log.d("hank1","我傳的listNewIngredient是 -> $listNewIngredient")
+                Log.d("hank1","我傳的listnewStep是 -> $listnewStep")
+
+            viewModel.create(newRecipes, listNewIngredient, listnewStep)
+
+            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
         }
 
         //取消

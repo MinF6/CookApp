@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/loginbackground"
+        android:background="@drawable/login_background"
         tools:context=".login.LoginFragment">
         <!--        android:background="#F9B531"-->
 
@@ -23,42 +23,42 @@
         <!--            app:layout_constraintStart_toStartOf="parent"-->
         <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <ImageView
-            android:id="@+id/image_login_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/logo2"
-            app:layout_constraintEnd_toStartOf="@+id/text_login_name"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_login_welcome" />
+<!--        <ImageView-->
+<!--            android:id="@+id/image_login_logo"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:background="@drawable/logo2"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/text_login_name"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintHorizontal_chainStyle="packed"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/text_login_welcome" />-->
 
-        <TextView
-            android:id="@+id/text_login_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="煮食"
-            android:textSize="40dp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_login_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/image_login_logo"
-            app:layout_constraintTop_toTopOf="@+id/image_login_logo" />
+<!--        <TextView-->
+<!--            android:id="@+id/text_login_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="煮食"-->
+<!--            android:textSize="40dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/image_login_logo"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/image_login_logo"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/image_login_logo" />-->
 
-        <TextView
-            android:id="@+id/text_login_welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="216dp"
-            android:text="歡迎來到"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/text_login_welcome"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="216dp"-->
+<!--            android:text="歡迎來到"-->
+<!--            android:textSize="30dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.498"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
@@ -68,8 +68,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_login_logo" />
-
+             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+<!--        app:layout_constraintTop_toBottomOf="@+id/image_login_logo"-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

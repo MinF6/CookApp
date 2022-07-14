@@ -19,6 +19,9 @@ class SocialAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes,
             binding.recipes = recipes
             binding.textSocialName.text = recipes.name
             binding.textSocialUser.text = "Hank"
+            binding.viewSocialCollect.setOnClickListener {
+                Log.d("hank1","想收藏的這個是 -> $recipes")
+            }
 
 
             binding.executePendingBindings()

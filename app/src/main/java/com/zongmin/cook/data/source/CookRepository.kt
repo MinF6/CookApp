@@ -13,7 +13,7 @@ interface CookRepository {
 
     suspend fun getKeywordRecipes(key: String): Result<List<Recipes>>
 
-
+    suspend fun getCollectRecipes(userId: String): Result<List<Recipes>>
 //    suspend fun getIngredient(): Result<List<Ingredient>>
 
 
