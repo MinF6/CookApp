@@ -8,6 +8,7 @@ import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.source.CookRepository
+import com.zongmin.cook.network.LoadApiStatus
 import com.zongmin.cook.util.ServiceLocator.cookRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +30,10 @@ class PlanViewModel(
     val plan: LiveData<List<Plan>>
         get() = _plan
 
+    private val _status = MutableLiveData<LoadApiStatus>()
+
+    val status: LiveData<LoadApiStatus>
+        get() = _status
 
 
 
@@ -42,21 +47,26 @@ class PlanViewModel(
     fun getPlanResult(){
 
         coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
 
             val result = cookRepository.getPlan()
 //            Log.d("hank1","show result => ${result}")
             _plan.value = when (result) {
                 is Result.Success -> {
+                    _status.value = LoadApiStatus.DONE
+                    Log.d("hank1","成功取得")
                     result.data
                 }
                 is Result.Fail -> {
+                    _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
-
+                    _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
+                    _status.value = LoadApiStatus.ERROR
                     null
                 }
             }

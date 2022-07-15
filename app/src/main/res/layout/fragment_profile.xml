@@ -130,8 +130,10 @@
             android:id="@+id/text_profile_introduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="我發布的食譜"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="我的介紹"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_profile_fans" />
@@ -158,19 +160,34 @@
 
         <!--        </androidx.viewpager.widget.ViewPager>-->
 
+        <TextView
+            android:id="@+id/text_profile_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:letterSpacing=".5"
+
+            android:gravity="center"
+            android:textSize="18dp"
+            android:text="我發布的食譜"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_profile"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:background="#eeeeee"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_title"
             tools:listitem="@layout/item_profile_creation" />
 
 

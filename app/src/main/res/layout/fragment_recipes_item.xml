@@ -3,6 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zongmin.cook.recipes.item.RecipesItemViewModel" />
+        <import type="android.view.View" />
+        <import type="com.zongmin.cook.network.LoadApiStatus"/>
+    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +42,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view_recipes_loading_news"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+
+            app:lottie_rawRes="@raw/cooking"
+            android:visibility="gone"
+            app:lottie_speed="3"
+            app:setupApiStatusForLottie="@{viewModel.status}" />
+<!--        android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"-->
         <ImageView
             android:id="@+id/image_recipes_null"
             android:layout_width="200dp"

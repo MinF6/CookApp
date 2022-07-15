@@ -68,11 +68,11 @@ class RecipesFragment : Fragment() {
 
 
 
-        binding.buttonNavNew.setOnClickListener {
-//                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
-            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(null))
-//            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(nullRecipes))
-        }
+//        binding.buttonNavNew.setOnClickListener {
+////                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
+//            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(null))
+////            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(nullRecipes))
+//        }
 
 
         //傳值

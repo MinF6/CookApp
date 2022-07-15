@@ -34,6 +34,7 @@ class PlanFragment : Fragment() {
 
 
         viewModel.getPlanResult()
+        binding.viewModel = viewModel
 
 //        binding.calendarView.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
 //

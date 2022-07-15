@@ -16,6 +16,7 @@ import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
 import com.zongmin.cook.login.UserManager
+import com.zongmin.cook.network.LoadApiStatus
 import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import com.zongmin.viewpagercards.CardPagerAdapter
@@ -47,13 +48,16 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         mCardAdapter = CardPagerAdapter(viewModel,recipesViewModel, CardPagerAdapter.OnClickListener {
 
         })
-            Log.d("hank1", "現在的type是 -> $recipesType")
+//            Log.d("hank1", "現在的type是 -> $recipesType")
 
+        binding.viewModel = viewModel
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
 
             mCardAdapter!!.remakeData()
             if(it != null) {
+
+//                viewModel._status.value = LoadApiStatus.DONE
                 binding.imageRecipesNull.visibility = View.GONE
                 for (i in it) {
 //                Log.d("hank1", "我想看迴圈 ->${i}")

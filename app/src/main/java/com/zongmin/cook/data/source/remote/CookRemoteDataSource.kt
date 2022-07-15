@@ -162,6 +162,7 @@ object CookRemoteDataSource : CookDataSource {
                                         list.add(recipes)
                                         count--
                                         if (count == 0) {
+                                            Log.d("hank1","成功查到東西")
                                             continuation.resume(Result.Success(list))
                                         }
                                     }
@@ -169,6 +170,7 @@ object CookRemoteDataSource : CookDataSource {
                         }
                     } else {
                         task.exception?.let {
+                            Log.d("hank1","失敗")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }

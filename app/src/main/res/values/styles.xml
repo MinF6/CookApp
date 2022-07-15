@@ -31,4 +31,10 @@
         <item name="android:colorForeground">#777777
         </item>
     </style>
+
+    <style name="calenderViewCustom" parent="Theme.AppCompat">
+
+        <item name="colorAccent">#ff9933</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
 </resources>

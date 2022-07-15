@@ -10,30 +10,36 @@ xmlns:tools="http://schemas.android.com/tools">
     android:layout_height="match_parent"
     tools:context=".recipes.RecipesFragment">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs_recipes"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="#3f3a3a"
+        app:tabSelectedTextColor="#3f3a3a"
+        app:tabTextColor="#888888">
+
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_recipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/edittext_recipes_search"
+        app:layout_constraintBottom_toTopOf="@+id/button_recipes_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/button_reicpes_search">
 
         <!--        app:layout_constraintBottom_toTopOf="@+id/radioGroup_recipes"-->
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_recipes"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:tabIndicatorColor="#3f3a3a"
-            app:tabSelectedTextColor="#3f3a3a"
-            app:tabTextColor="#888888">
-
-        </com.google.android.material.tabs.TabLayout>
 
     </androidx.viewpager.widget.ViewPager>
+
+
+
 
     <EditText
 
@@ -42,6 +48,8 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_height="wrap_content"
         android:background="@drawable/bg_corner_search"
         android:textSize="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:hint="@string/recipes_search"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/button_reicpes_search"
@@ -54,10 +62,10 @@ xmlns:tools="http://schemas.android.com/tools">
         android:id="@+id/button_reicpes_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="搜尋"
-
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_nav_new"
+
+        android:text="搜尋"
+        app:layout_constraintBottom_toBottomOf="@+id/button_recipes_clear"
         app:layout_constraintEnd_toStartOf="@+id/button_recipes_clear" />
 
     <Button
@@ -65,17 +73,17 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="清除條件"
-        app:layout_constraintBottom_toTopOf="@+id/button_nav_new"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs_recipes" />
 
 
-    <Button
-        android:id="@+id/button_nav_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="新增食譜"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/button_nav_new"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="新增食譜"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 <!--    -->
 
     <Button
@@ -85,7 +93,8 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_marginEnd="8dp"
         android:text="06/22(三)"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_nav_new" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <RadioGroup
         android:id="@+id/radioGroup_recipes"
