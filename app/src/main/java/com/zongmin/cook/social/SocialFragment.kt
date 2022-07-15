@@ -31,7 +31,7 @@ class SocialFragment : Fragment() {
 
         val binding = FragmentSocialBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.getRecipesResult()
+//        viewModel.getRecipesResult()
 
         val adapter = SocialAdapter(SocialAdapter.OnClickListener{
             Log.d("hank1","我點到的item是 -> $it")

@@ -31,28 +31,28 @@ class SocialViewModel(
         get() = _navigateToDetail
 
 
-    fun getRecipesResult() {
-        coroutineScope.launch {
-            val result = cookRepository.getRecipes()
-            _recipes.value = when (result) {
-                is Result.Success -> {
-                    result.data
-                }
-                is Result.Fail -> {
-                    null
-                }
-                is Result.Error -> {
-
-                    null
-                }
-                else -> {
-
-                    null
-                }
-            }
-//            Log.d("hank1","show recipes => ${recipes.value}")
-        }
-    }
+//    fun getRecipesResult() {
+//        coroutineScope.launch {
+//            val result = cookRepository.getRecipes()
+//            _recipes.value = when (result) {
+//                is Result.Success -> {
+//                    result.data
+//                }
+//                is Result.Fail -> {
+//                    null
+//                }
+//                is Result.Error -> {
+//
+//                    null
+//                }
+//                else -> {
+//
+//                    null
+//                }
+//            }
+////            Log.d("hank1","show recipes => ${recipes.value}")
+//        }
+//    }
 
     fun navigateToDetail(recipes: Recipes) {
         _navigateToDetail.value = recipes

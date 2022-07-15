@@ -14,13 +14,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.zongmin.cook.data.Result
+import com.zongmin.cook.login.UserManager
 
 class RecipesItemViewModel(
     private val cookRepository: CookRepository,
     recipesType: RecipesTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
-    var _recipes = MutableLiveData<List<Recipes>>()
+    private var _recipes = MutableLiveData<List<Recipes>>()
 
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
@@ -36,61 +37,68 @@ class RecipesItemViewModel(
         get() = _plan
 
 
-//    private val _passKey = MutableLiveData<String>()
-//
-//    val passKey: LiveData<String>
-//        get() = _passKey
-
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     //        val type = recipesType.value
     private var key: String = ""
 
     init {
-        getRecipesResult(recipesType.value)
-//        getRecipesResult()
-//        getRecipesResult( null)
-//        Log.d("hank1", "看一下拿到的recipesType -> ${recipesType}")
-//        Log.d("hank1", "看一下拿到的recipesType.value -> ${recipesType.value}")
-//        Log.d("hank1", "看一下拿到的recipesType.ordinal -> ${recipesType.ordinal}")
-//        Log.d("hank1", "看一下拿到的recipesType.name -> ${recipesType.name}")
-//        Log.d("hank1", "---------------------------------------------------------")
+        getRecipesResult(UserManager.user.collect, recipesType.value)
+        Log.d("hank1","查看在RecipesItemViewModel啟動時，UserManager就位沒 -> ${UserManager.user}")
+//        getCollectRecipesResult(UserManager.user.collect, recipesType.value)
 
     }
+//    getCollectRecipes
+
+//    private fun getCollectRecipesResult(collect: List<String>, type: String) {
+//        coroutineScope.launch {
+//            var result: Result<List<Recipes>>? = null
+//            if(type == "全部"){
+//                result = cookRepository.getCollectRecipes(collect)
+//            }else{
+//                result = cookRepository.getCategoryRecipes(collect,type)
+//            }
+//
+//
+//
+//            _recipes.value = when (result) {
+//                is Result.Success -> {
+//                    result.data
+//                }
+//                is Result.Fail -> {
+//                    null
+//                }
+//                is Result.Error -> {
+//                    null
+//                }
+//                else -> {
+//                    null
+//                }
+//            }
+//        }
+//    }
 
 
-    private fun getRecipesResult(type: String) {
-//    fun getRecipesResult() {
-//        Log.d("hank1", "現在的type到底是啥 -> $type")
-//        Log.d("hank1", "現在的key到底是啥 -> $key")
+
+
+    private fun getRecipesResult(collect: List<String>, type: String) {
         coroutineScope.launch {
             var result: Result<List<Recipes>>? = null
-//            Log.d("hank1", "現在的type是 -> $type 現在的key是 -> $key")
             if (key == "") {
                 if (type == "全部") {
-                    result = cookRepository.getRecipes()
-//                    Log.d("hank1", "進了1的result為 -> $result")
+                    result = cookRepository.getRecipes(collect)
                 } else {
-                    result = cookRepository.getCategoryRecipes(type)
-//                    result = cookRepository.getCategoryRecipes("蔬菜")
-//                    Log.d("hank1", "進了2的result為 -> $result")
+                    result = cookRepository.getCategoryRecipes(collect, type)
                 }
             } else {
                 if (type == "全部") {
-                    result = key?.let { cookRepository.getKeywordRecipes(it) }
-//                    Log.d("hank1", "進了3的result為 -> $result")
+                    result = key?.let { cookRepository.getKeywordRecipes(collect,it) }
                 } else {
-                    result = key?.let { cookRepository.getCompoundRecipes(type, it) }
-//                    result = key?.let { cookRepository.getCompoundRecipes("蔬菜", it) }
-//                    Log.d("hank1", "進了4的result為 -> $result")
+                    result = key?.let { cookRepository.getCompoundRecipes(collect, type, it) }
                 }
-
             }
-
             _recipes.value = when (result) {
                 is Result.Success -> {
                     result.data
@@ -99,11 +107,9 @@ class RecipesItemViewModel(
                     null
                 }
                 is Result.Error -> {
-
                     null
                 }
                 else -> {
-
                     null
                 }
             }
@@ -129,7 +135,7 @@ class RecipesItemViewModel(
 
     fun setRecipesKey(type: String, key: String) {
         this.key = key
-        getRecipesResult(type)
+        getRecipesResult(UserManager.user.collect, type)
     }
 
     fun setPlan(

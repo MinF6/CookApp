@@ -1,34 +1,38 @@
 package com.zongmin.cook.data.source
 
-import android.util.Log
 import com.zongmin.cook.data.*
 
 class DefaultCookRepository(
     private val cookRemoteDataSource: CookDataSource,
 ) : CookRepository {
-    override suspend fun getRecipes(): Result<List<Recipes>> {
+    override suspend fun getRecipes(collect: List<String>): Result<List<Recipes>> {
 
-        return cookRemoteDataSource.getRecipes()
+        return cookRemoteDataSource.getRecipes(collect)
     }
 
-    override suspend fun getCategoryRecipes(type: String): Result<List<Recipes>> {
+    override suspend fun getCategoryRecipes(collect: List<String>, type: String): Result<List<Recipes>> {
 
-        return cookRemoteDataSource.getCategoryRecipes(type)
+        return cookRemoteDataSource.getCategoryRecipes(collect, type)
     }
 
-    override suspend fun getCompoundRecipes(type: String, key: String): Result<List<Recipes>> {
+    override suspend fun getCompoundRecipes(collect: List<String>, type: String, key: String): Result<List<Recipes>> {
 
-        return cookRemoteDataSource.getCompoundRecipes(type, key)
+        return cookRemoteDataSource.getCompoundRecipes(collect, type, key)
     }
 
-    override suspend fun getKeywordRecipes(key: String): Result<List<Recipes>> {
+    override suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipes>> {
 
-        return cookRemoteDataSource.getKeywordRecipes(key)
+        return cookRemoteDataSource.getKeywordRecipes(collect, key)
     }
 
-    override suspend fun getCollectRecipes(userId: String): Result<List<Recipes>> {
+    override suspend fun getCreationRecipes(userId: String): Result<List<Recipes>> {
 
-        return cookRemoteDataSource.getCollectRecipes(userId)
+        return cookRemoteDataSource.getCreationRecipes(userId)
+    }
+
+    override suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipes>> {
+
+        return cookRemoteDataSource.getCollectRecipes(collect)
     }
 
     override suspend fun getPlan(): Result<List<Plan>> {

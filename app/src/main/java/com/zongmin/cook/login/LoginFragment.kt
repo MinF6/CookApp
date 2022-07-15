@@ -2,6 +2,8 @@ package com.zongmin.cook.login
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +65,12 @@ open class LoginFragment : Fragment() {
 //
 ////            findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
 //        }
+
+//        binding.buttonLoginTest.setBackgroundColor(0xFFFFFF)
+//        binding.buttonLoginTest.text = "使用Google登入"
+
+        binding.textLoginPrivacy.movementMethod = LinkMovementMethod.getInstance();
+
         viewModel.loginSuccess.observe(viewLifecycleOwner){
             if(it){
                 Toast.makeText(context, "登入成功", Toast.LENGTH_LONG).show()
@@ -71,14 +79,24 @@ open class LoginFragment : Fragment() {
             }
 
         }
+        viewModel.existedUser.observe(viewLifecycleOwner){
+
+            UserManager.user = it
+            Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
+        }
 
 //        binding.signInButton.getChildAt(0)
-        setGooglePlusButtonText(binding.signInButton,"用 Google 登入")
-        binding.signInButton.setOnClickListener {
+//        setGooglePlusButtonText(binding.signInButton,"用 Google 登入")
+//        binding.signInButton.setOnClickListener {
+//            signInGoogle()
+//        }
+
+        binding.buttonLogin.setOnClickListener {
             signInGoogle()
         }
 
         viewModel.navigateToRecipes.observe(viewLifecycleOwner){
+            Log.d("hank1","導航到食譜頁面")
             findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
 
         }

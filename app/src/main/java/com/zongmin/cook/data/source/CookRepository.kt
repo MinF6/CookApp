@@ -5,16 +5,18 @@ import com.zongmin.cook.data.*
 
 interface CookRepository {
 
-    suspend fun getRecipes(): Result<List<Recipes>>
+    suspend fun getRecipes(collect: List<String>): Result<List<Recipes>>
 
-    suspend fun getCategoryRecipes(type: String): Result<List<Recipes>>
+    suspend fun getCategoryRecipes(collect: List<String>, type: String): Result<List<Recipes>>
 
-    suspend fun getCompoundRecipes(type: String, key: String): Result<List<Recipes>>
+    suspend fun getCompoundRecipes(collect: List<String>, type: String, key: String): Result<List<Recipes>>
 
-    suspend fun getKeywordRecipes(key: String): Result<List<Recipes>>
+    suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipes>>
 
-    suspend fun getCollectRecipes(userId: String): Result<List<Recipes>>
+    suspend fun getCreationRecipes(userId: String): Result<List<Recipes>>
 //    suspend fun getIngredient(): Result<List<Ingredient>>
+
+    suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipes>>
 
 
     suspend fun getPlan(): Result<List<Plan>>

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.zongmin.cook.NavigationDirections
+import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
 import com.zongmin.cook.login.UserManager
@@ -46,15 +47,14 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         mCardAdapter = CardPagerAdapter(viewModel,recipesViewModel, CardPagerAdapter.OnClickListener {
 
         })
-
-
-//        Log.d("hank1","我想看登入的人的id -> ${UserManager.user.id}")
-//        Log.d("hank1","我想看登入的人的email -> ${UserManager.user.email}")
+            Log.d("hank1", "現在的type是 -> $recipesType")
 
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
-//            Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
+            Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
+
             mCardAdapter!!.remakeData()
             if(it != null) {
+                binding.imageRecipesNull.visibility = View.GONE
                 for (i in it) {
 //                Log.d("hank1", "我想看迴圈 ->${i}")
                     mCardAdapter!!.addCardItem(i)
@@ -68,16 +68,12 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 //                mCardAdapter!!.notifyDataSetChanged()
 
             }else{
-
+                binding.imageRecipesNull.visibility = View.VISIBLE
             Log.d("hank1", "他是null，不給進")
+                //可以顯示快去收藏的圖片
+
             }
 
-
-//            mCardShadowTransformer = ShadowTransformer(mViewPager!!, mCardAdapter!!)
-//            mCardShadowTransformer!!.enableScaling(true)
-//            mViewPager!!.adapter = mCardAdapter
-//            mViewPager!!.setPageTransformer(false, mCardShadowTransformer)
-//            mViewPager!!.offscreenPageLimit = 3
 
         })
 
