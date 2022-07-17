@@ -40,7 +40,7 @@
             <ImageView
                 android:id="@+id/image_recipes_item"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="200sp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/text_recipes_item_category"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="標題"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
 
                 app:layout_constraintBottom_toTopOf="@+id/button_view_pager_add"

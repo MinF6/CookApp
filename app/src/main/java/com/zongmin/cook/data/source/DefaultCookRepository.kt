@@ -35,19 +35,29 @@ class DefaultCookRepository(
         return cookRemoteDataSource.getCollectRecipes(collect)
     }
 
-    override suspend fun getPlan(): Result<List<Plan>> {
+    override suspend fun getPublicRecipes(): Result<List<Recipes>> {
 
-        return cookRemoteDataSource.getPlan()
+        return cookRemoteDataSource.getPublicRecipes()
     }
 
-    override suspend fun getManagement(): Result<List<Management>> {
+    override suspend fun getPlan(userId: String, time: Long): Result<List<Plan>> {
 
-        return cookRemoteDataSource.getManagement()
+        return cookRemoteDataSource.getPlan(userId, time)
+    }
+
+    override suspend fun getManagement(userId: String): Result<List<Management>> {
+
+        return cookRemoteDataSource.getManagement(userId)
     }
 
     override suspend fun getUser(id: String): Result<User> {
 
         return cookRemoteDataSource.getUser(id)
+    }
+
+    override suspend fun getSocialUser(userList: List<String>): Result<List<User>> {
+
+        return cookRemoteDataSource.getSocialUser(userList)
     }
 
     override suspend fun createRecipes(

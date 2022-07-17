@@ -149,6 +149,7 @@
                     android:id="@+id/switch_detail_public"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="公開食譜"
                     android:theme="@style/publicSwitch"
                     app:layout_constraintEnd_toEndOf="@+id/button_detail_to_edit"

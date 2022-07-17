@@ -38,7 +38,7 @@ class DetailRecipesFragment : Fragment() {
         binding.textDetailTitle.text = data.name
 
         binding.imageDetailBack.setOnClickListener {
-//            this.findNavController().navigateUp()
+            this.findNavController().navigateUp()
         }
 
         //食材adapter

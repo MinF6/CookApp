@@ -13,6 +13,6 @@ data class Management(
     val belong: String = " ",
     val quantity: String = " ",
     val unit: String = " ",
-    val time: Date? = null
+    val time: Long = 0L
 
 ) : Parcelable

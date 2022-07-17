@@ -82,7 +82,7 @@ open class LoginFragment : Fragment() {
         viewModel.existedUser.observe(viewLifecycleOwner){
 
             UserManager.user = it
-            Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
+//            Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
         }
 
 //        binding.signInButton.getChildAt(0)
@@ -96,7 +96,7 @@ open class LoginFragment : Fragment() {
         }
 
         viewModel.navigateToRecipes.observe(viewLifecycleOwner){
-            Log.d("hank1","導航到食譜頁面")
+//            Log.d("hank1","導航到食譜頁面")
             findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
 
         }

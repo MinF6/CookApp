@@ -18,6 +18,7 @@
                 android:id="@+id/item_edittext_step_depiction"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:theme="@style/editTextTheme"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -44,6 +45,7 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 android:scaleType="centerCrop"
+
                 app:shapeAppearanceOverlay="@style/imageViewCorner"
                 android:src="@drawable/stepimg"/>
 

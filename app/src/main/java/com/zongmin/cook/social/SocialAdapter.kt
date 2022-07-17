@@ -6,19 +6,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.zongmin.cook.bindImage
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.ItemSocialBinding
 
 
-class SocialAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
+class SocialAdapter(val onClickListener: OnClickListener, val viewModel: SocialViewModel) : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
 
 
     class SocialViewHolder(private var binding: ItemSocialBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipes: Recipes) {
+        fun bind(recipes: Recipes, viewModel: SocialViewModel) {
             binding.recipes = recipes
+//            binding.viewModel = viewModel
+            bindImage(binding.imageSocialUser, viewModel.userMap.value?.get(recipes.author)?.headShot)
+//            Log.d("hank1","檢查想拿到的User是 -> ${recipes.author}")
+//            Log.d("hank1","檢查想拿到的User大頭貼是 -> ${viewModel.userMap.value?.get(recipes.author)?.headShot}")
+//            if()
+            //收藏的判斷
+
             binding.textSocialName.text = recipes.name
-            binding.textSocialUser.text = "Hank"
+            binding.textSocialUser.text = viewModel.userMap.value?.get(recipes.author)?.name
             binding.viewSocialCollect.setOnClickListener {
                 Log.d("hank1","想收藏的這個是 -> $recipes")
             }
@@ -45,7 +53,7 @@ class SocialAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes,
         when (holder) {
             is SocialViewHolder -> {
                 val selectedItem = getItem(position) as Recipes
-                holder.bind(selectedItem)
+                holder.bind(selectedItem,viewModel)
                 holder.itemView.setOnClickListener {
                     onClickListener.onClick(getItem(position))
                 }

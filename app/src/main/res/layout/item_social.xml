@@ -8,6 +8,9 @@
         <variable
             name="recipes"
             type="com.zongmin.cook.data.Recipes" />
+        <variable
+            name="viewModel"
+            type="com.zongmin.cook.social.SocialViewModel" />
 
     </data>
 
@@ -23,10 +26,11 @@
             android:layout_marginStart="8dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/imageViewRound"
-            imageUrl="@{`https://img-global.cpcdn.com/users/bf4baf131b3d9154/108x108cq50/avatar.jpg`}"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_baseline_person_24"/>
+<!--        imageUrl="@{`https://img-global.cpcdn.com/users/bf4baf131b3d9154/108x108cq50/avatar.jpg`}"-->
 <!--        android:layout_margin="16dp"-->
 
 <!--        <ImageView-->
@@ -97,6 +101,7 @@
             android:id="@+id/view_social_collect"
             android:layout_width="24dp"
             android:layout_height="24dp"
+
             android:background="@drawable/ic_baseline_bookmark_24"
             app:layout_constraintBottom_toBottomOf="@+id/text_social_name"
             app:layout_constraintEnd_toEndOf="@+id/image_social_food"

@@ -59,6 +59,21 @@ class ProfileFragment : Fragment() {
             adapter.submitList(it)
         })
 
+        binding.textProfileFans.setOnClickListener {
+
+            viewModel.user.value?.let { it1 -> viewModel.navigateToFollow(it1.fans) }
+
+        }
+
+        binding.textProfileFollows.setOnClickListener {
+            viewModel.user.value?.let { it1 -> viewModel.navigateToFollow(it1.follows) }
+        }
+
+        viewModel.navigateToFollow.observe(viewLifecycleOwner){
+
+            findNavController().navigate(NavigationDirections.navigateToFollow())
+        }
+
         viewModel.navigateToDetail.observe(viewLifecycleOwner){
             if(it != null){
                 findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))

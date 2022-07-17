@@ -22,11 +22,12 @@
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/calenderViewCustom"
+
             android:selectedWeekBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+<!--        android:theme="@style/calenderViewCustom"-->
 
 
 
@@ -54,10 +55,10 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/cooking"
             app:lottie_speed="3"
-            android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.pf == true ? View.VISIBLE : View.GONE}"
             app:setupApiStatusForLottie="@{viewModel.status}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+<!--    android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"-->
 
 </layout>

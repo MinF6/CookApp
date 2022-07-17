@@ -20,7 +20,7 @@ class ProfileViewModel(
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    var _user = MutableLiveData<User>()
+    private var _user = MutableLiveData<User>()
 
     val user: LiveData<User>
         get() = _user
@@ -34,6 +34,11 @@ class ProfileViewModel(
 
     val navigateToDetail: LiveData<Recipes>
         get() = _navigateToDetail
+
+    private val _navigateToFollow = MutableLiveData<List<String>>()
+
+    val navigateToFollow: LiveData<List<String>>
+        get() = _navigateToFollow
 
 
     fun getUserResult() {
@@ -58,7 +63,7 @@ class ProfileViewModel(
                     null
                 }
             }
-            //到時候要改成針對ID的query
+
             _recipes.value = when (result2) {
                 is Result.Success -> {
                     result2.data
@@ -93,7 +98,13 @@ class ProfileViewModel(
     }
 
 
+    fun navigateToFollow(user: List<String>) {
+        _navigateToFollow.value = user
+    }
 
+    fun onFollowNavigated() {
+        _navigateToFollow.value = null
+    }
 
 
 

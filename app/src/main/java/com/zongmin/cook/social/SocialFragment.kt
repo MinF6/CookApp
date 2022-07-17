@@ -31,19 +31,37 @@ class SocialFragment : Fragment() {
 
         val binding = FragmentSocialBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-//        viewModel.getRecipesResult()
+        viewModel.getPublicRecipesResult()
+
+        binding.viewModel = viewModel
 
         val adapter = SocialAdapter(SocialAdapter.OnClickListener{
             Log.d("hank1","我點到的item是 -> $it")
             viewModel.navigateToDetail(it)
-        })
+        },viewModel)
 
         binding.recyclerviewSocial.adapter = adapter
 
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "觀察一下拿到的 => $it")
-            adapter.submitList(it)
+//            Log.d("hank1", "觀察一下拿到的 => $it")
+            viewModel.getUserList(it)
+
+//            adapter.submitList(it)
         })
+
+        viewModel.userList.observe(viewLifecycleOwner){
+//            Log.d("hank1","看看查到的User資料庫的列表 -> $it")
+            viewModel.setUserMap(it)
+
+        }
+
+        viewModel.userMap.observe(viewLifecycleOwner){
+            Log.d("hank1", "觀察一下拿到的 => $it")
+
+            adapter.submitList(viewModel.recipes.value)
+
+
+        }
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner){
             findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))

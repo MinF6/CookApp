@@ -18,25 +18,34 @@ import java.util.*
 class ManagementViewModel(
     private val cookRepository: CookRepository
 ) : ViewModel() {
-    var _management = MutableLiveData<List<Management>>()
+    private var _management = MutableLiveData<List<Management>>()
 
     val management: LiveData<List<Management>>
         get() = _management
+
+    private var _quantity = MutableLiveData<Int>()
+
+    val quantity: LiveData<Int>
+        get() = _quantity
+
+
 
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    fun getManagementResult() {
+    fun getManagementResult(userId: String) {
 //        Log.d("hank1","check1")
 
         coroutineScope.launch {
-            val result = cookRepository.getManagement()
+            val result = cookRepository.getManagement(userId)
 
 //            Log.d("hank1","check2")
             _management.value = when (result) {
                 is Result.Success -> {
+                    //直接用size會有問題，之後須改成觀察指定欄位判斷
+                    _quantity.value = result.data.size
                     result.data
                 }
                 is Result.Fail -> {
@@ -59,11 +68,18 @@ class ManagementViewModel(
         }
     }
 
+    fun addQuantity(){
+        _quantity.value = _quantity.value?.plus(1)
+    }
+
+    fun minusQuantity(){
+        _quantity.value = _quantity.value?.minus(1)
+    }
 
 
 
     var showTime = System.currentTimeMillis()
-    val dayTime = 24 * 60 * 60 * 1000L
+    private val dayTime = 24 * 60 * 60 * 1000L
 
     //可考慮加星期幾
     fun getToday(): String {

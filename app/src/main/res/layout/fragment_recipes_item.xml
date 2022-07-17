@@ -53,7 +53,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-
             app:lottie_rawRes="@raw/cooking"
             android:visibility="gone"
             app:lottie_speed="3"
@@ -61,9 +60,9 @@
 <!--        android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"-->
         <ImageView
             android:id="@+id/image_recipes_null"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@drawable/loading"
+            android:layout_width="200sp"
+            android:layout_height="300sp"
+            android:background="@drawable/test"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

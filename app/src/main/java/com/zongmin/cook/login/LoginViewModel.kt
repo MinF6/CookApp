@@ -77,11 +77,11 @@ class LoginViewModel(
             }
 //            user.id = googleSignInAccount.id.toString()
 
-            Log.d("hank1", "user.name = ${user.name}")
+//            Log.d("hank1", "user.name = ${user.name}")
             user.email = googleSignInAccount.email.toString()
-            Log.d("hank1", "user.email = ${user.email}")
+//            Log.d("hank1", "user.email = ${user.email}")
             user.headShot = googleSignInAccount.photoUrl.toString()
-            Log.d("hank1", "user.pictureUri = ${user.headShot}")
+//            Log.d("hank1", "user.pictureUri = ${user.headShot}")
 
 
             _loginSuccess.value = true
@@ -101,7 +101,7 @@ class LoginViewModel(
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("hank1", "signInWithCredential:success")
+//                    Log.d("hank1", "signInWithCredential:success")
 
                     val firebaseCurrentUser = firebaseAuth.currentUser
                     val firebaseTokenResult = firebaseCurrentUser?.getIdToken(false)?.result
@@ -148,7 +148,7 @@ class LoginViewModel(
                     if (task.result.additionalUserInfo?.isNewUser == true) {
                         UserManager.user = user
 
-                        Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
+//                        Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
                         _navigateToRecipes.value = true
 //                        Log.d("hank1", "task.result.additionalUserInfo?.isNewUser == true")
 //
@@ -258,7 +258,7 @@ class LoginViewModel(
                     null
                 }
             }
-            Log.d("hank1","查詢使用者的結果 -> $result")
+//            Log.d("hank1","查詢使用者的結果 -> $result")
             UserManager.user = existedUser.value!!
             _navigateToRecipes.value = true
 //            _navigateToRecipes.value = _navigateToRecipes.value

@@ -1,5 +1,6 @@
 package com.zongmin.cook.management
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.zongmin.cook.databinding.FragmentManagementBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 
 
 class ManagementFragment : Fragment() {
@@ -27,19 +29,31 @@ class ManagementFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentManagementBinding.inflate(inflater, container, false)
-
-        val adapter = ManagementAdapter()
+        binding.lifecycleOwner = viewLifecycleOwner
+        val adapter = ManagementAdapter(viewModel)
 
         binding.recyclerviewManagement.adapter = adapter
 
-        viewModel.getManagementResult()
+        viewModel.getManagementResult(UserManager.user.id)
 
         viewModel.management.observe(viewLifecycleOwner, Observer {
             Log.d("hank1","看一下拿到的食材 -> ${it}")
             binding.textManagementNeed.text = "需購食材" + it.size.toString() + "項"
             adapter.submitList(it)
-
         })
+
+        viewModel.quantity.observe(viewLifecycleOwner){
+            binding.textManagementNeed.text = "需購食材" + it + "項"
+            if(it == 0){
+                binding.textManagementNeed.setTextColor(Color.rgb(0, 170, 0))
+            }else{
+                binding.textManagementNeed.setTextColor(Color.rgb(255, 0, 0))
+
+            }
+
+        }
+
+
 
 //        val day = 24 * 60 * 60 * 1000L
 //

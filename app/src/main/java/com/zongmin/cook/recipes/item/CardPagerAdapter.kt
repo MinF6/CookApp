@@ -14,7 +14,7 @@ import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.item.RecipesItemViewModel
 
 
-class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel: RecipesViewModel, val onClickListener: OnClickListener) :
+class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesViewModel: RecipesViewModel, val onClickListener: OnClickListener) :
     PagerAdapter() {
     private val mViews: MutableList<CardView?>
     private var mData: MutableList<Recipes>
@@ -113,6 +113,7 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel
         btn.setOnClickListener {
 //            Log.d("hank1","點擊到這個item，這是 ->${item.name}")
 //            Log.d("hank1","點擊到這個item，這是 ->${item.id}")
+            Log.d("hank1","點擊到這個item，他的食材是 ->${item.ingredient}")
 //            Log.d("hank1","點擊到這個item，他隸屬於 ->${recipesViewModel.threeMeals.value}")
 //            Log.d("hank1","點擊到這個item，他設定的日期為 ->${recipesViewModel.date.value}")
             val threeMeals = recipesViewModel.threeMeals.value!!

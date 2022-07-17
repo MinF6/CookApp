@@ -18,13 +18,17 @@ interface CookRepository {
 
     suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipes>>
 
+    suspend fun getPublicRecipes(): Result<List<Recipes>>
 
-    suspend fun getPlan(): Result<List<Plan>>
+
+    suspend fun getPlan(userId: String, time: Long): Result<List<Plan>>
 
 
-    suspend fun getManagement(): Result<List<Management>>
+    suspend fun getManagement(userId: String): Result<List<Management>>
 
     suspend fun getUser(id: String): Result<User>
+
+    suspend fun getSocialUser(userList: List<String>): Result<List<User>>
 
     suspend fun createRecipes(summary: Summary,ingredient: List<Ingredient>,step: List<Step>): Result<Boolean>
 

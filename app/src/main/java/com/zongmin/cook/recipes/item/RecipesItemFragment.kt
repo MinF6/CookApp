@@ -81,6 +81,11 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
 
         })
 
+        viewModel.navigateToPlan.observe(viewLifecycleOwner){
+            findNavController().navigate(NavigationDirections.navigateToPlanFragment())
+            Log.d("hank1", "觸發導航到plan")
+        }
+
 
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {

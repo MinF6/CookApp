@@ -41,7 +41,7 @@ class DialogPlanAdapter(val viewModel: DialogPlanViewModel) : ListAdapter<Dialog
             binding.buttonDialogCancel.setOnClickListener {
                 Log.d("hank1","點擊了${plan}的取消紐")
                 Log.d("hank1","點擊了${plan.id}的取消紐")
-                viewModel.deletePlan(plan.id)
+//                viewModel.deletePlan(plan.id)
 
             }
 

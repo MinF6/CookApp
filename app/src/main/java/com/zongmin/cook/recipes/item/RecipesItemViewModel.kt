@@ -32,6 +32,11 @@ class RecipesItemViewModel(
     val navigateToDetail: LiveData<Recipes?>
         get() = _navigateToDetail
 
+    private val _navigateToPlan = MutableLiveData<Boolean>()
+
+    val navigateToPlan: LiveData<Boolean>
+        get() = _navigateToPlan
+
     private var _plan = MutableLiveData<Plan>()
 
     val plan: LiveData<Plan>
@@ -59,10 +64,9 @@ class RecipesItemViewModel(
     }
 
 
-
     private fun getRecipesResult(collect: List<String>, type: String) {
         coroutineScope.launch {
-            _status.value = LoadApiStatus.LOADING
+//            _status.value = LoadApiStatus.LOADING
 
             var result: Result<List<Recipes>>? = null
             if (key == "") {
@@ -73,21 +77,21 @@ class RecipesItemViewModel(
                 }
             } else {
                 if (type == "全部") {
-                    result = key?.let { cookRepository.getKeywordRecipes(collect,it) }
+                    result = key?.let { cookRepository.getKeywordRecipes(collect, it) }
                 } else {
                     result = key?.let { cookRepository.getCompoundRecipes(collect, type, it) }
                 }
             }
-            if(result == null){
-                Log.d("hank1","7777777777777")
+            if (result == null) {
+//                Log.d("hank1","7777777777777")
 //                _status.value = LoadApiStatus.ERROR
-            }else{
-                Log.d("hank1","88888888888888")
+            } else {
+//                Log.d("hank1","88888888888888")
             }
             _recipes.value = when (result) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
-                    Log.d("hank1","11111111111111")
+//                    Log.d("hank1","11111111111111")
                     result.data
 
                 }
@@ -103,25 +107,30 @@ class RecipesItemViewModel(
                 }
                 else -> {
                     _status.value = LoadApiStatus.ERROR
-                    Log.d("hank1","44444444444444")
+//                    Log.d("hank1","44444444444444")
                     null
                 }
             }
-            Log.d("hank1","查詢回來的內容 -> $result")
+//            Log.d("hank1","查詢回來的內容 -> $result")
         }
     }
 
-    fun createPlanResult(plan: Plan) {
+    private fun createPlanResult(plan: Plan) {
         coroutineScope.launch {
-            when (val result = cookRepository.createPlan(plan)) {
+            _navigateToPlan.value = when (val result = cookRepository.createPlan(plan)) {
                 is Result.Success -> {
+//                    _navigateToPlan.value = true
                     Log.d("hank1", "成功更新，看看result -> $result")
+                    result.data
                 }
                 is Result.Fail -> {
+                    null
                 }
                 is Result.Error -> {
+                    null
                 }
                 else -> {
+                    null
                 }
             }
         }
@@ -141,8 +150,16 @@ class RecipesItemViewModel(
         category: String,
         time: Long
     ) {
-        val newPlan = Plan("",threeMeals, PlanContent(foodId, image, name, category, time))
+        val newPlan = Plan(
+            "",
+            UserManager.user.id,
+            threeMeals,
+            time,
+//            PlanContent(foodId, image, name, category, time)
+            PlanContent(foodId, image, name, category)
+        )
         createPlanResult(newPlan)
+        _navigateToPlan.value = true
     }
 
 
