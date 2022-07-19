@@ -60,6 +60,11 @@ class DefaultCookRepository(
         return cookRemoteDataSource.getSocialUser(userList)
     }
 
+    override suspend fun getFollowList(userList: List<String>): Result<List<User>> {
+
+        return cookRemoteDataSource.getFollowList(userList)
+    }
+
     override suspend fun createRecipes(
         summary: Summary,
         ingredient: List<Ingredient>,

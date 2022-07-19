@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.zongmin.cook.R
+import androidx.fragment.app.viewModels
 import com.zongmin.cook.databinding.FragmentFollowBinding
-import com.zongmin.cook.edit.EditRecipesFragmentArgs
+import com.zongmin.cook.ext.getVmFactory
 
 
 class FollowFragment : Fragment() {
 
+    private val viewModel by viewModels<FollowViewModel> { getVmFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,20 @@ class FollowFragment : Fragment() {
 //            "我收到了資料 -> ${FollowFragmentArgs.fromBundle(requireArguments()).userList}"
 //        )
 //        val userList = FollowFragmentArgs.fromBundle(requireArguments()).userList
+
+        val adapter = FollowAdapter(FollowAdapter.OnClickListener{
+            Log.d("hank1","點到了 $it")
+        })
+
+
+        viewModel.user.observe(viewLifecycleOwner){
+
+            adapter.submitList(it)
+        }
+
+        binding.recyclerviewFollow.adapter = adapter
+
+
 
 
 

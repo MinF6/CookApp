@@ -36,7 +36,8 @@ class PlanAdapter(val viewModel: PlanViewModel) :
 
             binding.buttonPlanCancel.setOnClickListener {
                 Log.d("hank1", "看看這個item -> ${plan}")
-                viewModel.deletePlan(plan.id,viewModel.saveTime)
+//                viewModel.deletePlan(plan.id,viewModel.saveTime)
+                viewModel.deletePlan(plan.id,1658188800000)
             }
             binding.executePendingBindings()
         }

@@ -12,6 +12,7 @@
             android:id="@+id/item_edittext_ingredient_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:textSize="14dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:theme="@style/editTextTheme"
@@ -22,6 +23,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textSize="14dp"
             android:layout_marginTop="16dp"
             android:theme="@style/editTextTheme"
             android:hint="數量"
@@ -35,6 +37,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:theme="@style/editTextTheme"
+            android:textSize="14dp"
             android:hint="單位" />
 
         <ImageView

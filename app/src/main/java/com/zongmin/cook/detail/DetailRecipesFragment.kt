@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentDetailRecipesBinding
+import com.zongmin.cook.login.UserManager
 
 
 class DetailRecipesFragment : Fragment() {
@@ -40,7 +41,14 @@ class DetailRecipesFragment : Fragment() {
         binding.imageDetailBack.setOnClickListener {
             this.findNavController().navigateUp()
         }
+        if(UserManager.user.id == data.author){
+            binding.buttonDetailToEdit.visibility = View.VISIBLE
+            binding.switchDetailPublic.visibility = View.VISIBLE
+        }else{
+            binding.buttonDetailToEdit.visibility = View.GONE
+            binding.switchDetailPublic.visibility = View.GONE
 
+        }
         //食材adapter
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter

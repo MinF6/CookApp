@@ -71,9 +71,10 @@ class LoginViewModel(
 
             googleSignInAccount.idToken?.let { firebaseAuthWithGoogle(it) }
 
-            user.name = googleSignInAccount.givenName + "  "
+//            user.name = googleSignInAccount.givenName + " "
+            user.name = googleSignInAccount.givenName.toString()
             if(googleSignInAccount.familyName != null){
-                user.name += googleSignInAccount.familyName
+                user.name += " ${googleSignInAccount.familyName}"
             }
 //            user.id = googleSignInAccount.id.toString()
 

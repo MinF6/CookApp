@@ -519,6 +519,7 @@ object CookRemoteDataSource : CookDataSource {
             FirebaseFirestore.getInstance()
                 .collection(RECIPES)
                 .whereEqualTo("public", true)
+//                .orderBy("serving", Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -671,6 +672,29 @@ object CookRemoteDataSource : CookDataSource {
     }
 
     override suspend fun getSocialUser(userList: List<String>): Result<List<User>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection("User")
+                .whereIn("id", userList)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<User>()
+                        for (document in task.result!!) {
+                            val user = document.toObject(User::class.java)
+                            list.add(user)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                    }
+                }
+        }
+
+    override suspend fun getFollowList(userList: List<String>): Result<List<User>> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection("User")

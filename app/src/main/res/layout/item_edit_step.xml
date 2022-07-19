@@ -17,6 +17,7 @@
             <EditText
                 android:id="@+id/item_edittext_step_depiction"
                 android:layout_width="300dp"
+                android:textSize="14dp"
                 android:layout_height="wrap_content"
                 android:theme="@style/editTextTheme"
                 android:layout_marginStart="16dp"

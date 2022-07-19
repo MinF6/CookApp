@@ -1,8 +1,10 @@
 package com.zongmin.cook.social
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -24,11 +26,26 @@ class SocialAdapter(val onClickListener: OnClickListener, val viewModel: SocialV
 //            Log.d("hank1","檢查想拿到的User大頭貼是 -> ${viewModel.userMap.value?.get(recipes.author)?.headShot}")
 //            if()
             //收藏的判斷
-
+//            binding.textSocialLike.text = (0..100).random().toString()
+            binding.textSocialLike.text = recipes.like.size.toString()
             binding.textSocialName.text = recipes.name
             binding.textSocialUser.text = viewModel.userMap.value?.get(recipes.author)?.name
             binding.viewSocialCollect.setOnClickListener {
                 Log.d("hank1","想收藏的這個是 -> $recipes")
+//                binding.viewSocialCollect.setBackgroundColor(Color.rgb(255, 215, 0))
+                var a = it.background
+                a = DrawableCompat.wrap(a);
+                //the color is a direct color int and not a color resource
+                DrawableCompat.setTint(a, Color.rgb(255, 215, 0));
+                it.background = a;
+            }
+            binding.viewSocialAddLike.setOnClickListener {
+                binding.textSocialLike.text = ((binding.textSocialLike.text as String).toInt()+1).toString()
+                var b = binding.viewSocialLike.background
+                b = DrawableCompat.wrap(b);
+                //the color is a direct color int and not a color resource
+                DrawableCompat.setTint(b, Color.rgb(255, 215, 0));
+                binding.viewSocialLike.background = b;
             }
 
 

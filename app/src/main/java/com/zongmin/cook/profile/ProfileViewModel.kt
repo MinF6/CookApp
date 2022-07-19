@@ -8,6 +8,7 @@ import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.login.UserManager
+import com.zongmin.cook.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -40,26 +41,34 @@ class ProfileViewModel(
     val navigateToFollow: LiveData<List<String>>
         get() = _navigateToFollow
 
+    private val _status = MutableLiveData<LoadApiStatus>()
+
+    val status: LiveData<LoadApiStatus>
+        get() = _status
+
 
     fun getUserResult() {
         coroutineScope.launch {
+            _status.value = LoadApiStatus.LOADING
             val result = cookRepository.getUser(UserManager.user.id)
 //            val result2 = cookRepository.getRecipes()
             val result2 = cookRepository.getCreationRecipes(UserManager.user.id)
 
             _user.value = when (result) {
                 is Result.Success -> {
+                    _status.value = LoadApiStatus.DONE
                     result.data
                 }
                 is Result.Fail -> {
+                    _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
-
+                    _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
-
+                    _status.value = LoadApiStatus.ERROR
                     null
                 }
             }

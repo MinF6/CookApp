@@ -106,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/text_social_name"
             app:layout_constraintEnd_toEndOf="@+id/image_social_food"
             app:layout_constraintTop_toTopOf="@+id/text_social_name" />
-
+<!--        android:backgroundTint="#ffd700"-->
         <View
             android:id="@+id/view_social_like"
             android:layout_width="24dp"

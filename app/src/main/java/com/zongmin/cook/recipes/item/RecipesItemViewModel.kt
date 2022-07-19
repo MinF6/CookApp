@@ -1,6 +1,7 @@
 package com.zongmin.cook.recipes.item
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -159,6 +160,7 @@ class RecipesItemViewModel(
             PlanContent(foodId, image, name, category)
         )
         createPlanResult(newPlan)
+
         _navigateToPlan.value = true
     }
 

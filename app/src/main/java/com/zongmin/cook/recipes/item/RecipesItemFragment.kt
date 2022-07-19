@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -82,7 +83,8 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         })
 
         viewModel.navigateToPlan.observe(viewLifecycleOwner){
-            findNavController().navigate(NavigationDirections.navigateToPlanFragment())
+            Toast.makeText(context, "安排計畫成功", Toast.LENGTH_LONG).show()
+//            findNavController().navigate(NavigationDirections.navigateToPlanFragment())
             Log.d("hank1", "觸發導航到plan")
         }
 

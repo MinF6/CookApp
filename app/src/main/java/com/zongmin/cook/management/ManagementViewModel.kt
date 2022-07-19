@@ -23,7 +23,7 @@ class ManagementViewModel(
     val management: LiveData<List<Management>>
         get() = _management
 
-    private var _quantity = MutableLiveData<Int>()
+    var _quantity = MutableLiveData<Int>()
 
     val quantity: LiveData<Int>
         get() = _quantity

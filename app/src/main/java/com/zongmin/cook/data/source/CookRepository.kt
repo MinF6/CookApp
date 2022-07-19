@@ -30,6 +30,8 @@ interface CookRepository {
 
     suspend fun getSocialUser(userList: List<String>): Result<List<User>>
 
+    suspend fun getFollowList(userList: List<String>): Result<List<User>>
+
     suspend fun createRecipes(summary: Summary,ingredient: List<Ingredient>,step: List<Step>): Result<Boolean>
 
     suspend fun userSignIn(user: User): Result<Boolean>
