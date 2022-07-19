@@ -42,7 +42,7 @@ open class LoginFragment : Fragment() {
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("")
+            .requestIdToken("710335151502-96voej6nc0600b6ad5js1n0onb0fi82f.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
