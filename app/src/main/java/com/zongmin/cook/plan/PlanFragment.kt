@@ -111,11 +111,22 @@ class PlanFragment : Fragment() {
                 }
             }
 
-            Log.d("hank1", "這次計畫是 -> $dataList")
+//            Log.d("hank1", "這次計畫是 -> $dataList")
             adapter.submitList(dataList)
 
             }
         })
+
+        viewModel.deletePlanResult.observe(viewLifecycleOwner){
+//            viewModel.deleteManagement(it)
+            viewModel.getSpecifyManagementResult(it)
+        }
+
+        viewModel.management.observe(viewLifecycleOwner){
+            for(management in it){
+                viewModel.deleteManagement(management.id)
+            }
+        }
 
 
 

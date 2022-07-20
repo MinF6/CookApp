@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.zongmin.cook.data.Management
 import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.Result
@@ -33,6 +34,16 @@ class PlanViewModel(
 
     val plan: LiveData<List<Plan>>
         get() = _plan
+
+    private var _deletePlanResult = MutableLiveData<String>()
+
+    val deletePlanResult: LiveData<String>
+        get() = _deletePlanResult
+
+    private var _management = MutableLiveData<List<Management>>()
+
+    val management: LiveData<List<Management>>
+        get() = _management
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -85,7 +96,7 @@ class PlanViewModel(
             _status.value = LoadApiStatus.LOADING
 //            Log.d("hank1","狀態 -> ${status.value}")
             _pf.value = true
-            Log.d("hank1","我丟的時間是 -> ${time}")
+//            Log.d("hank1","我丟的時間是 -> ${time}")
 
             val result = cookRepository.getPlan(userId, time)
 //            Log.d("hank1","show result => ${result}")
@@ -121,17 +132,64 @@ class PlanViewModel(
 
     fun deletePlan(id: String, time: Long) {
         coroutineScope.launch {
-            when (val result = cookRepository.deletePlan(id)) {
+            _deletePlanResult.value = when (val result = cookRepository.deletePlan(id)) {
                 is Result.Success -> {
                     Log.d("hank1", "成功刪除，看看result -> $result")
                     getPlanResult(UserManager.user.id,time)
+                    result.data
                 }
                 is Result.Fail -> {
+                    null
                 }
                 is Result.Error -> {
+                    null
                 }
                 else -> {
+                    null
+                }
+            }
+        }
+    }
 
+    fun getSpecifyManagementResult(planId: String) {
+        coroutineScope.launch {
+            val result = cookRepository.getSpecifyManagement(planId)
+            _management.value = when (result) {
+                is Result.Success -> {
+                    result.data
+                }
+                is Result.Fail -> {
+                    null
+                }
+                is Result.Error -> {
+                    null
+                }
+                else -> {
+                    null
+                }
+            }
+            Log.d("hank1","show result => ${result}")
+//            Log.d("hank1","show recipes => ${}")
+        }
+    }
+
+
+    fun deleteManagement(id: String) {
+        coroutineScope.launch {
+            when (val result = cookRepository.deleteManagement(id)) {
+                is Result.Success -> {
+                    Log.d("hank1", "成功刪除，刪除了 -> $id")
+//                    getPlanResult(UserManager.user.id,time)
+//                    result.data
+                }
+                is Result.Fail -> {
+                    null
+                }
+                is Result.Error -> {
+                    null
+                }
+                else -> {
+                    null
                 }
             }
         }

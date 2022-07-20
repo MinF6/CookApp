@@ -625,12 +625,68 @@ object CookRemoteDataSource : CookDataSource {
 
 
     //食材管理
-    override suspend fun getManagement(userId: String): Result<List<Management>> =
+    override suspend fun getManagement(userId: String, time: Long): Result<List<Management>> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection("Management")
                 .whereEqualTo("userId", userId)
+                .whereEqualTo("time", time)
 //                .whereLessThan("time")
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Management>()
+                        for (document in task.result!!) {
+//                        Log.d("hank1", document.id + " => " + document.data)
+                            val management = document.toObject(Management::class.java)
+                            list.add(management)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                    }
+                }
+        }
+
+    override suspend fun getSpecifyManagement(planId: String): Result<List<Management>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection("Management")
+                .whereEqualTo("planId", planId)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<Management>()
+                        for (document in task.result!!) {
+//                        Log.d("hank1", document.id + " => " + document.data)
+                            val management = document.toObject(Management::class.java)
+                            list.add(management)
+                        }
+                        continuation.resume(Result.Success(list))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                    }
+                }
+        }
+
+    override suspend fun getPeriodManagement(
+        userId: String,
+        todayTime: Long,
+        scopeTime: Long
+    ): Result<List<Management>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection("Management")
+                .whereEqualTo("userId", userId)
+//                .whereGreaterThanOrEqualTo("time", todayTime)
+                .whereGreaterThan("time", todayTime - 10L)
+                .whereLessThan("time", scopeTime)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -844,7 +900,7 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
-    override suspend fun createPlan(plan: Plan): Result<Boolean> =
+    override suspend fun createPlan(plan: Plan): Result<String> =
         suspendCoroutine { continuation ->
             val recipe = FirebaseFirestore.getInstance().collection(PLAN)
             val document = recipe.document()
@@ -856,7 +912,7 @@ object CookRemoteDataSource : CookDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d("hank1", "新增成功區，我新增了 -> $plan")
-//                        continuation.resume(Result.Success(true))
+                        continuation.resume(Result.Success(plan.id))
                     } else {
                         task.exception?.let {
                             Log.d("hank1", "新增失敗")
@@ -868,7 +924,7 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
-    override suspend fun deletePlan(id: String): Result<Boolean> =
+    override suspend fun deletePlan(id: String): Result<String> =
         suspendCoroutine { continuation ->
 
             FirebaseFirestore.getInstance()
@@ -878,7 +934,7 @@ object CookRemoteDataSource : CookDataSource {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.d("hank1", "成功刪除")
-                        continuation.resume(Result.Success(true))
+                        continuation.resume(Result.Success(id))
                     } else {
                         task.exception?.let {
                             Log.d(

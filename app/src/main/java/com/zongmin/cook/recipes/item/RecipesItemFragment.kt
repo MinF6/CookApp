@@ -13,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.zongmin.cook.NavigationDirections
+import com.zongmin.cook.data.Management
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import com.zongmin.viewpagercards.CardPagerAdapter
@@ -44,13 +46,33 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         val recipesViewModel = ViewModelProvider(requireParentFragment()).get(RecipesViewModel::class.java)
         mViewPager = binding.viewPager
         mCardAdapter = CardPagerAdapter(viewModel,recipesViewModel, CardPagerAdapter.OnClickListener {
+//            Log.d("hank1","檢查cardItem是 -> $it")
+            viewModel.setPlan(recipesViewModel.threeMeals.value!!,it.name,it.id,it.mainImage,it.category,recipesViewModel.date.value!!,it)
 
         })
 //            Log.d("hank1", "現在的type是 -> $recipesType")
+        viewModel.planId.observe(viewLifecycleOwner){
+            val ingredientList = viewModel.itemRecipe.value?.ingredient
+            if (ingredientList != null) {
+                for(ingredient in ingredientList){
+                    Log.d("hank1","checkout 333")
+                    val newManagement = viewModel.itemRecipe.value?.let { it1 ->
+                        Log.d("hank1","checkout 444")
+                        Management(" ",UserManager.user.id,it,recipesViewModel.threeMeals.value!!,ingredient.ingredientName,
+                            it1.name,ingredient.quantity,ingredient.unit,recipesViewModel.date.value!!)
+                    }
+                    Log.d("hank1","新建的management -> $newManagement")
+                    if (newManagement != null) {
+                        viewModel.createManagementResult(newManagement)
+                    }
+                }
+            }
+
+        }
 
         binding.viewModel = viewModel
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
+//            Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
 
             mCardAdapter!!.remakeData()
             if(it != null) {
@@ -81,7 +103,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         viewModel.navigateToPlan.observe(viewLifecycleOwner){
             Toast.makeText(context, "安排計畫成功", Toast.LENGTH_LONG).show()
 //            findNavController().navigate(NavigationDirections.navigateToPlanFragment())
-            Log.d("hank1", "觸發導航到plan")
+//            Log.d("hank1", "觸發導航到plan")
         }
 
 
@@ -93,6 +115,8 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
                 viewModel.onDetailNavigated()
             }
         })
+
+//        viewModel.
 
 
 

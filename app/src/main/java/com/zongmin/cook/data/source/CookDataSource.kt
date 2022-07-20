@@ -23,11 +23,13 @@ interface CookDataSource {
 
 //    suspend fun getIngredient():Result<List<Ingredient>>
 
-
     suspend fun getPlan(userId: String, time: Long): Result<List<Plan>>
 
+    suspend fun getManagement(userId: String, time: Long): Result<List<Management>>
 
-    suspend fun getManagement(userId: String): Result<List<Management>>
+    suspend fun getSpecifyManagement(planId: String): Result<List<Management>>
+
+    suspend fun getPeriodManagement(userId: String, todayTime: Long, scopeTime: Long): Result<List<Management>>
 
     suspend fun getUser(id: String): Result<User>
 
@@ -41,9 +43,9 @@ interface CookDataSource {
 
     suspend fun deleteRecipes(id: String): Result<Boolean>
 
-    suspend fun createPlan(plan: Plan): Result<Boolean>
+    suspend fun createPlan(plan: Plan): Result<String>
 
-    suspend fun deletePlan(id: String): Result<Boolean>
+    suspend fun deletePlan(id: String): Result<String>
 
     suspend fun createManagement(management: Management): Result<Boolean>
 

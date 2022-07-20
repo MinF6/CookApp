@@ -35,25 +35,34 @@ class ManagementFragment : Fragment() {
 
         binding.recyclerviewManagement.adapter = adapter
 
-        viewModel.getManagementResult(UserManager.user.id)
+        viewModel.time.observe(viewLifecycleOwner) {
+//            viewModel.getManagementResult(UserManager.user.id, it)
+        }
+
+
 
         viewModel.management.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1","看一下拿到的食材 -> ${it}")
-            binding.textManagementNeed.text = "需購食材" + it.size.toString() + "項"
+            Log.d("hank1", "看一下拿到的食材 -> ${it}")
+            if(it != null){
+            binding.textManagementNeed.text = "需購食材${it.size}項"
             adapter.submitList(it)
+            }else{
+                //這裡會有過去有拿到東西所以非空值的bug
+                binding.textManagementNeed.text = "需購食材0項"
+                adapter.submitList(null)
+            }
         })
 
-        viewModel.quantity.observe(viewLifecycleOwner){
+        viewModel.quantity.observe(viewLifecycleOwner) {
             binding.textManagementNeed.text = "需購食材" + it + "項"
-            if(it == 0){
+            if (it == 0) {
                 binding.textManagementNeed.setTextColor(Color.rgb(0, 170, 0))
-            }else{
+            } else {
                 binding.textManagementNeed.setTextColor(Color.rgb(255, 0, 0))
 
             }
 
         }
-
 
 
 //        val day = 24 * 60 * 60 * 1000L
@@ -66,55 +75,67 @@ class ManagementFragment : Fragment() {
 
 
         binding.textManagementDate.text = viewModel.getToday()
-
+        viewModel.time.value?.let { time ->
+            viewModel.getManagementResult(UserManager.user.id,
+                time
+            )
+        }
 
 
         //昨天鍵
         binding.buttonManagementYesterday.setOnClickListener {
             binding.textManagementDate.text = viewModel.getYesterday()
+            viewModel.time.value?.let { time ->
+                viewModel.getManagementResult(UserManager.user.id,
+                    time
+                )
+            }
         }
 
         //明天鍵
         binding.buttonManagementTomorrow.setOnClickListener {
             binding.textManagementDate.text = viewModel.getTomorrow()
+            viewModel.time.value?.let { time ->
+                viewModel.getManagementResult(UserManager.user.id,
+                    time
+                )
+            }
         }
 
         //本日鍵
         binding.buttonManagementToday.setOnClickListener {
             binding.textManagementDate.text = viewModel.getToday()
-            viewModel.getManagementResult(UserManager.user.id)
+            viewModel.time.value?.let { time ->
+                viewModel.getManagementResult(UserManager.user.id,
+                    time
+                )
+            }
         }
 
+        val dayTime = 24 * 60 * 60 * 1000L
         //三日鍵
         binding.buttonManagementThreeDay.setOnClickListener {
             binding.textManagementDate.text = viewModel.getThreeDay()
-//            val threeDay = listOf<Management>(Management("b1T6sK5Z9OXqryxzYKUv", "午餐", "馬鈴薯", "小白兔咖哩飯", "1", "顆", 1658016000000),
-//                Management(" "," ", "蝦仁","蝦仁蛋炒飯","500","克", 1658016000000),
-//                Management(" "," ", "豬排","舒肥戰斧豬排","2","隻", 1658016000000),
-//                Management(" "," ", "金針菇","蔥油金針菇","1","包", 1658016000000),
-//                Management(" "," ", "蔥油","蔥油金針菇","50","克", 1658016000000),
-//                Management(" "," ", "優格","莓果優格煉乳冰","300","克", 1658016000000),
-//                Management(" "," ", "莓果","莓果優格煉乳冰","100","克", 1658016000000))
-//            viewModel._quantity.value = threeDay.size
-//            adapter.submitList(threeDay)
+            viewModel.time.value?.let { time ->
+                viewModel.getPeriodManagementResult(
+                    UserManager.user.id,
+                    time, time + (dayTime * 3)
+                )
+            }
 
         }
 
         //一周鍵
         binding.buttonManagementWeek.setOnClickListener {
             binding.textManagementDate.text = viewModel.getWeek()
-//            val threeDay = listOf<Management>(Management("b1T6sK5Z9OXqryxzYKUv", "午餐", "馬鈴薯", "小白兔咖哩飯", "1", "顆", 1658016000000),
-//                Management(" "," ", "蝦仁","蝦仁蛋炒飯","500","克", 1658016000000),
-//                Management(" "," ", "豬排","舒肥戰斧豬排","2","隻", 1658016000000),
-//                Management(" "," ", "金針菇","蔥油金針菇","1","包", 1658016000000),
-//                Management(" "," ", "蔥油","蔥油金針菇","50","克", 1658016000000),
-//                Management(" "," ", "優格","莓果優格煉乳冰","300","克", 1658016000000),
-//                Management(" "," ", "莓果","莓果優格煉乳冰","100","克", 1658016000000),
-//                Management(" "," ", "雞腿","九尾雞湯","3","隻", 1658016000000),
-//                Management(" "," ", "蛤蜊","九尾雞湯","20","顆", 1658016000000),
-//                Management(" "," ", "狗尾草","九尾雞湯","150","克", 1658016000000))
-//            viewModel._quantity.value = threeDay.size
-//            adapter.submitList(threeDay)
+            viewModel.time.value?.let { time ->
+                viewModel.getPeriodManagementResult(
+                    UserManager.user.id,
+                    time, time + (dayTime * 7)
+                )
+            }
+
+
 
         }
 

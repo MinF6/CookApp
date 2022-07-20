@@ -45,9 +45,22 @@ class DefaultCookRepository(
         return cookRemoteDataSource.getPlan(userId, time)
     }
 
-    override suspend fun getManagement(userId: String): Result<List<Management>> {
+    override suspend fun getManagement(userId: String, time: Long): Result<List<Management>> {
 
-        return cookRemoteDataSource.getManagement(userId)
+        return cookRemoteDataSource.getManagement(userId, time)
+    }
+
+    override suspend fun getSpecifyManagement(planId: String): Result<List<Management>> {
+
+        return cookRemoteDataSource.getSpecifyManagement(planId)
+    }
+
+    override suspend fun getPeriodManagement(
+        userId: String,
+        todayTime: Long,
+        scopeTime: Long
+    ): Result<List<Management>> {
+        return cookRemoteDataSource.getPeriodManagement(userId, todayTime, scopeTime)
     }
 
     override suspend fun getUser(id: String): Result<User> {
@@ -84,12 +97,12 @@ class DefaultCookRepository(
         return cookRemoteDataSource.deleteRecipes(id)
     }
 
-    override suspend fun createPlan(plan: Plan): Result<Boolean> {
+    override suspend fun createPlan(plan: Plan): Result<String> {
 
         return cookRemoteDataSource.createPlan(plan)
     }
 
-    override suspend fun deletePlan(id: String): Result<Boolean> {
+    override suspend fun deletePlan(id: String): Result<String> {
 
         return cookRemoteDataSource.deletePlan(id)
     }

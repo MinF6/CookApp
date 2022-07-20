@@ -25,6 +25,11 @@ class RecipesItemViewModel(
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
 
+    private var _itemRecipe = MutableLiveData<Recipes>()
+
+    val itemRecipe: LiveData<Recipes>
+        get() = _itemRecipe
+
     private var _management = MutableLiveData<Boolean>()
 
     val management: LiveData<Boolean>
@@ -39,6 +44,11 @@ class RecipesItemViewModel(
 
     val navigateToPlan: LiveData<Boolean>
         get() = _navigateToPlan
+
+    private val _planId = MutableLiveData<String>()
+
+    val planId: LiveData<String>
+        get() = _planId
 
     private var _plan = MutableLiveData<Plan>()
 
@@ -120,9 +130,10 @@ class RecipesItemViewModel(
 
     private fun createPlanResult(plan: Plan) {
         coroutineScope.launch {
-            _navigateToPlan.value = when (val result = cookRepository.createPlan(plan)) {
+//            _navigateToPlan.value = when (val result = cookRepository.createPlan(plan)) {
+            _planId.value = when (val result = cookRepository.createPlan(plan)) {
                 is Result.Success -> {
-                    Log.d("hank1", "成功更新，看看result -> $result")
+//                    Log.d("hank1", "成功更新，看看result -> $result")
                     result.data
                 }
                 is Result.Fail -> {
@@ -138,7 +149,7 @@ class RecipesItemViewModel(
         }
     }
 
-    private fun createManagementResult(management: Management) {
+     fun createManagementResult(management: Management) {
         coroutineScope.launch {
             _management.value = when (val result = cookRepository.createManagement(management)) {
                 is Result.Success -> {
@@ -155,6 +166,7 @@ class RecipesItemViewModel(
                     null
                 }
             }
+
         }
     }
 
@@ -170,7 +182,8 @@ class RecipesItemViewModel(
         foodId: String,
         image: String,
         category: String,
-        time: Long
+        time: Long,
+        recipes: Recipes
     ) {
         val newPlan = Plan(
             "",
@@ -181,25 +194,26 @@ class RecipesItemViewModel(
             PlanContent(foodId, image, name, category)
 
         )
-        Log.d("hank1","創建烹飪計畫的系統毫秒 -> ${System.currentTimeMillis()}")
-        createPlanResult(newPlan)
+//        Log.d("hank1","創建烹飪計畫的系統毫秒 -> ${System.currentTimeMillis()}")
+        _itemRecipe.value = recipes
 
+//        createPlanResult(newPlan)
+         createPlanResult(newPlan)
+//        setManagement(id)
 
         _navigateToPlan.value = true
     }
 
     fun setManagement(
-        belong: String,
-        name: String,
-        quantity: String,
-        threeMeals: String,
-        time: Long,
-        unit: String
+        planId: String
     ) {
+//        val recipe = itemRecipe.value
+//        val newManagement =
+//            Management("", UserManager.user.id,planId,)
 
-        val newManagement = Management("", UserManager.user.id, threeMeals,name,belong,quantity,unit,time)
-        Log.d("hank1","創建食材管理的系統毫秒 -> ${System.currentTimeMillis()}")
-        createManagementResult(newManagement)
+
+//            createManagementResult(newManagement)
+
 
     }
 
