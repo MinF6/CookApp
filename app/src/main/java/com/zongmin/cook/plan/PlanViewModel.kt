@@ -65,12 +65,12 @@ class PlanViewModel(
         val month = SimpleDateFormat("MM").format(Date(toDay)).toInt()
         val day = SimpleDateFormat("dd").format(Date(toDay)).toInt()
 
-        Log.d("hank1", "顯示今天$year 年$month 月 $day 日")
+//        Log.d("hank1", "顯示今天$year 年$month 月 $day 日")
 
 
 //        val storedDate = GregorianCalendar(2022, 6, 17)
         val storedDate = GregorianCalendar(year, month - 1, day)
-        Log.d("hank1", "今天轉換成毫秒是 -> ${storedDate.timeInMillis}")
+//        Log.d("hank1", "今天轉換成毫秒是 -> ${storedDate.timeInMillis}")
         _toDay.value = storedDate.timeInMillis
 
 //        Log.d(

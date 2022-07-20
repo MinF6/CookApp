@@ -49,6 +49,8 @@ class EditRecipesFragment : Fragment() {
     val FILE_NAME = "photo.jpg"
     var photoFile: File? = null
 
+    var tempImageView: ImageView? = null
+
     private val viewModel by viewModels<EditRecipesViewModel> { getVmFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +69,8 @@ class EditRecipesFragment : Fragment() {
         //來自itemImage
         if (requestCode == ITEM_STEP_IMAGE) {
             uri = data?.data
-            viewModel.itemUri.value = uri
+//            viewModel.itemUri.value = uri
+            tempImageView?.setImageURI(uri)
             Log.d("hank1", "看一下上傳拿到的uri是啥 -> $uri")
         }
 
@@ -465,7 +468,7 @@ class EditRecipesFragment : Fragment() {
         }
 
 
-
+        addStepView()
         return binding.root
 
     }
@@ -506,9 +509,13 @@ class EditRecipesFragment : Fragment() {
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, ITEM_STEP_IMAGE)
-            viewModel.itemUri.observe(viewLifecycleOwner) {
-                stepImage.setImageURI(it)
-            }
+            tempImageView = stepImage
+//            viewModel.itemUri.observe(viewLifecycleOwner) {
+//                it?.let {
+//                    stepImage.setImageURI(it)
+//                    viewModel.itemUri.value = null
+//                }
+//            }
 
         }
         stepList?.addView(bb)

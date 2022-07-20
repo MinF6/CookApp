@@ -15,41 +15,28 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class RecipesViewModel: ViewModel() {
-//class RecipesViewModel(
-//    private val cookRepository: CookRepository
-//): ViewModel() {
+class RecipesViewModel : ViewModel() {
 
     val searchText = MutableLiveData<String>()
-
     val threeMeals = MutableLiveData("早餐")
-
-//    val date = MutableLiveData(SimpleDateFormat("MM/dd").format(Date()))
-//    val date = MutableLiveData("")
-
-//     var _date = MutableLiveData<String>()
-//     var date = MutableLiveData<String>()
-     var date = MutableLiveData<Long>()
-//     var date = MutableLong(0)
-
-//    val date: LiveData<String>
-//        get() = _date
-
-    private val _timeStamp = MutableLiveData<Timestamp>()
-
-    val timeStamp: LiveData<Timestamp>
-        get() = _timeStamp
+    var date = MutableLiveData<Long>()
 
 
     init {
-        getDate()
+        date.value = getToday()
+        Log.d("hank1", "dat/e初始值 -> ${date.value}")
     }
 
-    private fun getDate(){
-//        _date.value = SimpleDateFormat("MM/dd").format(Date())
-//        date.value = SimpleDateFormat("MM/dd").format(Date())
+    private fun getToday(): Long {
 
-        date.value = System.currentTimeMillis()
+//        _date.value = SimpleDateFormat("MM/dd").format(Date())
+        val year = SimpleDateFormat("yyyy").format(Date())
+        val month = SimpleDateFormat("MM").format(Date())
+        val day = SimpleDateFormat("dd").format(Date())
+//        date.value = GregorianCalendar(year.toInt(), month.toInt()-1, day.toInt()).timeInMillis
+        return GregorianCalendar(year.toInt(), month.toInt() - 1, day.toInt()).timeInMillis
+
+
 //        date = System.currentTimeMillis()
     }
 
@@ -65,9 +52,6 @@ class RecipesViewModel: ViewModel() {
         var showYear = 0
         var showMonth = 0
         var showDay = 0
-//        var showHour: Int
-//        var showMinute: Int
-//        calendar.
 
         val timePickerOnDataSetListener =
             TimePickerDialog.OnTimeSetListener { _, hour, minute ->
@@ -82,9 +66,9 @@ class RecipesViewModel: ViewModel() {
 //                calendar.set(Calendar.HOUR_OF_DAY, showHour)
 //                calendar.set(Calendar.MINUTE, showMinute)
 //                Logger.i("Dialog selected calendar.time = ${calendar.time}")
-                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar}")
-                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.time}")
-                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.timeInMillis}")
+//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar}")
+//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.time}")
+//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.timeInMillis}")
 //                _timeStamp.value = Timestamp(calendar.time)
 //                _timeStamp.value = calendar.time
             }
@@ -99,10 +83,10 @@ class RecipesViewModel: ViewModel() {
 //                Logger.i("year: $showYear, month: $showMonth, day: $showDay")
 //                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.time}")
 //                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.timeInMillis}")
-                Log.d("hank1","看一下最後拿到的日期是 -> ${year}/$month/$day")
+                Log.d("hank1", "看一下最後拿到的日期是 -> ${year}/$month/$day")
 
                 val storedDate = GregorianCalendar(year, month, day)
-                Log.d("hank1","看一下最後拿到的日期轉毫秒是 -> ${storedDate.timeInMillis}")
+                Log.d("hank1", "看一下最後拿到的日期轉毫秒是 -> ${storedDate.timeInMillis}")
                 date.value = storedDate.timeInMillis
 //                TimePickerDialog(
 //                    context,
@@ -118,17 +102,9 @@ class RecipesViewModel: ViewModel() {
             datePickerOnDataSetListener,
             nowYear,
             nowMonth,
-            nowDay).show()
+            nowDay
+        ).show()
     }
-
-
-
-
-
-
-
-
-
 
 
 }

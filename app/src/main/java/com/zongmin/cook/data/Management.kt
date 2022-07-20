@@ -7,7 +7,8 @@ import java.util.*
 
 @Parcelize
 data class Management(
-    val id: String = " ",
+    var id: String = " ",
+    val userId: String = " ",
     val threeMeals: String = " ",
     val name: String = " ",
     val belong: String = " ",

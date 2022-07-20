@@ -13,11 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.zongmin.cook.NavigationDirections
-import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.FragmentRecipesItemBinding
 import com.zongmin.cook.ext.getVmFactory
-import com.zongmin.cook.login.UserManager
-import com.zongmin.cook.network.LoadApiStatus
 import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import com.zongmin.viewpagercards.CardPagerAdapter
@@ -75,7 +72,6 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
             }else{
                 binding.imageRecipesNull.visibility = View.VISIBLE
             Log.d("hank1", "他是null，不給進")
-                //可以顯示快去收藏的圖片
 
             }
 

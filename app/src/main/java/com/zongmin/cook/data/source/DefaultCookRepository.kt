@@ -94,9 +94,17 @@ class DefaultCookRepository(
         return cookRemoteDataSource.deletePlan(id)
     }
 
-//    override suspend fun getIngredient(): Result<List<Ingredient>> {
-//        return cookRemoteDataSource.getIngredient()
-//    }
+    override suspend fun createManagement(management: Management): Result<Boolean> {
+
+        return cookRemoteDataSource.createManagement(management)
+    }
+
+    override suspend fun deleteManagement(id: String): Result<Boolean> {
+
+        return cookRemoteDataSource.deleteManagement(id)
+    }
+
+
 
 
 }

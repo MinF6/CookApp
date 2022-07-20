@@ -5,16 +5,13 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.PlanContent
-import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.*
 import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.zongmin.cook.data.Result
 import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.network.LoadApiStatus
 
@@ -27,6 +24,11 @@ class RecipesItemViewModel(
 
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
+
+    private var _management = MutableLiveData<Boolean>()
+
+    val management: LiveData<Boolean>
+        get() = _management
 
     private val _navigateToDetail = MutableLiveData<Recipes?>()
 
@@ -120,7 +122,26 @@ class RecipesItemViewModel(
         coroutineScope.launch {
             _navigateToPlan.value = when (val result = cookRepository.createPlan(plan)) {
                 is Result.Success -> {
-//                    _navigateToPlan.value = true
+                    Log.d("hank1", "成功更新，看看result -> $result")
+                    result.data
+                }
+                is Result.Fail -> {
+                    null
+                }
+                is Result.Error -> {
+                    null
+                }
+                else -> {
+                    null
+                }
+            }
+        }
+    }
+
+    private fun createManagementResult(management: Management) {
+        coroutineScope.launch {
+            _management.value = when (val result = cookRepository.createManagement(management)) {
+                is Result.Success -> {
                     Log.d("hank1", "成功更新，看看result -> $result")
                     result.data
                 }
@@ -158,10 +179,28 @@ class RecipesItemViewModel(
             time,
 //            PlanContent(foodId, image, name, category, time)
             PlanContent(foodId, image, name, category)
+
         )
+        Log.d("hank1","創建烹飪計畫的系統毫秒 -> ${System.currentTimeMillis()}")
         createPlanResult(newPlan)
 
+
         _navigateToPlan.value = true
+    }
+
+    fun setManagement(
+        belong: String,
+        name: String,
+        quantity: String,
+        threeMeals: String,
+        time: Long,
+        unit: String
+    ) {
+
+        val newManagement = Management("", UserManager.user.id, threeMeals,name,belong,quantity,unit,time)
+        Log.d("hank1","創建食材管理的系統毫秒 -> ${System.currentTimeMillis()}")
+        createManagementResult(newManagement)
+
     }
 
 

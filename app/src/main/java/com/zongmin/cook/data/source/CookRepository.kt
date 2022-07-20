@@ -42,4 +42,8 @@ interface CookRepository {
 
     suspend fun deletePlan(id: String): Result<Boolean>
 
+    suspend fun createManagement(management: Management): Result<Boolean>
+
+    suspend fun deleteManagement(id: String): Result<Boolean>
+
 }

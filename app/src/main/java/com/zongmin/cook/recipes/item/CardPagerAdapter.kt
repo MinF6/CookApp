@@ -78,7 +78,7 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesV
         val title = binding.textRecipesItemTitle
         val image = binding.imageRecipesItem
         binding.textRecipesTime.text = "${item.cookingTime}分鐘"
-        binding.textRecipesServing.text = "${item.serving.toString()}人份"
+        binding.textRecipesServing.text = "${item.serving}人份"
 
 //        titleTextView.setText(viewModel.recipes.value?.get(0)?.name ?: "")
 //        binding.titleTextView.setText("123456")
@@ -119,6 +119,10 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesV
             val threeMeals = recipesViewModel.threeMeals.value!!
             val date = recipesViewModel.date.value!!
             viewModel.setPlan(threeMeals,item.name,item.id,item.mainImage,item.category,date)
+            for (management in item.ingredient){
+            viewModel.setManagement(item.name,management.ingredientName,management.quantity,threeMeals,date,management.unit)
+
+            }
 
         }
 

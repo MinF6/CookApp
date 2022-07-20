@@ -16,7 +16,9 @@ object CookRemoteDataSource : CookDataSource {
     private const val RECIPES = " Recipes"
     private const val INGREDIENT = "ingredient"
     private const val STEP = "step"
-    const val PLAN = "Plan"
+    private const val PLAN = "Plan"
+    private const val MANAGEMENT = "Management"
+
 
     override suspend fun getRecipes(collect: List<String>): Result<List<Recipes>> =
         suspendCoroutine { continuation ->
@@ -628,6 +630,7 @@ object CookRemoteDataSource : CookDataSource {
             FirebaseFirestore.getInstance()
                 .collection("Management")
                 .whereEqualTo("userId", userId)
+//                .whereLessThan("time")
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -889,36 +892,51 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
+    override suspend fun createManagement(management: Management): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val recipe = FirebaseFirestore.getInstance().collection(MANAGEMENT)
+            val document = recipe.document()
 
-    //備份單拿Recipes----------------------------------------------
+            management.id = document.id
+            document
+                .set(management)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("hank1", "新增成功區，我新增了 -> $management")
+//                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            Log.d("hank1", "新增失敗")
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+//                    continuation.resume(kotlin.Result.Fail(PublisherApplication.instance.getString(R.string.you_know_nothing)))
+                    }
+                }
+        }
 
-//    override suspend fun getRecipes(): Result<List<Recipes>> = suspendCoroutine { continuation ->
-//        FirebaseFirestore.getInstance()
-//            .collection(" Recipes")
-//            .get()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-////                    Log.d("hank1","check4")
-//                    val list = mutableListOf<Recipes>()
-//                    for (document in task.result!!) {
-//
-////                        Log.d("hank1","check3")
-////                        Log.d("hank1",document.id + " => " + document.data)
-//
-//                        val article = document.toObject(Recipes::class.java)
-//
-//                        list.add(article)
-//                    }
-//                    continuation.resume(Result.Success(list))
-//                } else {
-//                    task.exception?.let {
-//                        continuation.resume(Result.Error(it))
-//                        return@addOnCompleteListener
-//                    }
-////                    continuation.resume(Result.Fail(CookApplication.instance.getString(1)))
-//                }
-//            }
-//    }
+    override suspend fun deleteManagement(id: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
 
+            FirebaseFirestore.getInstance()
+                .collection(MANAGEMENT)
+                .document(id)
+                .delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("hank1", "成功刪除管理的內容")
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            Log.d(
+                                "hank1",
+                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                            )
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                    }
+                }
+        }
 
 }

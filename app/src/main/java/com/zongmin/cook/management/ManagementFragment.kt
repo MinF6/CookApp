@@ -88,33 +88,33 @@ class ManagementFragment : Fragment() {
         //三日鍵
         binding.buttonManagementThreeDay.setOnClickListener {
             binding.textManagementDate.text = viewModel.getThreeDay()
-            val threeDay = listOf<Management>(Management("b1T6sK5Z9OXqryxzYKUv", "午餐", "馬鈴薯", "小白兔咖哩飯", "1", "顆", 1658016000000),
-                Management(" "," ", "蝦仁","蝦仁蛋炒飯","500","克", 1658016000000),
-                Management(" "," ", "豬排","舒肥戰斧豬排","2","隻", 1658016000000),
-                Management(" "," ", "金針菇","蔥油金針菇","1","包", 1658016000000),
-                Management(" "," ", "蔥油","蔥油金針菇","50","克", 1658016000000),
-                Management(" "," ", "優格","莓果優格煉乳冰","300","克", 1658016000000),
-                Management(" "," ", "莓果","莓果優格煉乳冰","100","克", 1658016000000))
-            viewModel._quantity.value = threeDay.size
-            adapter.submitList(threeDay)
+//            val threeDay = listOf<Management>(Management("b1T6sK5Z9OXqryxzYKUv", "午餐", "馬鈴薯", "小白兔咖哩飯", "1", "顆", 1658016000000),
+//                Management(" "," ", "蝦仁","蝦仁蛋炒飯","500","克", 1658016000000),
+//                Management(" "," ", "豬排","舒肥戰斧豬排","2","隻", 1658016000000),
+//                Management(" "," ", "金針菇","蔥油金針菇","1","包", 1658016000000),
+//                Management(" "," ", "蔥油","蔥油金針菇","50","克", 1658016000000),
+//                Management(" "," ", "優格","莓果優格煉乳冰","300","克", 1658016000000),
+//                Management(" "," ", "莓果","莓果優格煉乳冰","100","克", 1658016000000))
+//            viewModel._quantity.value = threeDay.size
+//            adapter.submitList(threeDay)
 
         }
 
         //一周鍵
         binding.buttonManagementWeek.setOnClickListener {
             binding.textManagementDate.text = viewModel.getWeek()
-            val threeDay = listOf<Management>(Management("b1T6sK5Z9OXqryxzYKUv", "午餐", "馬鈴薯", "小白兔咖哩飯", "1", "顆", 1658016000000),
-                Management(" "," ", "蝦仁","蝦仁蛋炒飯","500","克", 1658016000000),
-                Management(" "," ", "豬排","舒肥戰斧豬排","2","隻", 1658016000000),
-                Management(" "," ", "金針菇","蔥油金針菇","1","包", 1658016000000),
-                Management(" "," ", "蔥油","蔥油金針菇","50","克", 1658016000000),
-                Management(" "," ", "優格","莓果優格煉乳冰","300","克", 1658016000000),
-                Management(" "," ", "莓果","莓果優格煉乳冰","100","克", 1658016000000),
-                Management(" "," ", "雞腿","九尾雞湯","3","隻", 1658016000000),
-                Management(" "," ", "蛤蜊","九尾雞湯","20","顆", 1658016000000),
-                Management(" "," ", "狗尾草","九尾雞湯","150","克", 1658016000000))
-            viewModel._quantity.value = threeDay.size
-            adapter.submitList(threeDay)
+//            val threeDay = listOf<Management>(Management("b1T6sK5Z9OXqryxzYKUv", "午餐", "馬鈴薯", "小白兔咖哩飯", "1", "顆", 1658016000000),
+//                Management(" "," ", "蝦仁","蝦仁蛋炒飯","500","克", 1658016000000),
+//                Management(" "," ", "豬排","舒肥戰斧豬排","2","隻", 1658016000000),
+//                Management(" "," ", "金針菇","蔥油金針菇","1","包", 1658016000000),
+//                Management(" "," ", "蔥油","蔥油金針菇","50","克", 1658016000000),
+//                Management(" "," ", "優格","莓果優格煉乳冰","300","克", 1658016000000),
+//                Management(" "," ", "莓果","莓果優格煉乳冰","100","克", 1658016000000),
+//                Management(" "," ", "雞腿","九尾雞湯","3","隻", 1658016000000),
+//                Management(" "," ", "蛤蜊","九尾雞湯","20","顆", 1658016000000),
+//                Management(" "," ", "狗尾草","九尾雞湯","150","克", 1658016000000))
+//            viewModel._quantity.value = threeDay.size
+//            adapter.submitList(threeDay)
 
         }
 
