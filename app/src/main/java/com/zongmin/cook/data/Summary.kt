@@ -16,4 +16,5 @@ data class Summary(
     var like: List<String> = listOf(),
     var remark: String = " ",
     var references: List<String> = listOf(),
+    var public: Boolean = false
 ) : Parcelable

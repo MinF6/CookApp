@@ -18,10 +18,12 @@ data class Recipes(
     var step: List<Step> = listOf(Step(" "," "," "," ",ToolType(" ", " "))),
     var tags: List<String> = listOf(" "),
     var author: String = " ",
-    var like: List<String> = listOf(" "),
+    var like: List<String> = listOf(),
     var remark: String =" ",
     var references: List<String> = listOf(" "),
-    var message: List<Message> = listOf(Message(" "," "," ",null))
+    var message: List<Message> = listOf(Message(" "," "," ",null)),
+    var public: Boolean = false
+
 
 
 ): Parcelable

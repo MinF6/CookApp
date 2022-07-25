@@ -59,7 +59,7 @@
             app:layout_constraintTop_toTopOf="@+id/text_management_ingredient_quantity" />
 
         <CheckBox
-            android:id="@+id/checkbox_managment"
+            android:id="@+id/checkbox_management"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

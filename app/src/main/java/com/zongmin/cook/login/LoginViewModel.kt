@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
 import kotlinx.coroutines.CoroutineScope
@@ -35,6 +36,10 @@ class LoginViewModel(
     val navigateToRecipes: LiveData<Boolean>
         get() = _navigateToRecipes
 
+    private var _existedUser = MutableLiveData<User>()
+
+    val existedUser: LiveData<User>
+        get() = _existedUser
 
     val user = User()
 
@@ -42,6 +47,8 @@ class LoginViewModel(
 
     val loginSuccess: LiveData<Boolean>
         get() = _loginSuccess
+
+
 
 
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -64,17 +71,18 @@ class LoginViewModel(
 
             googleSignInAccount.idToken?.let { firebaseAuthWithGoogle(it) }
 
-            user.name = googleSignInAccount.givenName + "  "
+//            user.name = googleSignInAccount.givenName + " "
+            user.name = googleSignInAccount.givenName.toString()
             if(googleSignInAccount.familyName != null){
-                user.name += googleSignInAccount.familyName
+                user.name += " ${googleSignInAccount.familyName}"
             }
 //            user.id = googleSignInAccount.id.toString()
 
-            Log.d("hank1", "user.name = ${user.name}")
+//            Log.d("hank1", "user.name = ${user.name}")
             user.email = googleSignInAccount.email.toString()
-            Log.d("hank1", "user.email = ${user.email}")
+//            Log.d("hank1", "user.email = ${user.email}")
             user.headShot = googleSignInAccount.photoUrl.toString()
-            Log.d("hank1", "user.pictureUri = ${user.headShot}")
+//            Log.d("hank1", "user.pictureUri = ${user.headShot}")
 
 
             _loginSuccess.value = true
@@ -94,7 +102,7 @@ class LoginViewModel(
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("hank1", "signInWithCredential:success")
+//                    Log.d("hank1", "signInWithCredential:success")
 
                     val firebaseCurrentUser = firebaseAuth.currentUser
                     val firebaseTokenResult = firebaseCurrentUser?.getIdToken(false)?.result
@@ -105,10 +113,13 @@ class LoginViewModel(
 //                        "hank1",
 //                        "~~~~~~開始~~~~~~firebaseTokenResult?.token.toString() = ${firebaseTokenResult?.token.toString()}"
 //                    )
-                    UserManager.user = user
-                    Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
+                    getUserResult(user.id)
+//                    UserManager.user = user
+//                    Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
 //                    Log.d("hank1","檢查user有無值 -> $user")
-                    _navigateToRecipes.value = true
+
+//                    _navigateToRecipes.value = true
+
 //                    val firebaseDate = firebaseTokenResult?.expirationTimestamp?.let { Date(it) }
 //                    Log.d("hank1", "firebaseDate = $firebaseDate")
 //
@@ -134,11 +145,11 @@ class LoginViewModel(
 //                    Log.d("hank1", "UserManager.user.value = ${UserManager.user.value}")
 //                    liveUser.value = user
 //                    Log.d("hank1", "Login user = $user")
-                    userSignIn(user)
+//                    userSignIn(user)
                     if (task.result.additionalUserInfo?.isNewUser == true) {
                         UserManager.user = user
 
-                        Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
+//                        Log.d("hank1","檢查user有無值 -> ${UserManager.user}")
                         _navigateToRecipes.value = true
 //                        Log.d("hank1", "task.result.additionalUserInfo?.isNewUser == true")
 //
@@ -228,9 +239,31 @@ class LoginViewModel(
     }
 
 
-//    fun onDetailNavigated() {
-//        _navigateToRecipes.value = null
-//    }
+    private fun getUserResult(id: String) {
+        coroutineScope.launch {
+            val result = cookRepository.getUser(id)
+
+            _existedUser.value = when (result) {
+                is Result.Success -> {
+                    result.data
+                }
+                is Result.Fail -> {
+                    null
+                }
+                is Result.Error -> {
+
+                    null
+                }
+                else -> {
+
+                    null
+                }
+            }
+//            Log.d("hank1","查詢使用者的結果 -> $result")
+            UserManager.user = existedUser.value!!
+            _navigateToRecipes.value = true
+//            _navigateToRecipes.value = _navigateToRecipes.value
+        }}
 
 
 }

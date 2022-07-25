@@ -1,135 +1,179 @@
 package com.zongmin.cook.recipes.item
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.PlanContent
-import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.*
 import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.recipes.RecipesTypeFilter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.zongmin.cook.data.Result
+import com.zongmin.cook.login.UserManager
+import com.zongmin.cook.network.LoadApiStatus
 
 class RecipesItemViewModel(
     private val cookRepository: CookRepository,
     recipesType: RecipesTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
-    var _recipes = MutableLiveData<List<Recipes>>()
+    private var _recipes = MutableLiveData<List<Recipes>>()
 
     val recipes: LiveData<List<Recipes>>
         get() = _recipes
+
+    private var _itemRecipe = MutableLiveData<Recipes>()
+
+    val itemRecipe: LiveData<Recipes>
+        get() = _itemRecipe
+
+    private var _management = MutableLiveData<Boolean>()
+
+    val management: LiveData<Boolean>
+        get() = _management
 
     private val _navigateToDetail = MutableLiveData<Recipes?>()
 
     val navigateToDetail: LiveData<Recipes?>
         get() = _navigateToDetail
 
+    private val _navigateToPlan = MutableLiveData<Boolean>()
+
+    val navigateToPlan: LiveData<Boolean>
+        get() = _navigateToPlan
+
+    private val _planId = MutableLiveData<String>()
+
+    val planId: LiveData<String>
+        get() = _planId
+
     private var _plan = MutableLiveData<Plan>()
 
     val plan: LiveData<Plan>
         get() = _plan
 
+    // status: The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<LoadApiStatus>()
 
-//    private val _passKey = MutableLiveData<String>()
-//
-//    val passKey: LiveData<String>
-//        get() = _passKey
+    val status: LiveData<LoadApiStatus>
+        get() = _status
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
+
     private var viewModelJob = Job()
 
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     //        val type = recipesType.value
     private var key: String = ""
 
     init {
-        getRecipesResult(recipesType.value)
-//        getRecipesResult()
-//        getRecipesResult( null)
-//        Log.d("hank1", "看一下拿到的recipesType -> ${recipesType}")
-//        Log.d("hank1", "看一下拿到的recipesType.value -> ${recipesType.value}")
-//        Log.d("hank1", "看一下拿到的recipesType.ordinal -> ${recipesType.ordinal}")
-//        Log.d("hank1", "看一下拿到的recipesType.name -> ${recipesType.name}")
-//        Log.d("hank1", "---------------------------------------------------------")
+        getRecipesResult(UserManager.user.collect, recipesType.value)
+//        Log.d("hank1","查看在RecipesItemViewModel啟動時，UserManager就位沒 -> ${UserManager.user}")
+//        getCollectRecipesResult(UserManager.user.collect, recipesType.value)
 
     }
 
 
-    private fun getRecipesResult(type: String) {
-//    fun getRecipesResult() {
-//        Log.d("hank1", "現在的type到底是啥 -> $type")
-//        Log.d("hank1", "現在的key到底是啥 -> $key")
+    private fun getRecipesResult(collect: List<String>, type: String) {
         coroutineScope.launch {
+//            _status.value = LoadApiStatus.LOADING
+
             var result: Result<List<Recipes>>? = null
-//            Log.d("hank1", "現在的type是 -> $type 現在的key是 -> $key")
             if (key == "") {
                 if (type == "全部") {
-                    result = cookRepository.getRecipes()
-//                    Log.d("hank1", "進了1的result為 -> $result")
+                    result = cookRepository.getRecipes(collect)
                 } else {
-                    result = cookRepository.getCategoryRecipes(type)
-//                    result = cookRepository.getCategoryRecipes("蔬菜")
-//                    Log.d("hank1", "進了2的result為 -> $result")
+                    result = cookRepository.getCategoryRecipes(collect, type)
                 }
             } else {
                 if (type == "全部") {
-                    result = key?.let { cookRepository.getKeywordRecipes(it) }
-//                    Log.d("hank1", "進了3的result為 -> $result")
+                    result = key?.let { cookRepository.getKeywordRecipes(collect, it) }
                 } else {
-                    result = key?.let { cookRepository.getCompoundRecipes(type, it) }
-//                    result = key?.let { cookRepository.getCompoundRecipes("蔬菜", it) }
-//                    Log.d("hank1", "進了4的result為 -> $result")
+                    result = key?.let { cookRepository.getCompoundRecipes(collect, type, it) }
                 }
-
             }
-
+            if (result == null) {
+//                Log.d("hank1","7777777777777")
+//                _status.value = LoadApiStatus.ERROR
+            } else {
+//                Log.d("hank1","88888888888888")
+            }
             _recipes.value = when (result) {
                 is Result.Success -> {
+                    _status.value = LoadApiStatus.DONE
+//                    Log.d("hank1","11111111111111")
+                    result.data
+
+                }
+                is Result.Fail -> {
+                    _status.value = LoadApiStatus.ERROR
+//                    Log.d("hank1","22222222222222222")
+                    null
+                }
+                is Result.Error -> {
+                    _status.value = LoadApiStatus.ERROR
+//                    Log.d("hank1","3333333333333333")
+                    null
+                }
+                else -> {
+                    _status.value = LoadApiStatus.ERROR
+//                    Log.d("hank1","44444444444444")
+                    null
+                }
+            }
+//            Log.d("hank1","查詢回來的內容 -> $result")
+        }
+    }
+
+    private fun createPlanResult(plan: Plan) {
+        coroutineScope.launch {
+//            _navigateToPlan.value = when (val result = cookRepository.createPlan(plan)) {
+            _planId.value = when (val result = cookRepository.createPlan(plan)) {
+                is Result.Success -> {
+//                    Log.d("hank1", "成功更新，看看result -> $result")
                     result.data
                 }
                 is Result.Fail -> {
                     null
                 }
                 is Result.Error -> {
-
                     null
                 }
                 else -> {
-
                     null
                 }
             }
         }
     }
 
-    fun createPlanResult(plan: Plan) {
+     fun createManagementResult(management: Management) {
         coroutineScope.launch {
-            when (val result = cookRepository.createPlan(plan)) {
+            _management.value = when (val result = cookRepository.createManagement(management)) {
                 is Result.Success -> {
                     Log.d("hank1", "成功更新，看看result -> $result")
+                    result.data
                 }
                 is Result.Fail -> {
+                    null
                 }
                 is Result.Error -> {
+                    null
                 }
                 else -> {
+                    null
                 }
             }
+
         }
     }
 
 
     fun setRecipesKey(type: String, key: String) {
         this.key = key
-        getRecipesResult(type)
+        getRecipesResult(UserManager.user.collect, type)
     }
 
     fun setPlan(
@@ -138,10 +182,39 @@ class RecipesItemViewModel(
         foodId: String,
         image: String,
         category: String,
-        time: Long
+        time: Long,
+        recipes: Recipes
     ) {
-        val newPlan = Plan("",threeMeals, PlanContent(foodId, image, name, category, time))
-        createPlanResult(newPlan)
+        val newPlan = Plan(
+            "",
+            UserManager.user.id,
+            threeMeals,
+            time,
+//            PlanContent(foodId, image, name, category, time)
+            PlanContent(foodId, image, name, category)
+
+        )
+//        Log.d("hank1","創建烹飪計畫的系統毫秒 -> ${System.currentTimeMillis()}")
+        _itemRecipe.value = recipes
+
+//        createPlanResult(newPlan)
+         createPlanResult(newPlan)
+//        setManagement(id)
+
+        _navigateToPlan.value = true
+    }
+
+    fun setManagement(
+        planId: String
+    ) {
+//        val recipe = itemRecipe.value
+//        val newManagement =
+//            Management("", UserManager.user.id,planId,)
+
+
+//            createManagementResult(newManagement)
+
+
     }
 
 

@@ -4,34 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/loginFragment">
-<!--    app:startDestination="@id/recipesFragment">-->
+    <!--    app:startDestination="@id/recipesFragment">-->
 
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.zongmin.cook.recipes.RecipesFragment"
         android:label="RecipesFragment"
-        tools:layout="@layout/fragment_recipes"/>
+        tools:layout="@layout/fragment_recipes" />
     <fragment
         android:id="@+id/managmentFragment"
         android:name="com.zongmin.cook.management.ManagementFragment"
         android:label="ManagmentFragment"
-        tools:layout="@layout/fragment_management"/>
+        tools:layout="@layout/fragment_management" />
     <fragment
         android:id="@+id/planFragment"
         android:name="com.zongmin.cook.plan.PlanFragment"
         android:label="PlanFragment"
-        tools:layout="@layout/fragment_plan"/>
+        tools:layout="@layout/fragment_plan" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.zongmin.cook.profile.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/socialFragment"
         android:name="com.zongmin.cook.social.SocialFragment"
         android:label="SocialFragment"
-        tools:layout="@layout/fragment_social"/>
+        tools:layout="@layout/fragment_social" />
 
     <fragment
         android:id="@+id/detailRecipesFragment"
@@ -39,9 +39,10 @@
         android:label="DetailRecipesFragment"
         tools:layout="@layout/fragment_detail_recipes">
 
-        <argument android:name="recipes"
+        <argument
+            android:name="recipes"
             app:argType="com.zongmin.cook.data.Recipes"
-            app:nullable="false"/>
+            app:nullable="false" />
 
     </fragment>
 
@@ -51,9 +52,10 @@
         android:label="EditRecipesFragment"
         tools:layout="@layout/fragment_edit_recipes">
 
-        <argument android:name="recipes"
+        <argument
+            android:name="recipes"
             app:argType="com.zongmin.cook.data.Recipes"
-            app:nullable="true"/>
+            app:nullable="true" />
 
     </fragment>
 
@@ -61,51 +63,73 @@
         android:id="@+id/dialogPlan"
         android:name="com.zongmin.cook.dialog.DialogPlan"
         android:label="DialogPlan"
-        tools:layout="@layout/fragment_dialog_plan"/>
+        tools:layout="@layout/fragment_dialog_plan" />
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zongmin.cook.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/followFragment"
+        android:name="com.zongmin.cook.follow.FollowFragment"
+        android:label="FollowFragment"
+        tools:layout="@layout/fragment_follow">
+
+    </fragment>
+<!--    <argument-->
+<!--        android:name="userList"-->
+<!--        app:argType="String[]"-->
+<!--        app:nullable="true" />-->
 
 
-    <action android:id="@+id/navigate_to_recipes_fragment" app:destination="@+id/recipesFragment"
+    <action
+        android:id="@+id/navigate_to_recipes_fragment"
+        app:destination="@+id/recipesFragment"
         app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+        app:popUpToInclusive="true"/>
+    <!--    app:popUpTo="@id/navigation"-->
+    <!--    app:popUpToInclusive="true"-->
 
-    <action android:id="@+id/navigate_to_managment_fragment" app:destination="@+id/managmentFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
 
-    <action android:id="@+id/navigate_to_plan_fragment" app:destination="@+id/planFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_managment_fragment"
+        app:destination="@+id/managmentFragment" />
 
-    <action android:id="@+id/navigate_to_profile_fragment" app:destination="@+id/profileFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_plan_fragment"
+        app:destination="@+id/planFragment" />
 
-    <action android:id="@+id/navigate_to_social_fragment" app:destination="@+id/socialFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_profile_fragment"
+        app:destination="@+id/profileFragment" />
 
-    <action android:id="@+id/navigate_to_detail_recipes_fragment" app:destination="@+id/detailRecipesFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_social_fragment"
+        app:destination="@+id/socialFragment" />
 
-    <action android:id="@+id/navigate_to_edit_recipes_fragment" app:destination="@+id/editRecipesFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_detail_recipes_fragment"
+        app:destination="@+id/detailRecipesFragment" />
 
-    <action android:id="@+id/navigate_to_dialog_plan" app:destination="@+id/dialogPlan"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_edit_recipes_fragment"
+        app:destination="@+id/editRecipesFragment" />
 
-    <action android:id="@+id/navigate_to_login" app:destination="@+id/loginFragment"
-        app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/navigate_to_dialog_plan"
+        app:destination="@+id/dialogPlan" />
 
+    <action
+        android:id="@+id/navigate_to_login"
+        app:destination="@+id/loginFragment" />
+
+    <action
+        android:id="@+id/navigate_to_follow"
+        app:destination="@+id/followFragment"
+        app:popUpTo="@+id/profileFragment"
+        app:popUpToInclusive="true" />
 
 
 </navigation>

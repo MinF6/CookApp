@@ -8,7 +8,11 @@
         <variable
             name="user"
             type="com.zongmin.cook.data.User" />
-
+            <variable
+                name="viewModel"
+                type="com.zongmin.cook.profile.ProfileViewModel" />
+            <import type="android.view.View" />
+            <import type="com.zongmin.cook.network.LoadApiStatus"/>
     </data>
 
 
@@ -57,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="追蹤"
-
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_profile_head_shot" />
@@ -130,8 +134,10 @@
             android:id="@+id/text_profile_introduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="我發布的食譜"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="我的介紹"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_profile_fans" />
@@ -158,20 +164,51 @@
 
         <!--        </androidx.viewpager.widget.ViewPager>-->
 
+        <TextView
+            android:id="@+id/text_profile_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+
+            android:letterSpacing=".5"
+            android:text="我發布的食譜"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_profile"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:background="#eeeeee"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_title"
             tools:listitem="@layout/item_profile_creation" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view_recipes_loading_news"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/cooking"
+            app:lottie_speed="3"
+            app:setupApiStatusForLottie="@{viewModel.status}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

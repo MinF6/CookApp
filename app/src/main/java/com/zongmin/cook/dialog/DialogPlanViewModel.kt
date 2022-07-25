@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.zongmin.cook.data.Plan
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.source.CookRepository
+import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.recipes.RecipesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,53 +40,53 @@ class DialogPlanViewModel(
 
 
     init {
-        getPlanResult()
+//        getPlanResult(UserManager.user.id)
 //        Log.d("hank1", "進到DialogPlanViewModel")
         getToday()
     }
 
-    fun getPlanResult() {
-        coroutineScope.launch {
-            val result = cookRepository.getPlan()
-//            Log.d("hank1","show result => ${result}")
-            _plan.value = when (result) {
-                is Result.Success -> {
-                    result.data
-                }
-                is Result.Fail -> {
-                    null
-                }
-                is Result.Error -> {
+//    fun getPlanResult(userId: String) {
+//        coroutineScope.launch {
+//            val result = cookRepository.getPlan(userId)
+////            Log.d("hank1","show result => ${result}")
+//            _plan.value = when (result) {
+//                is Result.Success -> {
+//                    result.data
+//                }
+//                is Result.Fail -> {
+//                    null
+//                }
+//                is Result.Error -> {
+//
+//                    null
+//                }
+//                else -> {
+//
+//                    null
+//                }
+//            }
+//
+//            Log.d("hank1", "show recipes => ${plan.value}")
+//        }
+//    }
 
-                    null
-                }
-                else -> {
-
-                    null
-                }
-            }
-
-            Log.d("hank1", "show recipes => ${plan.value}")
-        }
-    }
-
-    fun deletePlan(id: String) {
-        coroutineScope.launch {
-            when (val result = cookRepository.deletePlan(id)) {
-                is Result.Success -> {
-                    Log.d("hank1", "成功更新，看看result -> $result")
-                    getPlanResult()
-                }
-                is Result.Fail -> {
-                }
-                is Result.Error -> {
-                }
-                else -> {
-
-                }
-            }
-        }
-    }
+//    fun deletePlan(id: String) {
+//        coroutineScope.launch {
+//            when (val result = cookRepository.deletePlan(id)) {
+//                is Result.Success -> {
+//                    Log.d("hank1", "成功更新，看看result -> $result")
+//                    getPlanResult(UserManager.user.id)
+//                }
+//                is Result.Fail -> {
+//                }
+//                is Result.Error -> {
+//                }
+//                else -> {
+//
+//                }
+//            }
+//        }
+//    }
 
     //    var showTime = System.currentTimeMillis()
     val dayTime = 24 * 60 * 60 * 1000L

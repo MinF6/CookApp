@@ -1,9 +1,7 @@
 package com.zongmin.cook.edit
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -51,6 +49,8 @@ class EditRecipesFragment : Fragment() {
     val FILE_NAME = "photo.jpg"
     var photoFile: File? = null
 
+    var tempImageView: ImageView? = null
+
     private val viewModel by viewModels<EditRecipesViewModel> { getVmFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +69,8 @@ class EditRecipesFragment : Fragment() {
         //來自itemImage
         if (requestCode == ITEM_STEP_IMAGE) {
             uri = data?.data
-            viewModel.itemUri.value = uri
+//            viewModel.itemUri.value = uri
+            tempImageView?.setImageURI(uri)
             Log.d("hank1", "看一下上傳拿到的uri是啥 -> $uri")
         }
 
@@ -101,6 +102,7 @@ class EditRecipesFragment : Fragment() {
         val binding = FragmentEditRecipesBinding.inflate(inflater, container, false)
         val binding2 = ItemEditIngredientBinding.inflate(inflater, container, false)
         val binding3 = ItemEditStepBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val ingredientName = binding2.itemEdittextIngredientName
         val quantity = binding2.itemEdittextQuantity
@@ -181,10 +183,7 @@ class EditRecipesFragment : Fragment() {
                                             bindImage(eImg, recipesData.step[i].images)
                                         }
                                     }
-
-
                                 }
-
                             }
                         }
                     }
@@ -346,7 +345,7 @@ class EditRecipesFragment : Fragment() {
         binding.buttonEditSave.setOnClickListener {
             val newRecipes = Summary()
             val listNewIngredient = mutableListOf<Ingredient>()
-            val listnewStep = mutableListOf<Step>()
+            val listNewStep = mutableListOf<Step>()
 
             //取得步驟內容
             var sequence = 1
@@ -376,7 +375,7 @@ class EditRecipesFragment : Fragment() {
                                         if (eImg.id == itemImage.id) {
                                             Log.d("hank1","要放入的depictionText是 -> $depictionText")
                                         depictionUri = "https://tokyo-kitchen.icook.network/uploads/recipe/cover/360711/84b41b35a1124c7c.jpg"
-                                            listnewStep.add(Step("",sequence.toString(),depictionUri,depictionText,
+                                            listNewStep.add(Step("",sequence.toString(),depictionUri,depictionText,
                                                 ToolType()
                                             ))
                                         }
@@ -431,6 +430,7 @@ class EditRecipesFragment : Fragment() {
             newRecipes.serving = binding.edittextServing.text.toString().toInt()
             newRecipes.mainImage = mainImage
             newRecipes.cookingTime = binding.edittextEditCookTime.text.toString()
+
             if (recipesData != null) {
                 newRecipes.author = recipesData.author
                 newRecipes.id = recipesData.id
@@ -440,23 +440,23 @@ class EditRecipesFragment : Fragment() {
 
             newRecipes.remark = binding.edittextEditRemark.text.toString()
 
-                Log.d("hank1","檢視一下要新增的id是 -> ${newRecipes.id}")
-            if(newRecipes.id == null){
-                Log.d("hank1","他是null")
-            }
-            if(newRecipes.id == ""){
-                Log.d("hank1","他是沒有空值的字串")
-            }
-            if(newRecipes.id == " "){
-                Log.d("hank1","他是有空值的字串")
-            }
+//                Log.d("hank1","檢視一下要新增的id是 -> ${newRecipes.id}")
+//            if(newRecipes.id == null){
+//                Log.d("hank1","他是null")
+//            }
+//            if(newRecipes.id == ""){
+//                Log.d("hank1","他是沒有空值的字串")
+//            }
+//            if(newRecipes.id == " "){
+//                Log.d("hank1","他是有空值的字串")
+//            }
 
 
                 Log.d("hank1","我傳的newRecipes是 -> $newRecipes")
                 Log.d("hank1","我傳的listNewIngredient是 -> $listNewIngredient")
-                Log.d("hank1","我傳的listnewStep是 -> $listnewStep")
+                Log.d("hank1","我傳的listNewStep是 -> $listNewStep")
 
-            viewModel.create(newRecipes, listNewIngredient, listnewStep)
+            viewModel.create(newRecipes, listNewIngredient, listNewStep)
 
             findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
         }
@@ -467,6 +467,12 @@ class EditRecipesFragment : Fragment() {
         }
 
 
+        addStepView()
+
+        viewModel.createId.observe(viewLifecycleOwner){
+            Log.d("hank1","拿到新增的食譜idddddddddddddddddddddddddddddddddddddddddddddddd -> $it")
+            viewModel.setCollect(it)
+        }
 
         return binding.root
 
@@ -501,16 +507,20 @@ class EditRecipesFragment : Fragment() {
             removeStepView(bb)
         }
         stepImage.setOnClickListener {
-            Log.d("hank1", "我點到了")
+            Log.d("hank1", "我點到了第${it}個")
 //            stepImage.setImageURI(uri)
             val intent = Intent()
             intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, ITEM_STEP_IMAGE)
-            viewModel.itemUri.observe(viewLifecycleOwner) {
-                stepImage.setImageURI(it)
-            }
+            tempImageView = stepImage
+//            viewModel.itemUri.observe(viewLifecycleOwner) {
+//                it?.let {
+//                    stepImage.setImageURI(it)
+//                    viewModel.itemUri.value = null
+//                }
+//            }
 
         }
         stepList?.addView(bb)

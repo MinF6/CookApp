@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
         val adapter = ProfileAdapter(ProfileAdapter.OnClickListener{
             viewModel.navigateToDetail(it)
         })
-
+        binding.viewModel = viewModel
         binding.recyclerviewProfile.adapter = adapter
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
@@ -52,12 +52,28 @@ class ProfileFragment : Fragment() {
             Log.d("hank1","粉絲數量 -> ${it.fans.size}")
             Log.d("hank1","粉絲內容 -> ${it.fans}")
             binding.textProfileIntroduce.text = it.introduce
+            binding.textProfileTitle.text = "${it.name}發布的食譜"
 
         })
 
         viewModel.recipes.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+
+        binding.textProfileFans.setOnClickListener {
+
+            viewModel.user.value?.let { it1 -> viewModel.navigateToFollow(it1.fans) }
+
+        }
+
+        binding.textProfileFollows.setOnClickListener {
+            viewModel.user.value?.let { it1 -> viewModel.navigateToFollow(it1.follows) }
+        }
+
+        viewModel.navigateToFollow.observe(viewLifecycleOwner){
+
+            findNavController().navigate(NavigationDirections.navigateToFollow())
+        }
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner){
             if(it != null){

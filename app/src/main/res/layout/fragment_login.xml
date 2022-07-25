@@ -13,69 +13,66 @@
         tools:context=".login.LoginFragment">
         <!--        android:background="#F9B531"-->
 
-        <!--        <Button-->
-        <!--            android:id="@+id/button_login"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="登入google"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/image_login_logo"-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="100dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:background="@drawable/logo2"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/text_login_name"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintHorizontal_chainStyle="packed"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/text_login_welcome" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/text_login_name"-->
-<!--            android:layout_width="wrap_content"-->
+<!--        <Button-->
+<!--            android:id="@+id/button_login"-->
+<!--            android:layout_width="0dp"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:text="煮食"-->
-<!--            android:textSize="40dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/image_login_logo"-->
+<!--            android:layout_margin="16dp"-->
+<!--            android:background="@drawable/login_button"-->
+<!--            android:text="登入google"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textView2"-->
 <!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/image_login_logo"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/image_login_logo" />-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/text_login_welcome"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="216dp"-->
-<!--            android:text="歡迎來到"-->
-<!--            android:textSize="30dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.498"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/sign_in_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:elevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-<!--        app:layout_constraintTop_toBottomOf="@+id/image_login_logo"-->
-        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.736"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/recipes" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/google_logo"
+            android:elevation="5dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/button_login"
+            app:layout_constraintStart_toStartOf="@+id/button_login"
+            app:layout_constraintTop_toTopOf="@+id/button_login" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:letterSpacing="0.4"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_corner_white"
+            android:text="@string/login_button"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/text_login_privacy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/text_login_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
             android:background="#ff9933"
+            android:textSize="12dp"
             android:gravity="center"
             android:text="@string/login_specification"
             android:textColorLink="#2222ff"

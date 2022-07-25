@@ -21,7 +21,7 @@
 
     <style name="publicSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">#ff9933</item>
+        <item name="colorControlActivated">@color/primary</item>
 
         <!-- inactive thumb color -->
         <item name="colorSwitchThumbNormal">#444444
@@ -30,5 +30,17 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#777777
         </item>
+    </style>
+
+    <style name="calenderViewCustom" parent="Theme.AppCompat">
+
+        <item name="colorAccent">@color/primary</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="editTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
     </style>
 </resources>

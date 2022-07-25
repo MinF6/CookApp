@@ -34,18 +34,21 @@
 
             <Button
                 android:id="@+id/button_edit_upload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="上傳照片"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_baseline_cloud_upload_24"
                 app:layout_constraintBottom_toBottomOf="@+id/image_edit_test"
                 app:layout_constraintStart_toStartOf="parent" />
+            <!--            android:text="上傳照片"-->
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_edit_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="從相機打開"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_baseline_add_a_photo_24"
+
                 app:layout_constraintStart_toEndOf="@+id/button_edit_upload"
                 app:layout_constraintTop_toTopOf="@+id/button_edit_upload" />
 
@@ -56,8 +59,8 @@
                 android:layout_height="300dp"
                 android:background="@drawable/editimg"
                 android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -111,6 +114,8 @@
                 android:hint="輸入料理名稱"
                 android:singleLine="true"
                 android:text="@{recipes.name}"
+                android:textSize="14dp"
+                android:theme="@style/editTextTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_edit_name"
                 app:layout_constraintTop_toBottomOf="@+id/text_edit_name" />
@@ -151,6 +156,8 @@
                 android:inputType="number"
                 android:maxLength="5"
                 android:text="@{recipes.serving == 0 ? null : Integer.toString(recipes.serving) }"
+                android:textSize="14dp"
+                android:theme="@style/editTextTheme"
                 app:layout_constraintBottom_toBottomOf="@+id/text_serving"
                 app:layout_constraintEnd_toStartOf="@+id/text_serving"
                 app:layout_constraintTop_toTopOf="@+id/text_serving" />
@@ -257,9 +264,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="輸入烹飪時間(分鐘)"
+                android:hint="輸入烹飪時間"
                 android:inputType="number"
                 android:text="@{recipes.cookingTime}"
+                android:textSize="14dp"
+                android:theme="@style/editTextTheme"
                 app:layout_constraintBottom_toBottomOf="@+id/text_edit_cook_time_title"
                 app:layout_constraintEnd_toStartOf="@+id/text_edit_cook_time_title"
                 app:layout_constraintTop_toTopOf="@+id/text_edit_cook_time_title" />
@@ -283,9 +292,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_edit_step">
 
-                <include layout="@layout/item_edit_step">
 
-                </include>
             </LinearLayout>
 
             <Button
@@ -336,6 +343,8 @@
                 android:layout_height="wrap_content"
                 android:hint="輸入備註"
                 android:text="@{recipes.remark}"
+                android:textSize="14dp"
+                android:theme="@style/editTextTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_edit_remark"
                 app:layout_constraintTop_toBottomOf="@+id/text_edit_remark" />

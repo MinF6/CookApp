@@ -54,8 +54,11 @@ class RecipesFragment : Fragment() {
 
 
         viewModel.date.observe(viewLifecycleOwner){
-//            Log.d("hank1","Recipes的data 被改變了 -> $it")
+            Log.d("hank1","Recipes的data 被改變了 -> $it")
+            Log.d("hank1","Recipes的data 被改變了 -> ${SimpleDateFormat("MM/dd").format(Date(it))}")
             binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date(it))
+            binding.buttonRecipesDate.text = SimpleDateFormat("MM/dd").format(Date(it))
+
 
 
         }
@@ -68,11 +71,11 @@ class RecipesFragment : Fragment() {
 
 
 
-        binding.buttonNavNew.setOnClickListener {
-//                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
-            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(null))
-//            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(nullRecipes))
-        }
+//        binding.buttonNavNew.setOnClickListener {
+////                this.findNavController().navigate(MainNavigationDirections.navigateToArticleFragment())
+//            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(null))
+////            findNavController().navigate(NavigationDirections.navigateToEditRecipesFragment(nullRecipes))
+//        }
 
 
         //傳值
@@ -96,6 +99,11 @@ class RecipesFragment : Fragment() {
 
         binding.buttonRecipesDialog.setOnClickListener {
             findNavController().navigate(NavigationDirections.navigateToDialogPlan())
+
+        }
+
+        binding.buttonRecipesDate.setOnClickListener {
+            context?.let { it1 -> viewModel.showDateTimeDialog(it1) }
 
         }
 

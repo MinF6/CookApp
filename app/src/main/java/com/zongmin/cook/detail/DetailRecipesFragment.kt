@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentDetailRecipesBinding
+import com.zongmin.cook.ext.getVmFactory
+import com.zongmin.cook.login.UserManager
 
 
 class DetailRecipesFragment : Fragment() {
 
+    private val viewModel by viewModels<DetailRecipesViewModel> { getVmFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,14 +42,21 @@ class DetailRecipesFragment : Fragment() {
         binding.textDetailTitle.text = data.name
 
         binding.imageDetailBack.setOnClickListener {
-//            this.findNavController().navigateUp()
+            this.findNavController().navigateUp()
         }
+        if(UserManager.user.id == data.author){
+            binding.buttonDetailToEdit.visibility = View.VISIBLE
+            binding.switchDetailPublic.visibility = View.VISIBLE
+        }else{
+            binding.buttonDetailToEdit.visibility = View.GONE
+            binding.switchDetailPublic.visibility = View.GONE
 
+        }
         //食材adapter
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter
 
-        val viewModel = DetailRecipesViewModel()
+//        val viewModel = DetailRecipesViewModel()
         viewModel.getIngredient(data)
 
         viewModel.ingredient.observe(viewLifecycleOwner, Observer {
@@ -64,7 +75,14 @@ class DetailRecipesFragment : Fragment() {
 //            Log.d("hank1","看一下拿到的步驟 -> ${it}")
             stepAdapter.submitList(it)
         })
+        binding.switchDetailPublic.isChecked = data.public
 
+        binding.switchDetailPublic.setOnCheckedChangeListener { _, isChecked ->
+            // do whatever you need to do when the switch is toggled here
+            Log.d("hank1","檢查checked -> $isChecked")
+            viewModel.setPublicRecipes(isChecked, data.id)
+
+        }
 
 
 

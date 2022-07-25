@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.zongmin.cook.MainViewModel
 import com.zongmin.cook.data.source.CookRepository
+import com.zongmin.cook.detail.DetailRecipesViewModel
 import com.zongmin.cook.dialog.DialogPlanViewModel
 import com.zongmin.cook.edit.EditRecipesViewModel
+import com.zongmin.cook.follow.FollowViewModel
 import com.zongmin.cook.login.LoginViewModel
 import com.zongmin.cook.management.ManagementViewModel
 import com.zongmin.cook.plan.PlanViewModel
@@ -55,11 +57,11 @@ class ViewModelFactory constructor(
                 isAssignableFrom(LoginViewModel::class.java) ->
                     LoginViewModel(cookRepository)
 
-//                isAssignableFrom(MainViewModel::class.java) ->
-//                    MainViewModel(cookRepository)
-//
-//                isAssignableFrom(SocialViewModel::class.java) ->
-//                    SocialViewModel(cookRepository)
+                isAssignableFrom(FollowViewModel::class.java) ->
+                    FollowViewModel(cookRepository)
+
+                isAssignableFrom(DetailRecipesViewModel::class.java) ->
+                    DetailRecipesViewModel(cookRepository)
 //
 //                isAssignableFrom(SocialViewModel::class.java) ->
 //                    SocialViewModel(cookRepository)

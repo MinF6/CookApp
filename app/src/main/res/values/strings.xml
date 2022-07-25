@@ -3,7 +3,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recipes_search"><font size="13"><font color="white">請輸入食譜名稱</font></font></string>
-    <string name="login_specification">當您使用本服務時，及表示您同意我們的<a href="https://www.google.com.tw">服務條款</a>和<a href="https://www.google.com.tw">隱私權政策</a></string>
+    <string name="edit_ingredient_name"><font size="14"><font color="white">食材名稱</font></font></string>
+    <string name="edit_ingredient_quantity"><font size="14"><font color="white">數量</font></font></string>
+    <string name="edit_ingredient_unit"><font size="14"><font color="white">單位</font></font></string>
+    <string name="edit_step"><font size="14"><font color="white">請輸入步驟</font></font></string>
+    <string name="login_specification">當您使用本服務時，即表示您同意我們的<a href="https://www.privacypolicies.com/live/44cd8f4a-fee1-42b3-9cfe-ca14cac2a985">隱私權政策</a></string>
+    <string name="login_button">使用<font color="#4285f4">G</font><font color="#ea4335">o</font><font color="#fbbc05">o</font><font color="#4285f4">g</font><font color="#34a853">l</font><font color="#ea4335">e</font>登入</string>
 
 
 </resources>

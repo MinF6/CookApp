@@ -31,9 +31,17 @@ class PlanFragment : Fragment() {
     ): View? {
 
         val binding = FragmentPlanBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
-        viewModel.getPlanResult()
+        viewModel.toDay.observe(viewLifecycleOwner) {
+//            Log.d("hank1","觸發監聽，呼叫getPlanResult")
+            viewModel.getPlanResult(UserManager.user.id, it)
+        }
+
+
+
+        binding.viewModel = viewModel
 
 //        binding.calendarView.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
 //
@@ -42,15 +50,18 @@ class PlanFragment : Fragment() {
 //
 //
 //        })
-//        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-//
-//            Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
-////            Log.d()
-//            val storedDate = GregorianCalendar(year, month, dayOfMonth)
-//            Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
-//
-//
-//        }
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+
+            Log.d("hank1", "我選了日期 ->${year}年${month + 1} 月$dayOfMonth 日 ")
+//            Log.d()
+            val storedDate = GregorianCalendar(year, month, dayOfMonth)
+//            Log.d("hank1", "轉換成毫秒是 -> ${storedDate.timeInMillis}")
+//            viewModel.saveTime = storedDate.timeInMillis
+//            viewModel.getPlanResult(UserManager.user.id,storedDate.timeInMillis)
+            viewModel.getPlanResult(UserManager.user.id,storedDate.timeInMillis)
+
+
+        }
         val adapter = PlanAdapter(viewModel)
 
         binding.recyclerviewPlan.adapter = adapter
@@ -62,6 +73,8 @@ class PlanFragment : Fragment() {
             val breakfast = mutableListOf<Plan>()
             val lunch = mutableListOf<Plan>()
             val dinner = mutableListOf<Plan>()
+//            Log.d("hank1","觸發plan監聽，查看內容 -> $it")
+            if(it != null){
 
             for (plan in it) {
                 when (plan.threeMeals) {
@@ -98,11 +111,22 @@ class PlanFragment : Fragment() {
                 }
             }
 
-
+//            Log.d("hank1", "這次計畫是 -> $dataList")
             adapter.submitList(dataList)
 
-
+            }
         })
+
+        viewModel.deletePlanResult.observe(viewLifecycleOwner){
+//            viewModel.deleteManagement(it)
+            viewModel.getSpecifyManagementResult(it)
+        }
+
+        viewModel.management.observe(viewLifecycleOwner){
+            for(management in it){
+                viewModel.deleteManagement(management.id)
+            }
+        }
 
 
 

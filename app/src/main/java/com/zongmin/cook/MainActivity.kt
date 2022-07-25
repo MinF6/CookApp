@@ -1,23 +1,13 @@
 package com.zongmin.cook
 
-import android.content.Intent
+
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.zongmin.cook.databinding.ActivityMainBinding
-import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.util.CurrentFragmentType
 
 
@@ -40,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 //            fragment.onActivityResult(requestCode, resultCode, data)
 //        }
 //    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,38 +87,26 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_recipes -> {
-//                    binding.textActivityTitle.text = "食譜"
-//                    binding.imageActivityCreate.visibility = View.VISIBLE
-//                    binding.imageActivitySearch.visibility = View.VISIBLE
-//                    binding.toolbar.visibility = View.VISIBLE
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToRecipesFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_plan -> {
-//                    binding.textActivityTitle.text = "計畫"
-//                    binding.imageActivityCreate.visibility = View.GONE
-//                    binding.imageActivitySearch.visibility = View.GONE
+
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToPlanFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_management -> {
-//                    binding.textActivityTitle.text = "採購"
-//                    binding.imageActivityCreate.visibility = View.GONE
-//                    binding.imageActivitySearch.visibility = View.GONE
+
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToManagmentFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-//                    binding.textActivityTitle.text = "個人"
-//                    binding.imageActivityCreate.visibility = View.GONE
-//                    binding.imageActivitySearch.visibility = View.GONE
+
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToProfileFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_social -> {
-//                    binding.textActivityTitle.text = "分享"
-//                    binding.imageActivityCreate.visibility = View.GONE
-//                    binding.imageActivitySearch.visibility = View.GONE
+
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToSocialFragment())
                     return@setOnItemSelectedListener true
                 }

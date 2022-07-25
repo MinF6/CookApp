@@ -12,8 +12,10 @@
             android:id="@+id/item_edittext_ingredient_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:textSize="14dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:theme="@style/editTextTheme"
             android:hint="食材名稱" />
 
         <EditText
@@ -21,7 +23,9 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:textSize="14dp"
             android:layout_marginTop="16dp"
+            android:theme="@style/editTextTheme"
             android:hint="數量"
             android:inputType="number" />
 
@@ -32,6 +36,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:theme="@style/editTextTheme"
+            android:textSize="14dp"
             android:hint="單位" />
 
         <ImageView
@@ -39,7 +45,7 @@
             android:id="@+id/item_cross"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ic_baseline_close_24"
             android:visibility="gone"/>

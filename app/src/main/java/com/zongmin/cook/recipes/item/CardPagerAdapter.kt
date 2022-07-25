@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleRegistry
 import androidx.viewpager.widget.PagerAdapter
 import com.zongmin.cook.bindImage
 import com.zongmin.cook.data.Recipes
@@ -14,7 +16,7 @@ import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.item.RecipesItemViewModel
 
 
-class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel: RecipesViewModel, val onClickListener: OnClickListener) :
+class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesViewModel: RecipesViewModel, val onClickListener: OnClickListener) :
     PagerAdapter() {
     private val mViews: MutableList<CardView?>
     private var mData: MutableList<Recipes>
@@ -78,7 +80,9 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel
         val title = binding.textRecipesItemTitle
         val image = binding.imageRecipesItem
         binding.textRecipesTime.text = "${item.cookingTime}分鐘"
-        binding.textRecipesServing.text = "${item.serving.toString()}人份"
+        binding.textRecipesServing.text = "${item.serving}人份"
+
+
 
 //        titleTextView.setText(viewModel.recipes.value?.get(0)?.name ?: "")
 //        binding.titleTextView.setText("123456")
@@ -110,15 +114,28 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, val recipesViewModel
 
 
         val btn = binding.buttonViewPagerAdd
+
         btn.setOnClickListener {
 //            Log.d("hank1","點擊到這個item，這是 ->${item.name}")
 //            Log.d("hank1","點擊到這個item，這是 ->${item.id}")
+//            Log.d("hank1","點擊到這個item，他的食材是 ->${item.ingredient}")
 //            Log.d("hank1","點擊到這個item，他隸屬於 ->${recipesViewModel.threeMeals.value}")
 //            Log.d("hank1","點擊到這個item，他設定的日期為 ->${recipesViewModel.date.value}")
             val threeMeals = recipesViewModel.threeMeals.value!!
             val date = recipesViewModel.date.value!!
-            viewModel.setPlan(threeMeals,item.name,item.id,item.mainImage,item.category,date)
+//            viewModel.setPlan(threeMeals,item.name,item.id,item.mainImage,item.category,date)
+//            viewModel.planId.observe()
+            for (management in item.ingredient){
+//                Log.d("hank1","checkout 111")
+//                viewModel.planId.value?.let { it1 ->
+//                Log.d("hank1","checkout 222")
+//                    viewModel.setManagement(item.name,management.ingredientName,
+//                        it1,management.quantity,threeMeals,date,management.unit)
+//                }
+//            viewModel.setManagement(item.name,management.ingredientName,management.quantity,threeMeals,date,management.unit)
 
+            }
+            onClickListener.onClick(item)
         }
 
 //        mData = ArrayList()
