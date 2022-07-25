@@ -82,7 +82,7 @@ class DefaultCookRepository(
         summary: Summary,
         ingredient: List<Ingredient>,
         step: List<Step>
-    ): Result<Boolean> {
+    ): Result<String> {
 
         return cookRemoteDataSource.createRecipes(summary, ingredient, step)
     }
@@ -117,7 +117,25 @@ class DefaultCookRepository(
         return cookRemoteDataSource.deleteManagement(id)
     }
 
+    override suspend fun setCollect(isCollect: Boolean, recipesId: String): Result<Boolean> {
 
+        return cookRemoteDataSource.setCollect(isCollect, recipesId)
+    }
+
+    override suspend fun setLike(isLiked: Boolean, recipesId: String): Result<Boolean> {
+
+        return cookRemoteDataSource.setLike(isLiked, recipesId)
+    }
+
+    override suspend fun setPublic(isPublic: Boolean, recipesId: String): Result<Boolean> {
+
+        return cookRemoteDataSource.setPublic(isPublic, recipesId)
+    }
+
+    override suspend fun setPrepare(isPrepare: Boolean, managementId: String): Result<Boolean> {
+
+        return cookRemoteDataSource.setPrepare(isPrepare, managementId)
+    }
 
 
 }

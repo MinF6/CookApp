@@ -35,7 +35,7 @@ interface CookRepository {
 
     suspend fun getFollowList(userList: List<String>): Result<List<User>>
 
-    suspend fun createRecipes(summary: Summary,ingredient: List<Ingredient>,step: List<Step>): Result<Boolean>
+    suspend fun createRecipes(summary: Summary,ingredient: List<Ingredient>,step: List<Step>): Result<String>
 
     suspend fun userSignIn(user: User): Result<Boolean>
 
@@ -48,5 +48,14 @@ interface CookRepository {
     suspend fun createManagement(management: Management): Result<Boolean>
 
     suspend fun deleteManagement(id: String): Result<Boolean>
+
+    suspend fun setCollect(isCollect: Boolean, recipesId: String): Result<Boolean>
+
+    suspend fun setLike(isLiked: Boolean, recipesId: String): Result<Boolean>
+
+    suspend fun setPublic(isPublic:Boolean, recipesId: String): Result<Boolean>
+
+    suspend fun setPrepare(isPrepare: Boolean, managementId: String): Result<Boolean>
+
 
 }

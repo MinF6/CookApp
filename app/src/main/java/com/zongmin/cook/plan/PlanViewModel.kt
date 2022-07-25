@@ -60,7 +60,13 @@ class PlanViewModel(
     val toDay: LiveData<Long>
         get() = _toDay
 
-    var saveTime: Long = 0L
+//    var saveTime: Long = 0L
+
+    private val _time = MutableLiveData<Long>()
+
+    val time: LiveData<Long>
+        get() = _time
+
 
 
     init {
@@ -103,10 +109,9 @@ class PlanViewModel(
             _plan.value = when (result) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
-//                    Log.d("hank1","成功取得")
                     _pf.value = false
-//                        Log.d("hank1","狀態 -> ${status.value}")
-//                        Log.d("hank1","pf狀態 -> ${pf.value}")
+                    _time.value = time
+
                     result.data
                 }
                 is Result.Fail -> {

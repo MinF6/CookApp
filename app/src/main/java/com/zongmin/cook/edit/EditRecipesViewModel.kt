@@ -34,26 +34,35 @@ class EditRecipesViewModel(
 //        get() = _mainUri
 
 
+    private var _createId = MutableLiveData<String>()
+
+    val createId: LiveData<String>
+        get() = _createId
 
 
     fun create(summary: Summary, ingredient: List<Ingredient>, step: List<Step>) {
         coroutineScope.launch {
-            when (val result = cookRepository.createRecipes(summary, ingredient, step)) {
+            val result = cookRepository.createRecipes(summary, ingredient, step)
+            _createId.value = when (result) {
                 is Result.Success -> {
-                    Log.d("hank1", "成功更新，看看result -> $result")
+                    Log.d("hank1", "成功更新111，看看result -> $result")
+
+                    result.data
                 }
                 is Result.Fail -> {
+                    null
                 }
                 is Result.Error -> {
+                    null
                 }
                 else -> {
-
+                    null
                 }
             }
         }
     }
 
-    fun getRecipesData(recipes: Recipes){
+    fun getRecipesData(recipes: Recipes) {
         _recipes.value = recipes
     }
 
@@ -87,6 +96,10 @@ class EditRecipesViewModel(
                 }
             }
         }
+    }
+
+    fun setCollect(recipesId: String) {
+
     }
 
 

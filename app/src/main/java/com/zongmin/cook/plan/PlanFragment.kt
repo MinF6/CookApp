@@ -56,7 +56,7 @@ class PlanFragment : Fragment() {
 //            Log.d()
             val storedDate = GregorianCalendar(year, month, dayOfMonth)
 //            Log.d("hank1", "轉換成毫秒是 -> ${storedDate.timeInMillis}")
-            viewModel.saveTime = storedDate.timeInMillis
+//            viewModel.saveTime = storedDate.timeInMillis
 //            viewModel.getPlanResult(UserManager.user.id,storedDate.timeInMillis)
             viewModel.getPlanResult(UserManager.user.id,storedDate.timeInMillis)
 

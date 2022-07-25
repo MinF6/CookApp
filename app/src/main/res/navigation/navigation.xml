@@ -86,9 +86,12 @@
 
     <action
         android:id="@+id/navigate_to_recipes_fragment"
-        app:destination="@+id/recipesFragment" />
+        app:destination="@+id/recipesFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"/>
     <!--    app:popUpTo="@id/navigation"-->
     <!--    app:popUpToInclusive="true"-->
+
 
     <action
         android:id="@+id/navigate_to_managment_fragment"

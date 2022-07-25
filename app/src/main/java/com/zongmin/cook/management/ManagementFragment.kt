@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.zongmin.cook.data.Management
 import com.zongmin.cook.databinding.FragmentManagementBinding
 import com.zongmin.cook.ext.getVmFactory
 import com.zongmin.cook.login.UserManager
@@ -19,11 +18,6 @@ class ManagementFragment : Fragment() {
 
     private val viewModel by viewModels<ManagementViewModel> { getVmFactory() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +29,7 @@ class ManagementFragment : Fragment() {
 
         binding.recyclerviewManagement.adapter = adapter
 
+
         viewModel.time.observe(viewLifecycleOwner) {
 //            viewModel.getManagementResult(UserManager.user.id, it)
         }
@@ -42,11 +37,13 @@ class ManagementFragment : Fragment() {
 
 
         viewModel.management.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "看一下拿到的食材 -> ${it}")
-            if(it != null){
-            binding.textManagementNeed.text = "需購食材${it.size}項"
-            adapter.submitList(it)
-            }else{
+//            Log.d("hank1", "看一下拿到的食材 -> ${it}")
+            if (it != null) {
+                binding.recyclerviewManagement.setItemViewCacheSize(it.size)
+//                binding.textManagementNeed.text = "需購食材${it.size}項"
+//                binding.textManagementNeed.text = "需購食材${quantity}項"
+                adapter.submitList(it)
+            } else {
                 //這裡會有過去有拿到東西所以非空值的bug
                 binding.textManagementNeed.text = "需購食材0項"
                 adapter.submitList(null)
@@ -54,6 +51,7 @@ class ManagementFragment : Fragment() {
         })
 
         viewModel.quantity.observe(viewLifecycleOwner) {
+            Log.d("hank1","所需數量產生了變動，有 -> $it")
             binding.textManagementNeed.text = "需購食材" + it + "項"
             if (it == 0) {
                 binding.textManagementNeed.setTextColor(Color.rgb(0, 170, 0))
@@ -76,7 +74,8 @@ class ManagementFragment : Fragment() {
 
         binding.textManagementDate.text = viewModel.getToday()
         viewModel.time.value?.let { time ->
-            viewModel.getManagementResult(UserManager.user.id,
+            viewModel.getManagementResult(
+                UserManager.user.id,
                 time
             )
         }
@@ -86,7 +85,8 @@ class ManagementFragment : Fragment() {
         binding.buttonManagementYesterday.setOnClickListener {
             binding.textManagementDate.text = viewModel.getYesterday()
             viewModel.time.value?.let { time ->
-                viewModel.getManagementResult(UserManager.user.id,
+                viewModel.getManagementResult(
+                    UserManager.user.id,
                     time
                 )
             }
@@ -96,7 +96,8 @@ class ManagementFragment : Fragment() {
         binding.buttonManagementTomorrow.setOnClickListener {
             binding.textManagementDate.text = viewModel.getTomorrow()
             viewModel.time.value?.let { time ->
-                viewModel.getManagementResult(UserManager.user.id,
+                viewModel.getManagementResult(
+                    UserManager.user.id,
                     time
                 )
             }
@@ -105,8 +106,11 @@ class ManagementFragment : Fragment() {
         //本日鍵
         binding.buttonManagementToday.setOnClickListener {
             binding.textManagementDate.text = viewModel.getToday()
+//            viewModel.deleteManagement()
+//            binding.recyclerviewManagement.recycledViewPool.clear()
             viewModel.time.value?.let { time ->
-                viewModel.getManagementResult(UserManager.user.id,
+                viewModel.getManagementResult(
+                    UserManager.user.id,
                     time
                 )
             }
@@ -116,6 +120,8 @@ class ManagementFragment : Fragment() {
         //三日鍵
         binding.buttonManagementThreeDay.setOnClickListener {
             binding.textManagementDate.text = viewModel.getThreeDay()
+//            viewModel.deleteManagement()
+//            binding.recyclerviewManagement.recycledViewPool.clear()
             viewModel.time.value?.let { time ->
                 viewModel.getPeriodManagementResult(
                     UserManager.user.id,
@@ -128,13 +134,14 @@ class ManagementFragment : Fragment() {
         //一周鍵
         binding.buttonManagementWeek.setOnClickListener {
             binding.textManagementDate.text = viewModel.getWeek()
+            binding.recyclerviewManagement.recycledViewPool.clear()
+//            viewModel.deleteManagement()
             viewModel.time.value?.let { time ->
                 viewModel.getPeriodManagementResult(
                     UserManager.user.id,
                     time, time + (dayTime * 7)
                 )
             }
-
 
 
         }

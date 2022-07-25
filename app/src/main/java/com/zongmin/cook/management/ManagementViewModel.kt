@@ -22,7 +22,7 @@ class ManagementViewModel(
     val management: LiveData<List<Management>>
         get() = _management
 
-    var _quantity = MutableLiveData<Int>()
+    private var _quantity = MutableLiveData<Int>()
 
     val quantity: LiveData<Int>
         get() = _quantity
@@ -38,23 +38,17 @@ class ManagementViewModel(
 
 
     fun getManagementResult(userId: String, time: Long) {
-//        Log.d("hank1","check1")
-
         coroutineScope.launch {
-            val result = cookRepository.getManagement(userId,time)
-
-//            Log.d("hank1","check2")
+            val result = cookRepository.getManagement(userId, time)
             _management.value = when (result) {
                 is Result.Success -> {
-                    //直接用size會有問題，之後須改成觀察指定欄位判斷
-                    _quantity.value = result.data.size
+                    _quantity.value = checkQuantity(result.data)
                     result.data
                 }
                 is Result.Fail -> {
                     null
                 }
                 is Result.Error -> {
-
                     null
                 }
                 else -> {
@@ -70,35 +64,58 @@ class ManagementViewModel(
     }
 
     fun getPeriodManagementResult(userId: String, todayTime: Long, scopeTime: Long) {
-        Log.d("hank1","區間查詢丟進來的時間scopeTime為 -> $scopeTime")
-
         coroutineScope.launch {
-            val result = cookRepository.getPeriodManagement(userId,todayTime, scopeTime)
+            val result = cookRepository.getPeriodManagement(userId, todayTime, scopeTime)
 
-//            Log.d("hank1","check2")
             _management.value = when (result) {
                 is Result.Success -> {
-                    //直接用size會有問題，之後須改成觀察指定欄位判斷
-                    _quantity.value = result.data.size
+
+                    _quantity.value = checkQuantity(result.data)
                     result.data
                 }
                 is Result.Fail -> {
                     null
                 }
                 is Result.Error -> {
-
                     null
                 }
                 else -> {
-
                     null
                 }
             }
-            Log.d("hank1","範圍型食材查詢，看看查到了什麼 => ${result}")
-//            Log.d("hank1","show recipes => ${recipes.value}")
-
-
         }
+    }
+
+    private fun checkQuantity(management: List<Management>): Int {
+        var quantity = management.size
+        for (q in management) {
+            if (q.prepare) {
+                quantity--
+            }
+        }
+
+        return quantity
+    }
+
+    fun setPrepareResult(isPrepare: Boolean, managementId: String) {
+        coroutineScope.launch {
+            Log.d("hank1", "我要改的食材id是 -> $managementId")
+            when (val result = cookRepository.setPrepare(isPrepare, managementId)) {
+                is Result.Success -> {
+                    result.data
+                }
+                is Result.Fail -> {
+                    null
+                }
+                is Result.Error -> {
+                    null
+                }
+                else -> {
+                    null
+                }
+            }
+        }
+
     }
 
     fun addQuantity() {
@@ -110,7 +127,7 @@ class ManagementViewModel(
     }
 
 
-//    var showTime = System.currentTimeMillis()
+    //    var showTime = System.currentTimeMillis()
     private val dayTime = 24 * 60 * 60 * 1000L
 
     //可考慮加星期幾
@@ -178,6 +195,12 @@ class ManagementViewModel(
 
 
     }
+
+    fun deleteManagement() {
+        _management.value = null
+    }
+
+
 
 
 }

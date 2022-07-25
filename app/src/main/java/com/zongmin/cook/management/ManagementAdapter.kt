@@ -3,13 +3,11 @@ package com.zongmin.cook.management
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zongmin.cook.data.Management
 import com.zongmin.cook.databinding.ItemManagementBinding
-import java.util.*
 
 class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Management, RecyclerView.ViewHolder>(DiffCallback) {
 
@@ -20,21 +18,17 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
             binding.textManagementBelongName.text = management.belong
             binding.textManagementIngredientQuantity.text = management.quantity
             binding.textManagementIngredientUnit.text = management.unit
-//            binding.checkboxManagement.isChecked = true
-            binding.checkboxManagement.setOnCheckedChangeListener { _, i ->
-//                val checkedMeals = binding.radioGroupRecipes.findViewById<RadioButton>(i).text.toString()
-                Log.d("hank1","checkout改變，查看變數 -> ${i}")
-                if(i){
+            binding.checkboxManagement.isChecked = management.prepare
+            binding.checkboxManagement.setOnCheckedChangeListener { _, isChecked ->
+//                Log.d("hank1","checkout改變，查看變數 -> ${isChecked}")
+                if(isChecked){
                     viewModel.minusQuantity()
+//                    viewModel.setPrepareResult(isChecked,management.id)
                 }else{
                     viewModel.addQuantity()
+//                    viewModel.setPrepareResult(isChecked,management.id)
                 }
-                Log.d("hank1","checkout的這個item是 -> ${management}")
-
-//                val storedDate = GregorianCalendar(year, month, dayOfMonth)
 //                Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
-
-//                viewModel.threeMeals.value = checkedMeals
             }
             binding.executePendingBindings()
         }

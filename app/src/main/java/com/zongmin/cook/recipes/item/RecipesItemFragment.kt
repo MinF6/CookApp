@@ -55,9 +55,9 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
             val ingredientList = viewModel.itemRecipe.value?.ingredient
             if (ingredientList != null) {
                 for(ingredient in ingredientList){
-                    Log.d("hank1","checkout 333")
+
                     val newManagement = viewModel.itemRecipe.value?.let { it1 ->
-                        Log.d("hank1","checkout 444")
+
                         Management(" ",UserManager.user.id,it,recipesViewModel.threeMeals.value!!,ingredient.ingredientName,
                             it1.name,ingredient.quantity,ingredient.unit,recipesViewModel.date.value!!)
                     }

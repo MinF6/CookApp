@@ -3,11 +3,13 @@ package com.zongmin.cook.data.source.remote
 import android.icu.util.Calendar
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.zongmin.cook.CookApplication
 import com.zongmin.cook.data.*
 import com.zongmin.cook.data.source.CookDataSource
+import com.zongmin.cook.login.UserManager
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -18,6 +20,7 @@ object CookRemoteDataSource : CookDataSource {
     private const val STEP = "step"
     private const val PLAN = "Plan"
     private const val MANAGEMENT = "Management"
+    private const val USER = "User"
 
 
     override suspend fun getRecipes(collect: List<String>): Result<List<Recipes>> =
@@ -168,7 +171,7 @@ object CookRemoteDataSource : CookDataSource {
                                         list.add(recipes)
                                         count--
                                         if (count == 0) {
-                                            Log.d("hank1", "成功查到東西")
+//                                            Log.d("hank1", "成功查到東西")
                                             continuation.resume(Result.Success(list))
                                         }
                                     }
@@ -269,7 +272,7 @@ object CookRemoteDataSource : CookDataSource {
                         }
                     } else {
                         task.exception?.let {
-                            Log.d("hank1", "GGGGGG")
+//                            Log.d("hank1", "GGGGGG")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
@@ -521,14 +524,14 @@ object CookRemoteDataSource : CookDataSource {
             FirebaseFirestore.getInstance()
                 .collection(RECIPES)
                 .whereEqualTo("public", true)
-//                .orderBy("serving", Query.Direction.ASCENDING)
+//                .orderBy("serving")
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         var count = task.result.size()
                         val list = mutableListOf<Recipes>()
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
+//                            Log.d("hank1", document.id + " => " + document.data)
                             val recipes = document.toObject(Recipes::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -780,7 +783,7 @@ object CookRemoteDataSource : CookDataSource {
         summary: Summary,
         ingredient: List<Ingredient>,
         step: List<Step>
-    ): Result<Boolean> =
+    ): Result<String> =
         suspendCoroutine { continuation ->
             val recipe = FirebaseFirestore.getInstance().collection(RECIPES)
             val document = recipe.document()
@@ -788,6 +791,7 @@ object CookRemoteDataSource : CookDataSource {
                 summary.id = document.id
                 Log.d("hank1", "需要給ID")
             } else {
+
                 Log.d("hank1", "不需要給ID")
             }
 
@@ -796,8 +800,9 @@ object CookRemoteDataSource : CookDataSource {
                 .set(summary)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "新增成功區，我新增了 -> $recipe")
-//                        continuation.resume(Result.Success(true))
+//                        Log.d("hank1", "新增成功區，我新增了 -> $recipe")
+                        continuation.resume(Result.Success(summary.id))
+//                        continuation.resume(Result.Success(document.id))
                     } else {
                         task.exception?.let {
                             Log.d("hank1", "新增失敗")
@@ -816,7 +821,7 @@ object CookRemoteDataSource : CookDataSource {
                 document.collection(INGREDIENT).document(ingredientDocument.id).set(i)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "新增成功區，我新增了ingredient -> $i")
+//                            Log.d("hank1", "新增成功區，我新增了ingredient -> $i")
 //                            continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
@@ -836,7 +841,7 @@ object CookRemoteDataSource : CookDataSource {
                 document.collection(STEP).document(stepDocument.id).set(i)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "新增成功區，我新增了step -> $i")
+//                            Log.d("hank1", "新增成功區，我新增了step -> $i")
 //                            continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
@@ -847,7 +852,8 @@ object CookRemoteDataSource : CookDataSource {
                         }
                     }
             }
-
+//            continuation.resume(Result.Success(document.id))
+//            continuation.resume(Result.Success(summary.id))
 
         }
 
@@ -993,6 +999,190 @@ object CookRemoteDataSource : CookDataSource {
                         }
                     }
                 }
+        }
+
+    override suspend fun setCollect(isCollect: Boolean, recipesId: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            if (isCollect) {
+                FirebaseFirestore.getInstance()
+                    .collection(USER)
+                    .document(UserManager.user.id)
+                    .update("collect", FieldValue.arrayRemove(recipesId))
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+//                            Log.d("hank1", "成功刪除此收藏")
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            } else {
+                FirebaseFirestore.getInstance()
+                    .collection(USER)
+                    .document(UserManager.user.id)
+                    .update("collect", FieldValue.arrayUnion(recipesId))
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+//                            Log.d("hank1", "成功新增收藏")
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            }
+
+        }
+
+    override suspend fun setLike(isLiked: Boolean, recipesId: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            if (isLiked) {
+                FirebaseFirestore.getInstance()
+                    .collection(RECIPES)
+                    .document(recipesId)
+                    .update("like", FieldValue.arrayRemove(UserManager.user.id))
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("hank1", "收回讚")
+                            continuation.resume(Result.Success(false))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            } else {
+                FirebaseFirestore.getInstance()
+                    .collection(RECIPES)
+                    .document(recipesId)
+                    .update("like", FieldValue.arrayUnion(UserManager.user.id))
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("hank1", "成功點讚")
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            }
+
+        }
+
+    override suspend fun setPublic(isPublic: Boolean, recipesId: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            if (isPublic) {
+                FirebaseFirestore.getInstance()
+                    .collection(RECIPES)
+                    .document(recipesId)
+                    .update("public", true)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("hank1", "要公開了")
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            } else {
+                FirebaseFirestore.getInstance()
+                    .collection(RECIPES)
+                    .document(recipesId)
+                    .update("public", false)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("hank1", "不公開了")
+                            continuation.resume(Result.Success(false))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            }
+
+        }
+
+    override suspend fun setPrepare(isPrepare: Boolean, managementId: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            if (isPrepare) {
+                FirebaseFirestore.getInstance()
+                    .collection(MANAGEMENT)
+                    .document(managementId)
+                    .update("prepare", true)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("hank1", "準備好了")
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            } else {
+                FirebaseFirestore.getInstance()
+                    .collection(MANAGEMENT)
+                    .document(managementId)
+                    .update("prepare", false)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("hank1", "還沒準備好")
+                            continuation.resume(Result.Success(false))
+                        } else {
+                            task.exception?.let {
+                                Log.d(
+                                    "hank1",
+                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
+                                )
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                        }
+                    }
+            }
+
         }
 
 }
