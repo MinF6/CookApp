@@ -21,15 +21,27 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
             binding.checkboxManagement.isChecked = management.prepare
             binding.checkboxManagement.setOnCheckedChangeListener { _, isChecked ->
 //                Log.d("hank1","checkout改變，查看變數 -> ${isChecked}")
-                if(isChecked){
-                    viewModel.minusQuantity()
-//                    viewModel.setPrepareResult(isChecked,management.id)
-                }else{
-                    viewModel.addQuantity()
-//                    viewModel.setPrepareResult(isChecked,management.id)
-                }
+//                if(isChecked){
+//                    viewModel.minusQuantity()
+////                    viewModel.setPrepareResult(isChecked,management.id)
+//                }else{
+//                    viewModel.addQuantity()
+////                    viewModel.setPrepareResult(isChecked,management.id)
+//                }
 //                Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
             }
+            binding.checkboxManagement.setOnClickListener{
+//                Log.d("hank1","現在有無勾選 -> ${binding.checkboxManagement.isChecked}")
+                if(binding.checkboxManagement.isChecked){
+                    viewModel.minusQuantity()
+                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked,management.id)
+                }else{
+                    viewModel.addQuantity()
+                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked,management.id)
+                }
+            }
+
+
             binding.executePendingBindings()
         }
 
