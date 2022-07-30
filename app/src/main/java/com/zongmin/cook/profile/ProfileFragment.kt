@@ -56,7 +56,7 @@ class ProfileFragment : Fragment() {
 
         })
 
-        viewModel.recipes.observe(viewLifecycleOwner, Observer {
+        viewModel.recipe.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
 

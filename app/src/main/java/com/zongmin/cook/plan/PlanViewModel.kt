@@ -6,12 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zongmin.cook.data.Management
 import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.network.LoadApiStatus
-import com.zongmin.cook.util.ServiceLocator.cookRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

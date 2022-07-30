@@ -71,7 +71,7 @@ class RecipesItemFragment(private val recipesType: RecipesTypeFilter) : Fragment
         }
 
         binding.viewModel = viewModel
-        viewModel.recipes.observe(viewLifecycleOwner, Observer {
+        viewModel.recipe.observe(viewLifecycleOwner, Observer {
 //            Log.d("hank1", "觸發了變動，我想看recipes ->${it}")
 
             mCardAdapter!!.remakeData()

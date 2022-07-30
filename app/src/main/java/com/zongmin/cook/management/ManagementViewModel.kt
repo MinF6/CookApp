@@ -1,6 +1,5 @@
 package com.zongmin.cook.management
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -56,9 +55,6 @@ class ManagementViewModel(
                     null
                 }
             }
-//            Log.d("hank1","show result => ${result}")
-//            Log.d("hank1","show recipes => ${recipes.value}")
-
 
         }
     }
@@ -69,7 +65,6 @@ class ManagementViewModel(
 
             _management.value = when (result) {
                 is Result.Success -> {
-
                     _quantity.value = checkQuantity(result.data)
                     result.data
                 }
@@ -99,7 +94,6 @@ class ManagementViewModel(
 
     fun setPrepareResult(isPrepare: Boolean, managementId: String) {
         coroutineScope.launch {
-            Log.d("hank1", "我要改的食材id是 -> $managementId")
             when (val result = cookRepository.setPrepare(isPrepare, managementId)) {
                 is Result.Success -> {
                     result.data
@@ -126,26 +120,19 @@ class ManagementViewModel(
         _quantity.value = _quantity.value?.minus(1)
     }
 
-
-    //    var showTime = System.currentTimeMillis()
     private val dayTime = 24 * 60 * 60 * 1000L
 
-    //可考慮加星期幾
     fun getToday(): String {
         setDate(System.currentTimeMillis())
         return SimpleDateFormat(
             "yyyy/MM/dd",
             Locale.getDefault()
         ).format(Date(time.value!!))
-//        showTime = System.currentTimeMillis()
-//        return SimpleDateFormat("yyyy/MM/dd").format(Date(showTime))
-
 
     }
 
     fun getYesterday(): String? {
-//        showTime -= dayTime
-//        return SimpleDateFormat("yyyy/MM/dd").format(Date(showTime))
+
         _time.value = _time.value?.minus(dayTime)
         return SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date(time.value!!))
     }
@@ -156,7 +143,7 @@ class ManagementViewModel(
     }
 
     fun getThreeDay(): String {
-//        showTime = System.currentTimeMillis()
+
         setDate(System.currentTimeMillis())
         return SimpleDateFormat(
             "yyyy/MM/dd",
@@ -168,9 +155,8 @@ class ManagementViewModel(
         )
     }
 
-
     fun getWeek(): String {
-//        showTime = System.currentTimeMillis()
+
         setDate(System.currentTimeMillis())
         return SimpleDateFormat(
             "yyyy/MM/dd",
@@ -182,25 +168,16 @@ class ManagementViewModel(
         )
     }
 
-
     private fun setDate(time: Long) {
-//        val today = System.currentTimeMillis()
+
         val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(time)).toInt()
         val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(time)).toInt()
         val day = SimpleDateFormat("dd", Locale.getDefault()).format(Date(time)).toInt()
 
         val storedDate = GregorianCalendar(year, month - 1, day)
-//        Log.d("hank1", "今天轉換成毫秒是 -> ${storedDate.timeInMillis}")
         _time.value = storedDate.timeInMillis
 
 
     }
-
-    fun deleteManagement() {
-        _management.value = null
-    }
-
-
-
 
 }

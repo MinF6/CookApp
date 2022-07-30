@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleRegistry
 import androidx.viewpager.widget.PagerAdapter
 import com.zongmin.cook.bindImage
-import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.Recipe
 import com.zongmin.cook.databinding.ItemRecipesViewPagerBinding
 import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.recipes.item.RecipesItemViewModel
@@ -19,11 +17,11 @@ import com.zongmin.cook.recipes.item.RecipesItemViewModel
 class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesViewModel: RecipesViewModel, val onClickListener: OnClickListener) :
     PagerAdapter() {
     private val mViews: MutableList<CardView?>
-    private var mData: MutableList<Recipes>
+    private var mData: MutableList<Recipe>
     var baseElevation = 0f
         private set
 
-    fun addCardItem(item: Recipes) {
+    fun addCardItem(item: Recipe) {
         item.let {
 //            Log.d("hank1","進入addCardItem時機")
             mViews.add(null)
@@ -38,7 +36,7 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesV
 
     override fun getCount(): Int {
 //        return mData.size
-        return viewModel.recipes.value?.size ?: 0
+        return viewModel.recipe.value?.size ?: 0
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -58,9 +56,9 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesV
         return binding.root
     }
 
-    fun submitList(data: List<Recipes>) {
+    fun submitList(data: List<Recipe>) {
         Log.d("hank1","進入submitList")
-        this.mData = data as MutableList<Recipes>
+        this.mData = data as MutableList<Recipe>
         notifyDataSetChanged()
     }
 
@@ -72,7 +70,7 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesV
     }
 
     //    private fun bind(item: CardItem, view: View, binding: ItemRecipesViewPagerBinding) {
-    private fun bind(item: Recipes, binding: ItemRecipesViewPagerBinding, position: Int) {
+    private fun bind(item: Recipe, binding: ItemRecipesViewPagerBinding, position: Int) {
 //        val category = view.findViewById(R.id.text_recipes_item_category) as TextView
 //        val title = view.findViewById(R.id.text_recipes_item_title) as TextView
 //        val image = view.findViewById(R.id.image_recipes_item) as ImageView
@@ -148,8 +146,8 @@ class CardPagerAdapter(val viewModel: RecipesItemViewModel, private val recipesV
         mViews = ArrayList()
     }
 
-    class OnClickListener(val clickListener: (recipes: Recipes) -> Unit) {
-        fun onClick(recipes: Recipes) = clickListener(recipes)
+    class OnClickListener(val clickListener: (recipe: Recipe) -> Unit) {
+        fun onClick(recipe: Recipe) = clickListener(recipe)
     }
 
     fun remakeData(){

@@ -1,7 +1,6 @@
 package com.zongmin.cook.recipes.item
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,14 +19,14 @@ class RecipesItemViewModel(
     recipesType: RecipesTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
-    private var _recipes = MutableLiveData<List<Recipes>>()
+    private var _recipes = MutableLiveData<List<Recipe>>()
 
-    val recipes: LiveData<List<Recipes>>
+    val recipe: LiveData<List<Recipe>>
         get() = _recipes
 
-    private var _itemRecipe = MutableLiveData<Recipes>()
+    private var _itemRecipe = MutableLiveData<Recipe>()
 
-    val itemRecipe: LiveData<Recipes>
+    val itemRecipe: LiveData<Recipe>
         get() = _itemRecipe
 
     private var _management = MutableLiveData<Boolean>()
@@ -35,9 +34,9 @@ class RecipesItemViewModel(
     val management: LiveData<Boolean>
         get() = _management
 
-    private val _navigateToDetail = MutableLiveData<Recipes?>()
+    private val _navigateToDetail = MutableLiveData<Recipe?>()
 
-    val navigateToDetail: LiveData<Recipes?>
+    val navigateToDetail: LiveData<Recipe?>
         get() = _navigateToDetail
 
     private val _navigateToPlan = MutableLiveData<Boolean>()
@@ -70,7 +69,10 @@ class RecipesItemViewModel(
     private var key: String = ""
 
     init {
-        getRecipesResult(UserManager.user.collect, recipesType.value)
+        if (UserManager.user.collect.isNotEmpty()) {
+            getRecipesResult(UserManager.user.collect, recipesType.value)
+        }
+
 //        Log.d("hank1","查看在RecipesItemViewModel啟動時，UserManager就位沒 -> ${UserManager.user}")
 //        getCollectRecipesResult(UserManager.user.collect, recipesType.value)
 
@@ -81,7 +83,7 @@ class RecipesItemViewModel(
         coroutineScope.launch {
 //            _status.value = LoadApiStatus.LOADING
 
-            var result: Result<List<Recipes>>? = null
+            var result: Result<List<Recipe>>? = null
             if (key == "") {
                 if (type == "全部") {
                     result = cookRepository.getRecipes(collect)
@@ -149,7 +151,7 @@ class RecipesItemViewModel(
         }
     }
 
-     fun createManagementResult(management: Management) {
+    fun createManagementResult(management: Management) {
         coroutineScope.launch {
             _management.value = when (val result = cookRepository.createManagement(management)) {
                 is Result.Success -> {
@@ -183,7 +185,7 @@ class RecipesItemViewModel(
         image: String,
         category: String,
         time: Long,
-        recipes: Recipes
+        recipe: Recipe
     ) {
         val newPlan = Plan(
             "",
@@ -195,10 +197,10 @@ class RecipesItemViewModel(
 
         )
 //        Log.d("hank1","創建烹飪計畫的系統毫秒 -> ${System.currentTimeMillis()}")
-        _itemRecipe.value = recipes
+        _itemRecipe.value = recipe
 
 //        createPlanResult(newPlan)
-         createPlanResult(newPlan)
+        createPlanResult(newPlan)
 //        setManagement(id)
 
         _navigateToPlan.value = true
@@ -218,8 +220,8 @@ class RecipesItemViewModel(
     }
 
 
-    fun navigateToDetail(recipes: Recipes) {
-        _navigateToDetail.value = recipes
+    fun navigateToDetail(recipe: Recipe) {
+        _navigateToDetail.value = recipe
     }
 
     fun onDetailNavigated() {

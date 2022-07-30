@@ -5,37 +5,37 @@ import com.zongmin.cook.data.*
 class DefaultCookRepository(
     private val cookRemoteDataSource: CookDataSource,
 ) : CookRepository {
-    override suspend fun getRecipes(collect: List<String>): Result<List<Recipes>> {
+    override suspend fun getRecipes(collect: List<String>): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getRecipes(collect)
     }
 
-    override suspend fun getCategoryRecipes(collect: List<String>, type: String): Result<List<Recipes>> {
+    override suspend fun getCategoryRecipes(collect: List<String>, type: String): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getCategoryRecipes(collect, type)
     }
 
-    override suspend fun getCompoundRecipes(collect: List<String>, type: String, key: String): Result<List<Recipes>> {
+    override suspend fun getCompoundRecipes(collect: List<String>, type: String, key: String): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getCompoundRecipes(collect, type, key)
     }
 
-    override suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipes>> {
+    override suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getKeywordRecipes(collect, key)
     }
 
-    override suspend fun getCreationRecipes(userId: String): Result<List<Recipes>> {
+    override suspend fun getCreationRecipes(userId: String): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getCreationRecipes(userId)
     }
 
-    override suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipes>> {
+    override suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getCollectRecipes(collect)
     }
 
-    override suspend fun getPublicRecipes(): Result<List<Recipes>> {
+    override suspend fun getPublicRecipes(): Result<List<Recipe>> {
 
         return cookRemoteDataSource.getPublicRecipes()
     }

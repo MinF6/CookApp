@@ -118,13 +118,13 @@ class EditRecipesFragment : Fragment() {
 
         Log.d(
             "hank1",
-            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipes}"
+            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe}"
         )
-        val recipesData = EditRecipesFragmentArgs.fromBundle(requireArguments()).recipes
+        val recipesData = EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe
         if (recipesData != null) {
             binding.buttonEditDelete.visibility = View.VISIBLE
             viewModel.getRecipesData(recipesData)
-            binding.recipes = recipesData
+            binding.recipe = recipesData
             viewModel.selectSpinnerValue(binding.spinnerEditCategory, recipesData.category)
 
             //食材所需欄位

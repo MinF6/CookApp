@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="recipes"
-            type="com.zongmin.cook.data.Recipes" />
+            name="recipe"
+            type="com.zongmin.cook.data.Recipe" />
 
         <variable
             name="viewModel"
@@ -65,7 +65,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_social_food"
-            imageUrl="@{recipes.mainImage}"
+            imageUrl="@{recipe.mainImage}"
             android:layout_width="160dp"
             android:layout_height="120dp"
             android:layout_marginTop="8dp"

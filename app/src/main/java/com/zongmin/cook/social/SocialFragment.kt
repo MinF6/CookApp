@@ -43,7 +43,7 @@ class SocialFragment : Fragment() {
 
         binding.recyclerviewSocial.adapter = adapter
 
-        viewModel.recipes.observe(viewLifecycleOwner, Observer {
+        viewModel.recipe.observe(viewLifecycleOwner, Observer {
             Log.d("hank1", "觀察一下拿到的 => $it")
             if (it != null) {
                 viewModel.getUserList(it)
@@ -63,7 +63,7 @@ class SocialFragment : Fragment() {
         viewModel.userMap.observe(viewLifecycleOwner) {
             Log.d("hank1", "觀察一下拿到的 => $it")
 
-            adapter.submitList(viewModel.recipes.value)
+            adapter.submitList(viewModel.recipe.value)
 
         }
 

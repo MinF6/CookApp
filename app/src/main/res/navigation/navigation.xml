@@ -40,8 +40,8 @@
         tools:layout="@layout/fragment_detail_recipes">
 
         <argument
-            android:name="recipes"
-            app:argType="com.zongmin.cook.data.Recipes"
+            android:name="recipe"
+            app:argType="com.zongmin.cook.data.Recipe"
             app:nullable="false" />
 
     </fragment>
@@ -53,8 +53,8 @@
         tools:layout="@layout/fragment_edit_recipes">
 
         <argument
-            android:name="recipes"
-            app:argType="com.zongmin.cook.data.Recipes"
+            android:name="recipe"
+            app:argType="com.zongmin.cook.data.Recipe"
             app:nullable="true" />
 
     </fragment>
@@ -78,10 +78,6 @@
         tools:layout="@layout/fragment_follow">
 
     </fragment>
-<!--    <argument-->
-<!--        android:name="userList"-->
-<!--        app:argType="String[]"-->
-<!--        app:nullable="true" />-->
 
 
     <action

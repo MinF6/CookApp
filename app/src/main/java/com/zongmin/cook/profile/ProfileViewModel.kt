@@ -3,7 +3,7 @@ package com.zongmin.cook.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.Recipe
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
@@ -26,14 +26,14 @@ class ProfileViewModel(
     val user: LiveData<User>
         get() = _user
 
-    var _recipes = MutableLiveData<List<Recipes>>()
+    var _recipes = MutableLiveData<List<Recipe>>()
 
-    val recipes: LiveData<List<Recipes>>
+    val recipe: LiveData<List<Recipe>>
         get() = _recipes
 
-    private val _navigateToDetail = MutableLiveData<Recipes>()
+    private val _navigateToDetail = MutableLiveData<Recipe>()
 
-    val navigateToDetail: LiveData<Recipes>
+    val navigateToDetail: LiveData<Recipe>
         get() = _navigateToDetail
 
     private val _navigateToFollow = MutableLiveData<List<String>>()
@@ -98,8 +98,8 @@ class ProfileViewModel(
     }
 
 
-    fun navigateToDetail(recipes: Recipes) {
-        _navigateToDetail.value = recipes
+    fun navigateToDetail(recipe: Recipe) {
+        _navigateToDetail.value = recipe
     }
 
     fun onDetailNavigated() {

@@ -21,9 +21,9 @@ class EditRecipesViewModel(
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private var _recipes = MutableLiveData<Recipes>()
+    private var _recipes = MutableLiveData<Recipe>()
 
-    val recipes: LiveData<Recipes>
+    val recipe: LiveData<Recipe>
         get() = _recipes
 
     var mainUri = MutableLiveData<Boolean>()
@@ -62,8 +62,8 @@ class EditRecipesViewModel(
         }
     }
 
-    fun getRecipesData(recipes: Recipes) {
-        _recipes.value = recipes
+    fun getRecipesData(recipe: Recipe) {
+        _recipes.value = recipe
     }
 
     fun selectSpinnerValue(spinner: Spinner, myString: String) {

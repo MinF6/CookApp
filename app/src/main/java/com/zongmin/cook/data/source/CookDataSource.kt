@@ -1,25 +1,24 @@
 package com.zongmin.cook.data.source
 
-import androidx.lifecycle.MutableLiveData
 import com.zongmin.cook.data.*
 
 interface CookDataSource {
 
-    suspend fun getRecipes(collect: List<String>): Result<List<Recipes>>
+    suspend fun getRecipes(collect: List<String>): Result<List<Recipe>>
 
-    suspend fun getCategoryRecipes(collect: List<String>, type: String): Result<List<Recipes>>
+    suspend fun getCategoryRecipes(collect: List<String>, type: String): Result<List<Recipe>>
 
-    suspend fun getCompoundRecipes(collect: List<String>, type: String, key: String): Result<List<Recipes>>
+    suspend fun getCompoundRecipes(collect: List<String>, type: String, key: String): Result<List<Recipe>>
 
-    suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipes>>
+    suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipe>>
 
     //改版，根據使用者ID取得使用者創作的食譜
-    suspend fun getCreationRecipes(userId: String): Result<List<Recipes>>
+    suspend fun getCreationRecipes(userId: String): Result<List<Recipe>>
 
     //取得使用者有收藏的食譜
-    suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipes>>
+    suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipe>>
 
-    suspend fun getPublicRecipes(): Result<List<Recipes>>
+    suspend fun getPublicRecipes(): Result<List<Recipe>>
 
 //    suspend fun getIngredient():Result<List<Ingredient>>
 

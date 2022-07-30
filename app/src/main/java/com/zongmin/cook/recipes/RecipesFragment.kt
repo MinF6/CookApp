@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.zongmin.cook.NavigationDirections
-import com.zongmin.cook.data.Recipes
 import com.zongmin.cook.databinding.FragmentRecipesBinding
-import com.zongmin.cook.dialog.DialogPlanViewModel
 import com.zongmin.cook.ext.getVmFactory
 import java.text.SimpleDateFormat
 import java.util.*

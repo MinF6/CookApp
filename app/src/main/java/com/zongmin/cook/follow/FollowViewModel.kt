@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
-import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
