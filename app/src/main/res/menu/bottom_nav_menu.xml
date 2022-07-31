@@ -5,7 +5,6 @@
         android:id="@+id/navigation_recipes"
         android:icon="@drawable/recipes"
         android:title="食譜" />
-<!--    android:icon="@drawable/ic_baseline_menu_book_24"-->
 
     <item
         android:id="@+id/navigation_management"

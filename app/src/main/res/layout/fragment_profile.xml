@@ -5,14 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="user"
             type="com.zongmin.cook.data.User" />
-            <variable
-                name="viewModel"
-                type="com.zongmin.cook.profile.ProfileViewModel" />
-            <import type="android.view.View" />
-            <import type="com.zongmin.cook.network.LoadApiStatus"/>
+
+        <variable
+            name="viewModel"
+            type="com.zongmin.cook.profile.ProfileViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="com.zongmin.cook.network.LoadApiStatus" />
     </data>
 
 
@@ -32,16 +36,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/imageViewRound" />
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/image_profile_head_shot"-->
-        <!--            android:layout_width="60dp"-->
-        <!--            android:layout_height="60dp"-->
-        <!--            android:layout_margin="16dp"-->
-        <!--            imageUrl="@{user.headShot}"-->
-        <!--            android:src="@drawable/ic_baseline_catching_pokemon_24"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <TextView
             android:id="@+id/text_profile_name"
@@ -65,14 +59,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_profile_head_shot" />
-
-        <!--        <Button-->
-        <!--            android:id="@+id/button_profile_login"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="測試登入"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/text_profile_fans_title" />-->
 
         <TextView
             android:id="@+id/text_profile_fans_title"
@@ -134,35 +120,13 @@
             android:id="@+id/text_profile_introduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="我的介紹"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_profile_fans" />
-
-        <!--        <androidx.viewpager.widget.ViewPager-->
-        <!--            android:id="@+id/viewpager_profile"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce">-->
-
-        <!--            <com.google.android.material.tabs.TabLayout-->
-        <!--                android:id="@+id/tabs_profile"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="48dp"-->
-        <!--                app:tabIndicatorColor="#3f3a3a"-->
-        <!--                app:tabSelectedTextColor="#3f3a3a"-->
-        <!--                app:tabTextColor="#888888">-->
-
-        <!--            </com.google.android.material.tabs.TabLayout>-->
-
-        <!--        </androidx.viewpager.widget.ViewPager>-->
 
         <TextView
             android:id="@+id/text_profile_title"
@@ -172,7 +136,6 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-
             android:letterSpacing=".5"
             android:text="我發布的食譜"
             android:textSize="18dp"
@@ -209,7 +172,6 @@
             app:lottie_rawRes="@raw/cooking"
             app:lottie_speed="3"
             app:setupApiStatusForLottie="@{viewModel.status}" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

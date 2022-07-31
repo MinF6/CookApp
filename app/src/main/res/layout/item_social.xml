@@ -13,7 +13,6 @@
         <variable
             name="viewModel"
             type="com.zongmin.cook.social.SocialViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,18 +31,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/imageViewRound"
             tools:src="@drawable/ic_baseline_person_24" />
-        <!--        imageUrl="@{`https://img-global.cpcdn.com/users/bf4baf131b3d9154/108x108cq50/avatar.jpg`}"-->
-        <!--        android:layout_margin="16dp"-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/image_social_user"-->
-        <!--            android:layout_width="24dp"-->
-        <!--            android:layout_height="24dp"-->
-        <!--            android:layout_margin="16dp"-->
-        <!--            imageUrl="@{`https://img-global.cpcdn.com/users/bf4baf131b3d9154/108x108cq50/avatar.jpg`}"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            tools:src="@drawable/ic_baseline_catching_pokemon_24" />-->
 
         <TextView
             android:id="@+id/text_social_user"
@@ -76,18 +63,6 @@
             app:layout_constraintTop_toBottomOf="@+id/image_social_user"
             app:shapeAppearanceOverlay="@style/imageViewCorner" />
 
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/image_social_food"-->
-        <!--            android:layout_width="160dp"-->
-        <!--            android:layout_height="120dp"-->
-        <!--            android:layout_marginTop="8dp"-->
-        <!--            android:layout_marginEnd="16dp"-->
-        <!--            imageUrl="@{recipes.mainImage}"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/image_social_user"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/image_social_user" />-->
-
         <TextView
             android:id="@+id/text_social_name"
             android:layout_width="wrap_content"
@@ -108,7 +83,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/text_social_name"
             app:layout_constraintEnd_toEndOf="@+id/image_social_food"
             app:layout_constraintTop_toTopOf="@+id/text_social_name" />
-        <!--        android:backgroundTint="#ffd700"-->
+
         <View
             android:id="@+id/view_social_like"
             android:layout_width="24dp"
@@ -119,8 +94,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_social_name"
             app:layout_constraintTop_toBottomOf="@+id/text_social_name" />
-<!--        android:backgroundTint="@{viewModel.like == true ? @color/gold : @color/black}"-->
-
 
         <TextView
             android:id="@+id/text_social_like"
@@ -140,7 +113,6 @@
             android:background="@drawable/ic_baseline_add_reaction_24"
             app:layout_constraintStart_toEndOf="@+id/text_social_like"
             app:layout_constraintTop_toTopOf="@+id/view_social_like" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

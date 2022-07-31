@@ -21,12 +21,8 @@ class PlanViewModel(
     private val cookRepository: CookRepository
 ) : ViewModel() {
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     private var _plan = MutableLiveData<List<Plan>>()
 

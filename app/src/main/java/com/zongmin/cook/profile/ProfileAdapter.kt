@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zongmin.cook.data.Recipe
 import com.zongmin.cook.databinding.ItemProfileCreationBinding
 
-class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipe, RecyclerView.ViewHolder>(DiffCallback) {
+class ProfileAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<Recipe, RecyclerView.ViewHolder>(DiffCallback) {
 
     class UserViewHolder(private var binding: ItemProfileCreationBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -16,14 +17,10 @@ class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipe,
             binding.recipe = recipe
             binding.textProfileRecipes.text = recipe.name
             var ingredientlist = ""
-            for(i in recipe.ingredient){
+            for (i in recipe.ingredient) {
                 ingredientlist += "${i.ingredientName}\n"
             }
             binding.textProfileIngredient.text = ingredientlist
-
-
-
-
             binding.executePendingBindings()
         }
 
@@ -62,8 +59,6 @@ class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipe,
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     class OnClickListener(val clickListener: (recipe: Recipe) -> Unit) {

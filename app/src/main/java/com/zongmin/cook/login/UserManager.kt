@@ -4,9 +4,6 @@ import android.content.Context
 import com.zongmin.cook.CookApplication
 import com.zongmin.cook.data.User
 
-/**
- * Created by Wayne Chen in Jul. 2019.
- */
 object UserManager {
 
     private const val USER_DATA = "user_data"

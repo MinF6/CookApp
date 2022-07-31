@@ -5,9 +5,8 @@ import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.util.ServiceLocator
 import kotlin.properties.Delegates
 
-class CookApplication: Application() {
+class CookApplication : Application() {
 
-    // Depends on the flavor,
     val cookRepository: CookRepository
         get() = ServiceLocator.provideTasksRepository(this)
 

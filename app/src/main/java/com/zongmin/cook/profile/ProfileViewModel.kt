@@ -26,7 +26,7 @@ class ProfileViewModel(
     val user: LiveData<User>
         get() = _user
 
-    var _recipes = MutableLiveData<List<Recipe>>()
+    private var _recipes = MutableLiveData<List<Recipe>>()
 
     val recipe: LiveData<List<Recipe>>
         get() = _recipes
@@ -89,11 +89,6 @@ class ProfileViewModel(
                     null
                 }
             }
-
-//            Log.d("hank1","check2，檢查Query結果，result => $result")
-//            Log.d("hank1","check2，檢查Query結果，result => $result2")
-//            Log.d("hank1","show recipes => ${recipes.value}")
-
         }
     }
 
@@ -114,15 +109,5 @@ class ProfileViewModel(
     fun onFollowNavigated() {
         _navigateToFollow.value = null
     }
-
-
-
-
-
-
-
-
-
-
 
 }

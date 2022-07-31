@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/loginFragment">
-    <!--    app:startDestination="@id/recipesFragment">-->
 
     <fragment
         android:id="@+id/recipesFragment"
@@ -84,10 +83,7 @@
         android:id="@+id/navigate_to_recipes_fragment"
         app:destination="@+id/recipesFragment"
         app:popUpTo="@id/navigation"
-        app:popUpToInclusive="true"/>
-    <!--    app:popUpTo="@id/navigation"-->
-    <!--    app:popUpToInclusive="true"-->
-
+        app:popUpToInclusive="true" />
 
     <action
         android:id="@+id/navigate_to_managment_fragment"

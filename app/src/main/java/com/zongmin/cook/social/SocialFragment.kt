@@ -19,12 +19,6 @@ class SocialFragment : Fragment() {
 
     private val viewModel by viewModels<SocialViewModel> { getVmFactory() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,45 +31,28 @@ class SocialFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = SocialAdapter(SocialAdapter.OnClickListener {
-            Log.d("hank1", "我點到的item是 -> $it")
             viewModel.navigateToDetail(it)
         }, viewModel)
 
         binding.recyclerviewSocial.adapter = adapter
 
-        viewModel.recipe.observe(viewLifecycleOwner, Observer {
-            Log.d("hank1", "觀察一下拿到的 => $it")
-            if (it != null) {
+        viewModel.recipe.observe(viewLifecycleOwner) {
+            it?.let {
                 viewModel.getUserList(it)
             }
 
+        }
 
-//            adapter.submitList(it)
-        })
-
-//        UserManager.user.collect
         viewModel.userList.observe(viewLifecycleOwner) {
-//            Log.d("hank1","看看查到的User資料庫的列表 -> $it")
             viewModel.setUserMap(it)
-
         }
 
         viewModel.userMap.observe(viewLifecycleOwner) {
-            Log.d("hank1", "觀察一下拿到的 => $it")
-
             adapter.submitList(viewModel.recipe.value)
-
         }
 
-        viewModel.user.observe(viewLifecycleOwner){
-            Log.d("hank1", "更新的UserData => $it")
+        viewModel.user.observe(viewLifecycleOwner) {
             UserManager.user = it
-//            viewModel.getPublicRecipesResult()
-        }
-
-        viewModel.like.observe(viewLifecycleOwner){
-            Log.d("hank1", "有人改變了讚")
-//            viewModel.getPublicRecipesResult()
         }
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner) {
@@ -84,10 +61,6 @@ class SocialFragment : Fragment() {
                 viewModel.onDetailNavigated()
             }
         }
-
-
-
-
 
         return binding.root
     }

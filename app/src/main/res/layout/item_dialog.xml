@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="食物名稱"
+            android:textColor="#ffffff"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="@+id/text_dialog_category"
             app:layout_constraintStart_toStartOf="@+id/text_dialog_category"
             app:layout_constraintTop_toBottomOf="@+id/text_dialog_category" />
@@ -46,8 +46,8 @@
         <View
             android:layout_width="150dp"
             android:layout_height="1dp"
-            android:background="#eeeeee"
             android:layout_margin="8dp"
+            android:background="#eeeeee"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_dialog_title" />

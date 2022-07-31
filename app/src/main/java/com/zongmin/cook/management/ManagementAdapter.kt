@@ -14,7 +14,6 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
     class ManagementViewHolder(private var binding: ItemManagementBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(management: Management, viewModel: ManagementViewModel) {
-
             binding.textManagementName.text = management.name
             binding.textManagementBelongName.text = management.belong
             binding.textManagementIngredientQuantity.text = management.quantity
@@ -64,8 +63,6 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
         override fun areContentsTheSame(oldItem: Management, newItem: Management): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
 

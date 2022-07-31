@@ -132,7 +132,6 @@ class ManagementViewModel(
     }
 
     fun getYesterday(): String? {
-
         _time.value = _time.value?.minus(dayTime)
         return SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(Date(time.value!!))
     }
@@ -143,7 +142,6 @@ class ManagementViewModel(
     }
 
     fun getThreeDay(): String {
-
         setDate(System.currentTimeMillis())
         return SimpleDateFormat(
             "yyyy/MM/dd",
@@ -156,7 +154,6 @@ class ManagementViewModel(
     }
 
     fun getWeek(): String {
-
         setDate(System.currentTimeMillis())
         return SimpleDateFormat(
             "yyyy/MM/dd",
@@ -173,10 +170,8 @@ class ManagementViewModel(
         val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(time)).toInt()
         val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(time)).toInt()
         val day = SimpleDateFormat("dd", Locale.getDefault()).format(Date(time)).toInt()
-
         val storedDate = GregorianCalendar(year, month - 1, day)
         _time.value = storedDate.timeInMillis
-
 
     }
 

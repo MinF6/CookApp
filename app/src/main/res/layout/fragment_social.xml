@@ -5,11 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.zongmin.cook.social.SocialViewModel" />
+
         <import type="android.view.View" />
-        <import type="com.zongmin.cook.network.LoadApiStatus"/>
+
+        <import type="com.zongmin.cook.network.LoadApiStatus" />
     </data>
 
 
@@ -37,13 +40,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_social_title"
-            tools:listitem="@layout/item_social"
-            />
+            app:spanCount="2"
+            tools:listitem="@layout/item_social" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_view_recipes_loading_news"
             android:layout_width="300dp"
@@ -58,9 +61,6 @@
             app:lottie_rawRes="@raw/cooking"
             app:lottie_speed="3"
             app:setupApiStatusForLottie="@{viewModel.status}" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>

@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="step"
             type="com.zongmin.cook.data.Step" />
@@ -54,7 +53,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/imageViewCorner"
             tools:src="@drawable/ic_baseline_catching_pokemon_24" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
