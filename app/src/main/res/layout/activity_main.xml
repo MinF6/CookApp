@@ -41,10 +41,11 @@
             android:layout_marginStart="16dp"
             android:background="@drawable/search"
             android:elevation="5dp"
-            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.RECIPES ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.RECIPES ? View.GONE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
+<!--        android:visibility="@{viewModel.currentFragmentType == CurrentFragmentType.RECIPES ? View.VISIBLE : View.GONE}"-->
 
         <TextView
             android:id="@+id/text_activity_title"

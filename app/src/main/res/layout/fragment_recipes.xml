@@ -27,11 +27,10 @@
             android:id="@+id/viewpager_recipes"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
             app:layout_constraintBottom_toTopOf="@+id/radioGroup_recipes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_reicpes_search"></androidx.viewpager.widget.ViewPager>
+            app:layout_constraintTop_toBottomOf="@+id/button_reicpes_search" />
 
 
         <EditText

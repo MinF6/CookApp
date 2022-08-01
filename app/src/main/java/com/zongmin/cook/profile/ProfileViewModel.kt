@@ -1,5 +1,6 @@
 package com.zongmin.cook.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,11 +52,11 @@ class ProfileViewModel(
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
             val result = cookRepository.getUser(UserManager.user.id)
-//            val result2 = cookRepository.getRecipes()
             val result2 = cookRepository.getCreationRecipes(UserManager.user.id)
 
             _user.value = when (result) {
                 is Result.Success -> {
+                    Log.d("hank1","查詢使用者成功")
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }

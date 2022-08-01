@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.zongmin.cook"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 8
         versionName "1.0"

@@ -71,8 +71,8 @@ class CardPagerAdapter(
         val imgUrl = item.mainImage
 
         bindImage(image, imgUrl)
-        category.setText(item.category)
-        title.setText(item.name)
+        category.text = item.category
+        title.text = item.name
 
         val cardView = binding.cardView
         if (baseElevation == 0f) {

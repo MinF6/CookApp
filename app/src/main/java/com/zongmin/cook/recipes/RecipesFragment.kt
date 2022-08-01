@@ -24,7 +24,7 @@ class RecipesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -32,7 +32,6 @@ class RecipesFragment : Fragment() {
         binding.radioGroupRecipes.setOnCheckedChangeListener { _, i ->
             val checkedMeals =
                 binding.radioGroupRecipes.findViewById<RadioButton>(i).text.toString()
-            Log.d("hank1", "radio改變，目前選的是 -> ${checkedMeals}")
             viewModel.threeMeals.value = checkedMeals
         }
 
@@ -45,8 +44,10 @@ class RecipesFragment : Fragment() {
         }
 
         viewModel.date.observe(viewLifecycleOwner) {
-            binding.buttonRecipesDialog.text = SimpleDateFormat("MM/dd").format(Date(it))
-            binding.buttonRecipesDate.text = SimpleDateFormat("MM/dd").format(Date(it))
+            binding.buttonRecipesDialog.text =
+                SimpleDateFormat("MM/dd", Locale.getDefault()).format(Date(it))
+            binding.buttonRecipesDate.text =
+                SimpleDateFormat("MM/dd", Locale.getDefault()).format(Date(it))
         }
 
         binding.buttonReicpesSearch.setOnClickListener {

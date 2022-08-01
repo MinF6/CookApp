@@ -28,12 +28,6 @@ class EditRecipesViewModel(
 
     var mainUri = MutableLiveData<Boolean>()
 
-    var itemUri = MutableLiveData<Uri>()
-//
-//    val mainUri: LiveData<Boolean>
-//        get() = _mainUri
-
-
     private var _createId = MutableLiveData<String>()
 
     val createId: LiveData<String>
@@ -45,8 +39,6 @@ class EditRecipesViewModel(
             val result = cookRepository.createRecipes(summary, ingredient, step)
             _createId.value = when (result) {
                 is Result.Success -> {
-                    Log.d("hank1", "成功更新111，看看result -> $result")
-
                     result.data
                 }
                 is Result.Fail -> {
@@ -74,11 +66,6 @@ class EditRecipesViewModel(
                 break
             }
         }
-    }
-
-
-    fun uploadImage() {
-
     }
 
     fun deleteRecipes(id: String) {

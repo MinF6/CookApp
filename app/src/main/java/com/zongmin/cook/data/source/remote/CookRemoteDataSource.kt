@@ -713,11 +713,12 @@ object CookRemoteDataSource : CookDataSource {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    Log.d("hank1","有查到東西嗎? -> $task")
 //                    val list = mutableListOf<User>()
 //                    var list: User
                     for (document in task.result!!) {
                         val user = document.toObject(User::class.java)
-
+                        Log.d("hank1","有查到東西嗎222? -> $user")
                         continuation.resume(Result.Success(user))
                     }
 //                    continuation.resume(Result.Success(list))
