@@ -5,28 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.zongmin.cook.data.Ingredient
-import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.Recipe
 import com.zongmin.cook.databinding.ItemProfileCreationBinding
-import com.zongmin.cook.social.SocialAdapter
 
-class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes, RecyclerView.ViewHolder>(DiffCallback) {
+class ProfileAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<Recipe, RecyclerView.ViewHolder>(DiffCallback) {
 
     class UserViewHolder(private var binding: ItemProfileCreationBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(recipes: Recipes) {
-            binding.result = recipes
-            binding.textProfileRecipes.text = recipes.name
-//            val ingredientlist = mutableListOf<String>()
+        fun bind(recipe: Recipe) {
+            binding.recipe = recipe
+            binding.textProfileRecipes.text = recipe.name
             var ingredientlist = ""
-            for(i in recipes.ingredient){
+            for (i in recipe.ingredient) {
                 ingredientlist += "${i.ingredientName}\n"
             }
             binding.textProfileIngredient.text = ingredientlist
-
-
-
-
             binding.executePendingBindings()
         }
 
@@ -47,7 +41,7 @@ class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is UserViewHolder -> {
-                val selectedItem = getItem(position) as Recipes
+                val selectedItem = getItem(position) as Recipe
                 holder.itemView.setOnClickListener {
                     onClickListener.onClick(getItem(position))
                 }
@@ -57,20 +51,18 @@ class ProfileAdapter(val onClickListener: OnClickListener) : ListAdapter<Recipes
     }
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Recipes>() {
-        override fun areItemsTheSame(oldItem: Recipes, newItem: Recipes): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Recipe>() {
+        override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Recipes, newItem: Recipes): Boolean {
+        override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
-    class OnClickListener(val clickListener: (recipes: Recipes) -> Unit) {
-        fun onClick(recipes: Recipes) = clickListener(recipes)
+    class OnClickListener(val clickListener: (recipe: Recipe) -> Unit) {
+        fun onClick(recipe: Recipe) = clickListener(recipe)
     }
 
 }

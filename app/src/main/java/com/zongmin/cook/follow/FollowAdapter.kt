@@ -9,7 +9,7 @@ import com.zongmin.cook.data.User
 import com.zongmin.cook.databinding.ItemFollowBinding
 
 
-class FollowAdapter(val onClickListener: OnClickListener) :
+class FollowAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<User, RecyclerView.ViewHolder>(DiffCallback) {
 
     class UserViewHolder(private var binding: ItemFollowBinding) :
@@ -18,7 +18,6 @@ class FollowAdapter(val onClickListener: OnClickListener) :
             binding.user = user
             binding.textFollowName.text = user.name
             binding.textFollowCreation.text = "創作了${user.creation.size.toString()}篇食譜"
-
 
             binding.executePendingBindings()
         }

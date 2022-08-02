@@ -21,18 +21,12 @@ class EditRecipesViewModel(
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private var _recipes = MutableLiveData<Recipes>()
+    private var _recipes = MutableLiveData<Recipe>()
 
-    val recipes: LiveData<Recipes>
+    val recipe: LiveData<Recipe>
         get() = _recipes
 
     var mainUri = MutableLiveData<Boolean>()
-
-    var itemUri = MutableLiveData<Uri>()
-//
-//    val mainUri: LiveData<Boolean>
-//        get() = _mainUri
-
 
     private var _createId = MutableLiveData<String>()
 
@@ -45,8 +39,6 @@ class EditRecipesViewModel(
             val result = cookRepository.createRecipes(summary, ingredient, step)
             _createId.value = when (result) {
                 is Result.Success -> {
-                    Log.d("hank1", "成功更新111，看看result -> $result")
-
                     result.data
                 }
                 is Result.Fail -> {
@@ -62,8 +54,8 @@ class EditRecipesViewModel(
         }
     }
 
-    fun getRecipesData(recipes: Recipes) {
-        _recipes.value = recipes
+    fun getRecipesData(recipe: Recipe) {
+        _recipes.value = recipe
     }
 
     fun selectSpinnerValue(spinner: Spinner, myString: String) {
@@ -74,11 +66,6 @@ class EditRecipesViewModel(
                 break
             }
         }
-    }
-
-
-    fun uploadImage() {
-
     }
 
     fun deleteRecipes(id: String) {

@@ -4,13 +4,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.util.Log
-import android.util.MutableLong
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zongmin.cook.data.Recipes
-import com.zongmin.cook.data.source.CookRepository
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,23 +16,17 @@ class RecipesViewModel : ViewModel() {
     val threeMeals = MutableLiveData("早餐")
     var date = MutableLiveData<Long>()
 
-
     init {
         date.value = getToday()
         Log.d("hank1", "dat/e初始值 -> ${date.value}")
     }
 
     private fun getToday(): Long {
-
-//        _date.value = SimpleDateFormat("MM/dd").format(Date())
         val year = SimpleDateFormat("yyyy").format(Date())
         val month = SimpleDateFormat("MM").format(Date())
         val day = SimpleDateFormat("dd").format(Date())
-//        date.value = GregorianCalendar(year.toInt(), month.toInt()-1, day.toInt()).timeInMillis
         return GregorianCalendar(year.toInt(), month.toInt() - 1, day.toInt()).timeInMillis
 
-
-//        date = System.currentTimeMillis()
     }
 
 
@@ -46,8 +35,6 @@ class RecipesViewModel : ViewModel() {
         val nowYear = calendar.get(Calendar.YEAR)
         val nowMonth = calendar.get(Calendar.MONTH)
         val nowDay = calendar.get(Calendar.DAY_OF_MONTH)
-        val nowHour = calendar.get(Calendar.HOUR_OF_DAY)
-        val nowMinute = calendar.get(Calendar.MINUTE)
 
         var showYear = 0
         var showMonth = 0
@@ -55,45 +42,19 @@ class RecipesViewModel : ViewModel() {
 
         val timePickerOnDataSetListener =
             TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-//                showHour = hour
-//                showMinute = minute
-//                Logger.i("hour: $showHour, minute: $showMinute")
-//                Logger.i("Dialog selected time year: $showYear, month: $showMonth, day: $showDay, hour: $showHour, minute: $showMinute")
                 calendar.set(Calendar.YEAR, showYear)
                 calendar.set(Calendar.MONTH, showMonth)
                 calendar.set(Calendar.DAY_OF_MONTH, showDay)
 
-//                calendar.set(Calendar.HOUR_OF_DAY, showHour)
-//                calendar.set(Calendar.MINUTE, showMinute)
-//                Logger.i("Dialog selected calendar.time = ${calendar.time}")
-//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar}")
-//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.time}")
-//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.timeInMillis}")
-//                _timeStamp.value = Timestamp(calendar.time)
-//                _timeStamp.value = calendar.time
             }
 
         val datePickerOnDataSetListener =
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
-//                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE)
-//                setText(sdf.format(calendar.time))
                 showYear = year
                 showMonth = month
                 showDay = day
-//                Logger.i("year: $showYear, month: $showMonth, day: $showDay")
-//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.time}")
-//                Log.d("hank1","看一下最後拿到的時間是 -> ${calendar.timeInMillis}")
-                Log.d("hank1", "看一下最後拿到的日期是 -> ${year}/$month/$day")
-
                 val storedDate = GregorianCalendar(year, month, day)
-                Log.d("hank1", "看一下最後拿到的日期轉毫秒是 -> ${storedDate.timeInMillis}")
                 date.value = storedDate.timeInMillis
-//                TimePickerDialog(
-//                    context,
-//                    timePickerOnDataSetListener,
-//                    nowHour,
-//                    nowMinute,
-//                    true).show()
             }
 
         DatePickerDialog(

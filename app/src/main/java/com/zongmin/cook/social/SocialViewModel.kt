@@ -1,10 +1,9 @@
 package com.zongmin.cook.social
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.zongmin.cook.data.Recipes
+import com.zongmin.cook.data.Recipe
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
@@ -19,19 +18,18 @@ class SocialViewModel(
     private val cookRepository: CookRepository
 ) : ViewModel() {
 
-
     private var viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private var _recipes = MutableLiveData<List<Recipes>>()
+    private var _recipes = MutableLiveData<List<Recipe>>()
 
-    val recipes: LiveData<List<Recipes>>
+    val recipe: LiveData<List<Recipe>>
         get() = _recipes
 
-    private val _navigateToDetail = MutableLiveData<Recipes>()
+    private val _navigateToDetail = MutableLiveData<Recipe>()
 
-    val navigateToDetail: LiveData<Recipes>
+    val navigateToDetail: LiveData<Recipe>
         get() = _navigateToDetail
 
     private var _userMap = MutableLiveData<MutableMap<String, User>>()
@@ -53,11 +51,6 @@ class SocialViewModel(
 
     val status: LiveData<LoadApiStatus>
         get() = _status
-
-    private val _like = MutableLiveData<Boolean>()
-
-    val like: LiveData<Boolean>
-        get() = _like
 
 
     fun getPublicRecipesResult() {
@@ -82,7 +75,6 @@ class SocialViewModel(
                     null
                 }
             }
-//            Log.d("hank1","show recipes => ${recipes.value}")
         }
     }
 
@@ -139,14 +131,11 @@ class SocialViewModel(
         }
     }
 
-    fun getUserList(recipes: List<Recipes>) {
-//        val userList = mutableListOf<String>()
+    fun getUserList(recipes: List<Recipe>) {
         val userList = mutableSetOf<String>()
         for (i in recipes) {
             userList.add(i.author)
         }
-//        Log.d("hank1","看一下整理好的User清單set -> ${userList.toList()}")
-
         getSocialUser(userList.toList())
     }
 
@@ -154,17 +143,13 @@ class SocialViewModel(
         val map = mutableMapOf<String, User>()
         for (user in userList) {
             map[user.id] = user
-
         }
         _userMap.value = map
-//        Log.d("hank1","看一下整理好的User map -> ${apple}")
-//        Log.d("hank1","指定map -> ${apple["EeFC0IAZXET3MSDGP5XsF8k60Gt1"]}")
-
     }
 
 
-    fun navigateToDetail(recipes: Recipes) {
-        _navigateToDetail.value = recipes
+    fun navigateToDetail(recipe: Recipe) {
+        _navigateToDetail.value = recipe
     }
 
     fun onDetailNavigated() {
@@ -174,8 +159,7 @@ class SocialViewModel(
     private fun setCollectResult(isCollect: Boolean, recipesId: String) {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            val result = cookRepository.setCollect(isCollect, recipesId)
-            when (result) {
+            when (val result = cookRepository.setCollect(isCollect, recipesId)) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
                     result.data
@@ -200,12 +184,9 @@ class SocialViewModel(
     private fun setLikeResult(isLiked: Boolean, recipesId: String) {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            val result = cookRepository.setLike(isLiked, recipesId)
-             _like.value = when (result) {
-//              when (result) {
+            when (val result = cookRepository.setLike(isLiked, recipesId)) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
-//                    getPublicRecipesResult()
                     result.data
                 }
                 is Result.Fail -> {
@@ -236,19 +217,13 @@ class SocialViewModel(
     }
 
     fun changeLike(recipesId: String, isLiked: Boolean): Boolean {
-        return if(isLiked){
-            //已經點讚要取消
+        return if (isLiked) {
             setLikeResult(true, recipesId)
             false
-        }else{
+        } else {
             setLikeResult(false, recipesId)
             true
         }
     }
-
-//    fun setLike(isLiked: Boolean){
-//        _like.value = isLiked
-//    }
-
 
 }

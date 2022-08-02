@@ -14,9 +14,7 @@ class DetailIngredientAdapter : ListAdapter<Ingredient, RecyclerView.ViewHolder>
     class DetailIngredientViewHolder(private var binding: ItemIngredientBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ingredient: Ingredient) {
-            binding.textIngredientName.text = ingredient.ingredientName
-            binding.textIngredientQuantity.text = ingredient.quantity
-            binding.textIngredientUnit.text = ingredient.unit
+            binding.ingredient = ingredient
 
             binding.executePendingBindings()
         }
@@ -25,7 +23,6 @@ class DetailIngredientAdapter : ListAdapter<Ingredient, RecyclerView.ViewHolder>
             fun from(parent: ViewGroup): DetailIngredientViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemIngredientBinding.inflate(layoutInflater, parent, false)
-
                 return DetailIngredientViewHolder(binding)
             }
         }
@@ -47,15 +44,11 @@ class DetailIngredientAdapter : ListAdapter<Ingredient, RecyclerView.ViewHolder>
 
     companion object DiffCallback : DiffUtil.ItemCallback<Ingredient>() {
         override fun areItemsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
-            return oldItem === newItem  //這邊是三個等號 判斷引用是否相等
+            return oldItem === newItem
         }
 
         override fun areContentsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {
             return oldItem == newItem
         }
-
-
     }
-
-
 }

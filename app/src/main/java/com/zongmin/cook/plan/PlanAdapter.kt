@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.PlanContent
 import com.zongmin.cook.databinding.ItemPlanBinding
 import com.zongmin.cook.databinding.ItemPlanThreeMealsBinding
 
@@ -35,10 +34,6 @@ class PlanAdapter(val viewModel: PlanViewModel) :
             binding.textPlanCategory.text = plan.planContent.category
 
             binding.buttonPlanCancel.setOnClickListener {
-                Log.d("hank1", "看看這個item -> ${plan}")
-//                viewModel.deletePlan(plan.id,viewModel.saveTime)
-                //這裡的時間有bug
-//                viewModel.deletePlan(plan.id,1658275200000)
                 viewModel.time.value?.let { it1 -> viewModel.deletePlan(plan.id, it1) }
             }
             binding.executePendingBindings()
@@ -61,9 +56,6 @@ class PlanAdapter(val viewModel: PlanViewModel) :
         }
     }
 
-    /**
-     * Replaces the contents of a view (invoked by the layout manager)
-     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         when (holder) {
@@ -76,14 +68,12 @@ class PlanAdapter(val viewModel: PlanViewModel) :
         }
     }
 
-
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is PlanItem.Title -> ITEM_VIEW_TYPE_TITLE
             is PlanItem.FullPlan -> ITEM_VIEW_TYPE_PRODUCT_FULL
         }
     }
-
 
     companion object DiffCallback : DiffUtil.ItemCallback<PlanItem>() {
         override fun areItemsTheSame(oldItem: PlanItem, newItem: PlanItem): Boolean {
@@ -96,7 +86,6 @@ class PlanAdapter(val viewModel: PlanViewModel) :
 
         private const val ITEM_VIEW_TYPE_TITLE = 0x00
         private const val ITEM_VIEW_TYPE_PRODUCT_FULL = 0x01
-        private const val ITEM_VIEW_TYPE_PRODUCT_COLLAGE = 0x02
     }
 
 

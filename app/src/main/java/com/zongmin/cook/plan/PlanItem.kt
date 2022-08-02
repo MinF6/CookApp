@@ -1,7 +1,6 @@
 package com.zongmin.cook.plan
 
 import com.zongmin.cook.data.Plan
-import com.zongmin.cook.data.PlanContent
 
 sealed class PlanItem {
 

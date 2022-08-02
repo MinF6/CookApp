@@ -12,20 +12,15 @@ import com.zongmin.cook.data.PlanContent
 import com.zongmin.cook.databinding.ItemDialogBinding
 import com.zongmin.cook.databinding.ItemDialogThreeMealsBinding
 
-class DialogPlanAdapter(val viewModel: DialogPlanViewModel) : ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffCallback) {
+class DialogPlanAdapter(val viewModel: DialogPlanViewModel) :
+    ListAdapter<DialogItem, RecyclerView.ViewHolder>(DiffCallback) {
 
 
     class DialogTitleViewHolder(private var binding: ItemDialogThreeMealsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: String) {
-//            Log.d("hank1","有沒有進來Item裡面")
             binding.textDialogThree.text = title
-
-
-
-
-
             binding.executePendingBindings()
         }
     }
@@ -33,19 +28,11 @@ class DialogPlanAdapter(val viewModel: DialogPlanViewModel) : ListAdapter<Dialog
     class DialogPlanContentViewHolder(private var binding: ItemDialogBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(plan: Plan,viewModel: DialogPlanViewModel) {
-//            Log.d("hank1","有沒有進來Item裡面 => ${planContent}")
+        fun bind(plan: Plan, viewModel: DialogPlanViewModel) {
             binding.textDialogTitle.text = plan.planContent.name
             binding.textDialogCategory.text = plan.planContent.category
-
             binding.buttonDialogCancel.setOnClickListener {
-                Log.d("hank1","點擊了${plan}的取消紐")
-                Log.d("hank1","點擊了${plan.id}的取消紐")
-//                viewModel.deletePlan(plan.id)
-
             }
-
-
             binding.executePendingBindings()
         }
     }
@@ -76,7 +63,7 @@ class DialogPlanAdapter(val viewModel: DialogPlanViewModel) : ListAdapter<Dialog
                 holder.bind((getItem(position) as DialogItem.Title).title)
             }
             is DialogPlanContentViewHolder -> {
-                holder.bind((getItem(position) as DialogItem.FullPlan).plan,viewModel)
+                holder.bind((getItem(position) as DialogItem.FullPlan).plan, viewModel)
             }
         }
     }
@@ -101,7 +88,6 @@ class DialogPlanAdapter(val viewModel: DialogPlanViewModel) : ListAdapter<Dialog
 
         private const val ITEM_VIEW_TYPE_TITLE = 0x00
         private const val ITEM_VIEW_TYPE_PRODUCT_FULL = 0x01
-//        private const val ITEM_VIEW_TYPE_PRODUCT_COLLAGE = 0x02
     }
 
 

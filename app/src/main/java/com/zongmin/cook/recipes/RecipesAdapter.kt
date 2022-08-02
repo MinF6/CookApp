@@ -12,7 +12,7 @@ class RecipesAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapt
 
     override fun getCount() = RecipesTypeFilter.values().size
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return RecipesTypeFilter.values()[position].value
     }
 }

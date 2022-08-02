@@ -12,22 +12,22 @@
             android:id="@+id/item_edittext_ingredient_name"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:theme="@style/editTextTheme"
-            android:hint="食材名稱" />
+            android:hint="食材名稱"
+            android:textSize="14dp"
+            android:theme="@style/editTextTheme" />
 
         <EditText
             android:id="@+id/item_edittext_quantity"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textSize="14dp"
             android:layout_marginTop="16dp"
-            android:theme="@style/editTextTheme"
             android:hint="數量"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textSize="14dp"
+            android:theme="@style/editTextTheme" />
 
         <EditText
             android:id="@+id/item_edittext_unit"
@@ -36,9 +36,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:theme="@style/editTextTheme"
+            android:hint="單位"
             android:textSize="14dp"
-            android:hint="單位" />
+            android:theme="@style/editTextTheme" />
 
         <ImageView
 
@@ -48,7 +48,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ic_baseline_close_24"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -3,12 +3,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.zongmin.cook.plan.PlanViewModel" />
+
         <import type="android.view.View" />
-        <import type="com.zongmin.cook.network.LoadApiStatus"/>
+
+        <import type="com.zongmin.cook.network.LoadApiStatus" />
     </data>
 
 
@@ -17,19 +21,14 @@
         android:layout_height="match_parent"
         tools:context=".plan.PlanFragment">
 
-
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:selectedWeekBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!--        android:theme="@style/calenderViewCustom"-->
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_plan"
@@ -40,13 +39,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calendarView"
-            tools:listitem="@layout/item_plan"/>
+            tools:listitem="@layout/item_plan" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_view_plan_loading_news"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:elevation="5dp"
+            android:visibility="@{viewModel.pf == true ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +55,8 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/cooking"
             app:lottie_speed="3"
-            android:visibility="@{viewModel.pf == true ? View.VISIBLE : View.GONE}"
             app:setupApiStatusForLottie="@{viewModel.status}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-<!--    android:visibility="@{viewModel.status == LoadApiStatus.LOADING ? View.VISIBLE : View.GONE}"-->
 
 </layout>
