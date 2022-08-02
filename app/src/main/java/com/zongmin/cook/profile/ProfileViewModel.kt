@@ -47,16 +47,18 @@ class ProfileViewModel(
     val status: LiveData<LoadApiStatus>
         get() = _status
 
+    init {
+        _user.value = UserManager.user
+        getRecipesResult()
+    }
 
-    fun getUserResult() {
+
+    private fun getRecipesResult() {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
-            val result = cookRepository.getUser(UserManager.user.id)
-            val result2 = cookRepository.getCreationRecipes(UserManager.user.id)
-
-            _user.value = when (result) {
+            val result = cookRepository.getCreationRecipes(UserManager.user.id)
+            _recipes.value = when (result) {
                 is Result.Success -> {
-                    Log.d("hank1","查詢使用者成功")
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
@@ -70,23 +72,6 @@ class ProfileViewModel(
                 }
                 else -> {
                     _status.value = LoadApiStatus.ERROR
-                    null
-                }
-            }
-
-            _recipes.value = when (result2) {
-                is Result.Success -> {
-                    result2.data
-                }
-                is Result.Fail -> {
-                    null
-                }
-                is Result.Error -> {
-
-                    null
-                }
-                else -> {
-
                     null
                 }
             }

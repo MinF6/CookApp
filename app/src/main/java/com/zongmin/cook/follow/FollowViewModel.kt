@@ -31,7 +31,7 @@ class FollowViewModel(
         get() = _status
 
     init {
-        getFollowResult(listOf("oAYu4J696CaCdkhBIsWsTizIfhm2","yqU0EW959dbT1CPWZwdHpHzBhU22"))
+
     }
 
 
@@ -58,10 +58,6 @@ class FollowViewModel(
                     null
                 }
             }
-
-            Log.d("hank1","check2，檢查Query結果，result => $result")
-
-
         }
     }
 

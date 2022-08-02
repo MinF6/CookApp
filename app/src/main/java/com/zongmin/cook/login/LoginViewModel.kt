@@ -47,9 +47,6 @@ class LoginViewModel(
     val loginSuccess: LiveData<Boolean>
         get() = _loginSuccess
 
-
-
-
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             googleSignInAccount = completedTask.getResult(ApiException::class.java)

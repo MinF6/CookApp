@@ -41,7 +41,6 @@ class DetailRecipesFragment : Fragment() {
         } else {
             binding.buttonDetailToEdit.visibility = View.GONE
             binding.switchDetailPublic.visibility = View.GONE
-
         }
 
 

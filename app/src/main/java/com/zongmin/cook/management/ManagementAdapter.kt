@@ -14,11 +14,12 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
     class ManagementViewHolder(private var binding: ItemManagementBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(management: Management, viewModel: ManagementViewModel) {
-            binding.textManagementName.text = management.name
-            binding.textManagementBelongName.text = management.belong
-            binding.textManagementIngredientQuantity.text = management.quantity
-            binding.textManagementIngredientUnit.text = management.unit
-            binding.checkboxManagement.isChecked = management.prepare
+            binding.management = management
+//            binding.textManagementName.text = management.name
+//            binding.textManagementBelongName.text = management.belong
+//            binding.textManagementIngredientQuantity.text = management.quantity
+//            binding.textManagementIngredientUnit.text = management.unit
+//            binding.checkboxManagement.isChecked = management.prepare
             binding.checkboxManagement.setOnClickListener{
                 if(binding.checkboxManagement.isChecked){
                     viewModel.minusQuantity()

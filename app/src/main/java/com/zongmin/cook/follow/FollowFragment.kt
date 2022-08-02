@@ -23,7 +23,7 @@ class FollowFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = FollowAdapter(FollowAdapter.OnClickListener{
-            Log.d("hank1","點到了 $it")
+
         })
 
 

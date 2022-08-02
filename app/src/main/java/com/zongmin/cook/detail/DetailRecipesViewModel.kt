@@ -34,17 +34,14 @@ class DetailRecipesViewModel(
 
     fun getIngredients(recipe: Recipe) {
         _ingredients.value = recipe.ingredient
-
     }
 
     fun getSteps(recipe: Recipe) {
         _steps.value = recipe.step
-
     }
 
     fun setPublicRecipes(isPublic: Boolean,recipesId: String) {
         coroutineScope.launch {
-
             when (val result = cookRepository.setPublic(isPublic, recipesId)) {
                 is Result.Success -> {
                     result.data

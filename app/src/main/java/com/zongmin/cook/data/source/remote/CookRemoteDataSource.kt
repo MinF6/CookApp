@@ -360,7 +360,6 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
-    //改版，根據使用者ID取得，比對作者
     override suspend fun getCreationRecipes(userId: String): Result<List<Recipe>> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
@@ -371,8 +370,11 @@ object CookRemoteDataSource : CookDataSource {
                     if (task.isSuccessful) {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
-                        for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
+                        if(count == 0){
+                            continuation.resume(Result.Success(list))
+                        }
+                        for (document in task.result) {
+//                            Log.d("hank1", document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -383,8 +385,6 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
@@ -400,8 +400,6 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
@@ -430,11 +428,12 @@ object CookRemoteDataSource : CookDataSource {
                                 }
                         }
                     } else {
+                        Log.d("hank1", "check888")
                         task.exception?.let {
+                            Log.d("hank1", "check999")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(Result.Fail(CookApplication.instance.getString(1)))
                     }
                 }
         }
@@ -713,15 +712,10 @@ object CookRemoteDataSource : CookDataSource {
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Log.d("hank1","有查到東西嗎? -> $task")
-//                    val list = mutableListOf<User>()
-//                    var list: User
                     for (document in task.result!!) {
                         val user = document.toObject(User::class.java)
-                        Log.d("hank1","有查到東西嗎222? -> $user")
                         continuation.resume(Result.Success(user))
                     }
-//                    continuation.resume(Result.Success(list))
                 } else {
                     task.exception?.let {
                         continuation.resume(Result.Error(it))

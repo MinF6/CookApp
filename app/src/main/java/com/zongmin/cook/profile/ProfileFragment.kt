@@ -1,13 +1,14 @@
 package com.zongmin.cook.profile
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.zongmin.cook.NavigationDirections
 import com.zongmin.cook.databinding.FragmentProfileBinding
@@ -22,11 +23,9 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
-        viewModel.getUserResult()
 
         val adapter = ProfileAdapter(ProfileAdapter.OnClickListener {
             viewModel.navigateToDetail(it)
@@ -44,9 +43,18 @@ class ProfileFragment : Fragment() {
 
         }
 
-        viewModel.recipe.observe(viewLifecycleOwner, Observer {
+        viewModel.recipe.observe(viewLifecycleOwner){
+            if(it.isEmpty()){
+                binding.imageProfileNull.visibility = View.VISIBLE
+                DrawableCompat.setTint(
+                    binding.recyclerviewProfile.background,
+                    Color.rgb(255, 255, 255)
+                )
+            }else{
+                binding.imageProfileNull.visibility = View.GONE
+            }
             adapter.submitList(it)
-        })
+        }
 
         binding.textProfileFans.setOnClickListener {
             viewModel.user.value?.let { it1 -> viewModel.navigateToFollow(it1.fans) }
@@ -57,7 +65,7 @@ class ProfileFragment : Fragment() {
         }
 
         viewModel.navigateToFollow.observe(viewLifecycleOwner) {
-            findNavController().navigate(NavigationDirections.navigateToFollow())
+//            findNavController().navigate(NavigationDirections.navigateToFollow())
         }
 
         viewModel.navigateToDetail.observe(viewLifecycleOwner) {
