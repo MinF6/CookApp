@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="user"
             type="com.zongmin.cook.data.User" />
@@ -16,14 +17,14 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_follow"
+            imageUrl="@{user.headShot}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="16dp"
-            imageUrl="@{user.headShot}"
             android:src="@drawable/ic_baseline_person_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/imageViewRound"/>
+            app:shapeAppearanceOverlay="@style/imageViewRound" />
 
         <TextView
             android:id="@+id/text_follow_name"
@@ -49,17 +50,18 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="追蹤"
-            app:layout_constraintTop_toTopOf="@+id/image_follow"
             app:layout_constraintBottom_toBottomOf="@+id/image_follow"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_follow" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#aaaaaa"
-            app:layout_constraintTop_toBottomOf="@+id/image_follow"
             android:layout_margin="16dp"
+            android:background="#aaaaaa"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/image_follow" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

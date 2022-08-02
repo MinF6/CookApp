@@ -24,11 +24,7 @@ object ServiceLocator {
     private fun createStylishRepository(context: Context): CookRepository {
         return DefaultCookRepository(
             CookRemoteDataSource
-//            createLocalDataSource(context)
         )
     }
 
-//    private fun createLocalDataSource(context: Context): CookDataSource {
-//        return StylishLocalDataSource(context)
-//    }
 }

@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="step"
+            type="com.zongmin.cook.data.Step" />
     </data>
 
 
@@ -18,26 +20,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="步驟O"
+            android:text="@string/detail_step_number"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/image_step"
-            app:layout_constraintTop_toTopOf="@+id/image_step" />
+            app:layout_constraintTop_toTopOf="@+id/image_step"
+            tools:text="步驟1" />
 
         <TextView
             android:id="@+id/text_step_depiction"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
-            android:text="操作內容~~~~~~~~~~~1232143432151435"
+            android:layout_marginBottom="16dp"
+            android:text="@{step.depiction}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_step_sequence"
-            app:layout_constraintTop_toBottomOf="@+id/text_step_sequence" />
+            app:layout_constraintTop_toBottomOf="@+id/text_step_sequence"
+            tools:text="步驟內容" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_step"
+            imageUrl="@{step.images}"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="16dp"
@@ -46,18 +51,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/imageViewCorner" />
-
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/image_step"-->
-        <!--            android:layout_width="150dp"-->
-        <!--            android:layout_height="150dp"-->
-        <!--            android:layout_marginStart="16dp"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent" />-->
-
+            app:shapeAppearanceOverlay="@style/imageViewCorner"
+            tools:src="@drawable/ic_baseline_catching_pokemon_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,53 +17,23 @@ class MainActivity : AppCompatActivity() {
     val viewModel = MainViewModel()
 
 
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//
-//    }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        for (fragment in supportFragmentManager.fragments) {
-//            fragment.onActivityResult(requestCode, resultCode, data)
-//        }
-//    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
 
         binding.imageActivityCreate.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToEditRecipesFragment(null))
+            findNavController(R.id.myNavHostFragment).navigate(
+                NavigationDirections.navigateToEditRecipesFragment(
+                    null
+                )
+            )
         }
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-//        val parentViewModel = ViewModelProvider(requireParentFragment()).get(RecipesViewModel::class.java)
-//        val mainViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
         setupBottomNav()
         setupNavController()
-
-
-
-
-//      crash測試
-//        val crashButton = Button(this)
-//        crashButton.text = "Test Crash"
-//        crashButton.setOnClickListener {
-//            throw RuntimeException("Test Crash") // Force a crash
-//        }
-//
-//        addContentView(crashButton, ViewGroup.LayoutParams(
-//            ViewGroup.LayoutParams.MATCH_PARENT,
-//            ViewGroup.LayoutParams.WRAP_CONTENT))
-
 
     }
 

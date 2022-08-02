@@ -13,17 +13,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <EditText
                 android:id="@+id/item_edittext_step_depiction"
                 android:layout_width="300dp"
-                android:textSize="14dp"
                 android:layout_height="wrap_content"
-                android:theme="@style/editTextTheme"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="請輸入步驟" />
+                android:hint="請輸入步驟"
+                android:textSize="14dp"
+                android:theme="@style/editTextTheme" />
 
             <ImageView
 
@@ -47,8 +46,8 @@
                 android:layout_marginStart="16dp"
                 android:scaleType="centerCrop"
 
-                app:shapeAppearanceOverlay="@style/imageViewCorner"
-                android:src="@drawable/stepimg"/>
+                android:src="@drawable/stepimg"
+                app:shapeAppearanceOverlay="@style/imageViewCorner" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

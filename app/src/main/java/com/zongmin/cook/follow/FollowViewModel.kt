@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.zongmin.cook.data.Result
 import com.zongmin.cook.data.User
 import com.zongmin.cook.data.source.CookRepository
-import com.zongmin.cook.login.UserManager
 import com.zongmin.cook.network.LoadApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +31,7 @@ class FollowViewModel(
         get() = _status
 
     init {
-        getFollowResult(listOf("oAYu4J696CaCdkhBIsWsTizIfhm2","yqU0EW959dbT1CPWZwdHpHzBhU22"))
+
     }
 
 
@@ -59,10 +58,6 @@ class FollowViewModel(
                     null
                 }
             }
-
-            Log.d("hank1","check2，檢查Query結果，result => $result")
-
-
         }
     }
 

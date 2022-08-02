@@ -34,39 +34,25 @@ class DialogPlan : AppCompatDialogFragment() {
     ): View? {
 
         val binding = FragmentDialogPlanBinding.inflate(inflater, container, false)
-//dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val recipesViewModel =
             ViewModelProvider(requireParentFragment()).get(RecipesViewModel::class.java)
-//        binding.textDialogDate.text = viewModel.getToday()
 
-
-        //昨天鍵
         binding.buttonDialogYesterday.setOnClickListener {
-//            binding.textDialogDate.text = viewModel.getYesterday()
-//            recipesViewModel.date.value = viewModel.getYesterday()
             viewModel.getYesterday()
         }
 
         //明天鍵
         binding.buttonDialogTomorrow.setOnClickListener {
-//            binding.textDialogDate.text = viewModel.getTomorrow()
-//            recipesViewModel.date.value = viewModel.getYesterday()
             viewModel.getTomorrow()
         }
 
 
         viewModel.date.observe(viewLifecycleOwner) {
-            Log.d("hank1", "檢查改變後的日期毫秒 -> $it")
             recipesViewModel.date.value = it
             binding.textDialogDate.text = SimpleDateFormat("yyyy/MM/dd").format(Date(it))
-
         }
 
-
-
-
-//        viewModel.getPlanResult()
 
         val adapter = DialogPlanAdapter(viewModel)
 
@@ -77,15 +63,6 @@ class DialogPlan : AppCompatDialogFragment() {
             val breakfast = mutableListOf<Plan>()
             val lunch = mutableListOf<Plan>()
             val dinner = mutableListOf<Plan>()
-
-
-//            for (plan in it) {
-//                val item1 = DialogItem.Title(plan.threeMeals)
-//                dataList.add(item1)
-//
-//                val item2 = DialogItem.FullPlan(plan)
-//                dataList.add(item2)
-//            }
 
             for (plan in it) {
                 when (plan.threeMeals) {
@@ -121,18 +98,8 @@ class DialogPlan : AppCompatDialogFragment() {
                     dataList.add(DialogItem.FullPlan(i))
                 }
             }
-
-//            val item1 = DialogItem.Title(plan.threeMeals)
-//            dataList.add(item1)
-//            val item2 = DialogItem.FullPlan(plan)
-//            dataList.add(item2)
-
-
-//            Log.d("hank1", "安排完的結果 => $dataList")
             adapter.submitList(dataList)
-
         })
-
 
         return binding.root
     }

@@ -33,22 +33,20 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(DialogPlanViewModel::class.java) ->
                     DialogPlanViewModel(cookRepository)
-//
+
                 isAssignableFrom(ManagementViewModel::class.java) ->
                     ManagementViewModel(cookRepository)
-//
+
                 isAssignableFrom(ManagementViewModel::class.java) ->
                     ManagementViewModel(cookRepository)
-//
+
                 isAssignableFrom(SocialViewModel::class.java) ->
                     SocialViewModel(cookRepository)
-//
-                //到時候得拿掉換成吃type版本，同食譜的item
+
                 isAssignableFrom(ProfileViewModel::class.java) ->
                     ProfileViewModel(cookRepository)
 
                 isAssignableFrom(RecipesViewModel::class.java) ->
-//                    RecipesViewModel(cookRepository)
                     RecipesViewModel()
 
                 isAssignableFrom(EditRecipesViewModel::class.java) ->
@@ -62,18 +60,6 @@ class ViewModelFactory constructor(
 
                 isAssignableFrom(DetailRecipesViewModel::class.java) ->
                     DetailRecipesViewModel(cookRepository)
-//
-//                isAssignableFrom(SocialViewModel::class.java) ->
-//                    SocialViewModel(cookRepository)
-//
-//                isAssignableFrom(SocialViewModel::class.java) ->
-//                    SocialViewModel(cookRepository)
-//
-//                isAssignableFrom(SocialViewModel::class.java) ->
-//                    SocialViewModel(cookRepository)
-//
-//                isAssignableFrom(SocialViewModel::class.java) ->
-//                    SocialViewModel(cookRepository)
 
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

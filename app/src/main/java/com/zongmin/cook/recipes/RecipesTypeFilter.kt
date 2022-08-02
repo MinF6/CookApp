@@ -9,5 +9,4 @@ enum class RecipesTypeFilter(val value: String) {
     SOUP("湯品"),
     DESSERT("甜點"),
     OTHER("其他"),
-
 }

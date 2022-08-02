@@ -11,4 +11,17 @@
     <string name="login_button">使用<font color="#4285f4">G</font><font color="#ea4335">o</font><font color="#fbbc05">o</font><font color="#4285f4">g</font><font color="#34a853">l</font><font color="#ea4335">e</font>登入</string>
 
 
+    <string name="back_button">Back button image</string>
+    <string name="item_icon">item icon</string>
+
+
+    <string name="detail_recipe">編輯食譜</string>
+    <string name="detail_ingredient">食材：</string>
+    <string name="detail_step">步驟：</string>
+    <string name="detail_public">公開食譜</string>
+    <string name="detail_step_number">步驟</string>
+    <string name="detail_step_index">步驟 %1$d</string>
+
+
+
 </resources>

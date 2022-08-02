@@ -1,6 +1,6 @@
 package com.zongmin.cook.management
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,22 +14,22 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
     class ManagementViewHolder(private var binding: ItemManagementBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(management: Management, viewModel: ManagementViewModel) {
-            binding.textManagementName.text = management.name
-            binding.textManagementBelongName.text = management.belong
-            binding.textManagementIngredientQuantity.text = management.quantity
-            binding.textManagementIngredientUnit.text = management.unit
-            binding.checkboxManagement.isChecked = management.prepare
-            binding.checkboxManagement.setOnCheckedChangeListener { _, isChecked ->
-//                Log.d("hank1","checkout改變，查看變數 -> ${isChecked}")
-                if(isChecked){
+            binding.management = management
+//            binding.textManagementName.text = management.name
+//            binding.textManagementBelongName.text = management.belong
+//            binding.textManagementIngredientQuantity.text = management.quantity
+//            binding.textManagementIngredientUnit.text = management.unit
+//            binding.checkboxManagement.isChecked = management.prepare
+            binding.checkboxManagement.setOnClickListener{
+                if(binding.checkboxManagement.isChecked){
                     viewModel.minusQuantity()
-//                    viewModel.setPrepareResult(isChecked,management.id)
+                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked,management.id)
                 }else{
                     viewModel.addQuantity()
-//                    viewModel.setPrepareResult(isChecked,management.id)
+                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked,management.id)
                 }
-//                Log.d("hank1","轉換成毫秒是 -> ${storedDate.timeInMillis}")
             }
+
             binding.executePendingBindings()
         }
 
@@ -56,7 +56,6 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
         }
     }
 
-
     companion object DiffCallback : DiffUtil.ItemCallback<Management>() {
         override fun areItemsTheSame(oldItem: Management, newItem: Management): Boolean {
             return oldItem === newItem
@@ -65,8 +64,6 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
         override fun areContentsTheSame(oldItem: Management, newItem: Management): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
 

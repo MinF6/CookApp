@@ -1,11 +1,9 @@
 package com.zongmin.cook
 
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.databinding.BindingConversion
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.request.RequestOptions
 import com.zongmin.cook.network.LoadApiStatus
@@ -19,21 +17,13 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .load(imgUri)
             .apply(
                 RequestOptions()
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.loading)
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.loading)
             )
             .into(imgView)
     }
 }
 
-@BindingConversion
-fun convertColorToDrawable(color: Int) : ColorDrawable {
-    return ColorDrawable(color)
-}
-
-/**
- * According to [LoadApiStatus] to decide the visibility of [LottieAnimationView]
- */
 @BindingAdapter("setupApiStatusForLottie")
 fun bindApiStatusForLottie(view: LottieAnimationView, status: LoadApiStatus?) {
     when (status) {

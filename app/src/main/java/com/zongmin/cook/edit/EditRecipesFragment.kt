@@ -40,22 +40,18 @@ class EditRecipesFragment : Fragment() {
     var stepList: LinearLayout? = null
 
     var uri: Uri? = null
-    var PICK_CONTACT_REQUEST = 1
-    var REQUEST_CODE = 42
-    var ITEM_STEP_IMAGE = 3
+    private var PICK_CONTACT_REQUEST = 1
+    private var REQUEST_CODE = 42
+    private var ITEM_STEP_IMAGE = 3
 
     var img1: ImageView? = null
     var img2: ImageView? = null
-    val FILE_NAME = "photo.jpg"
+    private val FILE_NAME = "photo.jpg"
     var photoFile: File? = null
 
     var tempImageView: ImageView? = null
 
     private val viewModel by viewModels<EditRecipesViewModel> { getVmFactory() }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
@@ -118,13 +114,13 @@ class EditRecipesFragment : Fragment() {
 
         Log.d(
             "hank1",
-            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipes}"
+            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe}"
         )
-        val recipesData = EditRecipesFragmentArgs.fromBundle(requireArguments()).recipes
+        val recipesData = EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe
         if (recipesData != null) {
             binding.buttonEditDelete.visibility = View.VISIBLE
             viewModel.getRecipesData(recipesData)
-            binding.recipes = recipesData
+            binding.recipe = recipesData
             viewModel.selectSpinnerValue(binding.spinnerEditCategory, recipesData.category)
 
             //食材所需欄位
@@ -251,45 +247,6 @@ class EditRecipesFragment : Fragment() {
         }
 
 
-        //變更照片按鈕
-//        binding.buttonEditChangeImage.setOnClickListener {
-
-            //上傳圖片   應該要改去viewModel用coroutineScope.launch
-//            val time = System.currentTimeMillis()
-//            val picStorage = storageReference.child("image$time")
-////            Log.d("hank1", "點擊更換圖片1，看一下picStorage是啥 -> $picStorage")
-//
-//            uri?.let { it1 ->
-//                picStorage.putFile(it1).addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-//                        Log.d("hank1", "上傳成功")
-//                        picStorage.downloadUrl.addOnSuccessListener {
-//                            Log.d("hank1", "看一下uri ->$it ")
-//                            mainImage = it.toString()
-//                            Glide.with(this /* context */)
-//                                .load(it)
-//                                .into(img2!!)
-//
-//                            Log.d("hank1", "成功更換圖片")
-//                            if (unusedFileName == 0L) {
-//                                unusedFileName = time
-//                                Log.d("hank1", "沒有過去的圖片")
-//                            } else {
-//                                storageReference.child("image$unusedFileName").delete()
-//                                unusedFileName = time
-//                                Log.d("hank1", "刪除上次張上傳的圖片")
-//                            }
-//                        }.addOnFailureListener {
-//                            // Handle any errors
-//                        }
-//                    } else {
-//                        Log.d("hank1", "上傳失敗")
-//                    }
-//                }
-//            }
-
-//        }
-
         var unusedFileName = 0L
         var mainImage = ""
         viewModel.mainUri.observe(viewLifecycleOwner) {
@@ -327,7 +284,6 @@ class EditRecipesFragment : Fragment() {
                 }
             }
 
-//            viewModel.mainUri.value = null
         }
 
 //---------------------------------------------------------------------------------------------
@@ -381,8 +337,6 @@ class EditRecipesFragment : Fragment() {
                                         }
                                     }
                                 }
-//                                sequence++
-                            //K範圍結束
                         }
                     }
                     sequence++
@@ -440,18 +394,6 @@ class EditRecipesFragment : Fragment() {
 
             newRecipes.remark = binding.edittextEditRemark.text.toString()
 
-//                Log.d("hank1","檢視一下要新增的id是 -> ${newRecipes.id}")
-//            if(newRecipes.id == null){
-//                Log.d("hank1","他是null")
-//            }
-//            if(newRecipes.id == ""){
-//                Log.d("hank1","他是沒有空值的字串")
-//            }
-//            if(newRecipes.id == " "){
-//                Log.d("hank1","他是有空值的字串")
-//            }
-
-
                 Log.d("hank1","我傳的newRecipes是 -> $newRecipes")
                 Log.d("hank1","我傳的listNewIngredient是 -> $listNewIngredient")
                 Log.d("hank1","我傳的listNewStep是 -> $listNewStep")
@@ -470,7 +412,6 @@ class EditRecipesFragment : Fragment() {
         addStepView()
 
         viewModel.createId.observe(viewLifecycleOwner){
-            Log.d("hank1","拿到新增的食譜idddddddddddddddddddddddddddddddddddddddddddddddd -> $it")
             viewModel.setCollect(it)
         }
 
@@ -487,7 +428,6 @@ class EditRecipesFragment : Fragment() {
             removeView(aa)
         }
         ingredientList?.addView(aa)
-        Log.d("hank1", "進來新增囉")
 
     }
 

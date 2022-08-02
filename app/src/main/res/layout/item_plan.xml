@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="planContent"
             type="com.zongmin.cook.data.PlanContent" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,29 +17,17 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_plan"
+            imageUrl="@{planContent.image}"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/imageViewCorner"
-            imageUrl="@{planContent.image}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/loading"/>
-
-
-<!--        <ImageView-->
-<!--            android:id="@+id/image_plan"-->
-<!--            android:layout_width="90dp"-->
-<!--            android:layout_height="90dp"-->
-<!--            android:layout_margin="16dp"-->
-<!--            imageUrl="@{planContent.image}"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:src="@drawable/ic_baseline_catching_pokemon_24"/>-->
+            app:shapeAppearanceOverlay="@style/imageViewCorner"
+            tools:src="@drawable/loading" />
 
         <TextView
-
             android:id="@+id/text_plan_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +54,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/image_plan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/image_plan" />
-<!--        android:text="取消"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
