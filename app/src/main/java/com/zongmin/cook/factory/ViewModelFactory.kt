@@ -2,7 +2,6 @@ package com.zongmin.cook.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.zongmin.cook.MainViewModel
 import com.zongmin.cook.data.source.CookRepository
 import com.zongmin.cook.detail.DetailRecipesViewModel
 import com.zongmin.cook.dialog.DialogPlanViewModel
@@ -15,11 +14,6 @@ import com.zongmin.cook.profile.ProfileViewModel
 import com.zongmin.cook.recipes.RecipesViewModel
 import com.zongmin.cook.social.SocialViewModel
 
-/**
- * Created by Wayne Chen in Jul. 2019.
- *
- * Factory for all ViewModels.
- */
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory constructor(
     private val cookRepository: CookRepository

@@ -40,7 +40,6 @@ class SocialFragment : Fragment() {
             it?.let {
                 viewModel.getUserList(it)
             }
-
         }
 
         viewModel.userList.observe(viewLifecycleOwner) {
@@ -61,7 +60,6 @@ class SocialFragment : Fragment() {
                 viewModel.onDetailNavigated()
             }
         }
-
         return binding.root
     }
 

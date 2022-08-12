@@ -1,6 +1,5 @@
 package com.zongmin.cook
 
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,12 +9,10 @@ import androidx.navigation.findNavController
 import com.zongmin.cook.databinding.ActivityMainBinding
 import com.zongmin.cook.util.CurrentFragmentType
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     val viewModel = MainViewModel()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,29 +58,23 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_plan -> {
-
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToPlanFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_management -> {
-
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToManagmentFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
-
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToProfileFragment())
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_social -> {
-
                     findNavController(R.id.myNavHostFragment).navigate(NavigationDirections.navigateToSocialFragment())
                     return@setOnItemSelectedListener true
                 }
-
             }
             false
         }
-
     }
 }

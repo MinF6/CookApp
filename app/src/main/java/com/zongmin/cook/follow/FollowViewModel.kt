@@ -30,11 +30,6 @@ class FollowViewModel(
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    init {
-
-    }
-
-
     fun getFollowResult(userList: List<String>) {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
@@ -60,6 +55,5 @@ class FollowViewModel(
             }
         }
     }
-
 
 }

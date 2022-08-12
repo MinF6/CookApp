@@ -22,19 +22,17 @@ class FollowFragment : Fragment() {
         val binding = FragmentFollowBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val adapter = FollowAdapter(FollowAdapter.OnClickListener{
+        val adapter = FollowAdapter(FollowAdapter.OnClickListener {
 
         })
 
-
-        viewModel.user.observe(viewLifecycleOwner){
-            it?.let{
+        viewModel.user.observe(viewLifecycleOwner) {
+            it?.let {
                 adapter.submitList(it)
             }
         }
 
         binding.recyclerviewFollow.adapter = adapter
-
 
         return binding.root
     }

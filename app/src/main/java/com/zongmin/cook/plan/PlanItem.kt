@@ -12,5 +12,4 @@ sealed class PlanItem {
         val id: Long = -1
 
     }
-
 }

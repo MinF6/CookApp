@@ -82,7 +82,6 @@ class SocialViewModel(
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
             val result = cookRepository.getUser(UserManager.user.id)
-
             _user.value = when (result) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
@@ -101,7 +100,6 @@ class SocialViewModel(
                     null
                 }
             }
-
         }
     }
 
@@ -127,7 +125,6 @@ class SocialViewModel(
                     null
                 }
             }
-
         }
     }
 
@@ -177,7 +174,6 @@ class SocialViewModel(
                     null
                 }
             }
-
         }
     }
 
@@ -203,7 +199,6 @@ class SocialViewModel(
                 }
             }
         }
-
     }
 
     fun changeCollect(recipesId: String): Boolean {

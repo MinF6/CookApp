@@ -8,20 +8,20 @@ import java.sql.Timestamp
 
 @Parcelize
 data class Recipe(
-    var id: String = " ",
-    var name: String = " ",
-    var category: String = " ",
-    var mainImage: String = " ",
+    var id: String = "",
+    var name: String = "",
+    var category: String = "",
+    var mainImage: String = "",
     var serving: Int = 0,
-    var cookingTime: String = " ",
-    var ingredient: List<Ingredient> = listOf(Ingredient(" "," "," "," ")),
-    var step: List<Step> = listOf(Step(" "," "," "," ",ToolType(" ", " "))),
-    var tags: List<String> = listOf(" "),
-    var author: String = " ",
+    var cookingTime: String = "",
+    var ingredient: List<Ingredient> = listOf(Ingredient("","","","")),
+    var step: List<Step> = listOf(Step("","","","",ToolType("", ""))),
+    var tags: List<String> = listOf(""),
+    var author: String = "",
     var like: List<String> = listOf(),
-    var remark: String =" ",
-    var references: List<String> = listOf(" "),
-    var message: List<Message> = listOf(Message(" "," "," ",null)),
+    var remark: String ="",
+    var references: List<String> = listOf(""),
+    var message: List<Message> = listOf(Message("","","",null)),
     var public: Boolean = false
 
 

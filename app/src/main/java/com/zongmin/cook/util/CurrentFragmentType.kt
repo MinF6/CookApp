@@ -1,7 +1,5 @@
 package com.zongmin.cook.util
 
-
-
 enum class CurrentFragmentType(val value: String) {
     RECIPES("食譜"),
     MANAGEMENT("採購"),

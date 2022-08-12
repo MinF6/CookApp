@@ -112,10 +112,10 @@ class EditRecipesFragment : Fragment() {
             this.findNavController().navigateUp()
         }
 
-        Log.d(
-            "hank1",
-            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe}"
-        )
+//        Log.d(
+//            "hank1",
+//            "我收到了資料 -> ${EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe}"
+//        )
         val recipesData = EditRecipesFragmentArgs.fromBundle(requireArguments()).recipe
         if (recipesData != null) {
             binding.buttonEditDelete.visibility = View.VISIBLE
@@ -381,7 +381,14 @@ class EditRecipesFragment : Fragment() {
 
             newRecipes.name = binding.edittextEditName.text.toString()
             newRecipes.category = binding.spinnerEditCategory.selectedItem.toString()
-            newRecipes.serving = binding.edittextServing.text.toString().toInt()
+            if(binding.edittextServing.text.toString() != ""){
+                Log.d("hank1", "1111111")
+                newRecipes.serving = binding.edittextServing.text.toString().toInt()
+            }else{
+                Log.d("hank1", "22222")
+                newRecipes.serving = 0
+            }
+
             newRecipes.mainImage = mainImage
             newRecipes.cookingTime = binding.edittextEditCookTime.text.toString()
 
