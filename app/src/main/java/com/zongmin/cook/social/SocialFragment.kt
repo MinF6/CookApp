@@ -36,7 +36,7 @@ class SocialFragment : Fragment() {
 
         binding.recyclerviewSocial.adapter = adapter
 
-        viewModel.recipe.observe(viewLifecycleOwner) {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             it?.let {
                 viewModel.getUserList(it)
             }
@@ -47,7 +47,7 @@ class SocialFragment : Fragment() {
         }
 
         viewModel.userMap.observe(viewLifecycleOwner) {
-            adapter.submitList(viewModel.recipe.value)
+            adapter.submitList(viewModel.recipes.value)
         }
 
         viewModel.user.observe(viewLifecycleOwner) {

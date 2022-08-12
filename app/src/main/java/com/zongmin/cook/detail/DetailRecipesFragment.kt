@@ -23,7 +23,7 @@ class DetailRecipesFragment : Fragment() {
     ): View {
         val binding = FragmentDetailRecipesBinding.inflate(inflater, container, false)
         val data = DetailRecipesFragmentArgs.fromBundle(requireArguments()).recipe
-        data.let{
+        data.let {
             binding.recipe = data
             viewModel.getSteps(data)
             viewModel.getIngredients(data)
@@ -42,8 +42,10 @@ class DetailRecipesFragment : Fragment() {
 
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter
-        viewModel.ingredients.observe(viewLifecycleOwner){
-            ingredientAdapter.submitList(it)
+        viewModel.ingredients.observe(viewLifecycleOwner) {
+            it?.let {
+                ingredientAdapter.submitList(it)
+            }
         }
 
         val stepAdapter = DetailStepAdapter()

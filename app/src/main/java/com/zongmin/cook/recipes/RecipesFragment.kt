@@ -61,11 +61,6 @@ class RecipesFragment : Fragment() {
             viewModel.searchText.value = result
         }
 
-        binding.buttonRecipesDialog.setOnClickListener {
-            findNavController().navigate(NavigationDirections.navigateToDialogPlan())
-
-        }
-
         binding.buttonRecipesDate.setOnClickListener {
             context?.let { it1 -> viewModel.showDateTimeDialog(it1) }
 

@@ -23,20 +23,20 @@ class PlanViewModel(
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private var _plan = MutableLiveData<List<Plan>>()
+    private var _plans = MutableLiveData<List<Plan>>()
 
-    val plan: LiveData<List<Plan>>
-        get() = _plan
+    val plans: LiveData<List<Plan>>
+        get() = _plans
 
     private var _deletePlanResult = MutableLiveData<String>()
 
     val deletePlanResult: LiveData<String>
         get() = _deletePlanResult
 
-    private var _management = MutableLiveData<List<Management>>()
+    private var _managements = MutableLiveData<List<Management>>()
 
-    val management: LiveData<List<Management>>
-        get() = _management
+    val managements: LiveData<List<Management>>
+        get() = _managements
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -58,10 +58,10 @@ class PlanViewModel(
     val time: LiveData<Long>
         get() = _time
 
-    private var _sortedPlan = MutableLiveData<List<PlanItem>>()
+    private var _sortedPlans = MutableLiveData<List<PlanItem>>()
 
-    val sortedPlan: LiveData<List<PlanItem>>
-        get() = _sortedPlan
+    val sortedPlans: LiveData<List<PlanItem>>
+        get() = _sortedPlans
 
     init {
         setDate()
@@ -81,7 +81,7 @@ class PlanViewModel(
             _status.value = LoadApiStatus.LOADING
             _lottie.value = true
             val result = cookRepository.getPlan(userId, time)
-            _plan.value = when (result) {
+            _plans.value = when (result) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
                     _lottie.value = false
@@ -127,7 +127,7 @@ class PlanViewModel(
     fun getSpecifyManagementResult(planId: String) {
         coroutineScope.launch {
             val result = cookRepository.getSpecifyManagement(planId)
-            _management.value = when (result) {
+            _managements.value = when (result) {
                 is Result.Success -> {
                     result.data
                 }
@@ -186,6 +186,6 @@ class PlanViewModel(
                 dataList.add(PlanItem.FullPlan(i))
             }
         }
-        _sortedPlan.value = dataList
+        _sortedPlans.value = dataList
     }
 }

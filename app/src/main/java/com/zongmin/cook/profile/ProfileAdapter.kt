@@ -15,7 +15,7 @@ class ProfileAdapter(val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) {
             binding.recipe = recipe
-            binding.textProfileRecipes.text = recipe.name
+            binding.textProfileServing.text = "${recipe.serving}人份"
             var ingredientlist = ""
             for (i in recipe.ingredient) {
                 ingredientlist += "${i.ingredientName}\n"

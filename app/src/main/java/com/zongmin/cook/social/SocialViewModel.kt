@@ -24,7 +24,7 @@ class SocialViewModel(
 
     private var _recipes = MutableLiveData<List<Recipe>>()
 
-    val recipe: LiveData<List<Recipe>>
+    val recipes: LiveData<List<Recipe>>
         get() = _recipes
 
     private val _navigateToDetail = MutableLiveData<Recipe>()
@@ -155,7 +155,7 @@ class SocialViewModel(
 
     private fun setCollectResult(isCollect: Boolean, recipesId: String) {
         coroutineScope.launch {
-            _status.value = LoadApiStatus.LOADING
+//            _status.value = LoadApiStatus.LOADING
             when (val result = cookRepository.setCollect(isCollect, recipesId)) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE

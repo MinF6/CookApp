@@ -23,8 +23,5 @@ data class Recipe(
     var references: List<String> = listOf(""),
     var message: List<Message> = listOf(Message("","","",null)),
     var public: Boolean = false
-
-
-
 ): Parcelable
 

@@ -38,11 +38,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="食譜名稱"
-                    android:textSize="18dp"
+                    android:text="@{recipe.name}"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="食譜名稱" />
 
                 <View
                     android:id="@+id/view_profile_time"
@@ -58,10 +59,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="10分鐘"
+                    android:text="@{recipe.cookingTime}"
                     app:layout_constraintBottom_toBottomOf="@+id/view_profile_time"
                     app:layout_constraintStart_toEndOf="@+id/view_profile_time"
-                    app:layout_constraintTop_toTopOf="@+id/view_profile_time" />
+                    app:layout_constraintTop_toTopOf="@+id/view_profile_time"
+                    tools:text="10分鐘" />
 
                 <View
                     android:id="@+id/view_profile_serving"
@@ -78,29 +80,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="1人份"
                     app:layout_constraintBottom_toBottomOf="@+id/view_profile_serving"
                     app:layout_constraintStart_toEndOf="@+id/view_profile_serving"
-                    app:layout_constraintTop_toTopOf="@+id/view_profile_serving" />
+                    app:layout_constraintTop_toTopOf="@+id/view_profile_serving"
+                    tools:text="1人份" />
 
                 <TextView
                     android:id="@+id/text_profile_ingredient"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:text="食材內容"
                     app:layout_constraintBottom_toTopOf="@+id/textView"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
                     app:layout_constraintStart_toStartOf="@+id/view_profile_time"
-                    app:layout_constraintTop_toBottomOf="@+id/view_profile_time" />
+                    app:layout_constraintTop_toBottomOf="@+id/view_profile_time"
+                    tools:text="食材內容" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="發布於1天前"
+                    android:text="@string/profile_time"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                    app:layout_constraintStart_toStartOf="@+id/text_profile_ingredient" />
+                    app:layout_constraintStart_toStartOf="@+id/text_profile_ingredient"
+                    tools:text="發布時間" />
 
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -116,8 +119,6 @@
                     app:shapeAppearanceOverlay="@style/imageViewCorner" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

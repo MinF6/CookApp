@@ -27,11 +27,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="最新食譜"
-            android:textSize="22dp"
+            android:text="@string/social_title"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_social"

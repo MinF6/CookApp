@@ -16,7 +16,6 @@ class ManagementFragment : Fragment() {
 
     private val viewModel by viewModels<ManagementViewModel> { getVmFactory() }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

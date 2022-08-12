@@ -16,7 +16,6 @@ class FollowAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.user = user
-            binding.textFollowName.text = user.name
             binding.textFollowCreation.text = "創作了${user.creation.size.toString()}篇食譜"
             binding.executePendingBindings()
         }

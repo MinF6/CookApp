@@ -44,7 +44,7 @@ class EditRecipesFragment : Fragment() {
     private var REQUEST_CODE = 42
     private var ITEM_STEP_IMAGE = 3
 
-    var img1: ImageView? = null
+//    var img1: ImageView? = null
     var img2: ImageView? = null
     private val FILE_NAME = "photo.jpg"
     var photoFile: File? = null
@@ -75,7 +75,7 @@ class EditRecipesFragment : Fragment() {
 
             val takeImage = BitmapFactory.decodeFile(photoFile?.absolutePath)
 //            Log.d("hank1", "看一下拍照拿的的takeImage是啥 -> $takeImage")
-            img1?.setImageBitmap(takeImage)
+//            img1?.setImageBitmap(takeImage)
 //            uri = context?.let { getImageUri(it, takeImage) }
             viewModel.mainUri.value = true
         }
@@ -191,7 +191,7 @@ class EditRecipesFragment : Fragment() {
         binding.buttonEditDelete.setOnClickListener {
             if (recipesData != null) {
                 viewModel.deleteRecipes(recipesData.id)
-                findNavController().navigate(NavigationDirections.navigateToRecipesFragment())
+                findNavController().navigate(NavigationDirections.navigateToProfileFragment())
             }
         }
 
@@ -231,7 +231,7 @@ class EditRecipesFragment : Fragment() {
         }
 
 //圖片上傳-------------------------------------------------------------------------------------
-        img1 = binding.imageEditTest
+//        img1 = binding.imageEditTest
         img2 = binding.imageEditMain
 
         var storageReference = FirebaseStorage.getInstance().getReference()

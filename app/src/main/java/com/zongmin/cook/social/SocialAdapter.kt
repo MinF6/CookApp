@@ -27,8 +27,6 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
                 viewModel.userMap.value?.get(recipe.author)?.headShot
             )
 
-            binding.textSocialLike.text = recipe.like.size.toString()
-            binding.textSocialName.text = recipe.name
             binding.textSocialUser.text = viewModel.userMap.value?.get(recipe.author)?.name
 
             if (UserManager.user.collect.contains(recipe.id)) {
@@ -69,7 +67,6 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
                         Color.rgb(176, 176, 176)
                     )
                     viewModel.changeLike(recipe.id, true)
-
                 } else {
                     isLiked = true
                     binding.textSocialLike.text =
@@ -123,6 +120,5 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
     class OnClickListener(val clickListener: (recipe: Recipe) -> Unit) {
         fun onClick(recipe: Recipe) = clickListener(recipe)
     }
-
 
 }

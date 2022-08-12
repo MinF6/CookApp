@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -31,18 +32,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="用戶名稱"
+            android:text="@{user.name}"
             app:layout_constraintStart_toEndOf="@+id/image_follow"
-            app:layout_constraintTop_toTopOf="@+id/image_follow" />
+            app:layout_constraintTop_toTopOf="@+id/image_follow"
+            tools:text="用戶名稱"/>
 
         <TextView
             android:id="@+id/text_follow_creation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="食譜數量"
             app:layout_constraintStart_toStartOf="@+id/text_follow_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_follow_name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_follow_name"
+            tools:text="食譜數量"/>
 
         <Button
             android:id="@+id/button_follow"

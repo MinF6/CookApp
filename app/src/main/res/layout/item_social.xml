@@ -27,7 +27,6 @@
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/imageViewRound"
             tools:src="@drawable/ic_baseline_person_24" />
@@ -37,9 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="作者名稱"
             app:layout_constraintStart_toEndOf="@+id/image_social_user"
-            app:layout_constraintTop_toTopOf="@+id/image_social_user" />
+            app:layout_constraintTop_toTopOf="@+id/image_social_user"
+            tools:text="作者名稱" />
 
         <View
             android:id="@+id/view_social_setting"
@@ -68,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="料理名稱"
+            android:text="@{recipe.name}"
             app:layout_constraintEnd_toStartOf="@+id/view_social_collect"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/image_social_food"
@@ -78,7 +77,6 @@
             android:id="@+id/view_social_collect"
             android:layout_width="24dp"
             android:layout_height="24dp"
-
             android:background="@drawable/ic_baseline_bookmark_24"
             app:layout_constraintBottom_toBottomOf="@+id/text_social_name"
             app:layout_constraintEnd_toEndOf="@+id/image_social_food"
@@ -100,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="1"
+            android:text="@{Integer.toString(recipe.like.size())}"
             app:layout_constraintBottom_toBottomOf="@+id/view_social_like"
             app:layout_constraintStart_toEndOf="@+id/view_social_like"
             app:layout_constraintTop_toTopOf="@+id/view_social_like" />

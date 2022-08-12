@@ -26,7 +26,7 @@ class FollowFragment : Fragment() {
 
         })
 
-        viewModel.user.observe(viewLifecycleOwner) {
+        viewModel.users.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
             }

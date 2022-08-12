@@ -33,16 +33,17 @@ class PlanFragment : Fragment() {
             val storedDate = GregorianCalendar(year, month, dayOfMonth)
             viewModel.getPlanResult(UserManager.user.id, storedDate.timeInMillis)
         }
+
         val adapter = PlanAdapter(viewModel)
         binding.recyclerviewPlan.adapter = adapter
 
-        viewModel.plan.observe(viewLifecycleOwner) {
+        viewModel.plans.observe(viewLifecycleOwner) {
             it.let {
                 viewModel.setSortedPlan(it)
             }
         }
 
-        viewModel.sortedPlan.observe(viewLifecycleOwner) {
+        viewModel.sortedPlans.observe(viewLifecycleOwner) {
             it.let {
                 adapter.submitList(it)
             }
@@ -52,7 +53,7 @@ class PlanFragment : Fragment() {
             viewModel.getSpecifyManagementResult(it)
         }
 
-        viewModel.management.observe(viewLifecycleOwner) {
+        viewModel.managements.observe(viewLifecycleOwner) {
             for (management in it) {
                 viewModel.deleteManagement(management.id)
             }
