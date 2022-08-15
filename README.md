@@ -6,7 +6,7 @@
 <img src="https://github.com/MinF6/img-storage/blob/main/google%20play%20icon%203.png" height="120" /><br>
 
 <img
-src ="https://github.com/MinF6/img-storage/blob/main/bg_google_play.Qpng" width="150" height="60"></a>
+src ="https://github.com/MinF6/img-storage/blob/main/bg_google_play.png" width="150" height="60"></a>
 
 ### Test account<br>
 Account: WeCook202207@gmail.com <br>
