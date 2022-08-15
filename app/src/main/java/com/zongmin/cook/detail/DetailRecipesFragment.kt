@@ -22,15 +22,12 @@ class DetailRecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentDetailRecipesBinding.inflate(inflater, container, false)
-
         val data = DetailRecipesFragmentArgs.fromBundle(requireArguments()).recipe
-
-        data.let{
+        data.let {
             binding.recipe = data
             viewModel.getSteps(data)
             viewModel.getIngredients(data)
         }
-
 
         binding.imageDetailBack.setOnClickListener {
             this.findNavController().navigateUp()
@@ -43,14 +40,13 @@ class DetailRecipesFragment : Fragment() {
             binding.switchDetailPublic.visibility = View.GONE
         }
 
-
-
         val ingredientAdapter = DetailIngredientAdapter()
         binding.recyclerviewIngredient.adapter = ingredientAdapter
-        viewModel.ingredients.observe(viewLifecycleOwner){
-            ingredientAdapter.submitList(it)
+        viewModel.ingredients.observe(viewLifecycleOwner) {
+            it?.let {
+                ingredientAdapter.submitList(it)
+            }
         }
-
 
         val stepAdapter = DetailStepAdapter()
         binding.recyclerviewStep.adapter = stepAdapter

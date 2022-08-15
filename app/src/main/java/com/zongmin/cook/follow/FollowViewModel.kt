@@ -20,27 +20,22 @@ class FollowViewModel(
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private var _user = MutableLiveData<List<User>>()
+    private var _users = MutableLiveData<List<User>>()
 
-    val user: LiveData<List<User>>
-        get() = _user
+    val users: LiveData<List<User>>
+        get() = _users
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    init {
-
-    }
-
-
     fun getFollowResult(userList: List<String>) {
         coroutineScope.launch {
             _status.value = LoadApiStatus.LOADING
             val result = cookRepository.getFollowList(userList)
 
-            _user.value = when (result) {
+            _users.value = when (result) {
                 is Result.Success -> {
                     _status.value = LoadApiStatus.DONE
                     result.data
@@ -60,6 +55,5 @@ class FollowViewModel(
             }
         }
     }
-
 
 }

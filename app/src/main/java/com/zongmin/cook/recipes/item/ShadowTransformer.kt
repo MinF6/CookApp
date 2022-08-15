@@ -5,37 +5,37 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 
 
-class ShadowTransformer(private val mViewPager: ViewPager, adapter: CardPagerAdapter) :
+class ShadowTransformer(private val viewPager: ViewPager, adapter: CardPagerAdapter) :
     OnPageChangeListener, ViewPager.PageTransformer {
-    private val mAdapter: CardPagerAdapter
+    private val adapter: CardPagerAdapter
 
     //    private val mAdapter: CardAdapter
-    private var mLastOffset = 0f
-    private var mScalingEnabled = false
+    private var lastOffset = 0f
+    private var scalingEnabled = false
     fun enableScaling(enable: Boolean) {
-        if (mScalingEnabled && !enable) {
-            val currentCard = mAdapter.getCardViewAt(mViewPager.currentItem)
+        if (scalingEnabled && !enable) {
+            val currentCard = adapter.getCardViewAt(viewPager.currentItem)
             if (currentCard != null) {
                 currentCard.animate().scaleY(1f)
                 currentCard.animate().scaleX(1f)
             }
-        } else if (!mScalingEnabled && enable) {
-            val currentCard = mAdapter.getCardViewAt(mViewPager.currentItem)
+        } else if (!scalingEnabled && enable) {
+            val currentCard = adapter.getCardViewAt(viewPager.currentItem)
             if (currentCard != null) {
                 currentCard.animate().scaleY(1.1f)
                 currentCard.animate().scaleX(1.1f)
             }
         }
-        mScalingEnabled = enable
+        scalingEnabled = enable
     }
 
     override fun transformPage(page: View, position: Float) {}
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
         val realCurrentPosition: Int
         val nextPosition: Int
-        val baseElevation = mAdapter.baseElevation
+        val baseElevation = adapter.baseElevation
         val realOffset: Float
-        val goingLeft = mLastOffset > positionOffset
+        val goingLeft = lastOffset > positionOffset
 
         if (goingLeft) {
             realCurrentPosition = position + 1
@@ -47,39 +47,39 @@ class ShadowTransformer(private val mViewPager: ViewPager, adapter: CardPagerAda
             realOffset = positionOffset
         }
 
-        if (nextPosition > mAdapter.count - 1
-            || realCurrentPosition > mAdapter.count - 1
+        if (nextPosition > adapter.count - 1
+            || realCurrentPosition > adapter.count - 1
         ) {
             return
         }
-        val currentCard = mAdapter.getCardViewAt(realCurrentPosition)
+        val currentCard = adapter.getCardViewAt(realCurrentPosition)
 
         if (currentCard != null) {
-            if (mScalingEnabled) {
+            if (scalingEnabled) {
                 currentCard.scaleX = (1 + 0.1 * (1 - realOffset)).toFloat()
                 currentCard.scaleY = (1 + 0.1 * (1 - realOffset)).toFloat()
             }
             currentCard.cardElevation = baseElevation + (baseElevation
                     * (8 - 1) * (1 - realOffset))
         }
-        val nextCard = mAdapter.getCardViewAt(nextPosition)
+        val nextCard = adapter.getCardViewAt(nextPosition)
 
         if (nextCard != null) {
-            if (mScalingEnabled) {
+            if (scalingEnabled) {
                 nextCard.scaleX = (1 + 0.1 * realOffset).toFloat()
                 nextCard.scaleY = (1 + 0.1 * realOffset).toFloat()
             }
             nextCard.cardElevation = baseElevation + (baseElevation
                     * (8 - 1) * realOffset)
         }
-        mLastOffset = positionOffset
+        lastOffset = positionOffset
     }
 
     override fun onPageSelected(position: Int) {}
     override fun onPageScrollStateChanged(state: Int) {}
 
     init {
-        mViewPager.addOnPageChangeListener(this)
-        mAdapter = adapter
+        viewPager.addOnPageChangeListener(this)
+        this.adapter = adapter
     }
 }

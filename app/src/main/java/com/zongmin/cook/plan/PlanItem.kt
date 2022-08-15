@@ -10,7 +10,5 @@ sealed class PlanItem {
 
     data class FullPlan(val plan: Plan) : PlanItem () {
         val id: Long = -1
-
     }
-
 }

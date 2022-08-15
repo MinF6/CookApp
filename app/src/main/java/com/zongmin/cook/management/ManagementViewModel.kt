@@ -31,10 +31,8 @@ class ManagementViewModel(
     val time: LiveData<Long>
         get() = _time
 
-
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     fun getManagementResult(userId: String, time: Long) {
         coroutineScope.launch {
@@ -51,7 +49,6 @@ class ManagementViewModel(
                     null
                 }
                 else -> {
-
                     null
                 }
             }
@@ -62,7 +59,6 @@ class ManagementViewModel(
     fun getPeriodManagementResult(userId: String, todayTime: Long, scopeTime: Long) {
         coroutineScope.launch {
             val result = cookRepository.getPeriodManagement(userId, todayTime, scopeTime)
-
             _management.value = when (result) {
                 is Result.Success -> {
                     _quantity.value = checkQuantity(result.data)
@@ -83,12 +79,11 @@ class ManagementViewModel(
 
     private fun checkQuantity(management: List<Management>): Int {
         var quantity = management.size
-        for (q in management) {
-            if (q.prepare) {
+        for (i in management) {
+            if (i.prepare) {
                 quantity--
             }
         }
-
         return quantity
     }
 
@@ -166,13 +161,11 @@ class ManagementViewModel(
     }
 
     private fun setDate(time: Long) {
-
         val year = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(time)).toInt()
         val month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(time)).toInt()
         val day = SimpleDateFormat("dd", Locale.getDefault()).format(Date(time)).toInt()
         val storedDate = GregorianCalendar(year, month - 1, day)
         _time.value = storedDate.timeInMillis
-
     }
 
 }

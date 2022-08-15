@@ -1,6 +1,5 @@
 package com.zongmin.cook.plan
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,13 +13,11 @@ import com.zongmin.cook.databinding.ItemPlanThreeMealsBinding
 class PlanAdapter(val viewModel: PlanViewModel) :
     ListAdapter<PlanItem, RecyclerView.ViewHolder>(DiffCallback) {
 
-
     class TitleViewHolder(private var binding: ItemPlanThreeMealsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: String) {
             binding.textPlanThreeMeals.text = title
-
             binding.executePendingBindings()
         }
     }
@@ -57,7 +54,6 @@ class PlanAdapter(val viewModel: PlanViewModel) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is TitleViewHolder -> {
                 holder.bind((getItem(position) as PlanItem.Title).title)
@@ -87,6 +83,5 @@ class PlanAdapter(val viewModel: PlanViewModel) :
         private const val ITEM_VIEW_TYPE_TITLE = 0x00
         private const val ITEM_VIEW_TYPE_PRODUCT_FULL = 0x01
     }
-
 
 }

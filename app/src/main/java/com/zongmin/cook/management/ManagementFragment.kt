@@ -16,7 +16,6 @@ class ManagementFragment : Fragment() {
 
     private val viewModel by viewModels<ManagementViewModel> { getVmFactory() }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,9 +23,7 @@ class ManagementFragment : Fragment() {
         val binding = FragmentManagementBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val adapter = ManagementAdapter(viewModel)
-
         binding.recyclerviewManagement.adapter = adapter
-
 
         viewModel.management.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -44,10 +41,8 @@ class ManagementFragment : Fragment() {
                 binding.textManagementNeed.setTextColor(Color.rgb(0, 170, 0))
             } else {
                 binding.textManagementNeed.setTextColor(Color.rgb(255, 0, 0))
-
             }
         }
-
 
         binding.textManagementDate.text = viewModel.getToday()
         viewModel.time.value?.let { time ->
@@ -108,9 +103,7 @@ class ManagementFragment : Fragment() {
                 )
             }
         }
-
         return binding.root
     }
-
 
 }

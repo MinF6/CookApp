@@ -7,9 +7,9 @@ import java.util.*
 
 @Parcelize
 data class Plan(
-    var id: String = " ",
-    var userId: String = " ",
-    val threeMeals: String = " ",
+    var id: String = "",
+    var userId: String = "",
+    val threeMeals: String = "",
     val time: Long = 0L,
     val planContent: PlanContent = PlanContent()
 ) : Parcelable
@@ -17,9 +17,8 @@ data class Plan(
 
 @Parcelize
 data class PlanContent(
-    val foodId: String = " ",
-    val image: String = " ",
-    val name: String = " ",
-    val category: String = " ",
-//    val time: Long = 0L
+    val foodId: String = "",
+    val image: String = "",
+    val name: String = "",
+    val category: String = "",
 ): Parcelable

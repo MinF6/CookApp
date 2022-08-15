@@ -9,27 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zongmin.cook.data.Management
 import com.zongmin.cook.databinding.ItemManagementBinding
 
-class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Management, RecyclerView.ViewHolder>(DiffCallback) {
+class ManagementAdapter(val viewModel: ManagementViewModel) :
+    ListAdapter<Management, RecyclerView.ViewHolder>(DiffCallback) {
 
     class ManagementViewHolder(private var binding: ItemManagementBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(management: Management, viewModel: ManagementViewModel) {
             binding.management = management
-//            binding.textManagementName.text = management.name
-//            binding.textManagementBelongName.text = management.belong
-//            binding.textManagementIngredientQuantity.text = management.quantity
-//            binding.textManagementIngredientUnit.text = management.unit
-//            binding.checkboxManagement.isChecked = management.prepare
-            binding.checkboxManagement.setOnClickListener{
-                if(binding.checkboxManagement.isChecked){
+            binding.checkboxManagement.setOnClickListener {
+                if (binding.checkboxManagement.isChecked) {
                     viewModel.minusQuantity()
-                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked,management.id)
-                }else{
+                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked, management.id)
+                } else {
                     viewModel.addQuantity()
-                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked,management.id)
+                    viewModel.setPrepareResult(binding.checkboxManagement.isChecked, management.id)
                 }
             }
-
             binding.executePendingBindings()
         }
 
@@ -37,7 +32,6 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
             fun from(parent: ViewGroup): ManagementViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemManagementBinding.inflate(layoutInflater, parent, false)
-
                 return ManagementViewHolder(binding)
             }
         }
@@ -65,6 +59,5 @@ class ManagementAdapter(val viewModel: ManagementViewModel) : ListAdapter<Manage
             return oldItem == newItem
         }
     }
-
 
 }

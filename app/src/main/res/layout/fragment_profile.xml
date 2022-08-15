@@ -5,20 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="user"
             type="com.zongmin.cook.data.User" />
-
         <variable
             name="viewModel"
             type="com.zongmin.cook.profile.ProfileViewModel" />
 
         <import type="android.view.View" />
-
         <import type="com.zongmin.cook.network.LoadApiStatus" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,23 +38,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="姓名"
-            android:textSize="22dp"
+            android:text="@{user.name}"
+            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_profile_head_shot"
             app:layout_constraintStart_toEndOf="@+id/image_profile_head_shot"
-            app:layout_constraintTop_toTopOf="@+id/image_profile_head_shot" />
+            app:layout_constraintTop_toTopOf="@+id/image_profile_head_shot"
+            tools:text="姓名" />
 
         <Button
             android:id="@+id/button_profile_follow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="追蹤"
+            android:text="@string/profile_follow_btn"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_profile_head_shot" />
+            app:layout_constraintTop_toBottomOf="@+id/image_profile_head_shot"
+            tools:text="追蹤" />
 
         <TextView
             android:id="@+id/text_profile_fans_title"
@@ -66,12 +64,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:text="粉絲人數"
+            android:text="@string/profile_fans"
             app:layout_constraintEnd_toStartOf="@+id/text_profile_follows_title"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_profile_follow" />
+            app:layout_constraintTop_toBottomOf="@+id/button_profile_follow"
+            tools:text="粉絲人數" />
 
         <View
             android:id="@+id/view2"
@@ -88,33 +87,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="追蹤中"
+            android:text="@string/profile_follows"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/text_profile_fans_title"
-            app:layout_constraintTop_toTopOf="@+id/text_profile_fans_title" />
+            app:layout_constraintTop_toTopOf="@+id/text_profile_fans_title"
+            tools:text="追蹤中" />
 
         <TextView
             android:id="@+id/text_profile_fans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="999"
+            android:text="@{Integer.toString(user.fans.size())}"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/text_profile_fans_title"
             app:layout_constraintStart_toStartOf="@+id/text_profile_fans_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_fans_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_fans_title"
+            tools:text="0" />
 
         <TextView
             android:id="@+id/text_profile_follows"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="34"
+            android:text="@{Integer.toString(user.follows.size())}"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/text_profile_follows_title"
             app:layout_constraintStart_toStartOf="@+id/text_profile_follows_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_follows_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_follows_title"
+            tools:text="0" />
 
         <TextView
             android:id="@+id/text_profile_introduce"
@@ -123,10 +125,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="我的介紹"
+            android:text="@string/profile_introduce"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_fans" />
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_fans"
+            tools:text="我的簡介" />
 
         <TextView
             android:id="@+id/text_profile_title"
@@ -137,12 +140,13 @@
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:letterSpacing=".5"
-            android:text="我發布的食譜"
-            android:textSize="18dp"
+            android:text="@string/profile_title"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce" />
+            app:layout_constraintTop_toBottomOf="@+id/text_profile_introduce"
+            tools:text="我發布的食譜" />
 
         <View
             android:layout_width="match_parent"
@@ -184,13 +188,11 @@
             android:layout_width="200sp"
             android:layout_height="300sp"
             android:background="@drawable/need_create"
+            android:contentDescription="@string/profile_null"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_profile_title" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

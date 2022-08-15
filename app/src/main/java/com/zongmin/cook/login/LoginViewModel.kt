@@ -52,7 +52,7 @@ class LoginViewModel(
             googleSignInAccount = completedTask.getResult(ApiException::class.java)
             googleSignInAccount.idToken?.let { firebaseAuthWithGoogle(it) }
             user.name = googleSignInAccount.givenName.toString()
-            if(googleSignInAccount.familyName != null){
+            if (googleSignInAccount.familyName != null) {
                 user.name += " ${googleSignInAccount.familyName}"
             }
             user.email = googleSignInAccount.email.toString()
@@ -67,9 +67,7 @@ class LoginViewModel(
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-
         firebaseAuth = Firebase.auth
-
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -81,13 +79,8 @@ class LoginViewModel(
                     if (task.result.additionalUserInfo?.isNewUser == true) {
                         UserManager.user = user
                         _navigateToRecipes.value = true
-
                         userSignIn(user)
-                    } else {
-                        Log.d("hank1", "task.result.additionalUserInfo?.isNewUser == false")
                     }
-                } else {
-                    Log.d("hank1", "signInWithCredential:failure e = ${task.exception}")
                 }
             }
     }
@@ -95,15 +88,12 @@ class LoginViewModel(
     private fun userSignIn(user: User) {
         coroutineScope.launch {
             cookRepository.userSignIn(user)
-
         }
     }
-
 
     private fun getUserResult(id: String) {
         coroutineScope.launch {
             val result = cookRepository.getUser(id)
-
             _existedUser.value = when (result) {
                 is Result.Success -> {
                     result.data
@@ -112,15 +102,14 @@ class LoginViewModel(
                     null
                 }
                 is Result.Error -> {
-
                     null
                 }
                 else -> {
-
                     null
                 }
             }
             UserManager.user = existedUser.value!!
             _navigateToRecipes.value = true
-        }}
+        }
+    }
 }

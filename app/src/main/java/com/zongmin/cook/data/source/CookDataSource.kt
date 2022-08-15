@@ -12,15 +12,11 @@ interface CookDataSource {
 
     suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipe>>
 
-    //改版，根據使用者ID取得使用者創作的食譜
     suspend fun getCreationRecipes(userId: String): Result<List<Recipe>>
 
-    //取得使用者有收藏的食譜
     suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipe>>
 
     suspend fun getPublicRecipes(): Result<List<Recipe>>
-
-//    suspend fun getIngredient():Result<List<Ingredient>>
 
     suspend fun getPlan(userId: String, time: Long): Result<List<Plan>>
 

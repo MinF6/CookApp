@@ -58,12 +58,6 @@
 
     </fragment>
 
-    <dialog
-        android:id="@+id/dialogPlan"
-        android:name="com.zongmin.cook.dialog.DialogPlan"
-        android:label="DialogPlan"
-        tools:layout="@layout/fragment_dialog_plan" />
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zongmin.cook.login.LoginFragment"
@@ -87,19 +81,27 @@
 
     <action
         android:id="@+id/navigate_to_managment_fragment"
-        app:destination="@+id/managmentFragment" />
+        app:destination="@+id/managmentFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/navigate_to_plan_fragment"
-        app:destination="@+id/planFragment" />
+        app:destination="@+id/planFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/navigate_to_profile_fragment"
-        app:destination="@+id/profileFragment" />
+        app:destination="@+id/profileFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/navigate_to_social_fragment"
-        app:destination="@+id/socialFragment" />
+        app:destination="@+id/socialFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/navigate_to_detail_recipes_fragment"
@@ -109,13 +111,12 @@
         android:id="@+id/navigate_to_edit_recipes_fragment"
         app:destination="@+id/editRecipesFragment" />
 
-    <action
-        android:id="@+id/navigate_to_dialog_plan"
-        app:destination="@+id/dialogPlan" />
 
     <action
         android:id="@+id/navigate_to_login"
-        app:destination="@+id/loginFragment" />
+        app:destination="@+id/loginFragment"
+        app:popUpTo="@id/navigation"
+        app:popUpToInclusive="true"/>
 
     <action
         android:id="@+id/navigate_to_follow"
