@@ -18,7 +18,6 @@ class RecipesViewModel : ViewModel() {
 
     init {
         date.value = getToday()
-        Log.d("hank1", "dat/e初始值 -> ${date.value}")
     }
 
     private fun getToday(): Long {
