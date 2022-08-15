@@ -24,7 +24,7 @@
             android:layout_marginTop="16dp"
             android:background="?android:attr/selectableItemBackground"
             android:backgroundTint="@color/white"
-            android:text="&lt;"
+            android:text="@string/lt"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@+id/text_management_date"
             app:layout_constraintHorizontal_bias="0.5"
@@ -37,13 +37,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="2022/6/20"
             app:layout_constraintBottom_toBottomOf="@+id/button_management_yesterday"
             app:layout_constraintEnd_toStartOf="@+id/button_management_tomorrow"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_management_yesterday"
-            app:layout_constraintTop_toTopOf="@+id/button_management_yesterday" />
-        <!--        -->
+            app:layout_constraintTop_toTopOf="@+id/button_management_yesterday"
+            tools:text="2022/6/20"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_management_tomorrow"
@@ -52,7 +51,7 @@
             android:layout_marginEnd="16dp"
             android:background="?android:attr/selectableItemBackground"
             android:backgroundTint="@color/white"
-            android:text="&gt;"
+            android:text="@string/gt"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/text_management_date"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,10 +65,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:letterSpacing="0.5"
-            android:text="需購食材0項"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_management_three_day" />
+            app:layout_constraintTop_toBottomOf="@+id/button_management_three_day"
+            tools:text="需購食材0項"/>
 
         <Button
             android:id="@+id/button_management_today"
@@ -77,11 +76,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="4dp"
-            android:text="本日"
+            android:text="@string/management_today"
             app:layout_constraintEnd_toStartOf="@+id/button_management_three_day"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button_management_three_day" />
+            app:layout_constraintTop_toTopOf="@+id/button_management_three_day"
+            tools:text="本日"/>
 
         <Button
             android:id="@+id/button_management_three_day"
@@ -89,12 +89,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
-            android:text="三日"
+            android:text="@string/management_three_day"
             app:layout_constraintBottom_toBottomOf="@+id/button_management_week"
             app:layout_constraintEnd_toStartOf="@+id/button_management_week"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_management_today"
-            app:layout_constraintTop_toTopOf="@+id/button_management_week" />
+            app:layout_constraintTop_toTopOf="@+id/button_management_week"
+            tools:text="三日"/>
 
         <Button
             android:id="@+id/button_management_week"
@@ -103,11 +104,12 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="一周"
+            android:text="@string/management_week"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_management_three_day"
-            app:layout_constraintTop_toBottomOf="@+id/button_management_tomorrow" />
+            app:layout_constraintTop_toBottomOf="@+id/button_management_tomorrow"
+            tools:text="一周"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_management"

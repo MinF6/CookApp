@@ -15,7 +15,6 @@ class DetailStepAdapter : ListAdapter<Step, RecyclerView.ViewHolder>(DiffCallbac
         fun bind(step: Step) {
             binding.step = step
             binding.textStepSequence.text = "步驟 ${step.sequence}"
-
             binding.executePendingBindings()
         }
 
@@ -23,7 +22,6 @@ class DetailStepAdapter : ListAdapter<Step, RecyclerView.ViewHolder>(DiffCallbac
             fun from(parent: ViewGroup): DetailStepViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemStepBinding.inflate(layoutInflater, parent, false)
-
                 return DetailStepViewHolder(binding)
             }
         }
@@ -42,7 +40,6 @@ class DetailStepAdapter : ListAdapter<Step, RecyclerView.ViewHolder>(DiffCallbac
         }
     }
 
-
     companion object DiffCallback : DiffUtil.ItemCallback<Step>() {
         override fun areItemsTheSame(oldItem: Step, newItem: Step): Boolean {
             return oldItem === newItem
@@ -51,9 +48,6 @@ class DetailStepAdapter : ListAdapter<Step, RecyclerView.ViewHolder>(DiffCallbac
         override fun areContentsTheSame(oldItem: Step, newItem: Step): Boolean {
             return oldItem == newItem
         }
-
-
     }
-
 
 }

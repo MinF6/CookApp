@@ -15,7 +15,6 @@ class DetailIngredientAdapter : ListAdapter<Ingredient, RecyclerView.ViewHolder>
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ingredient: Ingredient) {
             binding.ingredient = ingredient
-
             binding.executePendingBindings()
         }
 
@@ -40,7 +39,6 @@ class DetailIngredientAdapter : ListAdapter<Ingredient, RecyclerView.ViewHolder>
             }
         }
     }
-
 
     companion object DiffCallback : DiffUtil.ItemCallback<Ingredient>() {
         override fun areItemsTheSame(oldItem: Ingredient, newItem: Ingredient): Boolean {

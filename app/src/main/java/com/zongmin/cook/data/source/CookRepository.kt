@@ -14,12 +14,10 @@ interface CookRepository {
     suspend fun getKeywordRecipes(collect: List<String>, key: String): Result<List<Recipe>>
 
     suspend fun getCreationRecipes(userId: String): Result<List<Recipe>>
-//    suspend fun getIngredient(): Result<List<Ingredient>>
 
     suspend fun getCollectRecipes(collect: List<String>): Result<List<Recipe>>
 
     suspend fun getPublicRecipes(): Result<List<Recipe>>
-
 
     suspend fun getPlan(userId: String, time: Long): Result<List<Plan>>
 
@@ -56,6 +54,5 @@ interface CookRepository {
     suspend fun setPublic(isPublic:Boolean, recipesId: String): Result<Boolean>
 
     suspend fun setPrepare(isPrepare: Boolean, managementId: String): Result<Boolean>
-
 
 }

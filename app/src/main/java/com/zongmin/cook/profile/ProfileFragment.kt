@@ -35,15 +35,10 @@ class ProfileFragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner) {
             binding.user = it
-            binding.textProfileName.text = it.name
-            binding.textProfileFollows.text = it.follows.size.toString()
-            binding.textProfileFans.text = it.fans.size.toString()
-            binding.textProfileIntroduce.text = it.introduce
             binding.textProfileTitle.text = "${it.name}發布的食譜"
-
         }
 
-        viewModel.recipe.observe(viewLifecycleOwner){
+        viewModel.recipes.observe(viewLifecycleOwner){
             if(it.isEmpty()){
                 binding.imageProfileNull.visibility = View.VISIBLE
                 DrawableCompat.setTint(
@@ -64,17 +59,12 @@ class ProfileFragment : Fragment() {
             viewModel.user.value?.let { it1 -> viewModel.navigateToFollow(it1.follows) }
         }
 
-        viewModel.navigateToFollow.observe(viewLifecycleOwner) {
-//            findNavController().navigate(NavigationDirections.navigateToFollow())
-        }
-
         viewModel.navigateToDetail.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().navigate(NavigationDirections.navigateToDetailRecipesFragment(it))
                 viewModel.onDetailNavigated()
             }
         }
-
         return binding.root
     }
 

@@ -1,19 +1,23 @@
 <resources>
     <string name="app_name">Cook</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recipes_search"><font size="13"><font color="white">請輸入食譜名稱</font></font></string>
     <string name="edit_ingredient_name"><font size="14"><font color="white">食材名稱</font></font></string>
     <string name="edit_ingredient_quantity"><font size="14"><font color="white">數量</font></font></string>
     <string name="edit_ingredient_unit"><font size="14"><font color="white">單位</font></font></string>
     <string name="edit_step"><font size="14"><font color="white">請輸入步驟</font></font></string>
-    <string name="login_specification">當您使用本服務時，即表示您同意我們的<a href="https://www.privacypolicies.com/live/44cd8f4a-fee1-42b3-9cfe-ca14cac2a985">隱私權政策</a></string>
-    <string name="login_button">使用<font color="#4285f4">G</font><font color="#ea4335">o</font><font color="#fbbc05">o</font><font color="#4285f4">g</font><font color="#34a853">l</font><font color="#ea4335">e</font>登入</string>
 
+    <string name="login_specification">當您使用本服務時，即表示您同意我們的
+        <a href="https://www.privacypolicies.com/live/44cd8f4a-fee1-42b3-9cfe-ca14cac2a985">隱私權政策</a></string>
+    <string name="login_button">使用<font color="#4285f4">G</font><font color="#ea4335">o</font>
+        <font color="#fbbc05">o</font><font color="#4285f4">g</font><font color="#34a853">l</font>
+        <font color="#ea4335">e</font>登入</string>
 
     <string name="back_button">Back button image</string>
     <string name="item_icon">item icon</string>
-
+    <string name="lt"><![CDATA[<]]></string>
+    <string name="gt"><![CDATA[>]]></string>
 
     <string name="detail_recipe">編輯食譜</string>
     <string name="detail_ingredient">食材：</string>
@@ -22,6 +26,36 @@
     <string name="detail_step_number">步驟</string>
     <string name="detail_step_index">步驟 %1$d</string>
 
+
+    <string name="management_today">本日</string>
+    <string name="management_three_day">三日</string>
+    <string name="management_week">一周</string>
+
+    <string name="profile_follow_btn">追蹤</string>
+    <string name="profile_fans">粉絲人數</string>
+    <string name="profile_follows">追蹤中</string>
+    <string name="profile_introduce">我的簡介</string>
+    <string name="profile_title">我發布的食譜</string>
+    <string name="profile_null">沒有發布的食譜</string>
+    <string name="profile_time">發布於1天前</string>
+
+    <string name="social_title">最新食譜</string>
+    <string name="social_name">料理名稱</string>
+
+    <string name="activity_create_btn">新增食譜按鈕</string>
+
+    <string name="edit_category">選擇類別</string>
+    <string name="edit_ingredient_title">食材</string>
+    <string name="edit_serving_hint">輸入食材份量</string>
+    <string name="edit_delete">刪除</string>
+    <string name="edit_name_title">料理名稱</string>
+    <string name="edit_name_hint">輸入料理名稱</string>
+    <string name="edit_serving">人份</string>
+    <string name="recipe_image">食譜圖</string>
+    <string name="edit_new_ingredient">新增食材</string>
+    <string name="edit_step_title">步驟</string>
+    <string name="edit_cook_time_title">分鐘</string>
+    <string name="edit_cook_time">輸入烹飪時間</string>
 
 
 </resources>

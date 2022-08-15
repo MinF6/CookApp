@@ -1,6 +1,5 @@
 package com.zongmin.cook.data.source.remote
 
-import android.util.Log
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -11,14 +10,12 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 object CookRemoteDataSource : CookDataSource {
-
     private const val RECIPES = " Recipes"
     private const val INGREDIENT = "ingredient"
     private const val STEP = "step"
     private const val PLAN = "Plan"
     private const val MANAGEMENT = "Management"
     private const val USER = "User"
-
 
     override suspend fun getRecipes(collect: List<String>): Result<List<Recipe>> =
         suspendCoroutine { continuation ->
@@ -31,7 +28,6 @@ object CookRemoteDataSource : CookDataSource {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -42,13 +38,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -59,18 +52,14 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
                                 .document(document.id)
-//                            .collection("step")
                                 .collection(STEP)
                                 .orderBy("sequence", Query.Direction.ASCENDING)
                                 .get()
@@ -94,11 +83,9 @@ object CookRemoteDataSource : CookDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(Result.Fail(CookApplication.instance.getString(1)))
                     }
                 }
         }
-
 
     override suspend fun getCategoryRecipes(
         collect: List<String>,
@@ -114,9 +101,7 @@ object CookRemoteDataSource : CookDataSource {
                     if (task.isSuccessful) {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
-//                        Log.d("hank1", "檢查task.result.size -> ${task.result.size()}")
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -127,13 +112,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -144,13 +126,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -168,7 +147,6 @@ object CookRemoteDataSource : CookDataSource {
                                         list.add(recipes)
                                         count--
                                         if (count == 0) {
-//                                            Log.d("hank1", "成功查到東西")
                                             continuation.resume(Result.Success(list))
                                         }
                                     }
@@ -176,11 +154,9 @@ object CookRemoteDataSource : CookDataSource {
                         }
                     } else {
                         task.exception?.let {
-                            Log.d("hank1", "失敗")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(Result.Fail(CookApplication.instance.getString(1)))
                     }
                 }
         }
@@ -199,13 +175,9 @@ object CookRemoteDataSource : CookDataSource {
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-//                        Log.d("hank1", "檢查task.result.size -> ${task.result.size()}")
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
-
                         for (document in task.result!!) {
-//                            Log.d("hank1", document.id + " => " + document.data)
-
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -216,13 +188,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -233,13 +202,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -261,19 +227,12 @@ object CookRemoteDataSource : CookDataSource {
                                         }
                                     }
                                 }
-//                            list.add(recipes)
-//                            count--
-//                            if (count == 0) {
-//                                continuation.resume(Result.Success(list))
-//                            }
                         }
                     } else {
                         task.exception?.let {
-//                            Log.d("hank1", "GGGGGG")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(Result.Fail(CookApplication.instance.getString(1)))
                     }
                 }
         }
@@ -293,7 +252,6 @@ object CookRemoteDataSource : CookDataSource {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -304,13 +262,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -321,13 +276,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -355,7 +307,6 @@ object CookRemoteDataSource : CookDataSource {
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(Result.Fail(CookApplication.instance.getString(1)))
                     }
                 }
         }
@@ -370,11 +321,10 @@ object CookRemoteDataSource : CookDataSource {
                     if (task.isSuccessful) {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
-                        if(count == 0){
+                        if (count == 0) {
                             continuation.resume(Result.Success(list))
                         }
                         for (document in task.result) {
-//                            Log.d("hank1", document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -389,7 +339,6 @@ object CookRemoteDataSource : CookDataSource {
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -404,7 +353,6 @@ object CookRemoteDataSource : CookDataSource {
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -428,9 +376,7 @@ object CookRemoteDataSource : CookDataSource {
                                 }
                         }
                     } else {
-                        Log.d("hank1", "check888")
                         task.exception?.let {
-                            Log.d("hank1", "check999")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
@@ -449,7 +395,6 @@ object CookRemoteDataSource : CookDataSource {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
                         for (document in task.result!!) {
-//                        Log.d("hank1",document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -460,13 +405,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -477,13 +419,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -520,14 +459,12 @@ object CookRemoteDataSource : CookDataSource {
             FirebaseFirestore.getInstance()
                 .collection(RECIPES)
                 .whereEqualTo("public", true)
-//                .orderBy("serving")
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         var count = task.result.size()
                         val list = mutableListOf<Recipe>()
                         for (document in task.result!!) {
-//                            Log.d("hank1", document.id + " => " + document.data)
                             val recipes = document.toObject(Recipe::class.java)
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -538,13 +475,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task2.isSuccessful) {
                                         val list2 = mutableListOf<Ingredient>()
                                         for (document2 in task2.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Ingredient::class.java))
                                         }
                                         recipes.ingredient = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -555,13 +489,10 @@ object CookRemoteDataSource : CookDataSource {
                                     if (task3.isSuccessful) {
                                         val list2 = mutableListOf<Message>()
                                         for (document2 in task3.result) {
-//                                        Log.d("hank1", document2.id + " => " + document.data)
-//                                        val ingredient = document.toObject(Ingredient::class.java)
                                             list2.add(document2.toObject(Message::class.java))
                                         }
                                         recipes.message = list2
                                     }
-
                                 }
                             FirebaseFirestore.getInstance()
                                 .collection(RECIPES)
@@ -593,22 +524,17 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
-
     override suspend fun getPlan(userId: String, time: Long): Result<List<Plan>> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PLAN)
                 .whereEqualTo("userId", userId)
                 .whereEqualTo("time", time)
-//                .orderBy("time")
-//                .startAt(time)
-//            .whereGreaterThan("time",time)
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Plan>()
                         for (document in task.result!!) {
-                            Log.d("hank1", document.id + " => " + document.data)
                             val plan = document.toObject(Plan::class.java)
                             list.add(plan)
                         }
@@ -622,21 +548,17 @@ object CookRemoteDataSource : CookDataSource {
                 }
         }
 
-
-    //食材管理
     override suspend fun getManagement(userId: String, time: Long): Result<List<Management>> =
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection("Management")
                 .whereEqualTo("userId", userId)
                 .whereEqualTo("time", time)
-//                .whereLessThan("time")
                 .get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val list = mutableListOf<Management>()
                         for (document in task.result!!) {
-//                        Log.d("hank1", document.id + " => " + document.data)
                             val management = document.toObject(Management::class.java)
                             list.add(management)
                         }
@@ -660,7 +582,6 @@ object CookRemoteDataSource : CookDataSource {
                     if (task.isSuccessful) {
                         val list = mutableListOf<Management>()
                         for (document in task.result!!) {
-//                        Log.d("hank1", document.id + " => " + document.data)
                             val management = document.toObject(Management::class.java)
                             list.add(management)
                         }
@@ -683,7 +604,6 @@ object CookRemoteDataSource : CookDataSource {
             FirebaseFirestore.getInstance()
                 .collection("Management")
                 .whereEqualTo("userId", userId)
-//                .whereGreaterThanOrEqualTo("time", todayTime)
                 .whereGreaterThan("time", todayTime - 10L)
                 .whereLessThan("time", scopeTime)
                 .get()
@@ -691,7 +611,6 @@ object CookRemoteDataSource : CookDataSource {
                     if (task.isSuccessful) {
                         val list = mutableListOf<Management>()
                         for (document in task.result!!) {
-//                        Log.d("hank1", document.id + " => " + document.data)
                             val management = document.toObject(Management::class.java)
                             list.add(management)
                         }
@@ -779,33 +698,22 @@ object CookRemoteDataSource : CookDataSource {
         suspendCoroutine { continuation ->
             val recipe = FirebaseFirestore.getInstance().collection(RECIPES)
             val document = recipe.document()
-            if (summary.id == " ") {
+            if (summary.id == "") {
                 summary.id = document.id
-                Log.d("hank1", "需要給ID")
-            } else {
-
-                Log.d("hank1", "不需要給ID")
             }
-
-//        article.createdTime = Calendar.getInstance().timeInMillis
             document
                 .set(summary)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-//                        Log.d("hank1", "新增成功區，我新增了 -> $recipe")
                         continuation.resume(Result.Success(summary.id))
-//                        continuation.resume(Result.Success(document.id))
                     } else {
                         task.exception?.let {
-                            Log.d("hank1", "新增失敗")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(kotlin.Result.Fail(PublisherApplication.instance.getString(R.string.you_know_nothing)))
                     }
                 }
 
-            //ingredient
             val recipeIngredient = FirebaseFirestore.getInstance().collection(INGREDIENT)
             for (i in ingredient) {
                 val ingredientDocument = recipeIngredient.document()
@@ -813,11 +721,8 @@ object CookRemoteDataSource : CookDataSource {
                 document.collection(INGREDIENT).document(ingredientDocument.id).set(i)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-//                            Log.d("hank1", "新增成功區，我新增了ingredient -> $i")
-//                            continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d("hank1", "新增失敗")
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
@@ -825,7 +730,6 @@ object CookRemoteDataSource : CookDataSource {
                     }
             }
 
-            //step
             val recipeStep = FirebaseFirestore.getInstance().collection(STEP)
             for (i in step) {
                 val stepDocument = recipeStep.document()
@@ -833,64 +737,45 @@ object CookRemoteDataSource : CookDataSource {
                 document.collection(STEP).document(stepDocument.id).set(i)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-//                            Log.d("hank1", "新增成功區，我新增了step -> $i")
-//                            continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d("hank1", "新增失敗")
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
                         }
                     }
             }
-//            continuation.resume(Result.Success(document.id))
-//            continuation.resume(Result.Success(summary.id))
-
         }
 
     override suspend fun userSignIn(user: User): Result<Boolean> =
         suspendCoroutine { continuation ->
-
             FirebaseFirestore.getInstance()
                 .collection("User")
                 .document(user.id)
                 .set(user)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "pushScore task.isSuccessful")
                         continuation.resume(Result.Success(true))
                     } else {
                         task.exception?.let {
-                            Log.d(
-                                "hank1",
-                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                            )
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(Result.Fail(MovieApplication.instance.getString(R.string.you_know_nothing)))
                     }
                 }
         }
 
     override suspend fun deleteRecipes(id: String): Result<Boolean> =
         suspendCoroutine { continuation ->
-
             FirebaseFirestore.getInstance()
                 .collection(RECIPES)
                 .document(id)
                 .delete()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "成功刪除")
                         continuation.resume(Result.Success(true))
                     } else {
                         task.exception?.let {
-                            Log.d(
-                                "hank1",
-                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                            )
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
@@ -902,43 +787,32 @@ object CookRemoteDataSource : CookDataSource {
         suspendCoroutine { continuation ->
             val recipe = FirebaseFirestore.getInstance().collection(PLAN)
             val document = recipe.document()
-
             plan.id = document.id
-//        article.createdTime = Calendar.getInstance().timeInMillis
             document
                 .set(plan)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "新增成功區，我新增了 -> $plan")
                         continuation.resume(Result.Success(plan.id))
                     } else {
                         task.exception?.let {
-                            Log.d("hank1", "新增失敗")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(kotlin.Result.Fail(PublisherApplication.instance.getString(R.string.you_know_nothing)))
                     }
                 }
         }
 
     override suspend fun deletePlan(id: String): Result<String> =
         suspendCoroutine { continuation ->
-
             FirebaseFirestore.getInstance()
                 .collection(PLAN)
                 .document(id)
                 .delete()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "成功刪除")
                         continuation.resume(Result.Success(id))
                     } else {
                         task.exception?.let {
-                            Log.d(
-                                "hank1",
-                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                            )
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
@@ -950,42 +824,32 @@ object CookRemoteDataSource : CookDataSource {
         suspendCoroutine { continuation ->
             val recipe = FirebaseFirestore.getInstance().collection(MANAGEMENT)
             val document = recipe.document()
-
             management.id = document.id
             document
                 .set(management)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "新增成功區，我新增了 -> $management")
 //                        continuation.resume(Result.Success(true))
                     } else {
                         task.exception?.let {
-                            Log.d("hank1", "新增失敗")
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
-//                    continuation.resume(kotlin.Result.Fail(PublisherApplication.instance.getString(R.string.you_know_nothing)))
                     }
                 }
         }
 
     override suspend fun deleteManagement(id: String): Result<Boolean> =
         suspendCoroutine { continuation ->
-
             FirebaseFirestore.getInstance()
                 .collection(MANAGEMENT)
                 .document(id)
                 .delete()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Log.d("hank1", "成功刪除管理的內容")
                         continuation.resume(Result.Success(true))
                     } else {
                         task.exception?.let {
-                            Log.d(
-                                "hank1",
-                                "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                            )
                             continuation.resume(Result.Error(it))
                             return@addOnCompleteListener
                         }
@@ -1002,14 +866,9 @@ object CookRemoteDataSource : CookDataSource {
                     .update("collect", FieldValue.arrayRemove(recipesId))
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-//                            Log.d("hank1", "成功刪除此收藏")
                             continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
@@ -1022,21 +881,15 @@ object CookRemoteDataSource : CookDataSource {
                     .update("collect", FieldValue.arrayUnion(recipesId))
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-//                            Log.d("hank1", "成功新增收藏")
                             continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
                         }
                     }
             }
-
         }
 
     override suspend fun setLike(isLiked: Boolean, recipesId: String): Result<Boolean> =
@@ -1048,14 +901,9 @@ object CookRemoteDataSource : CookDataSource {
                     .update("like", FieldValue.arrayRemove(UserManager.user.id))
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "收回讚")
                             continuation.resume(Result.Success(false))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
@@ -1068,21 +916,15 @@ object CookRemoteDataSource : CookDataSource {
                     .update("like", FieldValue.arrayUnion(UserManager.user.id))
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "成功點讚")
                             continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
                         }
                     }
             }
-
         }
 
     override suspend fun setPublic(isPublic: Boolean, recipesId: String): Result<Boolean> =
@@ -1094,14 +936,9 @@ object CookRemoteDataSource : CookDataSource {
                     .update("public", true)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "要公開了")
                             continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
@@ -1114,21 +951,15 @@ object CookRemoteDataSource : CookDataSource {
                     .update("public", false)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "不公開了")
                             continuation.resume(Result.Success(false))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
                         }
                     }
             }
-
         }
 
     override suspend fun setPrepare(isPrepare: Boolean, managementId: String): Result<Boolean> =
@@ -1140,14 +971,9 @@ object CookRemoteDataSource : CookDataSource {
                     .update("prepare", true)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "準備好了")
                             continuation.resume(Result.Success(true))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
@@ -1160,21 +986,14 @@ object CookRemoteDataSource : CookDataSource {
                     .update("prepare", false)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Log.d("hank1", "還沒準備好")
                             continuation.resume(Result.Success(false))
                         } else {
                             task.exception?.let {
-                                Log.d(
-                                    "hank1",
-                                    "[${this::class.simpleName}] Error getting documents. ${it.message}"
-                                )
                                 continuation.resume(Result.Error(it))
                                 return@addOnCompleteListener
                             }
                         }
                     }
             }
-
         }
-
 }

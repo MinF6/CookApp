@@ -60,6 +60,7 @@
                     android:text="@{recipe.name}"
                     android:textSize="22sp"
                     android:textStyle="bold"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image_detail_main"
                     tools:text="小當家特製大熊貓麻婆豆腐" />
@@ -73,7 +74,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/text_detail_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_detail_title" />
-
 
                 <TextView
                     android:id="@+id/text_ingredient_title"

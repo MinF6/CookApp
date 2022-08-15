@@ -17,7 +17,6 @@ import com.zongmin.cook.login.UserManager
 class SocialAdapter(private val onClickListener: OnClickListener, val viewModel: SocialViewModel) :
     ListAdapter<Recipe, RecyclerView.ViewHolder>(DiffCallback) {
 
-
     class SocialViewHolder(private var binding: ItemSocialBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe, viewModel: SocialViewModel) {
@@ -28,8 +27,6 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
                 viewModel.userMap.value?.get(recipe.author)?.headShot
             )
 
-            binding.textSocialLike.text = recipe.like.size.toString()
-            binding.textSocialName.text = recipe.name
             binding.textSocialUser.text = viewModel.userMap.value?.get(recipe.author)?.name
 
             if (UserManager.user.collect.contains(recipe.id)) {
@@ -41,11 +38,9 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
 
             if (recipe.like.contains(UserManager.user.id)) {
                 DrawableCompat.setTint(binding.viewSocialLike.background, Color.rgb(255, 215, 0))
-
             }
 
             binding.viewSocialCollect.setOnClickListener {
-
                 if (viewModel.changeCollect(recipe.id)) {
                     DrawableCompat.setTint(
                         binding.viewSocialCollect.background,
@@ -59,9 +54,9 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
                     )
                     viewModel.getUserResult()
                 }
-
             }
-            var isLiked = UserManager.user.collect.contains(recipe.id)
+
+            var isLiked = recipe.like.contains(UserManager.user.id)
             binding.viewSocialAddLike.setOnClickListener {
                 if (isLiked) {
                     isLiked = false
@@ -72,7 +67,6 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
                         Color.rgb(176, 176, 176)
                     )
                     viewModel.changeLike(recipe.id, true)
-
                 } else {
                     isLiked = true
                     binding.textSocialLike.text =
@@ -82,9 +76,7 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
                         Color.rgb(255, 215, 0)
                     )
                     viewModel.changeLike(recipe.id, false)
-
                 }
-
             }
             binding.executePendingBindings()
         }
@@ -93,7 +85,6 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
             fun from(parent: ViewGroup): SocialViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemSocialBinding.inflate(layoutInflater, parent, false)
-
                 return SocialViewHolder(binding)
             }
         }
@@ -129,6 +120,5 @@ class SocialAdapter(private val onClickListener: OnClickListener, val viewModel:
     class OnClickListener(val clickListener: (recipe: Recipe) -> Unit) {
         fun onClick(recipe: Recipe) = clickListener(recipe)
     }
-
 
 }

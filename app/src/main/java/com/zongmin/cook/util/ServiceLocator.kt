@@ -16,7 +16,6 @@ object ServiceLocator {
     fun provideTasksRepository(context: Context): CookRepository {
         synchronized(this) {
             return cookRepository
-                ?: cookRepository
                 ?: createStylishRepository(context)
         }
     }

@@ -16,9 +16,7 @@ class FollowAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.user = user
-            binding.textFollowName.text = user.name
             binding.textFollowCreation.text = "創作了${user.creation.size.toString()}篇食譜"
-
             binding.executePendingBindings()
         }
 
@@ -26,7 +24,6 @@ class FollowAdapter(private val onClickListener: OnClickListener) :
             fun from(parent: ViewGroup): UserViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemFollowBinding.inflate(layoutInflater, parent, false)
-
                 return UserViewHolder(binding)
             }
         }
@@ -57,8 +54,6 @@ class FollowAdapter(private val onClickListener: OnClickListener) :
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem == newItem
         }
-
-
     }
 
     class OnClickListener(val clickListener: (user: User) -> Unit) {

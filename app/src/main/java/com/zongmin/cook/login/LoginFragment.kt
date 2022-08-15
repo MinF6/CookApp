@@ -22,7 +22,6 @@ import com.zongmin.cook.ext.getVmFactory
 open class LoginFragment : Fragment() {
 
     private val viewModel by viewModels<LoginViewModel> { getVmFactory() }
-
     private lateinit var googleSignInClient: GoogleSignInClient
 
     private val launcher =
@@ -35,13 +34,11 @@ open class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("710335151502-96voej6nc0600b6ad5js1n0onb0fi82f.apps.googleusercontent.com")
             .requestEmail()
             .build()
 
-        // Build a GoogleSignInClient with the options specified by gso.
         googleSignInClient =
             context?.let { GoogleSignIn.getClient(it, googleSignInOptions) }
                 ?: throw NullPointerException("Expression 'context?.let { GoogleSignIn.getClient(it, gso) }' must not be null")
@@ -65,7 +62,6 @@ open class LoginFragment : Fragment() {
         viewModel.existedUser.observe(viewLifecycleOwner) {
             UserManager.user = it
         }
-
 
         binding.buttonLogin.setOnClickListener {
             signInGoogle()
