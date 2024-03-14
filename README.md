@@ -6,7 +6,7 @@
 <a href="https://play.google.com/store/apps/details?id=com.zongmin.cook"><img src="https://github.com/MinF6/img-storage/blob/main/google%20play%20icon%203.png" height="120" /></a><br>
 
 <a href="https://play.google.com/store/apps/details?id=com.zongmin.cook"><img
-src ="https://github.com/MinF6/img-storage/blob/main/bg_google_play.png" width="150" height="60"></a>
+src ="https://github.com/MinF6/img-storage/blob/main/bg_google_play.png" width="150" height="60"></a>（Pending review for updates before relisting Message left on 3/15/2024.）
 
 ### Test account<br>
 Account: WeCook202207@gmail.com <br>
